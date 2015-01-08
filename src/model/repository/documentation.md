@@ -1,0 +1,1 @@
+#Contient des méthodes qui pourront filtrer les données : update, delete, read, *create par repository
