@@ -22,7 +22,7 @@ class Home { // cette classe extends controller
         render();
     }*/
     
-    public function DisplayForMember()
+    public function DisplayForm()
 	{
 		$user = $this->getRepository('User'); // correspond à un $employe = new Repository\EmployesRepository
 		$employes = $employes->getAllEmploye(); // méthode de Repository\EmployesRepository

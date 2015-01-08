@@ -4,6 +4,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+
 require 'Controller.php';
 /**
  * Description of Inscription
