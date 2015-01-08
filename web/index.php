@@ -42,18 +42,12 @@
         if (in_array($controller, $controllerArray)) {
             $path = __DIR__ . '\..\controller\\' . $controller . '.php';
             include $path;
-            $obj = new $controller;
-            call_user_func( array( $obj, $_GET['method'] ) );
+            $obj = new $controller; // $myController = new MyController()
+            call_user_func( array( $obj, $_GET['method'] ) ); // $myController->myMethod()
         } else {
             echo 'erreur 404';
         }
     }
     
-    require_once '/inc/footer.inc.php';               
-    require_once '/inc/footer.inc.php';               
-
-        
-
-
-   
-
+       require_once '/inc/footer.inc.php';            
+ 
