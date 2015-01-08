@@ -1,0 +1,1 @@
+Un fichier et donc une classe controller par type de modules / fonctionnalité(inscription, connexion, afficher le profil, afficher les 3 derniers produits avec un random, etc.)

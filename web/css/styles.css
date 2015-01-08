@@ -1,0 +1,209 @@
+@import url("reset.css");
+@import url("header.css");
+
+/*=============================================================
+
+   _____ ______ _   _ ______ _____            _      
+  / ____|  ____| \ | |  ____|  __ \     /\   | |     
+ | |  __| |__  |  \| | |__  | |__) |   /  \  | |     
+ | | |_ |  __| | . ` |  __| |  _  /   / /\ \ | |     
+ | |__| | |____| |\  | |____| | \ \  / ____ \| |____ 
+  \_____|______|_| \_|______|_|  \_\/_/    \_\______|
+                                                     
+  ******************************************************
+______________________________________________________________
+==============================================================
+*
+*/
+
+/*========================
+	HOME
+======================= */
+
+/* ----GRID---*/
+.container{
+    width: 90%;
+    margin: auto;
+	background: #F0F0F0;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 50px;
+}
+
+.container-box{
+	width: 90%;
+    margin: auto;
+	text-align: center;
+}
+
+.col_30{
+    display: inline-block;
+    width: 29%;
+	margin-bottom: 20px;
+}
+
+.col_30 p{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.col_50{
+	display: inline-block;
+    width: 45%;
+	vertical-align: top;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+.col_50 p{
+	display: inline-block;
+	margin-left: 15px;
+	vertical-align: top;
+}
+
+.col_60{
+	display: inline-block;
+    width: 55%;
+	vertical-align: top;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+.col_40{
+	display: inline-block;
+    width: 35%;
+	vertical-align: top;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+/* Utilisé pour les commentaires*/
+.box{ 
+	border: solid 1px grey;
+	background: white;
+	padding: 10px;
+	margin-bottom: 30px;	
+}
+
+.icon{
+	display: inline-block;
+}
+
+span.big_font{
+	font-size: 2em;
+}
+
+h3.short_title{
+	display: inline-block;
+	max-width: 100%;
+	margin-left: 10px;
+}
+
+time.block{
+	display: block;
+}
+
+/* ----I FRAMES---*/
+iframe{
+	width: 100%;
+	height: 250px;
+    margin: auto;
+	text-align: center;
+}
+
+
+/* ----CAROUSEL---*/
+.slide{
+	background: lightgray;
+	margin-top: 20px;
+}
+
+
+/* ----FORMS---*/
+.btn form button{
+	margin-bottom: 10px;
+}
+
+fieldset.inscription_form{
+    
+}
+
+fieldset.inscription_form label{
+    display: block;
+    margin-bottom: 6px;
+}
+
+fieldset.inscription_form input{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+fieldset.inscription_form input[type="radio"]{
+    width: inherit;
+}
+
+/* ----IMG---*/
+img.big_img{
+max-width: 100%;
+height: auto;
+
+}
+
+img.small_img{
+max-width: 100%;
+height: auto;
+}
+
+
+/*========================
+	RECHERCHE
+======================= */
+fieldset{
+	background: lightgrey;
+	margin-bottom: 30px;
+}
+
+.recherche_champ{
+	display: inline-block;
+}
+
+label.mot_cle{
+	border-left: solid 3px grey;
+	padding-left: 15px;
+}
+
+input.lieu{
+	margin-right: 15px;
+	
+}
+
+img.btn_recherche{
+	height: 15px;
+	width: auto;
+}
+
+
+/*============================================================
+ +-+-+-+-+-+-+
+ |f|o|o|t|e|r|
+ +-+-+-+-+-+-+
+______________________________________________________________
+==============================================================
+*
+*/
+nav.footer_menu{
+    display: inline-block;
+	width: 100%;
+	margin: auto;
+	background: lightgrey;
+	margin-top: 0px;
+}
+
+nav.footer_menu ul{
+	text-align: center;
+}
+
+nav.footer_menu ul li{
+    display: inline-block;
+    padding-right: 20px;
+}
