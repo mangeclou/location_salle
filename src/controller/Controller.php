@@ -11,6 +11,8 @@
  *
  * @author Yoann
  */
+namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+
 class Controller {
 	protected $table;
 //-----------------------
@@ -50,4 +52,12 @@ class Controller {
 		
 		return ob_end_flush(); // je retourne tout ce qu'il y a dans la mémoire tampon et je ferme la temporisation (càd, je ressort le $content (=employes.php) + layout.php)
 	}
+        
+        //autoload function permet d'inclure les classes quand elles sont instantiées
+        public function __autoload($class_name) {
+            include "$class_name.php";
+        }
+        
+        
+        
 }

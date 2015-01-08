@@ -5,7 +5,7 @@
  * written by KDO kdo@zpmag.com
  * @see        User
  */
-require_once('User.class.php');
+namespace entity; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 class Member extends User {
 

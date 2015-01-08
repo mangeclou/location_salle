@@ -5,9 +5,11 @@
  * written by KDO kdo@zpmag.com
  * @see        EntityRepository
  */
+namespace repository; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+
 require_once('EntityRepository.class.php');
 
-class PromotionRepository extends EntityRepository {
+class ProduitRepository extends EntityRepository {
 
 
 	/**
@@ -15,7 +17,7 @@ class PromotionRepository extends EntityRepository {
 	 * @return array
 	 */
 
-	public final  function getAllPromotion() {
+	public final  function getAllProduit() {
 
 	}
 

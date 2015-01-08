@@ -10,6 +10,8 @@
  *
  * @author Yoann
  */
+namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+
 class Home { // cette classe extends controller
     //put your code here
     
@@ -30,12 +32,12 @@ class Home { // cette classe extends controller
 			'employes' => $employes
 		));
 	}
-	public function oneDisplay($id)
+	public function InscriptionDisplay($id)
 	{
 		$employe = $this->getRepository('Employes');
 		$employe = $employe->getFindEmploye($id);
 		
-		return $this->render('layout.php', 'employe.php', array(
+		return $this->render('layout.php', 'inscription.php', array(
 			'title' => 'Application',
 			'employe' => $employe
 		));
@@ -46,7 +48,7 @@ class Home { // cette classe extends controller
             echo 'coucou';
 
         
-        if (!empty($_POST))
+        $pseudo = filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING );
        
        $verif_caracteres = trim(preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['pseudo'])); // return 0 si mauvais caractères dans le pseudo sinon return 1
        
