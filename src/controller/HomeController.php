@@ -1,5 +1,12 @@
 <?php
+
+//=======================
+/*TODO : à supprimer
+ * ======================
+ */
 /*
+ * 
+ * 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,16 +18,25 @@
  * @author Yoann
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+include 'Controller.php';
+USE controller\Controller AS MainController;
 
-class Home { // cette classe extends controller
+class HomeController extends MainController { // cette classe extends controller
     //put your code here
     
-   /* public function login()
+   
+    public function __construct() 
+    {
+        echo "instantiation réussie.";
+    }
+    
+    
+    public function login()
     {
         echo 'login';
         // render (methode du controller principal)
         render();
-    }*/
+    }
     
     public function DisplayForMember()
 	{

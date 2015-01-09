@@ -6,13 +6,13 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
-require 'Controller.php';
+USE controller\Controller AS MainController;
 /**
  * Description of Inscription
  *
  * @author Yoann
  */
-class Home extends Controller{ // cette classe extends controller
+/*class Home extends MainController{ // cette classe extends controller
     //put your code here
     
     public function login()
@@ -93,5 +93,5 @@ class Home extends Controller{ // cette classe extends controller
                $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Inscription Ok !</p></div>";
             }   
        }
-    } 
+  /*  } 
 }

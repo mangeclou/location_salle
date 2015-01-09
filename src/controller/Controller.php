@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -43,7 +42,7 @@ class Controller {
 		
 		ob_start();
 		// A partir de maintenant tout ce qui se trouve entre ob_start et ob_get_clean sera temporisé (càad non envoyé au navigateur)
-		require $__template__; // je prend tout ce qu'il y a dans employes.php
+		require $__template__; // je prend tout ce qu'il y a dans la page template
 		
 		$content = ob_get_clean(); // je le stock dans $content 
 		
@@ -57,7 +56,5 @@ class Controller {
         public function __autoload($class_name) {
             include "$class_name.php";
         }
-        
-        
-        
+       
 }
