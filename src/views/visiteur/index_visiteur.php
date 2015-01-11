@@ -1,12 +1,12 @@
 <!-- HEAD -->
 <?php
-    include_once 'web/inc/head.inc.php';
+    include_once '/../../../web/inc/head.inc.php';
 ?>
 
 <!-- HEADER -->  
 <div class="container">
 <?php
-    include_once 'web/inc/header.inc.php';
+    include_once '/../../../web/inc/header.inc.php';
 ?>
         
 

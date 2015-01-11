@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/views/visiteur/mention.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/controller/Controller.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/Autoload.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/web/index.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/views/visiteur/cgv.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/views/visiteur/mdpperdu.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/controller/HomeController.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/controller/VisiteurController.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/controller/MembreController.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/controller/AdminController.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/views/visiteur/plan.php</file>
-            <file>file:/C:/Users/stagiaire/Documents/GitHub/lokisalle/src/controller/Home.php</file>
+            <file>file:/C:/Users/Yoann/github/lokisalle.git/src/controller/VisiteurController.php</file>
+            <file>file:/C:/Users/Yoann/github/lokisalle.git/src/views/ViewManager.php</file>
+            <file>file:/C:/Users/Yoann/github/lokisalle.git/src/views/viewParameters.php</file>
+            <file>file:/C:/Users/Yoann/github/lokisalle.git/web/inc/visiteur/header.inc.php</file>
+            <file>file:/C:/Users/Yoann/github/lokisalle.git/src/controller/Controller.php</file>
+            <file>file:/C:/Users/Yoann/github/lokisalle.git/src/views/layout.php</file>
+            <file>file:/C:/Users/Yoann/github/lokisalle.git/src/views/visiteur/index_visiteur.php</file>
         </group>
     </open-files>
 </project-private>

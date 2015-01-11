@@ -30,12 +30,21 @@ class Controller {
 	public function render($layout, $template, $parameters = array())
 	{
 		$dirViews = __DIR__ . '/../views'; // je récupère le chemin vers le dossier qui contient les vues propres à mon application (layout.php et employes.php)
-		$dirFile = get_called_class(); 
-		$__template__ = $dirViews . '/' . $dirFile . '/' . $template .'.php'; // chemin pour aller au bon endroit du template 
+		$dirFileTemp = lcfirst(get_called_class()) ;
+        
+        //On passe du nom de la classe au nom du dossier
+        $pattern = "/controller/";
+        preg_match($pattern, $dirFileTemp,  $arrayDir);
+        //print_r($arrayDir);
+        $trans = array($arrayDir[0] => "", "\\" => "","Controller" =>"");
+        $newDir = strtr ($dirFileTemp, $trans );
+        echo '<br>' .$newDir;
+        
+        //On appelle le chemin du template correspondant
+		$__template__ = $dirViews . '/' . $newDir . '/' . $template; // chemin pour aller au bon endroit du template 
 		// echo $__template__;
-		$__layout__ = $dirViews . '/' . $layout . '.php'; // chemin pour aller au bon endroit du Layout
-		
-		//echo $__template__ . '<br>';
+		$__layout__ = $dirViews . '/' . $layout; // chemin pour aller au bon endroit du Layout
+        //echo $__template__ . '<br>';
 		//echo $__layout__ . '<br>';
 		
 		extract($parameters, EXTR_SKIP); // EXTR_SKIP me permet de ne pas écraser une variable qui porterait le même nom qu'une des variables générées par extract 
