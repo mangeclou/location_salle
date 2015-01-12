@@ -13,56 +13,51 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 include 'Controller.php';
+require __DIR__ . '/../views/viewParameters.php';
 
 USE controller\Controller AS MainController;
+
+//$visitorIncDir = __DIR__ . '/../../web/visiteur/'; 
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends MainController
 {
     //default layout of the pages
     protected $layout = 'layout.php';
-    
+     
     //liste des templates et des paramètres pour chaque page
     protected $cgvTemplate = 'cgv.php';
-    protected $cgvParameters = array();
-    
-    
+    protected $cgvParameters;
+       
     protected $connexionTemplate = 'connexion.php';
-    protected $connexionParameters = array();
+    protected $connexionParameters;
     
     protected $indexTemplate = 'index_visiteur.php';
-    protected $indexParameters = array();
-    protected $titlePage = "Accueil";
+    protected $indexParameters;    
     
     protected $inscriptionTemplate = 'inscription.php';
-    protected $inscriptionParameters = array();
+    protected $inscriptionParameters;
     
     protected $mdpperduTemplate = 'mdpperdu.php';
-    protected $mdpperduParameters = array();
+    protected $mdpperduParameters;
 
     protected $mentionTemplate = 'mention.php';
-    protected $mentionParameters = array();
+    protected $mentionParameters;
     
     protected $planTemplate = 'plan.php';
-    protected $planParameters = array();
+    protected $planParameters;
     
     protected $rechercheTemplate = 'recherche.php';
-    protected $rechercheParameters = array();
+    protected $rechercheParameters;
     
     protected $reservationTemplate = 'reservation.php';
-    protected $reservationParameters = array();
+    protected $reservationParameters;
     
     protected $reservationDetailTemplate = 'reservation_detail.php';
-    protected $reservationdetailParameters = array();
+    protected $reservationdetailParameters;
 
     //GETTERS
-    
-    public function GetTitle() 
-    {
-        return $this->titlePage;
-    }
-    
-    
+       
     /*
    public function __construct()
 
@@ -82,64 +77,69 @@ class VisiteurController extends MainController
     * @param $parameters : an array of some parameters
     */
          
+    /**
+     * Va chercher les paramètres de cgv depuis l'array de viewParameters.php
+     */
+    
     public function displayCgv() 
     {
         //on utilise la méthode render du parent Controller
+        $this->cgvParameters = $viewPageParameters['visiteur']['cgv'];
         return $this->render($this->layout, $this->cgvTemplate, $this->cgvParameters);  
     }
-    
-    public function displayConnexion() 
+          
+    public function displayConnexion()
     {
-        //
-       return $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+        $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
+        return $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
     }
     
-    public function displayIndex() 
+    public function displayIndex()
     {
-        
+        $this->indexParameters = $viewPageParameters['visiteur']['index_visiteur']; 
         return $this->render($this->layout, $this->indexTemplate, $this->indexParameters);  
     }
-    
-    public function displayInscription() 
+        
+    public function displayInscription()
     {
-        //
-       return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);  
+        $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+        return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);  
+    }
+    //continuer
+    public function displayMdpperdu()
+    {
+        $this->mdpperduParameters = $viewPageParameters['visiteur']['mdpperdu'];
+        return $this->render($this->layout, $this->mdpperduTemplate, $this->mdpperduParameters);  
     }
     
-    public function displayMdpperdu() 
+    public function displayMention()
     {
-        //
-       return $this->render($this->layout, $this->mdpperduTemplate, $this->mdpperduParameters);  
-    }
-    
-    public function displayMention() 
-    {
-        //
-       return $this->render($this->layout, $this->mentionTemplate, $this->mentionParameters);  
+        $this->mentionParameters = $viewPageParameters['visiteur']['mention'];
+        return $this->render($this->layout, $this->mentionTemplate, $this->mentionParameters);  
     } 
     
-    public function displayPlan() 
+    public function displayPlan()
     {
-        //
-       return $this->render($this->layout, $this->planTemplate, $this->planParameters);  
+        $this->planParameters = $viewPageParameters['visiteur']['plan'];
+        return $this->render($this->layout, $this->planTemplate, $this->planParameters);  
     }
     
-    public function displayRecherche() 
+    public function displayRecherche()
     {
-        //
-       return $this->render($this->layout, $this->rechercheTemplate, $this->rechercheParameters);  
+        $this->rechercheParameters = $viewPageParameters['visiteur']['recherche'];
+        return $this->render($this->layout, $this->rechercheTemplate, $this->rechercheParameters);  
     }
     
-    public function displayReservation() 
+    public function displayReservation()
     {
-        //
-       return $this->render($this->layout, $this->reservationTemplate, $this->reservationParameters);  
+        $this->reservationParameters = $viewPageParameters['visiteur']['reservation'];
+        return $this->render($this->layout, $this->reservationTemplate, $this->reservationParameters);  
     }
         
-    public function displayReservationdetail() 
+    public function displayReservationdetail()
     {
-        //
-       return $this->render($this->layout, $this->reservationDetailTemplate, $this->reservationdetailParameters);  
+        $this->reservationDetailParameters = $viewPageParameters['visiteur']['inscription'];
+        return $this->render($this->layout, $this->reservationDetailTemplate, $this->reservationdetailParameters);  
     }
         
 }

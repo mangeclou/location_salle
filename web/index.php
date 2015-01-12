@@ -4,7 +4,7 @@
 *
 *
 */
- require_once '/inc/head.inc.php';
+ require_once '/inc/visiteur/head.inc.php';
 
 /**
 *faire un if qui en fonction de ce que renvoie une methode de la classe controller (?)  qui elle va chercher la méthode  isAdmin va 
@@ -30,7 +30,7 @@ else {
 	header(location:'index_visitor.php');
 }
 */
-    require_once '/inc/header.inc.php';
+    require_once '/inc/visiteur/header.inc.php';
     //require_once '/inc/body.inc.php';
     
     /**
@@ -58,4 +58,4 @@ else {
         }
     }
     
-       require_once '/inc/footer.inc.php';
+       require_once '/inc/visiteur/footer.inc.php';

@@ -13,7 +13,7 @@ class Config {
 * 
 */
        
-    
+    protected $parameters;
     
     public function __construct()
     {

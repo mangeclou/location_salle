@@ -11,17 +11,17 @@
         
 
 	<div class="carousel_wrapper">
-		<div class="carousel">
-			<div class="slide">
-				<h2>Présentation 1</h2>
-				<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula faucibus sodales.
-						Nulla posuere, est sed volutpat ullamcorper, est nunc dignissim eros, ut imperdiet augue risus et est.</p>
-				<img src="img/home_presentation.jpg" alt="" class="big_img"> 
-			</div><!--END .slide -->
-		</div><!--END .carousel -->
+            <div class="carousel">
+		<div class="slide">
+                    <h2>Présentation 1</h2>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula faucibus sodales.
+			Nulla posuere, est sed volutpat ullamcorper, est nunc dignissim eros, ut imperdiet augue risus et est.</p>
+                    <img src="img/home_presentation.jpg" alt="" class="big_img"> 
+		</div><!--END .slide -->
+            </div><!--END .carousel -->
 	</div><!--END .carousel_wrapper -->
 	<div class="big_title">
-		<h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
+            <h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
 	</div>
 	<div class="container-box">
     <div class="col_30">

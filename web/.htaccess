@@ -1,0 +1,9 @@
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-F
+#RewriteRule ^(.*)$ lokisalle.php [QSA,L]
+
+#RewriteCond %{HTTP_REFERER} !^$
+
+#Remplacer l'adresse temporaire par celle du site final
+#RewriteCond %{HTTP_REFERER} !^http://www.votredomaine.net/.*$ [NC]
+#ReWriteRule .*\.(gif|png|jpe?g)$ - [F]

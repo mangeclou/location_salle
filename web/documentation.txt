@@ -1,3 +1,5 @@
 STRUCTURE
 
 Un index.php générique qui va rediriger vers index_front.php ou index_back.php en fonction du statut du visiteur
+
+Acviter le module rewrite dans httpd.conf de Apache (LoadModule rewrite_module modules/mod_rewrite.so)
