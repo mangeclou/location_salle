@@ -37,8 +37,15 @@ else {
      * On fait le lien entre l'url et les méthodes qui vont faire le traitement
      * et l'affichage
      */
-    if (!empty($_GET['controller']) && !empty($_GET['method'])  ) {
-        $controller = (filter_var(ucfirst($_GET['controller']),FILTER_SANITIZE_STRING));
+     $url = explode("/", $_SERVER['REQUEST_URI']);
+     echo '<hr>';
+     print_r( $url);
+    //if (!empty($_GET['controller']) && !empty($_GET['method'])  ) {
+     if (!empty($url)) {
+         
+       $url = trim($url);
+         
+        //$controller = (filter_var(ucfirst($_GET['controller']),FILTER_SANITIZE_STRING));
         $controllerArray = ['VisiteurController','MembreController','BackController'];
 
         if (in_array($controller, $controllerArray)) {

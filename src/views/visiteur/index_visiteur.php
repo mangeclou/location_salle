@@ -1,6 +1,8 @@
 <!-- HEAD -->
 <?php
     include_once '/../../../web/inc/visiteur/head.inc.php';
+  
+    print_r($viewPageParameters['visiteur']['index_visiteur']);
 ?>
 
 <!-- HEADER -->  

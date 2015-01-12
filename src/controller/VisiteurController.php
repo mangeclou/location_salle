@@ -13,7 +13,7 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 include 'Controller.php';
-require __DIR__ . '/../views/viewParameters.php';
+
 
 USE controller\Controller AS MainController;
 
@@ -56,6 +56,7 @@ class VisiteurController extends MainController
     protected $reservationDetailTemplate = 'reservation_detail.php';
     protected $reservationdetailParameters;
 
+    
     //GETTERS
        
     /*
@@ -84,6 +85,7 @@ class VisiteurController extends MainController
     public function displayCgv() 
     {
         //on utilise la méthode render du parent Controller
+        require __DIR__ . '/../views/viewParameters.php';
         $this->cgvParameters = $viewPageParameters['visiteur']['cgv'];
         return $this->render($this->layout, $this->cgvTemplate, $this->cgvParameters);  
     }
@@ -96,6 +98,7 @@ class VisiteurController extends MainController
     
     public function displayIndex()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->indexParameters = $viewPageParameters['visiteur']['index_visiteur']; 
         return $this->render($this->layout, $this->indexTemplate, $this->indexParameters);  
     }
@@ -103,7 +106,8 @@ class VisiteurController extends MainController
     public function displayInscription()
     {
         $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
-        return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);  
+        return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
+        //utiliser les données de l'array parametre pour déterminer l'inc
     }
     //continuer
     public function displayMdpperdu()
