@@ -82,119 +82,119 @@ class Salle {
 
     
     //----------- GETTERS -----------------
-        public function getIdSalle()
-        {
-            return $this->id_salle;
-        }
-        public function getPays()
-        {
-            return $this->pays;
-        }
-        public function getVille()
-        {
-            return $this->ville;
-        }
-        public function getAdresse()
-        {
-            return $this->adresse;
-        }
-        public function getCp()
-        {
-            return $this->cp;
-        }
-        public function getTitre()
-        {
-            return $this->titre;
-        }
-        public function getDescription()
-        {
-            return $this->description;
-        }
-        public function getCapacite()
-        {
-            return $this->capacite;
-        }        
-        public function getCategorie()
-        {
-            return $this->categorie;
-        }
-        //--------- SETTERS ------------------
-        /*
-        public function setIdSalle($arg)
-        {
-            if ()
-            $this->idEmploye = $arg;
-        }
+    public function getIdSalle()
+    {
+         return $this->id_salle;
+    }
+    public function getPays()
+    {
+         return $this->pays;
+    }
+    public function getVille()
+    {
+        return $this->ville;
+    }
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+    public function getCp()
+    {
+        return $this->cp;
+    }
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    public function getCapacite()
+    {
+        return $this->capacite;
+    }        
+    public function getCategorie()
+    {
+        return $this->categorie;
+    }
+    //--------- SETTERS ------------------
+    /*
+    public function setIdSalle($arg)
+    {
+        if ()
+        $this->idEmploye = $arg;
+    }
+    */
+    public function setPays($pays)
+    {
+        /**
+        * Filtre des inputs de formulaire.
+        * On teste si l'input est non vide et si c'est un string bien formatté
+        * 
         */
-        public function setPays($pays)
-        {
-            /**
-            * Filtre des inputs de formulaire.
-            * On teste si l'input est non vide et si c'est un string bien formatté
-            * 
-            */
-            if((filter_has_var(INPUT_POST, $pays))&&(filter_input(INPUT_POST, $pays, FILTER_SANITIZE_STRING)) === true) {
-            $this->pays = $pays;
-            }
+        if((filter_has_var(INPUT_POST, $pays))&&(filter_input(INPUT_POST, $pays, FILTER_SANITIZE_STRING)) === true) {
+        $this->pays = $pays;
         }
-        
-        public function setVille($ville)
-        {
-            /**
-            * Filtre des inputs de formulaire.
-            * On teste si l'input est non vide et si c'est un string bien formatté
-            * 
-            */
-             if((filter_has_var(INPUT_POST, $ville))&&(filter_input(INPUT_POST, $ville, FILTER_SANITIZE_STRING)) === true) {
+    }
+     
+    public function setVille($ville)
+    {
+        /**
+        * Filtre des inputs de formulaire.
+        * On teste si l'input est non vide et si c'est un string bien formatté
+        * 
+        */
+        if((filter_has_var(INPUT_POST, $ville))&&(filter_input(INPUT_POST, $ville, FILTER_SANITIZE_STRING)) === true) {
             $this->pays = $ville;
-            }
         }
-        
-        public function setAdresse($adresse)
-        {
-            //if (fonction de filtrage == true)
-             if((filter_has_var(INPUT_POST, $adresse))&&(filter_input(INPUT_POST, $adresse, FILTER_SANITIZE_STRING)) === true) {
+    }
+     
+    public function setAdresse($adresse)
+    {
+        //if (fonction de filtrage == true)
+        if((filter_has_var(INPUT_POST, $adresse))&&(filter_input(INPUT_POST, $adresse, FILTER_SANITIZE_STRING)) === true) {
             $this->pays = $adresse;
-            }
         }
-        
-        public function setCp($cp)
-        {
-            //if (fonction de filtrage == true)
-             if((filter_has_var(INPUT_POST, $cp))&&(filter_input(INPUT_POST, $cp, FILTER_SANITIZE_STRING)) === true) {
+    }
+     
+    public function setCp($cp)
+    {
+        //if (fonction de filtrage == true)
+        if((filter_has_var(INPUT_POST, $cp))&&(filter_input(INPUT_POST, $cp, FILTER_SANITIZE_STRING)) === true) {
             $this->pays = $cp;
-            }
         }
-        
-        public function setTitre($titre)
-        {
-            //if (fonction de filtrage == true)
-             if((filter_has_var(INPUT_POST, $titre))&&(filter_input(INPUT_POST, $titre, FILTER_SANITIZE_STRING)) === true) {
+    }
+     
+    public function setTitre($titre)
+    {
+        //if (fonction de filtrage == true)
+        if((filter_has_var(INPUT_POST, $titre))&&(filter_input(INPUT_POST, $titre, FILTER_SANITIZE_STRING)) === true) {
             $this->pays = $titre;
-            }
         }
-        
-        public function setDescription($description)
-        {
-            //if (fonction de filtrage == true)
-             if((filter_has_var(INPUT_POST, $description))&&(filter_input(INPUT_POST, $description, FILTER_SANITIZE_STRING)) === true) {
+    }
+     
+    public function setDescription($description)
+    {
+        //if (fonction de filtrage == true)
+        if((filter_has_var(INPUT_POST, $description))&&(filter_input(INPUT_POST, $description, FILTER_SANITIZE_STRING)) === true) {
             $this->pays = $description;
-            }
         }
-        
-        public function setCapacite($capacite)
-        {
-            //if (fonction de filtrage == true)
-            if((filter_has_var(INPUT_POST, $capacite))&&(filter_input(INPUT_POST, $capacite, FILTER_SANITIZE_NUMBER_INT)) === true) {
+    }
+     
+    public function setCapacite($capacite)
+    {
+        //if (fonction de filtrage == true)
+        if((filter_has_var(INPUT_POST, $capacite))&&(filter_input(INPUT_POST, $capacite, FILTER_SANITIZE_NUMBER_INT)) === true) {
             $this->capacite = $capacite;
-            }
         }
-        
-        public function setCategorie($categorie)
-        {
-            //if (fonction de filtrage == true)
-            if((filter_has_var(INPUT_POST, $categorie))&&(filter_input(INPUT_POST, $categorie, FILTER_SANITIZE_STRING)) === true) {
+    }
+     
+    public function setCategorie($categorie)
+    {
+        //if (fonction de filtrage == true)
+        if((filter_has_var(INPUT_POST, $categorie))&&(filter_input(INPUT_POST, $categorie, FILTER_SANITIZE_STRING)) === true) {
             $this->capacite = $categorie;
-            }
         }
+    }
 }

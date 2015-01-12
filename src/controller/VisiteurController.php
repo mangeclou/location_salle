@@ -26,11 +26,13 @@ class VisiteurController extends MainController
     protected $cgvTemplate = 'cgv.php';
     protected $cgvParameters = array();
     
+    
     protected $connexionTemplate = 'connexion.php';
     protected $connexionParameters = array();
     
     protected $indexTemplate = 'index_visiteur.php';
     protected $indexParameters = array();
+    protected $titlePage = "Accueil";
     
     protected $inscriptionTemplate = 'inscription.php';
     protected $inscriptionParameters = array();
@@ -53,7 +55,12 @@ class VisiteurController extends MainController
     protected $reservationDetailTemplate = 'reservation_detail.php';
     protected $reservationdetailParameters = array();
 
-
+    //GETTERS
+    
+    public function GetTitle() 
+    {
+        return $this->titlePage;
+    }
     
     
     /*
@@ -74,6 +81,7 @@ class VisiteurController extends MainController
     * @param $template : the html template of this page
     * @param $parameters : an array of some parameters
     */
+         
     public function displayCgv() 
     {
         //on utilise la méthode render du parent Controller

@@ -38,14 +38,19 @@ else {
      * et l'affichage
      */
     if (!empty($_GET['controller']) && !empty($_GET['method'])  ) {
-        $controller = ucfirst($_GET['controller']);
+        $controller = (filter_var(ucfirst($_GET['controller']),FILTER_SANITIZE_STRING));
         $controllerArray = ['VisiteurController','MembreController','BackController'];
 
         if (in_array($controller, $controllerArray)) {
             $path = __DIR__ . '\..\src\controller\\' . $controller . '.php';
             include $path;
-            //l'instantiation ne fonctionne pas
-            $obj = new $controller; // $myController = new MyController()
+            //on ajoute le namespace (controller)
+            $namespace = '\controller\\';
+            $controllerNamespace  = $namespace. $controller ;
+            echo $controllerNamespace;
+            
+            //On instantie dynamiquement la classe correspondante
+            $obj = new $controllerNamespace; // $myController = new MyController()
             
             call_user_func( array( $obj, $_GET['method'] ) ); // $myController->myMethod()
         } else {
