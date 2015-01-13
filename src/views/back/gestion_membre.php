@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+	<div class="big-title-back">
+            <h1>Gestion des membre</h1>
+        </div>
+	<div class="container-box">
+              
+                <div class="avis-table">
+                    <table>
+                        
+                    </table>
+                    <a href="create_new_admin.php">Créer un nouveau compte administrateur</a>
+                </div><!--END .avis-table -->
+
+        
+        </div><!--END .container-box -->
+  
+	
+</div><!--END .container -->

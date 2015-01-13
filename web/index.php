@@ -104,7 +104,8 @@ else {
             //echo $controllerNamespace;
 
         //inclusion des includes head et header en fonction du controller (Visiteur, Membre, Back)
-        if($controller == 'BackController'){
+        /*
+            if($controller == 'BackController'){
             require_once '/inc/back/head.inc.php';
             require_once '/inc/back/header.inc.php';
         }elseif ($controller == 'MembreController') {
@@ -114,7 +115,7 @@ else {
             include_once 'inc/visiteur/head.inc.php';
             include_once 'inc/visiteur/header.inc.php';
         }
-
+            */
 
 
         //On instancie dynamiquement la classe correspondante

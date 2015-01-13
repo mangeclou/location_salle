@@ -38,7 +38,7 @@ class Controller {
         //print_r($arrayDir);
         $trans = array($arrayDir[0] => "", "\\" => "","Controller" =>"");
         $newDir = strtr ($dirFileTemp, $trans );
-        echo '<br>' .$newDir;
+        //echo '<br>' .$newDir;
         
         //On appelle le chemin du template correspondant
 		$__template__ = $dirViews . '/' . $newDir . '/' . $template; // chemin pour aller au bon endroit du template 
@@ -47,7 +47,8 @@ class Controller {
         //echo $__template__ . '<br>';
 		//echo $__layout__ . '<br>';
 		
-		extract($parameters, EXTR_SKIP); // EXTR_SKIP me permet de ne pas écraser une variable qui porterait le même nom qu'une des variables générées par extract 
+		//extract() transforme l'array parameters en variables que l'on peut utiliser
+                extract($parameters, EXTR_SKIP); // EXTR_SKIP me permet de ne pas écraser une variable qui porterait le même nom qu'une des variables générées par extract 
 		
 		ob_start();
 		// A partir de maintenant tout ce qui se trouve entre ob_start et ob_get_clean sera temporisé (càad non envoyé au navigateur)

@@ -74,7 +74,7 @@
 </div><!--END .container -->
 <!-- FOOTER -->
 <?php
-    include_once 'web/inc/footer.inc.php';
+   // include_once 'web/inc/footer.inc.php';
 ?>
 
    

@@ -1,0 +1,2 @@
+*Un fichier et donc une classe controller par type de modules / fonctionnalit�(inscription, connexion, afficher le profil, afficher les 3 derniers produits avec un random, etc.)
+**Les liens des includes ne marchent pas mais ils sont dans layout, ça marchait quand ils étaient dans index.php l06

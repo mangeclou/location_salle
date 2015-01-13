@@ -49,6 +49,26 @@ $viewPageParameters = array (
                     "meta" => array (
                     )
                 ),
+                "panier_back" => array (
+                    "title" => "Panier back office",
+                    "meta" => array (
+                    )
+                ),
+                "profil_back" => array (
+                    "title" => "Profil back office",
+                    "meta" => array (
+                    )
+                ),
+                "recherche_back" => array (
+                    "title" => "Recherche back office",
+                    "meta" => array (
+                    )
+                ),
+                "reservation_back" => array (
+                    "title" => "Reservation back office",
+                    "meta" => array (
+                    )
+                ),
                 "statistique" => array (
                     "title" => "Statistiques",
                     "meta" => array (
