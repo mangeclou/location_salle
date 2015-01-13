@@ -1,15 +1,3 @@
-<!-- HEAD -->
-<?php
-    include_once '/../../../web/inc/visiteur/head.inc.php';
-?>
-
-<!-- HEADER -->  
-<div class="container">
-<?php
-    include_once '/../../../web/inc/visiteur/header.inc.php';
-    
-    echo $_SERVER['DOCUMENT_ROOT'];
-?>
     <div class="carousel_wrapper">
 	<div class="carousel">
             <div class="slide">
@@ -87,7 +75,7 @@
 </div><!--END .container -->
 <!-- FOOTER -->
 <?php
-    include_once 'web/inc/footer.inc.php';
+   // include_once 'web/inc/footer.inc.php';
 ?>
 
    

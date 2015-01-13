@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-
-<html>
     <head>
         <title>Lokisalle</title>
         <link media="all" rel="stylesheet" type="text/css" href="/css/styles.css"></link>

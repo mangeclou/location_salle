@@ -13,11 +13,7 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 include 'Controller.php';
-require __DIR__ . '/../views/viewParameters.php';
-
 USE controller\Controller AS MainController;
-
-//$visitorIncDir = __DIR__ . '/../../web/visiteur/'; 
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends MainController
@@ -84,60 +80,70 @@ class VisiteurController extends MainController
     public function displayCgv() 
     {
         //on utilise la méthode render du parent Controller
+        require __DIR__ . '/../views/viewParameters.php';
         $this->cgvParameters = $viewPageParameters['visiteur']['cgv'];
         return $this->render($this->layout, $this->cgvTemplate, $this->cgvParameters);  
     }
           
     public function displayConnexion()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
         return $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
     }
     
     public function displayIndex()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->indexParameters = $viewPageParameters['visiteur']['index_visiteur']; 
         return $this->render($this->layout, $this->indexTemplate, $this->indexParameters);  
     }
         
     public function displayInscription()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
         return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);  
     }
     //continuer
     public function displayMdpperdu()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->mdpperduParameters = $viewPageParameters['visiteur']['mdpperdu'];
         return $this->render($this->layout, $this->mdpperduTemplate, $this->mdpperduParameters);  
     }
     
     public function displayMention()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->mentionParameters = $viewPageParameters['visiteur']['mention'];
         return $this->render($this->layout, $this->mentionTemplate, $this->mentionParameters);  
     } 
     
     public function displayPlan()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->planParameters = $viewPageParameters['visiteur']['plan'];
         return $this->render($this->layout, $this->planTemplate, $this->planParameters);  
     }
     
     public function displayRecherche()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->rechercheParameters = $viewPageParameters['visiteur']['recherche'];
         return $this->render($this->layout, $this->rechercheTemplate, $this->rechercheParameters);  
     }
     
     public function displayReservation()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->reservationParameters = $viewPageParameters['visiteur']['reservation'];
         return $this->render($this->layout, $this->reservationTemplate, $this->reservationParameters);  
     }
         
     public function displayReservationdetail()
     {
+        require __DIR__ . '/../views/viewParameters.php';
         $this->reservationDetailParameters = $viewPageParameters['visiteur']['inscription'];
         return $this->render($this->layout, $this->reservationDetailTemplate, $this->reservationdetailParameters);  
     }

@@ -8,9 +8,10 @@
 /**
  * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
  *
- * @author stagiaire
+ * @author yoann
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+
 include 'Controller.php';
 USE controller\Controller AS MainController;
 
@@ -20,25 +21,22 @@ class MembreController extends MainController
     protected $layout = 'layout.php';
     
     //liste des templates et des paramètres pour chaque page
-    
     protected $contactTemplate = 'contact.php';
-    protected $contactParameters = array();
+    protected $contactParameters;
     
     protected $indexMembreTemplate = 'index_membre.php';
-    protected $indexMembreParameters = array();
+    protected $indexMembreParameters;
 
     protected $newsletterInscriptionTemplate = 'newsletter.php';
-    protected $newsletterInscriptionParameters = array();
+    protected $newsletterInscriptionParameters;
 
     protected $panierTemplate = 'panier.php';
-    protected $panierParameters = array();
+    protected $panierParameters;
     
     protected $profilTemplate = 'profil.php';
-    protected $profilParameters = array();
+    protected $profilParameters;
     
-    
-
-    /*
+        /*
     public function __construct() 
     {
         echo "instantiation réussie.";
@@ -55,32 +53,52 @@ class MembreController extends MainController
     */
     public function displayContact() 
     {
-        //on utilise la méthode render du parent Controller pour afficher la page
+       //on require le fichier de config de la view
+       require __DIR__ . '/../views/viewParameters.php';
+       //on va chercher les paramètres dans l'array viewpageParameters
+       $this->contactParameters = $viewPageParameters['membre']['contact'];
+       //on utilise la méthode render du parent Controller pour afficher la page
        return $this->render($this->layout, $this->contactTemplate, $this->contactParameters);  
     }
     
     public function displayIndexMembre() 
     {
-        //
-       return $this->render($this->layout, $this->indexMembreTemplate, $this->indexMembreParameters);  
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->indexMembreParameters = $viewPageParameters['membre']['index_membre'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->indexMembreTemplate, $this->indexMembreParameters);  
     }
     
     public function displayNewsletterInscription() 
     {
-        
-        return $this->render($this->layout, $this->newsletterInscriptionTemplate, $this->newsletterInscriptionParameters);  
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->newsletterInscriptionParameters = $viewPageParameters['membre']['newsletter'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->newsletterInscriptionTemplate, $this->indexMembreParameters);  
     }
     
     public function displayPanier() 
     {
-        //
-       return $this->render($this->layout, $this->panierTemplate, $this->panierParameters);  
+       //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->panierParameters = $viewPageParameters['membre']['panier'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->panierTemplate, $this->panierParameters);    
     }
     
     public function displayProfil() 
     {
-        //
-       return $this->render($this->layout, $this->profilTemplate, $this->profilParameters);  
+       //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->profilParameters = $viewPageParameters['membre']['profil'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->profilTemplate, $this->profilParameters);  
     }
             
 }
