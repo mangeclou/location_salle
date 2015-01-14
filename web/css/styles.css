@@ -191,7 +191,7 @@ ______________________________________________________________
 ==============================================================
 *
 */
-nav.footer_menu{
+nav.footer-menu{
     display: inline-block;
 	width: 100%;
 	margin: auto;
@@ -199,11 +199,11 @@ nav.footer_menu{
 	margin-top: 0px;
 }
 
-nav.footer_menu ul{
+nav.footer-menu ul{
 	text-align: center;
 }
 
-nav.footer_menu ul li{
+nav.footer-menu ul li{
     display: inline-block;
     padding-right: 20px;
 }

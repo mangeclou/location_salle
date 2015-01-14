@@ -96,6 +96,14 @@ $viewPageParameters = array (
                     "meta" => array (
                     )
                 ),
+                "newsletter_inscription_back" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Inscription à la newsletter",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    )
+                ),
                 "panier_back" => array (
                     "head_inc" => "/inc/back/head.inc.php",
                     "title" => "Panier back office",

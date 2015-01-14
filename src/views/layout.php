@@ -7,16 +7,13 @@
          * by the controller
          */
         include_once $head_inc;
-    ?>
-   
-        
-        <?php
+            
         /**
          * Include the header via the extracted viewParameters.php transmitted
          * by the controller
          */
         include_once $header_inc;
-        ?>
+    ?>
         
     <body>
             <h1><?php echo $title; ?></h1>
@@ -29,6 +26,6 @@
          * by the controller
          */
         include_once $footer_inc;
-   ?>
+    ?>
     
 </html>

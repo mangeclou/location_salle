@@ -57,6 +57,9 @@ class BackController extends MainController
     protected $mentionBackTemplate = 'mention_back.php';
     protected $mentionBackParameters;
     
+    protected $newsletterInscriptionBackTemplate = 'newsletter_inscription_back.php';
+    protected $newsletterInscriptionBackParameters;
+    
     protected $panierBackTemplate = 'panier_back.php';
     protected $panierBackParameters;
     
@@ -210,6 +213,16 @@ class BackController extends MainController
         $this->mentionBackParameters = $viewPageParameters['back']['mention_back'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->mentionBackTemplate, $this->mentionBackParameters);  
+    }
+    
+    public function displayNewsletterInscriptionBack() 
+    {
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->newsletterInscriptionBackParameters = $viewPageParameters['membre']['newsletter_inscription_back'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->newsletterInscriptionBackTemplate, $this->newsletterInscriptionBackParameters);  
     }
     
     public function displayPanierBack() 

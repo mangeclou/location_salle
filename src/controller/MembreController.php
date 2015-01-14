@@ -129,7 +129,7 @@ class MembreController extends MainController
         //on va chercher les paramètres dans l'array viewpageParameters
         $this->newsletterInscriptionParameters = $viewPageParameters['membre']['newsletter'];
         //on utilise la méthode render du parent Controller pour afficher la page
-        return $this->render($this->layout, $this->newsletterInscriptionTemplate, $this->indexMembreParameters);  
+        return $this->render($this->layout, $this->newsletterInscriptionTemplate, $this->newsletterInscriptionParameters);  
     }
     
     public function displayPanierMembre() 
