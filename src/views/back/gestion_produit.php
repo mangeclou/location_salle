@@ -6,11 +6,10 @@
             <div class="produit-back">
                     
                 <form  action="gestion_produit.php">
-                    <button type="submit" name="addProduit">Ajouter un produit</button>
-                    <button type="submit" name="displayProduit">Affichage des produits</button>
+                    <button type="button" name="addProduit">Ajouter un produit</button>
+                    <button type="button" name="displayProduit">Affichage des produits</button>
                 </form>
-                <a href="create_new_admin.php">Créer un nouveau compte administrateur</a>
-
+                
             </div><!--END .avis-table -->
         
         </div><!--END .container-box -->

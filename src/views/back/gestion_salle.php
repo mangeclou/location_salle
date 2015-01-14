@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+	<div class="big-title-back">
+            <h1>Gestion des produits</h1>
+        </div>
+	<div class="container-box">
+              
+            <div class="salle-back">
+                    
+                <form  action="gestion_produit.php">
+                    <button type="submit" name="addSalle">Ajouter une salle</button>
+                    <button type="submit" name="displaySalle">Affichage des salles</button>
+                </form>
+                
+
+            </div><!--END .avis-table -->
+        
+        </div><!--END .container-box -->
+  	
+</div><!--END .container -->
+

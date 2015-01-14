@@ -28,6 +28,9 @@ class VisiteurController extends MainController
     protected $connexionTemplate = 'connexion.php';
     protected $connexionParameters;
     
+    protected $contactTemplate = 'contact.php';
+    protected $contactParameters;
+    
     protected $indexTemplate = 'index_visiteur.php';
     protected $indexParameters;    
     
@@ -90,6 +93,13 @@ class VisiteurController extends MainController
         require __DIR__ . '/../views/viewParameters.php';
         $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
         return $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+    }
+    
+    public function displayContact()
+    {
+        require __DIR__ . '/../views/viewParameters.php';
+        $this->contactParameters = $viewPageParameters['visiteur']['contact']; 
+        return $this->render($this->layout, $this->contactTemplate, $this->contactParameters);  
     }
     
     public function displayIndex()

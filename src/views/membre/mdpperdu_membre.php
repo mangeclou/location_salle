@@ -2,7 +2,6 @@
             <h1>Mot de passe perdu</h1>
         </div>
 	<div class="container-box">
-    
             <div class="col_50">
                 <div class="form-contact">
                     <form method="post" action="">
@@ -18,7 +17,6 @@
                         </fieldset>
                     </form>
                 </div><!--END .form-contact -->
-
             </div><!--END .col -->
         </div><!--END .container-box -->
   	

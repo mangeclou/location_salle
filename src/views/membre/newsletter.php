@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+	<div class="big-title">
+            <h1>S'inscrire à la newsletter</h1>
+        </div>
+	<div class="container-box">
+              
+            <div class="col_60">
+                <form  action="" method="POST">
+                    <button type="button" name="subscribeNewsletter">S'inscrire à la newsletter</button>
+                </form>
+            </div><!--END .col-60 -->
+        </div><!--END .container-box -->
+  
+	
+</div><!--END .container -->

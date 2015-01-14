@@ -47,9 +47,7 @@
                 </form>
             </div>
             <a href="connexion.php">Connectez vous</a>
-     
         </div><!--END .col -->
-	 
 	<div class="col_30">
             <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
             <div class="date">
@@ -73,10 +71,6 @@
   
 	
 </div><!--END .container -->
-<!-- FOOTER -->
-<?php
-   // include_once 'web/inc/footer.inc.php';
-?>
 
    
 

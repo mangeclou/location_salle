@@ -21,20 +21,41 @@ class MembreController extends MainController
     protected $layout = 'layout.php';
     
     //liste des templates et des paramètres pour chaque page
-    protected $contactTemplate = 'contact.php';
+    protected $cgvMembreTemplate = 'cgv_membre.php';
+    protected $cgvMembreParameters;
+    
+    protected $contactTemplate = 'contact_membre.php';
     protected $contactParameters;
     
     protected $indexMembreTemplate = 'index_membre.php';
     protected $indexMembreParameters;
+    
+    protected $mdpperduMembreTemplate = 'mdpperdu_membre.php';
+    protected $mdpperduMembreParameters;
+    
+    protected $mentionMembreTemplate = 'mention_membre.php';
+    protected $mentionMembreParameters;
 
     protected $newsletterInscriptionTemplate = 'newsletter.php';
     protected $newsletterInscriptionParameters;
 
-    protected $panierTemplate = 'panier.php';
-    protected $panierParameters;
+    protected $panierMembreTemplate = 'panier_membre.php';
+    protected $panierMembreParameters;
     
-    protected $profilTemplate = 'profil.php';
-    protected $profilParameters;
+    protected $planMembreTemplate = 'plan_membre.php';
+    protected $planMembreParameters;
+       
+    protected $profilMembreTemplate = 'profil_membre.php';
+    protected $profilMembreParameters;
+    
+    protected $rechercheMembreTemplate = 'recherche_membre.php';
+    protected $rechercheMembreParameters;
+    
+    protected $reservationMembreTemplate = 'reservation_membre.php';
+    protected $reservationMembreParameters;
+    
+    protected $reservationDetailMembreTemplate = 'reservation_detail_membre.php';
+    protected $reservationDetailMembreParameters;
     
         /*
     public function __construct() 
@@ -51,6 +72,16 @@ class MembreController extends MainController
     * @param $template : the html template of this page
     * @param $parameters : an array of some parameters
     */
+    public function displayCgvMembre() 
+    {
+       //on require le fichier de config de la view
+       require __DIR__ . '/../views/viewParameters.php';
+       //on va chercher les paramètres dans l'array viewpageParameters
+       $this->cgvParameters = $viewPageParameters['back']['cgv_membre'];
+       //on utilise la méthode render du parent Controller pour afficher la page
+       return $this->render($this->layout, $this->cgvMembreTemplate, $this->cgvMembreParameters); 
+    }
+    
     public function displayContact() 
     {
        //on require le fichier de config de la view
@@ -71,6 +102,26 @@ class MembreController extends MainController
         return $this->render($this->layout, $this->indexMembreTemplate, $this->indexMembreParameters);  
     }
     
+    public function displayMdpperduMembre() 
+    {
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->mdpperduMembreParameters = $viewPageParameters['membre']['mdpperdu_membre'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->mdpperduMembreTemplate, $this->mdpperduMembreParameters);  
+    }
+    
+    public function displayMentionMembre() 
+    {
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->mentionMembreParameters = $viewPageParameters['membre']['mention_membre'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->mentionMembreTemplate, $this->mentionMembreParameters);  
+    }
+    
     public function displayNewsletterInscription() 
     {
         //on require le fichier de config de la view
@@ -81,24 +132,54 @@ class MembreController extends MainController
         return $this->render($this->layout, $this->newsletterInscriptionTemplate, $this->indexMembreParameters);  
     }
     
-    public function displayPanier() 
+    public function displayPanierMembre() 
     {
        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
         //on va chercher les paramètres dans l'array viewpageParameters
-        $this->panierParameters = $viewPageParameters['membre']['panier'];
+        $this->panierMembreParameters = $viewPageParameters['membre']['panier_membre'];
         //on utilise la méthode render du parent Controller pour afficher la page
-        return $this->render($this->layout, $this->panierTemplate, $this->panierParameters);    
+        return $this->render($this->layout, $this->panierMembreTemplate, $this->panierMembreParameters);    
     }
     
-    public function displayProfil() 
+    public function displayProfilMembre() 
     {
        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
         //on va chercher les paramètres dans l'array viewpageParameters
-        $this->profilParameters = $viewPageParameters['membre']['profil'];
+        $this->profilMembreParameters = $viewPageParameters['membre']['profil_membre'];
         //on utilise la méthode render du parent Controller pour afficher la page
-        return $this->render($this->layout, $this->profilTemplate, $this->profilParameters);  
+        return $this->render($this->layout, $this->profilMembreTemplate, $this->profilMembreParameters);  
+    }
+    
+    public function displayRechercheMembre() 
+    {
+       //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->rechercheMembreParameters = $viewPageParameters['membre']['recherche_membre'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->rechercheMembreTemplate, $this->rechercheMembreParameters);  
+    }
+    
+    public function displayReservationMembre() 
+    {
+       //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->reservationMembreParameters = $viewPageParameters['membre']['reservation_membre'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->reservationMembreTemplate, $this->reservationMembreParameters);  
+    }
+    
+    public function displayReservationDetailMembre() 
+    {
+       //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->reservationDetailMembreParameters = $viewPageParameters['membre']['reservation_detail_membre'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->reservationDetailMembreTemplate, $this->reservationDetailMembreParameters);  
     }
             
 }

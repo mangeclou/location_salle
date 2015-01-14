@@ -21,6 +21,12 @@ class BackController extends MainController
     protected $layout = 'layout.php';
     
     //liste des templates et des paramètres pour chaque page
+    protected $cgvBackTemplate = 'cgv_back.php';
+    protected $cgvBackParameters;
+    
+    protected $contactBackTemplate = 'contact_back.php';
+    protected $contactBackParameters;
+    
     protected $envoiNewsletterTemplate = 'envoi_newsletter.php';
     protected $envoiNewsletterParameters;
     
@@ -45,8 +51,17 @@ class BackController extends MainController
     protected $indexBackTemplate = 'index_back.php';
     protected $indexBackParameters;
     
+    protected $mdpperduBackTemplate = 'index_back.php';
+    protected $mdpperduBackParameters;
+    
+    protected $mentionBackTemplate = 'mention_back.php';
+    protected $mentionBackParameters;
+    
     protected $panierBackTemplate = 'panier_back.php';
     protected $panierBackParameters;
+    
+    protected $planBackTemplate = 'plan_back.php';
+    protected $planBackParameters;
     
     protected $profilBackTemplate = 'profil_back.php';
     protected $profilBackParameters;
@@ -56,6 +71,9 @@ class BackController extends MainController
     
     protected $reservationBackTemplate = 'reservation_back.php';
     protected $reservationBackParameters;
+    
+    protected $reservationDetailBackTemplate = 'reservation_detail_back.php';
+    protected $reservationDetailBackParameters;
     
     protected $statistiqueTemplate = 'statistique.php';
     protected $statistiqueParameters;
@@ -74,6 +92,26 @@ class BackController extends MainController
     * @param $template : the html template of this page
     * @param $parameters : an array of some parameters
     */
+    public function displayCgvBack() 
+    {
+       //on require le fichier de config de la view
+       require __DIR__ . '/../views/viewParameters.php';
+       //on va chercher les paramètres dans l'array viewpageParameters
+       $this->cgvParameters = $viewPageParameters['back']['cgv_back'];
+       //on utilise la méthode render du parent Controller pour afficher la page
+       return $this->render($this->layout, $this->cgvBackTemplate, $this->cgvBackParameters); 
+    }
+    
+    public function displayContact() 
+    {
+       //on require le fichier de config de la view
+       require __DIR__ . '/../views/viewParameters.php';
+       //on va chercher les paramètres dans l'array viewpageParameters
+       $this->contactBackParameters = $viewPageParameters['back']['contact_back'];
+       //on utilise la méthode render du parent Controller pour afficher la page
+       return $this->render($this->layout, $this->contactBackTemplateBack, $this->contactBackParameters); 
+    }
+    
     public function displayEnvoiNewsletter() 
     {
        //on require le fichier de config de la view
@@ -153,6 +191,26 @@ class BackController extends MainController
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->indexBackTemplate, $this->indexBackParameters);  
     }
+            
+    public function displayMdpperduBack() 
+    {
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->mdpperduBackParameters = $viewPageParameters['membre']['mdpperdu_back'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->mdpperduBackTemplate, $this->mdpperduBackParameters);  
+    }
+    
+    public function displayMentionBack() 
+    {
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->mentionBackParameters = $viewPageParameters['back']['mention_back'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->mentionBackTemplate, $this->mentionBackParameters);  
+    }
     
     public function displayPanierBack() 
     {
@@ -162,6 +220,16 @@ class BackController extends MainController
         $this->panierBackParameters = $viewPageParameters['back']['panier_back'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->panierBackTemplate, $this->panierBackParameters);  
+    }
+    
+    public function displayPlanBack() 
+    {
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->planBackParameters = $viewPageParameters['back']['plan_back'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->planBackTemplate, $this->planBackParameters);  
     }
     
     public function displayProfilBack() 
@@ -192,6 +260,16 @@ class BackController extends MainController
         $this->reservationBackParameters = $viewPageParameters['back']['reservation_back'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->reservationBackTemplate, $this->reservationBackParameters);  
+    }
+    
+    public function displayReservationDetailBack() 
+    {
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->reservationDetailBackParameters = $viewPageParameters['back']['reservation_detail_back'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->reservationDetailBackTemplate, $this->reservationDetailBackParameters);  
     }
     
     public function displayStatistique() 

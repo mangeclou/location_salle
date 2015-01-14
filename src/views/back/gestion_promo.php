@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+	<div class="big-title-back">
+            <h1>Gestion des promo</h1>
+        </div>
+	<div class="container-box">
+              
+            <div class="promo-back">
+                    
+                <form  action="gestion_produit.php">
+                    <button type="submit" name="addPromo">Ajouter un code promo</button>
+                    <button type="submit" name="displayPromo">Affichage des codes promo</button>
+                </form>
+               
+            </div><!--END .avis-table -->
+        
+        </div><!--END .container-box -->
+  	
+</div><!--END .container -->

@@ -14,12 +14,16 @@
                                    placeholder="Mail..." class="form-control" 
                                    value="<?php if(isset($_POST['sujet'])) echo $_POST['sujet'] ?>" >
                             </div>
+
                             <button type="submit" name="envoiAdresseMdpperdu">Envoyer</button>
-                        </fieldset>
-                    </form>
-                </div><!--END .form-contact -->
+
+                    </fieldset>
+                </form>
+            </div>
 
             </div><!--END .col -->
-        </div><!--END .container-box -->
+
+
+            </div>
   	
 </div><!--END .container -->

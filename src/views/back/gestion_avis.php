@@ -3,7 +3,7 @@
         </div>
 	<div class="container-box">
               
-                <div class="avis-table">
+                <div class="table">
                     <table>
                         
                     </table>

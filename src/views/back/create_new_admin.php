@@ -3,10 +3,10 @@
         </div>
 	<div class="container-box">
 	<div class="col_50">
-		<div class="inscription_form">
+		<div class="form-inscription">
 		<h2>Inscription</h2>
                  <form method="post" action="">
-        <fieldset class="inscription_form">
+        <fieldset class="form-inscription">
            
             <div class="inscription_champ"> 
                 <label for="pseudo">Pseudo</label>
@@ -70,7 +70,7 @@
                 <label for="adresse">Adresse</label>
                 <textarea id="adresse" name="adresse" class="form-control" placeholder="adresse..." ><?php if(isset($_POST['adresse'])) echo $_POST['adresse'] ?></textarea>
             </div> 
-            <button type="submit" name="inscription">Inscription</button>
+            <button type="submit" name="createNewAdmin">Inscription</button>
 		
 		</fieldset>
             </form>
@@ -78,6 +78,5 @@
 			
 	</div><!--END .col -->
 </div><!--END .container-box -->
-  
-	
+  	
 </div><!--END .container -->

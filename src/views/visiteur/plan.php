@@ -1,17 +1,23 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+	<div class="big-title-back">
+            <h1>Gestion des avis</h1>
+        </div>
+	<div class="container-box">
+              
+                <div class="col_60">
+                    <ul>
+                        <li><a href="index.php?controller=VisiteurController&method=displayIndex">Accueil</a></li>
+                        <li><a href="index.php?controller=VisiteurController&method=displayReservation">Réservations - Réservez vos salles en ligne</a></li>
+                        <li><a href="index.php?controller=VisiteurController&method=displayRecherche">Recherche</a></li>
+                        <li><a href="index.php?controller=VisiteurController&method=displayNewsletterInscription">Inscription à la newsletter</a></li>
+                        <li><a href="index.php?controller=VisiteurController&method=displayCgvMembre">Conditions Générales de vente</a></li>
+                        <li><a href="index.php?controller=VisiteurController&method=displayMentionMembre">Mentions légales</a></li>
+                    </ul>
+
+                </div><!--END .avis-table -->
+
+        
+        </div><!--END .container-box -->
+  
+	
+</div><!--END .container -->
+

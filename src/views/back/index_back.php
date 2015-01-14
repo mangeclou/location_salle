@@ -24,11 +24,11 @@
 			<p>600 €</p>
 		</div>
 		<div class="btn">
-				<form  action="reservation_details.php">
-					<button type="submit">Voir ce lieu</button>
-				</form>
+                    <form  action="reservation_details.php">
+			<button type="submit">Voir ce lieu</button>
+                    </form>
 		</div>
-		<a href="connexion.php">Connectez vous</a>
+		
     </div><!--END .col -->
 	<div class="col_30">
 		<img src="/web/img/home_box.jpg" alt="" class="small_img"> 
@@ -42,12 +42,11 @@
 			<p>400 €</p>
 		</div>
 		<div class="btn">
-				<form  action="reservation_details.php">
-					<button type="submit">Voir ce lieu</button>
-				</form>
+                    <form  action="reservation_details.php">
+			<button type="submit">Voir ce lieu</button>
+                    </form>
 		</div>
-		<a href="connexion.php">Connectez vous</a>
-     
+		     
     </div><!--END .col -->
 	 
 	<div class="col_30">
@@ -62,18 +61,17 @@
 			<p>400 €</p>
 		</div>
 		<div class="btn">
-				<form  action="reservation_details.php">
-					<button type="submit">Voir ce lieu</button>
-				</form>
+                    <form  action="reservation_details.php">
+			<button type="submit">Voir ce lieu</button>
+                    </form>
 		</div>
-		<a href="connexion.php">Connectez vous</a>
+		
      
     </div><!--END .col -->
 	</div>
-  
-	
+  	
 </div><!--END .container -->
-<!-- FOOTER -->
+
 
 
    

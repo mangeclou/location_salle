@@ -8,28 +8,28 @@
             </div><!--END .slide -->
 	</div><!--END .carousel -->
     </div><!--END .carousel_wrapper -->
-	<div class="big_title">
-		<h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
-	</div>
-	<div class="container-box">
-    <div class="col_30">
-	<img src="/web/img/home_box.jpg" alt="" class="small_img"> 
-	<div class="date">
-            <p>Du 13 déc 2015 au 17 déc 2015</p>
-	</div>
-	<div class="lieu">
-            <p>Paris</p>
-	</div>
-	<div class="prix">
-            <p>600 €</p>
-	</div>
-	<div class="btn">
-            <form  action="reservation_details.php">
-		<button type="submit">Voir ce lieu</button>
-            </form>
-	</div>
-        <a href="connexion.php">Connectez vous</a>
-    </div><!--END .col -->
+    <div class="big_title">
+	<h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
+    </div>
+    <div class="container-box">
+        <div class="col_30">
+            <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
+            <div class="date">
+                <p>Du 13 déc 2015 au 17 déc 2015</p>
+            </div>
+            <div class="lieu">
+                <p>Paris</p>
+            </div>
+            <div class="prix">
+                <p>600 €</p>
+            </div>
+            <div class="btn">
+                <form  action="reservation_details.php">
+                    <button type="submit">Voir ce lieu</button>
+                </form>
+            </div>
+            <a href="connexion.php">Connectez vous</a>
+        </div><!--END .col -->
 	<div class="col_30">
             <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
             <div class="date">
@@ -67,15 +67,10 @@
             </div>
             <a href="connexion.php">Connectez vous</a>
      
-    </div><!--END .col -->
-	</div>
-  
+        </div><!--END .col -->
+    </div><!--END .container-box -->
 	
 </div><!--END .container -->
-<!-- FOOTER -->
-<?php
-   // include_once 'web/inc/footer.inc.php';
-?>
 
    
 

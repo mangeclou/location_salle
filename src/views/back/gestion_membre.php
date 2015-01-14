@@ -1,9 +1,9 @@
 	<div class="big-title-back">
-            <h1>Gestion des membre</h1>
+            <h1>Gestion des membres</h1>
         </div>
 	<div class="container-box">
               
-                <div class="avis-table">
+                <div class="table">
                     <table>
                         
                     </table>

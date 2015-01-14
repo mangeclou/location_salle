@@ -8,6 +8,9 @@
                 <p>Les conditions générales de vente suivantes sont donc fictives.</p>
                 <p>Propriétaire du site : Yoann Arres Lapoque.</p>
                 <p>Hébergeur du site : </p>
+
             </div><!--END .col-60 -->
+        
         </div><!--END .container-box -->
-    </div><!--END .container -->
+  	
+</div><!--END .container -->

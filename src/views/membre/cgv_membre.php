@@ -60,8 +60,8 @@
                     Toute contestation relative aux présentes prestations relève de la seule compétence des tribunaux du ressort de la Cour d’appel de Paris.
                 </p>
                 
-            </div><!--END .avis-table -->
-
+            </div><!--END .col-60 -->
+        
         </div><!--END .container-box -->
   	
 </div><!--END .container -->

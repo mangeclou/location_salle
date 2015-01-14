@@ -25,7 +25,6 @@
                                     <img src="/web/img/search.png" class="btn_recherche">
                                 </button>
 			</div> 
-			
 		</fieldset>
 	</div>
 	<div class="container-box">

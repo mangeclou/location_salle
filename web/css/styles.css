@@ -124,21 +124,21 @@ iframe{
 	margin-bottom: 10px;
 }
 
-fieldset.inscription_form{
+fieldset.form-inscription{
     
 }
 
-fieldset.inscription_form label{
+fieldset.form-inscription label{
     display: block;
     margin-bottom: 6px;
 }
 
-fieldset.inscription_form input{
+fieldset.form-inscription input{
     width: 100%;
     margin-bottom: 10px;
 }
 
-fieldset.inscription_form input[type="radio"]{
+fieldset.form-inscription input[type="radio"]{
     width: inherit;
 }
 
