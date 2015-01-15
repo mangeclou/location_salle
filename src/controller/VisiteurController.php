@@ -12,11 +12,11 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
-include 'Controller.php';
-USE controller\Controller AS MainController;
+//include 'Controller.php';
+use controller\Controller;
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
-class VisiteurController extends MainController
+class VisiteurController extends Controller
 {
     //default layout of the pages
     protected $layout = 'layout.php';
@@ -43,6 +43,9 @@ class VisiteurController extends MainController
     protected $mentionTemplate = 'mention.php';
     protected $mentionParameters;
     
+    protected $newsletterInscriptionVisiteurTemplate = 'newsletter_inscription_visiteur.php';
+    protected $newsletterInscriptionVisiteurParameters;
+    
     protected $planTemplate = 'plan.php';
     protected $planParameters;
     
@@ -57,17 +60,7 @@ class VisiteurController extends MainController
 
     //GETTERS
        
-    /*
-   public function __construct()
-
-    {
-        echo "instantiation réussie.";
-        
-    }
-    
-     * 
-     */
-    
+       
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
     *
@@ -128,6 +121,13 @@ class VisiteurController extends MainController
         require __DIR__ . '/../views/viewParameters.php';
         $this->mentionParameters = $viewPageParameters['visiteur']['mention'];
         return $this->render($this->layout, $this->mentionTemplate, $this->mentionParameters);  
+    } 
+    
+    public function displayNewsletterInscriptionVisiteur()
+    {
+        require __DIR__ . '/../views/viewParameters.php';
+        $this->newsletterInscriptionVisiteurParameters = $viewPageParameters['visiteur']['newsletter_inscription_visiteur'];
+        return $this->render($this->layout, $this->newsletterInscriptionVisiteurTemplate, $this->newsletterInscriptionVisiteurParameters);  
     } 
     
     public function displayPlan()

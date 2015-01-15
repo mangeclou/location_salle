@@ -16,8 +16,7 @@
     ?>
         
     <body>
-            <h1><?php echo $title; ?></h1>
-		<?php echo $content; ?>
+            <?php echo $content; ?>
     </body>
     
     <?php

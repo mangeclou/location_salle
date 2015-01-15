@@ -14,6 +14,7 @@ namespace controller; // toujours le même nom que le dossier, pour que l'autolo
 
 class Controller {
 	protected $table;
+        public $test = "ok";
 //-----------------------
 	public function __construct() {}
 //-----------------------
@@ -22,15 +23,15 @@ class Controller {
 		$class = 'Repository\\' . $table . 'Repository'; // Repository\EmployesRepository
 		if(!isset($this->table))
 		{
-			$this->table = new $class; // j'instancie la classe EmployesRepository
+                    $this->table = new $class; // j'instancie la classe EmployesRepository
 		}
 		return $this->table; // je retourne la classe Employes
 	}
 	
 	public function render($layout, $template, $parameters = array())
 	{
-		$dirViews = __DIR__ . '/../views'; // je récupère le chemin vers le dossier qui contient les vues propres à mon application (layout.php et employes.php)
-		$dirFileTemp = lcfirst(get_called_class()) ;
+            $dirViews = __DIR__ . '/../views'; // je récupère le chemin vers le dossier qui contient les vues propres à mon application (layout.php et employes.php)
+            $dirFileTemp = lcfirst(get_called_class()) ;
         
         //On passe du nom de la classe au nom du dossier
         $pattern = "/controller/";
@@ -63,8 +64,29 @@ class Controller {
 	}
         
         //autoload function permet d'inclure les classes quand elles sont instantiées
+        /*
         public function __autoload($class_name) {
             include "$class_name.php";
         }
-       
+        */
+        static function dynamicInstantiateAndCall($controller,$method)
+        {
+            if (!empty($controller) && !empty($method)) {
+                $controller = (filter_var(ucfirst($controller),FILTER_SANITIZE_STRING));
+                $method = (filter_var($method,FILTER_SANITIZE_STRING));
+    
+                               
+                 //on ajoute le namespace (controller)
+                $namespace = '\controller\\';
+                $controllerNamespace  = $namespace. $controller ;
+                //echo $controllerNamespace;
+
+                //On instancie dynamiquement la classe correspondante
+           
+                $obj = new $controllerNamespace; // $myController = new MyController()
+
+                call_user_func( array( $obj, $method) ); // $myController->myMethod()
+            }
+        } 
+                   
 }

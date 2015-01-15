@@ -308,6 +308,14 @@ $viewPageParameters = array (
                     "meta" => array (
                     )
                 ),
+                "newsletter_inscription_visiteur" => array (
+                    "head_inc" => "/inc/visiteur/head.inc.php",
+                    "title" => "Inscription à la newsletter impossible",
+                    "header_inc" => "/inc/visiteur/header.inc.php",
+                    "footer_inc" => "/inc/visiteur/footer.inc.php",
+                    "meta" => array (
+                    )
+                ),
                 "plan" => array (
                     "head_inc" => "/inc/visiteur/head.inc.php",
                     "title" => "Plan du site",

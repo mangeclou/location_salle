@@ -1,5 +1,5 @@
 	<div class="big-title-back">
-            <h1>Gestion des avis</h1>
+            <h1>Plan du site</h1>
         </div>
 	<div class="container-box">
               
