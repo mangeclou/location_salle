@@ -27,6 +27,11 @@ class BackController extends MainController
     protected $contactBackTemplate = 'contact_back.php';
     protected $contactBackParameters;
     
+    protected $createNewAdminTemplate = 'create_new_admin.php';
+    protected $createNewAdminParameters;
+    
+    ///
+    
     protected $envoiNewsletterTemplate = 'envoi_newsletter.php';
     protected $envoiNewsletterParameters;
     
@@ -113,6 +118,16 @@ class BackController extends MainController
        $this->contactBackParameters = $viewPageParameters['back']['contact_back'];
        //on utilise la méthode render du parent Controller pour afficher la page
        return $this->render($this->layout, $this->contactBackTemplateBack, $this->contactBackParameters); 
+    }
+    
+    public function displayCreateNewAdmin() 
+    {
+       //on require le fichier de config de la view
+       require __DIR__ . '/../views/viewParameters.php';
+       //on va chercher les paramètres dans l'array viewpageParameters
+       $this->createNewAdminParameters = $viewPageParameters['back']['create_new_admin'];
+       //on utilise la méthode render du parent Controller pour afficher la page
+       return $this->render($this->layout, $this->createNewAdminTemplate, $this->createNewAdminParameters); 
     }
     
     public function displayEnvoiNewsletter() 

@@ -24,6 +24,14 @@ $viewPageParameters = array (
                     "meta" => array (
                     ),
                 ),
+                "create_new_admin" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Create new admin",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    ),
+                ),
                 "envoi_newsletter" => array (
                     "head_inc" => "/inc/back/head.inc.php",
                     "title" => "Envoyer newsletter",
@@ -96,6 +104,14 @@ $viewPageParameters = array (
                     "meta" => array (
                     )
                 ),
+                "mention_back" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Mentions légales",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    ),
+                ),
                 "newsletter_inscription_back" => array (
                     "head_inc" => "/inc/back/head.inc.php",
                     "title" => "Inscription à la newsletter",
@@ -144,6 +160,14 @@ $viewPageParameters = array (
                     "meta" => array (
                     )
                 ),
+                "reservation_detail_back" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Reservation détail back office",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    )
+                ),
                 "statistique" => array (
                     "head_inc" => "/inc/back/head.inc.php",
                     "title" => "Statistiques",
@@ -185,7 +209,15 @@ $viewPageParameters = array (
                     "footer_inc" => "/inc/membre/footer.inc.php",
                     "meta" => array (
                     )
-                ),    
+                ),
+                "mention_membre" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Mentions légales",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    )
+                ),
                 "newsletter" => array (
                     "head_inc" => "/inc/membre/head.inc.php",
                     "title" => "S'inscrire à la newsletter",
@@ -201,14 +233,6 @@ $viewPageParameters = array (
                     "footer_inc" => "/inc/membre/footer.inc.php",
                     "meta" => array (
                     )    
-                ),
-                "mention_membre" => array (
-                    "head_inc" => "/inc/membre/head.inc.php",
-                    "title" => "Mentions légales",
-                    "header_inc" => "/inc/membre/header.inc.php",
-                    "footer_inc" => "/inc/membre/footer.inc.php",
-                    "meta" => array (
-                    )
                 ),
                 "plan_membre" => array (
                     "head_inc" => "/inc/membre/head.inc.php",
@@ -234,17 +258,17 @@ $viewPageParameters = array (
                     "meta" => array (
                     )
                 ),
-                "reservation_membre" => array (
+                "reservation_detail_membre" => array (
                     "head_inc" => "/inc/membre/head.inc.php",
-                    "title" => "Réservation",
+                    "title" => "Détails sur vos réservations",
                     "header_inc" => "/inc/membre/header.inc.php",
                     "footer_inc" => "/inc/membre/footer.inc.php",
                     "meta" => array (
                     )
                 ),
-                "reservation_detail_membre" => array (
+                "reservation_membre" => array (
                     "head_inc" => "/inc/membre/head.inc.php",
-                    "title" => "Détails sur vos réservations",
+                    "title" => "Réservation",
                     "header_inc" => "/inc/membre/header.inc.php",
                     "footer_inc" => "/inc/membre/footer.inc.php",
                     "meta" => array (
@@ -311,6 +335,14 @@ $viewPageParameters = array (
                 "newsletter_inscription_visiteur" => array (
                     "head_inc" => "/inc/visiteur/head.inc.php",
                     "title" => "Inscription à la newsletter impossible",
+                    "header_inc" => "/inc/visiteur/header.inc.php",
+                    "footer_inc" => "/inc/visiteur/footer.inc.php",
+                    "meta" => array (
+                    )
+                ),
+                "panier" => array (
+                    "head_inc" => "/inc/visiteur/head.inc.php",
+                    "title" => "Panier",
                     "header_inc" => "/inc/visiteur/header.inc.php",
                     "footer_inc" => "/inc/visiteur/footer.inc.php",
                     "meta" => array (

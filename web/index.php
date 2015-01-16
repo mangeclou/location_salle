@@ -11,29 +11,48 @@
 */
 
 require_once(__DIR__ . '/../src/autoload.php');
-//require_once(__DIR__ .'/../src/controller/Controller.php');
+require_once(__DIR__ .'/../src/controller/controllerAndMethodManager.php');
 
 //use \controller\Controller;
 
- use controller\VisiteurController;
- echo Autoload::$nb;
+ //use controller\VisiteurController;
+ //echo Autoload::$nb . '<br>';
  //$objet = new VisiteurController();
+
  //print_r($objet);
  //exit();
- $classControllerName = "controller\\" .$_GET['controller'];
- echo $classControllerName;
- $obj = new $classControllerName;
- exit();
- call_user_func($obj, controller\Controller::dynamicInstantiateAndCall );
+ $controller = $_GET['controller'];
+ $methodName = $_GET['method'];
+ echo $controller . "<br>";
+ 
+ $path = __DIR__ . '\..\src\controller\\' . $controller . '.php';
+ include $path;
+ $controllerName = 'controller\\'. $controller;
+  echo $controllerName . "<br>";
+ //$obj = new $class;
+ //print_r($obj);
+ //exit();
+ 
+ //on appelle deux méthodes de controllerAndMethodManager pour checker, instancier
+ //et appeler la bonne méthode
+ if (controller\controllerAndMethodManager::checkControllerAndMethod($controller,$methodName)== true) {
+     controller\controllerAndMethodManager::filterInstantiateAndCall($controllerName,$methodName);
+ } else {
+     require_once '404.php';
+}
+         
+ 
+ //Appel de la method statique dynamicInstantiateAndCall de Controller
+ //controller\Controller::dynamicInstantiateAndCall($class,$classMethodName);
 
 
-  if (Autoload::$nb == 0) {
+  //if (Autoload::$nb == 0) {
        /**
             * Si le controller ou la method n'existent pas on affiche 404.php
             */
-            require_once '404.php';
+           // require_once '404.php';
       
-  } 
+ // } 
            
         
 /**

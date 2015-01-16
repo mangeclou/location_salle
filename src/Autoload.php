@@ -1,6 +1,6 @@
 <?php
 
-
+/*
 class Autoload
 {
     public static $nb = 0; // permet de compter le nbre de fois où l'on passe dans l'autoload 
@@ -19,10 +19,11 @@ class Autoload
         self::$nb++;
         } else {
            echo 
-            "<br>La classe n'existe pas."; 
+            "<br>La classe " .$className ." n'existe pas."; 
         }
         
     }
 }
 spl_autoload_register(array('Autoload', 'className')); 
 // $u = new Employe\Nom_De_LaClasse;
+*/

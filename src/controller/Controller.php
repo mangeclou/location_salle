@@ -69,24 +69,114 @@ class Controller {
             include "$class_name.php";
         }
         */
-        static function dynamicInstantiateAndCall($controller,$method)
+        /*
+        static function filterControllerAndMethod($controller,$method)
         {
             if (!empty($controller) && !empty($method)) {
-                $controller = (filter_var(ucfirst($controller),FILTER_SANITIZE_STRING));
+                $controller = (filter_var(ucfirst($_GET['controller']),FILTER_SANITIZE_STRING));
+                $method = (filter_var($_GET['method'],FILTER_SANITIZE_STRING));
+            }
+        }
+        
+        static function checkValidityControllerAndMethod($controller,$method)
+        {
+            if (in_array($controller, $controllerArray))&&
+            ((in_array($method, $methodArray['back']))
+                ||(in_array($method, $methodArray['membre'])) 
+                ||(in_array($method, $methodArray['visiteur'])) 
+        }
+        
+        
+        static function dynamicInstantiateAndCall($class,$method)
+        {
+            if (!empty($class) && !empty($method)) {
+                $class = (filter_var(ucfirst($class),FILTER_SANITIZE_STRING));
                 $method = (filter_var($method,FILTER_SANITIZE_STRING));
     
                                
                  //on ajoute le namespace (controller)
-                $namespace = '\controller\\';
-                $controllerNamespace  = $namespace. $controller ;
+                //$namespace = '\controller\\';
+                //$controllerNamespace  = $namespace. $controller ;
                 //echo $controllerNamespace;
 
                 //On instancie dynamiquement la classe correspondante
            
-                $obj = new $controllerNamespace; // $myController = new MyController()
+                $obj = new $class; // $myController = new MyController()
 
                 call_user_func( array( $obj, $method) ); // $myController->myMethod()
             }
         } 
+        */
+        
+        
+        
+        
+        
+    }
+        
+        
+    
+        /**
+        * Array des controllers valides
+        */
+ /*
+        $controllerArray = ['VisiteurController',
+                            'MembreController',
+                            'BackController'];
+        
+        /**
+        * Array des méthodes valides
+        */
+       /*
+        $methodArray = ['back'=>[
+                            'displayEnvoiNewsletter',
+                            'displayGestionAvis',
+                            'displayGestionCommande',
+                            'displayGestionMembre',
+                            'displayGestionProduit',
+                            'displayGestionPromo',
+                            'displayGestionSalle',
+                            'displayIndexBack',
+                            'displayPanierBack',
+                            'displayProfilBack',
+                            'displayRechercheBack',
+                            'displayReservationBack',
+                            'displayStatistique'
+                            ],
+                        'membre'=>[
+                            'displayContact',
+                            'displayIndexMembre',
+                            'displayNewsletterInscription',
+                            'displayPanier',
+                            'displayProfil'
+                            ],
+                        'visiteur'=>[
+                            'displayCgv',
+                            'displayConnexion',
+                            'displayIndex',
+                            'displayInscription',
+                            'displayMdpperdu',
+                            'displayMention',
+                            'displayPlan',
+                            'displayRecherche',
+                            'displayReservation',
+                            'displayReservationdetail',
+                            ]
+                        ];
+        
+        /**
+        * On teste si le controller et l'array font partie des arrays correspondants
+        */
+        /*
+        if ((in_array($controller, $controllerArray))&&
+            ((in_array($method, $methodArray['back']))
+                ||(in_array($method, $methodArray['membre'])) 
+                ||(in_array($method, $methodArray['visiteur'])) 
+        
+        */
+        
+        
+        
+        
+        
                    
-}

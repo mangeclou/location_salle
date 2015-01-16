@@ -12,7 +12,7 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
-//include 'Controller.php';
+include 'Controller.php';
 use controller\Controller;
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
