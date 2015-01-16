@@ -42,6 +42,13 @@ class Avis {
 	 */
 	protected  $note;
         
+        /**
+	 * 
+	 * @var integer
+	 * @access protected
+	 */
+	protected  $note;
+        
          //----------- GETTERS -----------------
     public function getIdAvis()
     {
@@ -55,65 +62,43 @@ class Avis {
     {
         return $this->idSalle;
     }
-    public function getSexe()
+    public function getCommentaire()
     {
-        return $this->sexe;
+        return $this->commentaire;
     }
-    public function getService()
+    public function getNote()
     {
-        return $this->service;
+        return $this->note;
     }
-    public function getDateEmbauche()
+    public function getDate()
     {
-        return $this->dateEmbauche;
+        return $this->date;
     }
-    public function getSalaire()
-    {
-        return $this->salaire;
-    }
-    public function getIdSecteur()
-    {
-        return $this->idSecteur;
-    }
+   
     //--------- SETTERS ------------------
     public function setIdAvis($arg)
     {
         // traitements ...
-        $this->idAvis = $arg;
+        $this->idAvis = filter_has_var(INPUT_POST, $arg);
     }
-    public function setPrenom($arg)
+    public function setIdMembre()
     {
-        // traitements ...
-        $this->prenom = $arg;
+        return $this->idMembre;
     }
-    public function setNom($arg)
+    public function setIdSalle()
     {
-        // traitements ...
-        $this->nom = $arg;
+        return $this->idSalle;
     }
-    public function setSexe($arg)
+    public function setCommentaire()
     {
-        // traitements ...
-        $this->sexe = $arg;
+        return $this->commentaire;
     }
-    public function setService($arg)
+    public function setNote()
     {
-        // traitements ...
-        $this->service = $arg;
+        return $this->note;
     }
-    public function setDateEmbauche($arg)
+    public function setDate()
     {
-        // traitements ...
-        $this->dateEmbauche = $arg;
-    }
-    public function setSalaire($arg)
-    {
-        // traitements ...
-        $this->salaire = $arg;
-    }
-    public function setIdSecteur($arg)
-    {
-        // traitements ...
-        $this->idSecteur = $arg;
+        return $this->date;
     }
 }
