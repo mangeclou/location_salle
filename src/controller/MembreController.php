@@ -51,12 +51,12 @@ class MembreController extends MainController
     protected $rechercheMembreTemplate = 'recherche_membre.php';
     protected $rechercheMembreParameters;
     
-    protected $reservationMembreTemplate = 'reservation_membre.php';
-    protected $reservationMembreParameters;
-    
     protected $reservationDetailMembreTemplate = 'reservation_detail_membre.php';
     protected $reservationDetailMembreParameters;
     
+    protected $reservationMembreTemplate = 'reservation_membre.php';
+    protected $reservationMembreParameters;
+            
         /*
     public function __construct() 
     {
@@ -140,6 +140,16 @@ class MembreController extends MainController
         $this->panierMembreParameters = $viewPageParameters['membre']['panier_membre'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->panierMembreTemplate, $this->panierMembreParameters);    
+    }
+    
+    public function displayPlanMembre() 
+    {
+       //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->planMembreParameters = $viewPageParameters['membre']['plan_membre'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->planMembreTemplate, $this->planMembreParameters);    
     }
     
     public function displayProfilMembre() 

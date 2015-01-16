@@ -29,9 +29,7 @@ class BackController extends MainController
     
     protected $createNewAdminTemplate = 'create_new_admin.php';
     protected $createNewAdminParameters;
-    
-    ///
-    
+        
     protected $envoiNewsletterTemplate = 'envoi_newsletter.php';
     protected $envoiNewsletterParameters;
     

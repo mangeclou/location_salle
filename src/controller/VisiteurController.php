@@ -46,6 +46,9 @@ class VisiteurController extends Controller
     protected $newsletterInscriptionVisiteurTemplate = 'newsletter_inscription_visiteur.php';
     protected $newsletterInscriptionVisiteurParameters;
     
+    protected $panierTemplate = 'panier.php';
+    protected $panierParameters;
+    
     protected $planTemplate = 'plan.php';
     protected $planParameters;
     
@@ -129,6 +132,13 @@ class VisiteurController extends Controller
         $this->newsletterInscriptionVisiteurParameters = $viewPageParameters['visiteur']['newsletter_inscription_visiteur'];
         return $this->render($this->layout, $this->newsletterInscriptionVisiteurTemplate, $this->newsletterInscriptionVisiteurParameters);  
     } 
+    
+    public function displayPanier()
+    {
+        require __DIR__ . '/../views/viewParameters.php';
+        $this->panierParameters = $viewPageParameters['visiteur']['panier'];
+        return $this->render($this->layout, $this->panierTemplate, $this->panierParameters);  
+    }
     
     public function displayPlan()
     {
