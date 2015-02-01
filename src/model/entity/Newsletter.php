@@ -12,15 +12,22 @@ class Newsletter {
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_newsletter;
+	protected  $idNewsletter;
 
 	/**
 	 * 
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_membre;
+	protected  $idMembre;
 
-
+    //----------- GETTERS -----------------
+    public function getIdNewsletter()
+    {
+        return $this->idNewsletter;
+    }
+    public function getIdMembre()
+    {
+        return $this->idMembre;
+    }
 }
-?>

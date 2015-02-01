@@ -16,15 +16,16 @@
     ?>
         
     <body>
-            <?php echo $content; ?>
-    </body>
-    
-    <?php
+            <?php echo $content;
+        
         /**
          * Include the footer via the extracted viewParameters.php transmitted
          * by the controller
          */
         include_once $footer_inc;
     ?>
+    </body>
+    
+    
     
 </html>

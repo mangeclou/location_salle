@@ -13,7 +13,7 @@ class Salle {
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_salle;
+	protected  $idSalle;
 
 	/**
 	 * 
@@ -84,7 +84,7 @@ class Salle {
     //----------- GETTERS -----------------
     public function getIdSalle()
     {
-         return $this->id_salle;
+         return $this->idSalle;
     }
     public function getPays()
     {
@@ -119,22 +119,18 @@ class Salle {
         return $this->categorie;
     }
     //--------- SETTERS ------------------
-    /*
-    public function setIdSalle($arg)
-    {
-        if ()
-        $this->idEmploye = $arg;
-    }
-    */
-    public function setPays($pays)
+     public function setPays($pays)
     {
         /**
         * Filtre des inputs de formulaire.
         * On teste si l'input est non vide et si c'est un string bien formatté
         * 
         */
-        if((filter_has_var(INPUT_POST, $pays))&&(filter_input(INPUT_POST, $pays, FILTER_SANITIZE_STRING)) === true) {
-        $this->pays = $pays;
+        //if((filter_has_var(INPUT_POST, $pays))&&(filter_input(INPUT_POST, $pays, FILTER_SANITIZE_STRING)) === true) {
+        //$this->pays = $pays;
+        //}
+         if(is_string($pays)) {
+            $this->nom = $pays;
         }
     }
      
@@ -145,56 +141,50 @@ class Salle {
         * On teste si l'input est non vide et si c'est un string bien formatté
         * 
         */
-        if((filter_has_var(INPUT_POST, $ville))&&(filter_input(INPUT_POST, $ville, FILTER_SANITIZE_STRING)) === true) {
-            $this->pays = $ville;
+        if(is_string($ville)) {
+            $this->ville = $ville;
         }
     }
      
     public function setAdresse($adresse)
     {
-        //if (fonction de filtrage == true)
-        if((filter_has_var(INPUT_POST, $adresse))&&(filter_input(INPUT_POST, $adresse, FILTER_SANITIZE_STRING)) === true) {
-            $this->pays = $adresse;
+        if(is_string($adresse)) {
+            $this->adresse = $adresse;
         }
     }
      
     public function setCp($cp)
     {
-        //if (fonction de filtrage == true)
-        if((filter_has_var(INPUT_POST, $cp))&&(filter_input(INPUT_POST, $cp, FILTER_SANITIZE_STRING)) === true) {
-            $this->pays = $cp;
+        if(is_int($cp)) {
+            $this->cp = $cp;
         }
     }
      
     public function setTitre($titre)
     {
-        //if (fonction de filtrage == true)
-        if((filter_has_var(INPUT_POST, $titre))&&(filter_input(INPUT_POST, $titre, FILTER_SANITIZE_STRING)) === true) {
-            $this->pays = $titre;
+        if(is_string($titre)) {
+            $this->titre = $titre;
         }
     }
      
     public function setDescription($description)
     {
-        //if (fonction de filtrage == true)
-        if((filter_has_var(INPUT_POST, $description))&&(filter_input(INPUT_POST, $description, FILTER_SANITIZE_STRING)) === true) {
-            $this->pays = $description;
+        if(is_string($description)) {
+            $this->description = $description;
         }
     }
      
     public function setCapacite($capacite)
     {
-        //if (fonction de filtrage == true)
-        if((filter_has_var(INPUT_POST, $capacite))&&(filter_input(INPUT_POST, $capacite, FILTER_SANITIZE_NUMBER_INT)) === true) {
+        if(is_int($capacite)) {
             $this->capacite = $capacite;
         }
     }
      
     public function setCategorie($categorie)
     {
-        //if (fonction de filtrage == true)
-        if((filter_has_var(INPUT_POST, $categorie))&&(filter_input(INPUT_POST, $categorie, FILTER_SANITIZE_STRING)) === true) {
-            $this->capacite = $categorie;
+        if(is_string($categorie)) {
+            $this->nom = $categorie;
         }
     }
 }

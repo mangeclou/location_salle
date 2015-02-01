@@ -59,10 +59,67 @@ class Member extends User {
 	protected  $adresse;
 
 
-     //----------- GETTERS -----------------
-    public function getMemberName()
+    //----------- GETTERS -----------------
+    public function getNom()
     {
-        return $this->idEmploye;
+        return $this->nom;
+    }
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+    public function getVille()
+    {
+        return $this->ville;
+    }
+    public function getCp()
+    {
+        return $this->cp;
+    }
+   
+    //--------- SETTERS ------------------
+    public function setNom($nom)
+    {
+        if(is_string($nom)) {
+            $this->nom = $nom;
+        }
+    }
+    public function setPrenom(string $prenom)
+    {
+        if(is_string($prenom)) {
+            $this->prenom = $prenom;
+        }
+    }
+    public function setEmail($email)
+    {
+        return $this->email = $email;
+    }
+    public function setSexe($sexe)
+    {
+        if($sexe === 'm'|| $sexe === 'f') {
+            return $this->sexe = $sexe;
+        }  else {
+            echo "Veuillez saisir 'm' ou 'f'";
+        }
+    }
+    public function setVille($ville)
+    {
+        if(is_string($ville)) {
+            $this->ville = $ville;
+        }
+    }
+    public function setCp($cp)
+    {
+        if(is_int($cp)) {
+            $this->cp = $cp;
+        }
     }
 }
-?>

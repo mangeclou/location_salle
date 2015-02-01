@@ -5,35 +5,36 @@
  * Tous les setters sanitize les données
  */
 namespace entity; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+
 abstract class User {
 
-/**
- * 
- * @var int
- * @access protected
- */
-protected  $id_membre;
+    /**
+     * 
+     * @var int
+     * @access protected
+     */
+    protected  $idMembre;
 
-/**
- * 
- * @var string
- * @access protected
- */
-protected  $pseudo;
+    /**
+     * 
+     * @var string
+     * @access protected
+     */
+    protected  $pseudo;
 
-/**
- * 
- * @var string
- * @access protected
- */
-protected  $mdp;
+    /**
+     * 
+     * @var string
+     * @access protected
+     */
+    protected  $mdp;
 
-/**
- * Droit : admin = 1; membre = 0
- * @var integer
- * @access protected
- */
-protected  $statut;
+    /**
+     * Droit : admin = 1; membre = 0
+     * @var integer
+     * @access protected
+     */
+    protected  $statut;
 
 //----------- GETTERS -----------------
     public function getIdMembre()
@@ -54,13 +55,6 @@ protected  $statut;
     }
     
     //--------- SETTERS ------------------
-    /*
-    public function setIdSalle($arg)
-    {
-        if ()
-        $this->idEmploye = $arg;
-    }
-    */
     public function setPseudo($pseudo)
     {
         /**
@@ -68,50 +62,32 @@ protected  $statut;
         * On teste si l'input est non vide et si c'est un string bien formatté
         * 
         */
-        if((filter_has_var(INPUT_POST, $pseudo))&&(filter_input(INPUT_POST, $pseudo, FILTER_SANITIZE_STRING)) === true) {
-        $this->pseudo = $pseudo;
+         if(is_string($pseudo)) {
+            $this->pseudo = $pseudo;
         }
     }
     
     public function setMdp($mdp)
     {
-        /**
-        * Filtre des inputs de formulaire.
-        * On teste si l'input est non vide et si c'est un string bien formatté
-        * 
-        */
-        if (filter_has_var(INPUT_POST, $mdp)){
-            if (((filter_input(INPUT_POST, $mdp, FILTER_SANITIZE_STRING)) === true)
-                && (strlen(filter_input(INPUT_POST, $mdp, FILTER_SANITIZE_STRING)) >= 8)) {
-        
+         if(is_string($mdp)) {
             $this->mdp = $mdp;
-            }
         }
     }
     
     public function setStatut($statut)
     {
-        /**
-        * Filtre des inputs de formulaire.
-        * On teste si l'input est non vide et si c'est un string bien formatté
-        * 
-        */
-        $statutArray = array (0, 1, 2);
-        
-        if(filter_has_var(INPUT_POST, $statut)) {
-            if ((filter_input(INPUT_POST, $pseudo, FILTER_SANITIZE_NUMBER_INT) === true) 
-            && ( in_array($statut, $statutArray))) {
-                $this->pseudo = $pseudo;
-            }
+         if(is_int($statut)) {
+            $this->statut = $statut;
         }
     }
             
     public function isConnected($user)
-{
-	if($_SESSION['connected'] == true)
-	{
-		return true;
-	}
+    {
+        if($_SESSION['connected'] == true)
+        {
+            return true;
+        }  else {
+            return false;
+        }
+    }
 }
-}
-?>

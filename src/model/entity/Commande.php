@@ -12,7 +12,7 @@ class Commande {
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_commande;
+	protected  $idCommande;
 
 	/**
 	 * 
@@ -26,7 +26,7 @@ class Commande {
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_membre;
+	protected  $idMembre;
 
 	/**
 	 * 
@@ -35,6 +35,30 @@ class Commande {
 	 */
 	protected  $date;
 
-
+    
+    //----------- GETTERS -----------------
+    public function getIdCommande()
+    {
+        return $this->idCommande;
+    }
+    public function getMontant()
+    {
+        return $this->Montant;
+    }
+    public function getIdMembre()
+    {
+        return $this->idMembre;
+    }
+    public function getDate()
+    {
+        return $this->date;
+    }
+    
+    //--------- SETTERS ------------------
+    public function setDate()
+    {
+        $this->date = date('D M','Y','G:i');
+        return $this->date;
+    }
+    
 }
-?>

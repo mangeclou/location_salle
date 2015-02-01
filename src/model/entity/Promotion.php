@@ -12,14 +12,14 @@ class Promotion {
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_promo;
+	protected  $idPromo;
 
 	/**
 	 * 
 	 * @var string
 	 * @access protected
 	 */
-	protected  $code_promo;
+	protected  $codePromo;
 
 	/**
 	 * 
@@ -28,6 +28,27 @@ class Promotion {
 	 */
 	protected  $reduction;
 
-
+     //----------- GETTERS -----------------
+    public function getIdPromo()
+    {
+        return $this->idPromo;
+    }
+    public function getCodePromo()
+    {
+        return $this->codePromo;
+    }
+    public function getReduction()
+    {
+        return $this->reduction;
+    }
+      
+    //--------- SETTERS ------------------
+    public function setCodePromo($code)
+    {
+        $this->codePromo = $code;
+    }
+    public function setReduction($reduction)
+    {
+        $this->reduction = $reduction;
+    }
 }
-?>

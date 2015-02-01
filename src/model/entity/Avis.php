@@ -12,21 +12,21 @@ class Avis {
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_avis;
+	protected  $idAvis;
 
 	/**
 	 * 
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_membre;
+	protected  $idMembre;
 
 	/**
 	 * 
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_salle;
+	protected  $idSalle;
 
 	/**
 	 * 
@@ -76,29 +76,21 @@ class Avis {
     }
    
     //--------- SETTERS ------------------
-    public function setIdAvis($arg)
+    public function setCommentaire($commentaire)
     {
-        // traitements ...
-        $this->idAvis = filter_has_var(INPUT_POST, $arg);
+        if(is_string($commentaire)) {
+            $this->nom = $commentaire;
+        }
     }
-    public function setIdMembre()
+    public function setNote($note)
     {
-        return $this->idMembre;
-    }
-    public function setIdSalle()
-    {
-        return $this->idSalle;
-    }
-    public function setCommentaire()
-    {
-        return $this->commentaire;
-    }
-    public function setNote()
-    {
-        return $this->note;
+        if(is_int($note)) {
+            $this->note = $note;
+        }
     }
     public function setDate()
     {
+        $this->date = date('D M','Y','G:i');
         return $this->date;
     }
 }

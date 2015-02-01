@@ -12,22 +12,33 @@ class DetailCommande {
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_detail_commande;
+	protected  $idDetailCommande;
 
 	/**
 	 * 
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_commande;
+	protected  $idCommande;
 
 	/**
 	 * 
 	 * @var integer
 	 * @access protected
 	 */
-	protected  $id_produit;
+	protected  $idProduit;
 
-
+    //----------- GETTERS -----------------
+    public function getIdDetailCommande()
+    {
+        return $this->idDetailCommande;
+    }
+    public function getIdCommande()
+    {
+        return $this->idCommande;
+    }
+    public function getIdProduit()
+    {
+        return $this->idProduit;
+    }
 }
-?>

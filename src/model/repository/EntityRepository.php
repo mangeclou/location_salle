@@ -23,11 +23,11 @@ class EntityRepository {
 //-------
     public function getDb()
     {
-        if(!$this->db)  {
+        if(!$this->db) {
             // getInstance retourne un objet, on peux donc remettre une fléche pour appeler une méthode.
-            // Ceci déclenche aussi l'autoload car c'est une instance
-
-            $this->db = PDOManager::getInstance()->getPdo();         }
+          
+            $this->db = PDOManager::getInstance()->getPdo();         
+        }
         return $this->db;
     }
 //-------
@@ -39,7 +39,8 @@ class EntityRepository {
         return strtolower(str_replace(array('Repository\\', 'Repository'), '', get_called_class())); // je veux retirer Repository\\ et repository de Repository\EmployeRepository pour garder seulement Employe.
     }
 //-------
-    public function findAll() // permet d'aller chercher toutes les informations sur un employe - c'est à ce moment là que PDO est instancié!
+    // permet d'aller chercher toutes les informations sur une entité - c'est à ce moment là que PDO est instancié!
+    public function findAll() 
     {
         // FROM le nom de la table recherchée
         $query = $this->getDb()->query('SELECT * FROM ' . $this->getTableName()); 
@@ -47,7 +48,7 @@ class EntityRepository {
 		// echo PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE;
 		// echo $this->getEntityClass();
 
-        $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'Backoffice\Entity\\' . $this->getTableName()); // on récupère un tableau array composé d'objets. FETCH_CLASS fais une instanciation de Employe, en remplissant les propriétés qui correspondent aux noms des champs SQL. (c'est pourquoi il faut avoir la même ortographe entre les propriétés et les noms SQL). Il rempli tous meme les private et protected.
+        $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'entity\\' . $this->getTableName()); // on récupère un tableau array composé d'objets. FETCH_CLASS fais une instanciation de Employe, en remplissant les propriétés qui correspondent aux noms des champs SQL. (c'est pourquoi il faut avoir la même ortographe entre les propriétés et les noms SQL). Il rempli tous meme les private et protected.
         // Pour chaque ligne SQL il instancie un objet. Donc il déclenche aussi l'autoload..
         if(!$resultatQuery) { // si la query ne fonctionne pas
             return false;
@@ -59,7 +60,10 @@ class EntityRepository {
 //-------
     public function find($id)
     {
-        $query = $this->getDb()->query('SELECT * FROM ' . $this->getTableName() . ' WHERE id' . ucfirst($this->getTableName()) . '= ' . (int) $id); // id'Employe' le premier champ est toujours le nom de la table. Caster en int permet d'éviter des erreurs de requete sql.
+        $query = $this->getDb()->query('SELECT * FROM ' . $this->getTableName() 
+                // Le premier champ est toujours le nom de la table.
+                //  Caster en int permet d'éviter des erreurs de requete sql.
+                . ' WHERE id' . ucfirst($this->getTableName()) . '= ' . (int) $id); 
         $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
 
         if(!$resultatQuery) {
@@ -75,7 +79,10 @@ class EntityRepository {
     {
         // echo implode(',',array_keys($_POST)) . '<hr />' ;
         // echo  "'" . implode("','", $_POST) . "'";
-        $query = $this->getDb()->query('INSERT INTO '. $this->getTableName() . '(' . implode(',',array_keys($_POST)) . ') VALUES (' . "'" . implode("','", $_POST) . "'" . ')'); // array_keys me permet de parcourrir les indices plutot que les valeur pour annoncer les champs.
+        // array_keys me permet de parcourrir les indices plutot que les valeur pour annoncer les champs.
+        $query = $this->getDb()->query('INSERT INTO '. $this->getTableName() 
+                . '(' . implode(',',array_keys($_POST)) . ') '
+                . 'VALUES (' . "'" . implode("','", $_POST) . "'" . ')'); 
         return $this->getDb()->lastInsertId(); // dernier identifiant généré
     }
 }
