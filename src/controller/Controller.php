@@ -14,7 +14,7 @@ namespace controller; // toujours le même nom que le dossier, pour que l'autolo
 
 class Controller {
 	protected $table;
-        public $test = "ok";
+        //public $test = "ok";
 //-----------------------
 	public function __construct() {}
 //-----------------------

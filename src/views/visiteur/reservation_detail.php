@@ -49,7 +49,7 @@
 	<div class="col_60">
 		<h2>Avis</h2>
 		<div class="box">
-			<img src="/web/img/male.jpg"> <!-- A dynamiser, src différente en fonction du sexe-->
+			<img src="/img/male.jpg"> <!-- A dynamiser, src différente en fonction du sexe-->
 			<h3 class="short_title">David</h3>
 			<div  class="icon"><!-- Ajouter en url()  une icone type bulle de bd ?-->
 			<span class="big_font">8</span>
@@ -59,7 +59,7 @@
 		</div>
 		
 		<div class="box">
-			<img src="/web/img/female.jpg"> <!-- A dynamiser, src différente en fonction du sexe-->
+                    <img src="/img/female.jpg" alt="icon"> <!-- A dynamiser, src différente en fonction du sexe-->
 			<h3 class="short_title">Emilie</h3>
 			<div  class="icon"><!-- Ajouter en url()  une icone type bulle de bd ?-->
 			<span class="big_font">7</span>

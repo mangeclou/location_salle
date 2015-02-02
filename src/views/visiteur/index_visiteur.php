@@ -24,11 +24,11 @@
 		<p>600 €</p>
             </div>
             <div class="btn">
-                <form  action="reservation_details.php">
-                    <button type="submit">Voir ce lieu</button>
-		</form>
+                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
+                    <button type="button">Voir ce lieu</button>
+                </a>
             </div>
-		<a href="connexion.php">Connectez vous</a>
+		<a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
         </div><!--END .col -->
 	<div class="col_30">
             <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
@@ -42,11 +42,11 @@
                 <p>400 €</p>
             </div>
             <div class="btn">
-                <form  action="reservation_details.php">
-                    <button type="submit">Voir ce lieu</button>
-                </form>
+                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
+                    <button type="button">Voir ce lieu</button>
+                </a>
             </div>
-            <a href="connexion.php">Connectez vous</a>
+            <a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
         </div><!--END .col -->
 	<div class="col_30">
             <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
@@ -60,11 +60,11 @@
                 <p>400 €</p>
             </div>
             <div class="btn">
-                <form  action="reservation_details.php">
-                    <button type="submit">Voir ce lieu</button>
-                </form>
+                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
+                    <button type="button">Voir ce lieu</button>
+                </a>
             </div>
-            <a href="connexion.php">Connectez vous</a>
+            <a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
      
         </div><!--END .col -->
     </div>

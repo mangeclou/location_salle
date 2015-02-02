@@ -19,9 +19,16 @@ class MemberRepository extends EntityRepository {
     {
         return $this->find($id); // on va voir la méthode findAll() de EntityRepository
     }
+    
+    public function findMembreByPseudo($pseudo)
+    {
+        $table = "Membre";
+        return $this->findByTableAndColumnName($table, $pseudo);
+    }
 
     public function registerMembre()
     {
-        return $this->register(); // on va voir la méthode findAll() de EntityRepository
+        // on fait appel à la méthode register de EntityRepository
+        return $this->register();
     }
 }

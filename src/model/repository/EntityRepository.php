@@ -40,6 +40,10 @@ class EntityRepository {
     }
 //-------
     // permet d'aller chercher toutes les informations sur une entité - c'est à ce moment là que PDO est instancié!
+    /**
+     * 
+     * @return boolean
+     */
     public function findAll() 
     {
         // FROM le nom de la table recherchée
@@ -58,7 +62,13 @@ class EntityRepository {
         }
     }
 //-------
-    public function find($id)
+    /**
+     * Recherche dynamiquement dans la table demandée l'id demandée.
+     * Retourne un array ou false.
+     * @param type $id
+     * @return boolean
+     */
+    public function findById($id)
     {
         $query = $this->getDb()->query('SELECT * FROM ' . $this->getTableName() 
                 // Le premier champ est toujours le nom de la table.
@@ -74,7 +84,34 @@ class EntityRepository {
             return $resultatQuery;
         }
     }
-//-------
+
+     /**
+     * Recherche dynamiquement dans la table demandée la demandée.
+     * Retourne un array ou false.
+     * @param type $id
+     * @return boolean
+     */
+    public function findByTableAndColumnName($table,$columnName)
+    {
+        $query = $this->getDb()->query('SELECT * FROM ' . $table 
+               //  Caster en int permet d'éviter des erreurs de requete sql.
+                . " WHERE $columnName" . '= ' . (string) $columnName); 
+        $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
+
+        if(!$resultatQuery) {
+            return false;
+        }
+        else {
+            // return $q->fetch(PDO::FETCH_ASSOC);
+            return $resultatQuery;
+        }
+    }
+    
+    
+    /**
+     * 
+     * @return type
+     */
     public function register()
     {
         // echo implode(',',array_keys($_POST)) . '<hr />' ;

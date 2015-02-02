@@ -59,7 +59,7 @@ class VisiteurController extends Controller
     protected $reservationParameters;
     
     protected $reservationDetailTemplate = 'reservation_detail.php';
-    protected $reservationdetailParameters;
+    protected $reservationDetailParameters;
 
     //GETTERS
        
@@ -164,8 +164,57 @@ class VisiteurController extends Controller
     public function displayReservationdetail()
     {
         require __DIR__ . '/../views/viewParameters.php';
-        $this->reservationDetailParameters = $viewPageParameters['visiteur']['inscription'];
-        return $this->render($this->layout, $this->reservationDetailTemplate, $this->reservationdetailParameters);  
+        $this->reservationDetailParameters = $viewPageParameters['visiteur']['reservation_detail'];
+        return $this->render($this->layout, $this->reservationDetailTemplate, $this->reservationDetailParameters);  
+    }
+    
+    public function creerMembre()
+    {
+        //Si le formulaire n'a pas été soumis
+        if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
+            (!filter_has_var(INPUT_POST, 'mdp')) &&
+            (!filter_has_var(INPUT_POST, 'nom')) &&
+            (!filter_has_var(INPUT_POST, 'prenom')) &&
+            (!filter_has_var(INPUT_POST, 'email')) &&
+            (!filter_has_var(INPUT_POST, 'ville')) &&
+            (!filter_has_var(INPUT_POST, 'cp')) &&
+            (!filter_has_var(INPUT_POST, 'adresse'))
+               ){
+            //On affiche le formulaire d'inscription
+            return $this->render($this->layout, $this->displayInscriptionTemplate, $this->displayInscriptionParameters);
+        } else {
+		//filtrer les données	
+            //$pseudo = trim(htmlentities($_POST['pseudo'], ENT_QUOTES));
+            //array_filter($_POST, 'trim_value');  
+                      
+            //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
+            
+            //
+            $membre = $this->getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
+			//on appelle la méthode registerMembre de MembreRepository
+                        //cette méthode appelle la méthode register de EntityRepository
+                        //Résultat : insertion du nouveau membre dans la BDD
+                        $idMembre = $membre->registerMembre();
+			$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
+			// var_dump($lemploye);
+			
+			return $this->render('layout.php', 'confirm.php', array( // on indique qu'elle est la vue à sortir ainsi que le layout (la vue "intérieur" rentre dans le layout "autour")
+				'title' => 'Application',
+				'lemploye' => $lemploye,
+			));
+        }
+		// render : permet de rendre un affichage
+        //connexion à la bdd
+       
+        
+        /*$connexion = connexionBDD();
+    $sql = "INSERT INTO utilisateur (id_utilisateur,pseudo,mdp) VALUES (NULL,:pseudo, :mdp)";
+    $insertion_utilisateur = $connexion->prepare($sql);
+    $insertion_utilisateur->execute(array(':pseudo'=>$pseudo,
+                      ':mdp'=>$mdp));
+    return $insertion_utilisateur;
+         * 
+         */
     }
         
 }
