@@ -20,12 +20,12 @@ class Controller {
 //-----------------------
 	public function getRepository($table)
 	{
-		$class = 'Repository\\' . $table . 'Repository'; // Repository\EmployesRepository
-		if(!isset($this->table))
-		{
-                    $this->table = new $class; // j'instancie la classe EmployesRepository
-		}
-		return $this->table; // je retourne la classe Employes
+            $class = 'repository\\' . $table . 'repository';
+            if(!isset($this->table))
+            {
+                       $this->table = new $class; // j'instancie la classe
+            }
+            return $this->table; // je retourne la classe
 	}
 	
 	public function render($layout, $template, $parameters = array())

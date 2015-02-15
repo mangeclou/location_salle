@@ -8,7 +8,7 @@
  * entités. cela doit rester générique afin que cela soit ré-utilisable.
  */
 
-namespace manager;
+namespace repository;
 
 require_once '/../../manager/PDOManager.php';
 use Manager\PDOManager;
@@ -36,7 +36,7 @@ class EntityRepository {
 		 // echo get_called_class() . '<br />'; // Dire à la fin : éxecuté ds findAll (fichier actuel), qui est éxecuté ds getAllEmploye (EmployeRepository), qui est éxecuté ds getRepository('Employe') (dans EmployeController), qui est éxécuté dans employeDisplay (dans EmployeController)
 		  //return 'employe'; // permet de faire les tests pendant la construction avant de revenir ici plus tard pour le faire dynamiquement.
 		 // echo strtolower(str_replace(array('Backoffice\\','Repository\\', 'Repository'), '', get_called_class()));
-        return strtolower(str_replace(array('Repository\\', 'Repository'), '', get_called_class())); // je veux retirer Repository\\ et repository de Repository\EmployeRepository pour garder seulement Employe.
+        return strtolower(str_replace(array('repository\\', 'repository'), '', get_called_class())); // je veux retirer Repository\\ et repository de Repository\EmployeRepository pour garder seulement Employe.
     }
 //-------
     // permet d'aller chercher toutes les informations sur une entité - c'est à ce moment là que PDO est instancié!
@@ -47,7 +47,9 @@ class EntityRepository {
     public function findAll() 
     {
         // FROM le nom de la table recherchée
-        $query = $this->getDb()->query('SELECT * FROM ' . $this->getTableName()); 
+        $query = $this->getDb();
+        $query->prepare('SELECT * FROM ' . $this->getTableName());
+        $query->execute();
 		// echo PDO::FETCH_PROPS_LATE;
 		// echo PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE;
 		// echo $this->getEntityClass();
@@ -93,9 +95,15 @@ class EntityRepository {
      */
     public function findByTableAndColumnName($table,$columnName)
     {
-        $query = $this->getDb()->query('SELECT * FROM ' . $table 
+        $query = $this->getDb();
+        echo 'query';
+        print_r($query);
+        
+        //TODO : faire la reque^te avec un prepare puis execute
+        $query->query('SELECT * FROM ' . $table 
                //  Caster en int permet d'éviter des erreurs de requete sql.
-                . " WHERE $columnName" . '= ' . (string) $columnName); 
+                . " WHERE $columnName" . '= ' . (string) $columnName);
+        //$query->execute();
         $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
 
         if(!$resultatQuery) {
@@ -109,13 +117,15 @@ class EntityRepository {
     
     
     /**
-     * 
+     * Fonction qui insère dynamiquement dans la bonne table de la BDD le nouveau
+     * membre à partir des données du $_POST
      * @return type
      */
     public function register()
     {
-        // echo implode(',',array_keys($_POST)) . '<hr />' ;
-        // echo  "'" . implode("','", $_POST) . "'";
+        //TODO : faire un prepare puis execute pour une meilleur sécurité
+        //***************************************************************
+        // (échappe automatiquement toutes les valeurs)
         // array_keys me permet de parcourrir les indices plutot que les valeur pour annoncer les champs.
         $query = $this->getDb()->query('INSERT INTO '. $this->getTableName() 
                 . '(' . implode(',',array_keys($_POST)) . ') '

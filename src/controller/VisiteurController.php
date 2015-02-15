@@ -12,12 +12,19 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
-include 'Controller.php';
+require 'Controller.php';
+require "/../model/repository/MembreRepository.php";
+    //permet d'utiliser les méthodes du trait ValidatorController
+require 'ValidatorController.php';
+
+
 use controller\Controller;
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends Controller
 {
+
+    
     //default layout of the pages
     protected $layout = 'layout.php';
      
@@ -105,13 +112,7 @@ class VisiteurController extends Controller
         return $this->render($this->layout, $this->indexTemplate, $this->indexParameters);  
     }
         
-    public function displayInscription()
-    {
-        require __DIR__ . '/../views/viewParameters.php';
-        $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
-        return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);  
-    }
-    //continuer
+     //continuer
     public function displayMdpperdu()
     {
         require __DIR__ . '/../views/viewParameters.php';
@@ -170,6 +171,16 @@ class VisiteurController extends Controller
     
     public function creerMembre()
     {
+        //TODO : tester que le visiteur n'est pas un membre connecté, si c'est le cas faire
+        //un header("location:#") vers l'accueil membre
+        if(isset($_SESSION)){
+            //on redirige vers la page d'accueil pour les membres
+            header("location:index.php?controller=MembreController&method=displayIndex");
+        }  else {
+            //Si le visiteur n'est pas connecté, j'affiche le formulaire d'inscription
+            require __DIR__ . '/../views/viewParameters.php';
+        $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+        $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
         //Si le formulaire n'a pas été soumis
         if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
             (!filter_has_var(INPUT_POST, 'mdp')) &&
@@ -186,22 +197,46 @@ class VisiteurController extends Controller
 		//filtrer les données	
             //$pseudo = trim(htmlentities($_POST['pseudo'], ENT_QUOTES));
             //array_filter($_POST, 'trim_value');  
-                      
+            $pseudo = trim(ValidatorController::validatePseudo($_POST['pseudo']));
+            $mdp = trim(ValidatorController::validatePseudo($_POST['mdp']));
+            $nom = trim(ValidatorController::validateNom(($_POST['nom']),20));
+            $prenom = trim(ValidatorController::validateNom(($_POST['prenom']),15));
+            $email =  trim(ValidatorController::validateEmail($_POST['email']));
+            $ville = trim(ValidatorController::validateNom(($_POST['ville']),20));
+            $cp =  trim(ValidatorController::validateCp($_POST['cp']));
+            $adresse = trim($_POST['adresse']);
+
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
+            $obj = new \repository\MembreRepository();
+            $obj ->findMembreByPseudo($pseudo);
             
-            //
-            $membre = $this->getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
+            if ($obj === false){
+                echo '<p>Veuillez choisir un autre pseudo.</p>';
+            }else{
+                //On appelle la méthdoe getRepository avec comme argument le nom de la table (Membre)
+                $futurMembre = new \manager\EntityRepository();
+                $futurMembre ->getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
 			//on appelle la méthode registerMembre de MembreRepository
                         //cette méthode appelle la méthode register de EntityRepository
                         //Résultat : insertion du nouveau membre dans la BDD
                         $idMembre = $membre->registerMembre();
-			$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
+                        
+                        
+                        
+			//$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
 			// var_dump($lemploye);
 			
-			return $this->render('layout.php', 'confirm.php', array( // on indique qu'elle est la vue à sortir ainsi que le layout (la vue "intérieur" rentre dans le layout "autour")
-				'title' => 'Application',
-				'lemploye' => $lemploye,
-			));
+			
+                        session_start();
+                        $_SESSION['pseudo'] = $pseudo;                     
+                        $_SESSION['email'] = $email;
+                        
+                        header("location:index.php?controller=MembreController&method=displayIndex");
+                        
+			
+            }
+            //
+            //récupérer avec un $_POST les données du formulaire d'inscription
         }
 		// render : permet de rendre un affichage
         //connexion à la bdd
@@ -215,6 +250,9 @@ class VisiteurController extends Controller
     return $insertion_utilisateur;
          * 
          */
-    }
+        }
+        
+       
+    }//END creerMembre()
         
 }

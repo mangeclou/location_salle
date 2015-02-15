@@ -9,7 +9,8 @@ $parameters = array(
     'connect'=> array(
         'host'=>'localhost',
         'type'=>'mysql',
-        'dbname'=>'entreprise',
+        'dbname'=>'lokisalle',
+        'charset'=>'UTF8',
         'user'=>'root',
         'password'=>''
     ),

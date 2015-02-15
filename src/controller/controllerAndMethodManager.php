@@ -41,6 +41,7 @@ class controllerAndMethodManager{
                             'displayProfil'
                             ],
                         'visiteur'=>[
+                            'creerMembre',
                             'displayCgv',
                             'displayConnexion',
                             'displayIndex',

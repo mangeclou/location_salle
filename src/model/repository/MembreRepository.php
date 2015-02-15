@@ -8,7 +8,7 @@ namespace repository;
 require_once 'EntityRepository.php';
 USE repository\EntityRepository; // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
 
-class MemberRepository extends EntityRepository {
+class MembreRepository extends EntityRepository {
 
     public function getAllMembre()
     {

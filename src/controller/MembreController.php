@@ -64,6 +64,17 @@ class MembreController extends MainController
         
     }*/
     
+    /**
+     * A l'instantiation de la classe on vérifie si la session existe, si elle
+     * n'existe pas on redirige vers l'accueil pour les visiteurs
+     */
+    public function __construct() {
+       if(!isset($_SESSION)){
+           header('location:index.php?controller=VisiteurController&method=displayIndex');
+       }
+    }
+    
+    
     
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
@@ -74,6 +85,7 @@ class MembreController extends MainController
     */
     public function displayCgvMembre() 
     {
+              
        //on require le fichier de config de la view
        require __DIR__ . '/../views/viewParameters.php';
        //on va chercher les paramètres dans l'array viewpageParameters
