@@ -142,6 +142,10 @@ fieldset.form-inscription input[type="radio"]{
     width: inherit;
 }
 
+fieldset.erreur{
+    color: #cd0a0a;
+}
+
 /* ----IMG---*/
 img.big_img{
 max-width: 100%;
