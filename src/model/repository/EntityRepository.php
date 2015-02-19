@@ -100,11 +100,13 @@ class EntityRepository {
         print_r($query);
         
         //TODO : faire la reque^te avec un prepare puis execute
-        $query->query('SELECT * FROM ' . $table 
+        
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $Myquery = $query->prepare('SELECT * FROM ' . $table 
                //  Caster en int permet d'éviter des erreurs de requete sql.
                 . " WHERE $columnName" . '= ' . (string) $columnName);
-        //$query->execute();
-        $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
+        $Myquery->execute();
+        $resultatQuery = $Myquery->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
 
         if(!$resultatQuery) {
             return false;

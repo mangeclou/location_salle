@@ -390,14 +390,6 @@ class ValidatorController{
         }  else {
             return $arrayErrors;
         }
-        
-               // if((is_string($pseudo)) && (strlen($pseudo)<= 30)&& preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$pseudo)){
-          //  return $pseudo;
-       // }  else {
-       //     throw new \Exception('Seuls les chiffres, les lettres de "a" à "z" et les "_" sont autorisés.');
-       // }
-        
-
     }
     /**
      * 

@@ -203,7 +203,7 @@ class VisiteurController extends Controller
            
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
             $obj = new \repository\MembreRepository();
-            $obj ->findMembreByPseudo($pseudo);
+            $obj ->findMembreByPseudo($_POST['pseudo']);
             if ($obj === false){
                 $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
             }else{
