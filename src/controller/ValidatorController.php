@@ -309,23 +309,26 @@ class ValidatorController{
     
     /**
      * 
-     * @param type STRING $nom : le nom à valider
-     * @param type INT $max : le nombre max de caractères admis
-     * @return type
-     * @throws Exception
+     * @param type $nom
+     * @return string
      */
-    public static function validateNom($nom, $max)
+    public static function validateNom($nom)
     {
         //A TESTER
-        
-        if((is_string($nom)) 
-                && (is_int($max))
-                && ((strlen($nom)<= $max))
-                && (preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$nom))){
-            return $nom;
-        }  else {
-            throw new Exception('Veuillez saisir un nom de '.$max .' caractères maximum.');
+        if ($nom ===""){
+            $arrayErrors [] = 'Veuillez saisir un pseudo.';
+            return $arrayErrors;
         }
+        if (!is_string($nom)){
+            $arrayErrors [] = 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
+            return $arrayErrors;
+        }
+        if (preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$nom)){
+            $arrayErrors [] = 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
+            return $arrayErrors;
+        }
+        //on retourne le nom si aucune erreur n'a été trouvée
+        return $nom;
     }
     
     /**
@@ -337,26 +340,64 @@ class ValidatorController{
     public static function validateEmail($email)
     {
         //On teste la validité de l'email
+        
         if (filter_var($email, FILTER_VALIDATE_EMAIL)== true){
-            return $email;
-        } else {
-            throw new Exception('Veuillez saisir un email valide.');
+            $arrayErrors [] = 'Veuillez saisir un email valide.';
+            return $arrayErrors;
+        } 
+        if ($email ===""){
+            $arrayErrors [] = 'Veuillez saisir un email.';
+            return $arrayErrors;
         }
+        //si l'arrayErrors est vide on retourne l'email, sinon on retourne l'arrayErrors
+        if(empty($arrayErrors)){
+            return $email;
+        }  else {
+            return $arrayErrors;
+        }
+        
     }
     /**
-     * 
+     * Teste si le pseudo est valide, retourne un arrayErrors si c'est le cas et
+     * sinon retourne le pseudo
      * @param type $pseudo
-     * @return type
-     * @throws Exception
+     * @return boolean
      */
     public static function validatePseudo($pseudo)
     {
-        //On autorise les lettres, les chiffres et "_"
-        if((is_string($pseudo)) && (strlen($pseudo)<= 30)&& preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$pseudo)){
+        if ($pseudo ===""){
+            $arrayErrors [] = 'Veuillez saisir un pseudo.';
+            return $arrayErrors;             
+        }
+        if (strlen($pseudo)> 30 ){
+            $arrayErrors [] = 'Veuillez saisir un pseudo de moins de 30 caractères..';
+            return $arrayErrors;
+        }
+        if (strlen($pseudo)< 3 ){
+            $arrayErrors [] = 'Veuillez saisir un pseudo d\'au moins 3 caractères.';
+            return $arrayErrors;           
+        }
+        if (!is_string($pseudo)){
+            $arrayErrors [] = 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
+            return $arrayErrors;            
+        }
+        if(!preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$pseudo)){
+            $arrayErrors [] = 'Vous utilisez des caractères non supportés.';
+            return $arrayErrors;            
+        }
+        if(empty($arrayErrors)){
             return $pseudo;
         }  else {
-            throw new \Exception('Seuls les chiffres, les lettres de "a" à "z" et les "_" sont autorisés.');
+            return $arrayErrors;
         }
+        
+               // if((is_string($pseudo)) && (strlen($pseudo)<= 30)&& preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$pseudo)){
+          //  return $pseudo;
+       // }  else {
+       //     throw new \Exception('Seuls les chiffres, les lettres de "a" à "z" et les "_" sont autorisés.');
+       // }
+        
+
     }
     /**
      * 
@@ -367,11 +408,20 @@ class ValidatorController{
     public static function validateCp($cp)
     {
         //On autorise uniquement les chiffres, au maximum 12 caractères
-        $cpInt = (int)($cp);
-        if((is_int($cpInt)) && (strlen($cpInt)<= 12)){
-            return $cpInt;
+        
+        if(!is_int($cp)){
+           $arrayErrors [] = 'Veuillez saisir un code postal valide.';
+           return $arrayErrors; 
+        }
+        if((strlen($cp)> 12)){
+           $arrayErrors [] = 'Votre code postal est trop long.';
+           return $arrayErrors; 
+        }
+        //si l'arrayErrors est vide on retourne le cp, sinon on retourne l'arrayErrors
+        if(empty($arrayErrors)){
+            return $cp;
         }  else {
-            throw new \Exception('Veuillez saisir un code postal valide.');
+            return $arrayErrors;
         }
     }
     /**
@@ -383,11 +433,17 @@ class ValidatorController{
     public static function validateSexe($sexe)
     {
         //On autorise uniquement les lettre "m" ou "f"
-        if(($sexe == 'm')||($sexe == 'f')){
+        if(!($sexe == 'm')||!($sexe == 'f')){
+           $arrayErrors [] = 'Veuillez saisir un sexe valide.';
+           return $arrayErrors; 
+        }
+        //si l'arrayErrors est vide on retourne le sexe, sinon on retourne l'arrayErrors
+        if(empty($arrayErrors)){
             return $sexe;
         }  else {
-            throw new Exception('Veuillez saisir un code postal valide.');
+            return $arrayErrors;
         }
+        
     }
     /**
      * 
@@ -398,11 +454,17 @@ class ValidatorController{
     public static function validatePays($pays)
     {
         //On autorise uniquement les noms de pays valides
-        if(in_array($pays, getCountryList())){
+        if(!in_array($pays, getCountryList())){
+           $arrayErrors [] = 'Veuillez saisir un pays valide.';
+           return $arrayErrors;
+        }
+        //si l'arrayErrors est vide on retourne le sexe, sinon on retourne l'arrayErrors
+        if(empty($arrayErrors)){
             return $pays;
         }  else {
-            throw new Exception('Veuillez saisir un pays valide.');
+            return $arrayErrors;
         }
+        
     }
     
 }

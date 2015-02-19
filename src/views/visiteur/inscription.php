@@ -127,6 +127,14 @@ $msg = '';
                         </div> 
                         <button type="submit" name="inscription">Inscription</button>
                     </fieldset>
+                    <?php
+                        //on récupère les erreurs depuis les paramètres de la méthode render
+                        if(!empty($arrayErrors)){
+                            foreach($arrayErrors as $error){
+                                echo '<p class="erreur">' .$error.'</p>';
+                            }
+                        }
+                    ?>
                 </form>
             </div><!--END .form-inscription -->
 			

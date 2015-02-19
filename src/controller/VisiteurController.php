@@ -177,10 +177,7 @@ class VisiteurController extends Controller
             //on redirige vers la page d'accueil pour les membres
             header("location:index.php?controller=MembreController&method=displayIndex");
         }  else {
-            //Si le visiteur n'est pas connecté, j'affiche le formulaire d'inscription
-            require __DIR__ . '/../views/viewParameters.php';
-        $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
-        $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
+            
         //Si le formulaire n'a pas été soumis
         if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
             (!filter_has_var(INPUT_POST, 'mdp')) &&
@@ -190,29 +187,60 @@ class VisiteurController extends Controller
             (!filter_has_var(INPUT_POST, 'ville')) &&
             (!filter_has_var(INPUT_POST, 'cp')) &&
             (!filter_has_var(INPUT_POST, 'adresse'))
+                
                ){
+            echo 'premier if';
             //On affiche le formulaire d'inscription
-            return $this->render($this->layout, $this->displayInscriptionTemplate, $this->displayInscriptionParameters);
+            //Si le visiteur n'est pas connecté, j'affiche le formulaire d'inscription
+           require __DIR__ . '/../views/viewParameters.php';
+        $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+        $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
+            //return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
         } else {
 		//filtrer les données	
             //$pseudo = trim(htmlentities($_POST['pseudo'], ENT_QUOTES));
             //array_filter($_POST, 'trim_value');  
-            $pseudo = trim(ValidatorController::validatePseudo($_POST['pseudo']));
-            $mdp = trim(ValidatorController::validatePseudo($_POST['mdp']));
-            $nom = trim(ValidatorController::validateNom(($_POST['nom']),20));
-            $prenom = trim(ValidatorController::validateNom(($_POST['prenom']),15));
-            $email =  trim(ValidatorController::validateEmail($_POST['email']));
-            $ville = trim(ValidatorController::validateNom(($_POST['ville']),20));
-            $cp =  trim(ValidatorController::validateCp($_POST['cp']));
-            $adresse = trim($_POST['adresse']);
-
+           
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
             $obj = new \repository\MembreRepository();
             $obj ->findMembreByPseudo($pseudo);
-            
             if ($obj === false){
-                echo '<p>Veuillez choisir un autre pseudo.</p>';
+                $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
             }else{
+            
+            $arrayErrors[] = ValidatorController::validatePseudo($_POST['pseudo']);
+            $arrayErrors[] = ValidatorController::validatePseudo($_POST['mdp']);
+            $arrayErrors[] = ValidatorController::validateNom(($_POST['nom']),20);
+            $arrayErrors[] = ValidatorController::validateNom(($_POST['prenom']),15);
+            $arrayErrors[] =  ValidatorController::validateEmail($_POST['email']);
+            $arrayErrors[] = ValidatorController::validateNom(($_POST['ville']),20);
+            $arrayErrors[] =  ValidatorController::validateCp($_POST['cp']);
+            $arrayErrors[] = ($_POST['adresse']);
+            
+            /*if(empty($arrayErrors)){
+                //c'est validé
+            } else {
+               
+                foreach($arrayErrors as $error){
+                }
+            }*/
+            
+            
+            
+            //on récupère $arrayErrors qui est retourné par les méthodes de la classe
+            //ValidatorController et on affiche le formulaire avec les données de message
+            //d'erreur
+            if(!empty($arrayErrors)){
+            $this->render($this->layout, $this->inscriptionTemplate, array(
+                'arrayErrors' => $arrayErrors
+                )); 
+            } else {
+
+            
+            
+            
+            
+            
                 //On appelle la méthdoe getRepository avec comme argument le nom de la table (Membre)
                 $futurMembre = new \manager\EntityRepository();
                 $futurMembre ->getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
@@ -221,8 +249,7 @@ class VisiteurController extends Controller
                         //Résultat : insertion du nouveau membre dans la BDD
                         $idMembre = $membre->registerMembre();
                         
-                        
-                        
+                                                
 			//$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
 			// var_dump($lemploye);
 			
@@ -237,7 +264,7 @@ class VisiteurController extends Controller
             }
             //
             //récupérer avec un $_POST les données du formulaire d'inscription
-        }
+        }//END if $arrayErrors est vide (donc aucune erreur)
 		// render : permet de rendre un affichage
         //connexion à la bdd
        
@@ -250,9 +277,9 @@ class VisiteurController extends Controller
     return $insertion_utilisateur;
          * 
          */
-        }
+            }//END if $_POST n'est pas vide
         
        
+        }//END if !isset $_SESSION
     }//END creerMembre()
-        
-}
+}//END VisiteurController
