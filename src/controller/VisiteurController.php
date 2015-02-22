@@ -175,7 +175,7 @@ class VisiteurController extends Controller
         //un header("location:#") vers l'accueil membre
         if(isset($_SESSION)){
             //on redirige vers la page d'accueil pour les membres
-            header("location:index.php?controller=MembreController&method=displayIndex");
+            header("location:index.php?controller=MembreController&method=displayIndexMembre");
         }  else {
             
         //Si le formulaire n'a pas été soumis
@@ -192,11 +192,12 @@ class VisiteurController extends Controller
             echo 'premier if';
             //On affiche le formulaire d'inscription
             //Si le visiteur n'est pas connecté, j'affiche le formulaire d'inscription
-           require __DIR__ . '/../views/viewParameters.php';
-        $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
-        $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
+            require __DIR__ . '/../views/viewParameters.php';
+            $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+            $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
             //return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
         } else {
+            
 		//filtrer les données	
             //$pseudo = trim(htmlentities($_POST['pseudo'], ENT_QUOTES));
             //array_filter($_POST, 'trim_value');  
@@ -204,50 +205,37 @@ class VisiteurController extends Controller
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
             $obj = new \repository\MembreRepository();
             $obj ->findMembreByPseudo($_POST['pseudo']);
-            if ($obj === false){
+            //Si la méthode findMembreByPseudo a retourné true (le pseudo existe déja)
+            if ($obj === true){
                 $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
             }else{
-            
-            $arrayErrors[] = ValidatorController::validatePseudo($_POST['pseudo']);
-            $arrayErrors[] = ValidatorController::validatePseudo($_POST['mdp']);
-            $arrayErrors[] = ValidatorController::validateNom(($_POST['nom']),20);
-            $arrayErrors[] = ValidatorController::validateNom(($_POST['prenom']),15);
-            $arrayErrors[] =  ValidatorController::validateEmail($_POST['email']);
-            $arrayErrors[] = ValidatorController::validateNom(($_POST['ville']),20);
-            $arrayErrors[] =  ValidatorController::validateCp($_POST['cp']);
-            $arrayErrors[] = ($_POST['adresse']);
-            
-            /*if(empty($arrayErrors)){
-                //c'est validé
-            } else {
-               
-                foreach($arrayErrors as $error){
-                }
-            }*/
+            //TODO : faire un filterValidator qui filtre le $_Post et qui
+            //retourne un array de données qui seront ensuite validées par isFormValid
+            if (!ValidatorController::isFormValid($_POST)){
+                
             
             
+                   
             
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
-            if(!empty($arrayErrors)){
-            $this->render($this->layout, $this->inscriptionTemplate, array(
+           
+                require __DIR__ . '/../views/viewParameters.php';
+                $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+                $this->render($this->layout, $this->inscriptionTemplate, array(
                 'arrayErrors' => $arrayErrors
                 )); 
             } else {
 
-            
-            
-            
-            
-            
+                      echo 'else';  
                 //On appelle la méthdoe getRepository avec comme argument le nom de la table (Membre)
-                $futurMembre = new \manager\EntityRepository();
-                $futurMembre ->getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
+                $futurMembre = new \repository\EntityRepository();
+                $futurMembre = parent::getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
 			//on appelle la méthode registerMembre de MembreRepository
                         //cette méthode appelle la méthode register de EntityRepository
                         //Résultat : insertion du nouveau membre dans la BDD
-                        $idMembre = $membre->registerMembre();
+                        $idMembre = $futurMembre->registerMembre();
                         
                                                 
 			//$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
@@ -255,10 +243,10 @@ class VisiteurController extends Controller
 			
 			
                         session_start();
-                        $_SESSION['pseudo'] = $pseudo;                     
-                        $_SESSION['email'] = $email;
+                        $_SESSION['pseudo'] = $_POST['pseudo'];                     
+                        $_SESSION['email'] = $_POST['email'];
                         
-                        header("location:index.php?controller=MembreController&method=displayIndex");
+                        header("location:index.php?controller=MembreController&method=displayIndexMembre");
                         
 			
             }
@@ -282,4 +270,17 @@ class VisiteurController extends Controller
        
         }//END if !isset $_SESSION
     }//END creerMembre()
+    
+    public function connexion()
+    {
+        if(isset($_SESSION)){
+            //on redirige vers la page d'accueil pour les membres
+            header("location:index.php?controller=MembreController&method=displayIndexMembre");
+        }  else {
+            //On teste si le $_POST contient quelque chose, si oui, on teste dans la bdd si
+            //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
+        }
+    }
+    
+    
 }//END VisiteurController

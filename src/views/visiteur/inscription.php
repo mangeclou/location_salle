@@ -125,13 +125,15 @@ $msg = '';
                             <label for="adresse">Adresse</label>
                             <textarea id="adresse" name="adresse" class="form-control" placeholder="adresse..." ><?php if(isset($_POST['adresse'])) echo $_POST['adresse'] ?></textarea>
                         </div> 
-                        <button type="submit" name="inscription">Inscription</button>
+                        <button type="submit" <!--name="inscription" -->>Inscription</button>
                     </fieldset>
                     <?php
                         //on récupère les erreurs depuis les paramètres de la méthode render
                         if(!empty($arrayErrors)){
-                            foreach($arrayErrors as $error){
-                                echo '<p class="erreur">' .$error.'</p>';
+                            foreach($arrayErrors as $key => $error){
+                               foreach($error as $key2 => $error2){
+                                echo '<p class="erreur">' .$error2.'</p>';
+                               }
                             }
                         }
                     ?>

@@ -203,5 +203,11 @@ class MembreController extends MainController
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->reservationDetailMembreTemplate, $this->reservationDetailMembreParameters);  
     }
+    
+    public function deconnexion() 
+    {
+        session_destroy();
+        header('location:index.php?controller=VisiteurController&method=displayIndex');
+    }
             
 }

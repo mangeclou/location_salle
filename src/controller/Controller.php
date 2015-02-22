@@ -23,7 +23,7 @@ class Controller {
             $class = 'repository\\' . $table . 'repository';
             if(!isset($this->table))
             {
-                       $this->table = new $class; // j'instancie la classe
+                $this->table = new $class; // j'instancie la classe
             }
             return $this->table; // je retourne la classe
 	}

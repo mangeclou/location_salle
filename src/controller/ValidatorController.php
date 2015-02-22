@@ -304,9 +304,7 @@ class ValidatorController{
      * @return type string
      * @throws Exception
      */
-    
-   
-    
+  
     /**
      * 
      * @param type $nom
@@ -316,19 +314,57 @@ class ValidatorController{
     {
         //A TESTER
         if ($nom ===""){
-            $arrayErrors [] = 'Veuillez saisir un pseudo.';
-            return $arrayErrors;
+            return 'Veuillez saisir un nom.';
         }
         if (!is_string($nom)){
-            $arrayErrors [] = 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
-            return $arrayErrors;
+            return 'Votre nom ne peut pas contenir uniquement des chiffres.';
         }
-        if (preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$nom)){
-            $arrayErrors [] = 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
-            return $arrayErrors;
+        if (!preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$nom)){
+            return 'Votre nom ne peut pas contenir de chiffre.';
         }
-        //on retourne le nom si aucune erreur n'a été trouvée
-        return $nom;
+              
+        return true;
+    }
+    
+    /**
+     * 
+     * @param type $nom
+     * @return string
+     */
+    public static function validateVille($ville)
+    {
+        //A TESTER
+        if ($ville ===""){
+            return 'Veuillez saisir une ville.';
+        }
+        if (!is_string($ville)){
+            return 'Votre ville ne peut pas contenir uniquement des chiffres.';
+        }
+        if (!preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$ville)){
+            return 'Certains caractères ne sont pas supportés.';
+        }
+        return true;
+    }
+     
+    /**
+     * 
+     * @param type $nom
+     * @return string
+     */
+    public static function validatePrenom($prenom)
+    {
+        //A TESTER
+        if ($prenom ===""){
+            return 'Veuillez saisir un prénom.';
+        }
+        if (!is_string($prenom)){
+            return 'Votre prénom ne peut pas contenir uniquement des chiffres.';
+        }
+        if (!preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$prenom)){
+            return 'Votre prénom ne peut pas contenir de chiffre.';
+        }
+              
+        return true;
     }
     
     /**
@@ -341,22 +377,40 @@ class ValidatorController{
     {
         //On teste la validité de l'email
         
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)== true){
-            $arrayErrors [] = 'Veuillez saisir un email valide.';
-            return $arrayErrors;
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)== false){
+            return 'Veuillez saisir un email valide.';
         } 
         if ($email ===""){
-            $arrayErrors [] = 'Veuillez saisir un email.';
-            return $arrayErrors;
+            return 'Veuillez saisir un email.';
         }
         //si l'arrayErrors est vide on retourne l'email, sinon on retourne l'arrayErrors
-        if(empty($arrayErrors)){
-            return $email;
-        }  else {
-            return $arrayErrors;
-        }
+        
+        return true;
         
     }
+    /**
+     * 
+     * @param type $email
+     * @return type
+     * @throws Exception
+     */
+    public static function validateMdp($mdp)
+    {
+        if ($mdp ===""){
+            return 'Veuillez saisir un mot de passe.';
+        }
+        if (strlen($mdp)> 30 ){
+            return 'Veuillez saisir un mot de passe de moins de 30 caract&egrave;res..';
+        }
+        if (strlen($mdp)< 7 ){
+            return 'Veuillez saisir un pseudo d\'au moins 7 caract&egrave;res.';
+        }
+        if(!preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$mdp)){
+            return 'Vous utilisez des caractères non supportés.';
+        }
+        return true;
+    }
+    
     /**
      * Teste si le pseudo est valide, retourne un arrayErrors si c'est le cas et
      * sinon retourne le pseudo
@@ -366,30 +420,22 @@ class ValidatorController{
     public static function validatePseudo($pseudo)
     {
         if ($pseudo ===""){
-            $arrayErrors [] = 'Veuillez saisir un pseudo.';
-            return $arrayErrors;             
+            return 'Veuillez saisir un pseudo.';
         }
         if (strlen($pseudo)> 30 ){
-            $arrayErrors [] = 'Veuillez saisir un pseudo de moins de 30 caractères..';
-            return $arrayErrors;
+            return 'Veuillez saisir un pseudo de moins de 30 caract&egrave;res..';
         }
         if (strlen($pseudo)< 3 ){
-            $arrayErrors [] = 'Veuillez saisir un pseudo d\'au moins 3 caractères.';
-            return $arrayErrors;           
+            return 'Veuillez saisir un pseudo d\'au moins 3 caract&egrave;res.';
         }
         if (!is_string($pseudo)){
-            $arrayErrors [] = 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
-            return $arrayErrors;            
+            return 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
         }
         if(!preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$pseudo)){
-            $arrayErrors [] = 'Vous utilisez des caractères non supportés.';
-            return $arrayErrors;            
+            return 'Vous utilisez des caractères non supportés.';
         }
-        if(empty($arrayErrors)){
-            return $pseudo;
-        }  else {
-            return $arrayErrors;
-        }
+        
+        return true;
     }
     /**
      * 
@@ -399,22 +445,12 @@ class ValidatorController{
      */
     public static function validateCp($cp)
     {
-        //On autorise uniquement les chiffres, au maximum 12 caractères
-        
-        if(!is_int($cp)){
-           $arrayErrors [] = 'Veuillez saisir un code postal valide.';
-           return $arrayErrors; 
-        }
+        //On autorise au maximum 12 caractères
         if((strlen($cp)> 12)){
-           $arrayErrors [] = 'Votre code postal est trop long.';
-           return $arrayErrors; 
+           return 'Votre code postal est trop long.';
         }
-        //si l'arrayErrors est vide on retourne le cp, sinon on retourne l'arrayErrors
-        if(empty($arrayErrors)){
-            return $cp;
-        }  else {
-            return $arrayErrors;
-        }
+                
+        return true;
     }
     /**
      * 
@@ -426,16 +462,9 @@ class ValidatorController{
     {
         //On autorise uniquement les lettre "m" ou "f"
         if(!($sexe == 'm')||!($sexe == 'f')){
-           $arrayErrors [] = 'Veuillez saisir un sexe valide.';
-           return $arrayErrors; 
+           return 'Veuillez saisir un sexe valide.';
         }
-        //si l'arrayErrors est vide on retourne le sexe, sinon on retourne l'arrayErrors
-        if(empty($arrayErrors)){
-            return $sexe;
-        }  else {
-            return $arrayErrors;
-        }
-        
+        return true;
     }
     /**
      * 
@@ -447,16 +476,66 @@ class ValidatorController{
     {
         //On autorise uniquement les noms de pays valides
         if(!in_array($pays, getCountryList())){
-           $arrayErrors [] = 'Veuillez saisir un pays valide.';
-           return $arrayErrors;
+          return 'Veuillez saisir un pays valide.';
         }
-        //si l'arrayErrors est vide on retourne le sexe, sinon on retourne l'arrayErrors
-        if(empty($arrayErrors)){
-            return $pays;
-        }  else {
-            return $arrayErrors;
-        }
-        
+        return true;
     }
     
+    /**
+     * 
+     * @param type $email
+     * @return type
+     * @throws Exception
+     */
+    public static function validateAdresse($adresse)
+    {
+        //On teste la validité de l'email
+        
+        if (empty($adresse)){
+            return 'Veuillez saisir une adresse.';
+        } 
+        if (strlen($adresse) >250){
+            return 'Votre adresse est trop longue.';
+        }
+        return true;
+    }
+    
+    
+    /**
+     * @desc Validateur pour le formulaire inscription, on lui passe $_POST, on peut donc
+     * récupérer toutes les valeurs ensuite
+     * @param type $form
+     * @return boolean
+     */
+    public static function isFormValid(/*$pseudo,$mdp,$prenom,$email,$sexe,$ville,
+            $cp,$adresse*/$array){
+            echo 'array de isformvalid';
+             var_dump($array);
+             //exit();
+        if((self::validatePseudo($array['pseudo']) == true)
+                && (self::validateMdp($array['mdp']) == true)
+                && (self::validatePrenom($array['prenom']) == true)
+                && (self::validateEmail($array['email']) == true)
+                && (self::validateSexe($array['sexe']) == true)
+                && (self::validateVille($array['ville']) == true)
+                && (self::validateCp($array['cp']) == true)
+                && (self::validateAdresse($array['adresse']) == true)
+                ){
+            return true;
+        }  else {
+            //Si au moins un validateur renvoie false, on crée un array de
+            // toutes les erreurs
+            $arrayErrors = [
+                errorPseudo => self::validatePseudo(),
+                errorMdp => self::validateMdp(),
+                errorNom => self::validateNom(),
+                errorPrenom => self::validatePrenom(),
+                errorEmail => self::validateEmail(),
+                errorSexe => self::validateSexe(),
+                errorVille => self::validateVille(),
+                errorCp => self::validateCp(),
+                errorAdresse => self::validateAdresse(),
+            ];
+        }
+    }
 }

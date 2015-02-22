@@ -31,12 +31,12 @@ class EntityRepository {
         return $this->db;
     }
 //-------
-    private function getTableName()
+    public function getTableName()
     {
-		 // echo get_called_class() . '<br />'; // Dire à la fin : éxecuté ds findAll (fichier actuel), qui est éxecuté ds getAllEmploye (EmployeRepository), qui est éxecuté ds getRepository('Employe') (dans EmployeController), qui est éxécuté dans employeDisplay (dans EmployeController)
+		 echo get_called_class() . '<br />'; // Dire à la fin : éxecuté ds findAll (fichier actuel), qui est éxecuté ds getAllEmploye (EmployeRepository), qui est éxecuté ds getRepository('Employe') (dans EmployeController), qui est éxécuté dans employeDisplay (dans EmployeController)
 		  //return 'employe'; // permet de faire les tests pendant la construction avant de revenir ici plus tard pour le faire dynamiquement.
 		 // echo strtolower(str_replace(array('Backoffice\\','Repository\\', 'Repository'), '', get_called_class()));
-        return strtolower(str_replace(array('repository\\', 'repository'), '', get_called_class())); // je veux retirer Repository\\ et repository de Repository\EmployeRepository pour garder seulement Employe.
+        return strtolower(str_replace(array('repository\\', 'Repository'), '', get_called_class())); // je veux retirer Repository\\ et repository de Repository\EmployeRepository pour garder seulement Employe.
     }
 //-------
     // permet d'aller chercher toutes les informations sur une entité - c'est à ce moment là que PDO est instancié!
@@ -102,10 +102,30 @@ class EntityRepository {
         //TODO : faire la reque^te avec un prepare puis execute
         
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
-        $Myquery = $query->prepare('SELECT * FROM ' . $table 
+        $myQuery = $query->prepare('SELECT * FROM ' . $table 
                //  Caster en int permet d'éviter des erreurs de requete sql.
                 . " WHERE $columnName" . '= ' . (string) $columnName);
-        $Myquery->execute();
+        
+        if(!$myQuery){
+            throw new \Exception('La requête n\'a trouvé aucune donnée.');
+           
+        } else {
+            return $myQuery;
+        }
+        
+       /*
+        try {
+            echo inverse(5) . "\n";
+            echo inverse(0) . "\n";
+        } catch (Exception $e) {
+            echo 'Exception reçue : ',  $e->getMessage(), "\n";
+        }
+        */
+        
+        $myQuery->execute();
+        
+        
+        
         $resultatQuery = $Myquery->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
 
         if(!$resultatQuery) {

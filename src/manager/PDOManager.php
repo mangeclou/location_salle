@@ -21,17 +21,22 @@ class PDOManager {
 //--------
 	public function getPdo()
 	{
-		include __DIR__ . '/../../config/Config.php'; // fichier config.php qui contient nos infos de connexion à la BDD
-		$config = new \Config(); // j'utilise le backslash pour retourner dans l'espace global 
+		require_once __DIR__ . '/../../config/Config.php'; // fichier config.php qui contient nos infos de connexion à la BDD
+		
+        $config = new \Config(); // j'utilise le backslash pour retourner dans l'espace global 
+        
 		$connect = $config->getParametersConnect(); // méthode de la classe Config 
-		try
+
+        try
 		{
 			$this->pdo = new \PDO("mysql:dbname=" . $connect['dbname'] . ";host=" . $connect['host'].";charset=" .$connect['charset'], $connect['user'], $connect['password'], array(\PDO::ATTR_ERRMODE=>\PDO::ERRMODE_EXCEPTION)); // j'utilise le backslash pour aller chercher PDO dans l'espace global 
 		}
+        
 		catch(\PDOException $e)
 		{
 			echo 'Connexion échouée : ' . $e->getMessage();
 		}
+        
 		return $this->pdo;
 	}
 }
