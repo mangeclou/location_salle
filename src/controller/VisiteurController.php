@@ -169,6 +169,9 @@ class VisiteurController extends Controller
         return $this->render($this->layout, $this->reservationDetailTemplate, $this->reservationDetailParameters);  
     }
     
+    /**
+     * Fonction qui crée un membre dans la base
+     */
     public function creerMembre()
     {
         //TODO : tester que le visiteur n'est pas un membre connecté, si c'est le cas faire
@@ -273,14 +276,48 @@ class VisiteurController extends Controller
     
     public function connexion()
     {
+        //si la session est définie, donc si l'utilisateur est déjà connecté
         if(isset($_SESSION)){
             //on redirige vers la page d'accueil pour les membres
             header("location:index.php?controller=MembreController&method=displayIndexMembre");
         }  else {
-            //On teste si le $_POST contient quelque chose, si oui, on teste dans la bdd si
-            //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
+            //On teste si le $_POST contient quelque chose,
+            //Si le formulaire n'a pas été soumis
+            if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
+                (!filter_has_var(INPUT_POST, 'mdp'))){
+                //  si oui, on teste dans la bdd si
+                //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
+                $testMembre = new \repository\EntityRepository();
+                $testMembre = parent::getRepository('Membre');
+                
+                 $selection_membre = executeRequete("SELECT * FROM membre WHERE pseudo='$_POST[pseudo]'"); // on récupère les informations de l'utilisateur
+    
+                if($selection_membre->num_rows != 0) { // si on obtient un résultat 
+               
+                    $membre = $selection_membre->fetch_assoc(); 
+                    if($_POST['mdp'] == $membre['mdp']){
+        
+                        // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
+                        foreach($membre as $indice=>$valeur){
+                            if($indice != 'mdp'){
+                               $_SESSION['utilisateur'][$indice] = $valeur; // nous créons l'indice utilisateur (tableau aray multidimensionnel) qui contiendra toutes les informations de l'utilisateur sauf le mdp
+                            }
+                        }
+                        header("location:profil.php");// les pseudo et mdp étant ok on redirige sur la page profil 
+                        // debug($_SESSION);
+                        } else {
+                            $msg .= "<div class='bg-danger' height='30' style='padding: 10px'><p>Erreur de mdp !</p></div>";
+                        }
+                        //$msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Pseudo Ok !</p></div>";
+                        } else {
+                            $msg .= "<div class='bg-danger' height='30' style='padding: 10px'><p>Erreur de Pseudo !</p></div>";
+                    }
+                }//END if $_POST
+            //Si non, on
         }
-    }
+    }//END function connexion
+}//===========================
+//END Class VisiteurController
     
     
-}//END VisiteurController
+
