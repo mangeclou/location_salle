@@ -22,8 +22,9 @@ class MembreRepository extends EntityRepository {
     
     public function findMembreByPseudo($pseudo)
     {
-        $table = "Membre";
-        return $this->findByTableAndColumnName($table, $pseudo);
+        $table = "membre";
+        $column = "pseudo";
+        return $this->findByTableAndColumnName($table, $column, $pseudo);
     }
 
     public function registerMembre()
@@ -31,4 +32,15 @@ class MembreRepository extends EntityRepository {
         // on fait appel à la méthode register de EntityRepository
         return $this->register();
     }
+    
+    /**
+     * 
+     * @param type $mdp
+     * @return type
+     */
+    public static function hashMdp($mdp){
+        $hashedMdp = trim(filter_has_var(password_hash($mdp), PASSWORD_DEFAULT));
+        return $hashedMdp;
+    }
+       
 }

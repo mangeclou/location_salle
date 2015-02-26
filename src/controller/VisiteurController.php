@@ -201,20 +201,40 @@ class VisiteurController extends Controller
             //return $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
         } else {
             
-		//filtrer les données	
+		//filtrer les données
+                //TODO : externaliser le processus dans une classe FilterController
+            $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
+            $mdp= \repository\MembreRepository::hashMdp(trim(filter_input
+                    (INPUT_POST, 'mdp', FILTER_SANITIZE_STRING)));
+            $nom = trim(filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING));
+            $prenom = trim(filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING));
+            $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
+            $ville = trim(filter_input(INPUT_POST, 'ville', FILTER_SANITIZE_STRING));
+            $cp = trim(filter_input(INPUT_POST, 'cp', FILTER_SANITIZE_STRING));
+            $adresse = trim(filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING));
             //$pseudo = trim(htmlentities($_POST['pseudo'], ENT_QUOTES));
-            //array_filter($_POST, 'trim_value');  
-           
+            //array_filter($_POST, 'trim_value');
+            $arrayFilteredValues = [
+                "pseudo"=> $pseudo,
+                "mdp"=> $mdp,
+                "nom"=> $nom,
+                "prenom"=> $prenom,
+                "email"=> $email,
+                "ville"=> $ville,
+                "cp"=> $cp,
+                "adresse"=> $adresse
+            ];
+            
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
             $obj = new \repository\MembreRepository();
-            $obj ->findMembreByPseudo($_POST['pseudo']);
+            $obj ->findMembreByPseudo($pseudo);
             //Si la méthode findMembreByPseudo a retourné true (le pseudo existe déja)
             if ($obj === true){
                 $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
             }else{
             //TODO : faire un filterValidator qui filtre le $_Post et qui
             //retourne un array de données qui seront ensuite validées par isFormValid
-            if (!ValidatorController::isFormValid($_POST)){
+            if (!ValidatorController::isFormValid($arrayFilteredValues)){
                 
             
             
@@ -230,15 +250,19 @@ class VisiteurController extends Controller
                 'arrayErrors' => $arrayErrors
                 )); 
             } else {
+                //Si le formulaire passe la validation
 
-                      echo 'else';  
+                      //echo 'else';  
                 //On appelle la méthdoe getRepository avec comme argument le nom de la table (Membre)
                 $futurMembre = new \repository\EntityRepository();
                 $futurMembre = parent::getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
 			//on appelle la méthode registerMembre de MembreRepository
                         //cette méthode appelle la méthode register de EntityRepository
                         //Résultat : insertion du nouveau membre dans la BDD
-                        $idMembre = $futurMembre->registerMembre();
+                
+              
+                
+                $idMembre = $futurMembre->registerMembre();
                         
                                                 
 			//$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
@@ -287,15 +311,24 @@ class VisiteurController extends Controller
                 (!filter_has_var(INPUT_POST, 'mdp'))){
                 //  si oui, on teste dans la bdd si
                 //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
+                
+                }//END if !$_POST
                 $testMembre = new \repository\EntityRepository();
                 $testMembre = parent::getRepository('Membre');
                 
-                 $selection_membre = executeRequete("SELECT * FROM membre WHERE pseudo='$_POST[pseudo]'"); // on récupère les informations de l'utilisateur
+                $pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
+                $hashedMdp = trim(filter_has_var(password_hash(INPUT_POST, 'pseudo'), PASSWORD_DEFAULT));
+                
+                $testMembre->findMembreByPseudo($pseudo); // on récupère les informations de l'utilisateur
+                
+                //on appelle la méthode findMembreMdp
+                $testMembre->findMembreMdp($table, $pseudo, $valeur);
     
-                if($selection_membre->num_rows != 0) { // si on obtient un résultat 
+                if($testMembre->num_rows != 0) { // si on obtient un résultat 
                
                     $membre = $selection_membre->fetch_assoc(); 
-                    if($_POST['mdp'] == $membre['mdp']){
+                    //cf PHP Cookbook p552
+                    if(password_verify($password, $hash)) {
         
                         // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
                         foreach($membre as $indice=>$valeur){
@@ -312,7 +345,6 @@ class VisiteurController extends Controller
                         } else {
                             $msg .= "<div class='bg-danger' height='30' style='padding: 10px'><p>Erreur de Pseudo !</p></div>";
                     }
-                }//END if $_POST
             //Si non, on
         }
     }//END function connexion

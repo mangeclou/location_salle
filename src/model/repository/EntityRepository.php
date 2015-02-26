@@ -93,7 +93,9 @@ class EntityRepository {
      * @param type $id
      * @return boolean
      */
-    public function findByTableAndColumnName($table,$columnName)
+    
+    //TODO : à tester
+    public function findByTableAndColumnName($table,$column,$valeur)
     {
         $query = $this->getDb();
         echo 'query';
@@ -103,9 +105,8 @@ class EntityRepository {
         
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
         $myQuery = $query->prepare('SELECT * FROM ' . $table 
-               //  Caster en int permet d'éviter des erreurs de requete sql.
-                . " WHERE $columnName" . '= ' . (string) $columnName);
-        
+            . " WHERE $column" . '= ' . (string) $valeur);
+        $myQuery->execute();
         if(!$myQuery){
             throw new \Exception('La requête n\'a trouvé aucune donnée.');
            
