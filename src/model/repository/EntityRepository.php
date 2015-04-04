@@ -97,24 +97,26 @@ class EntityRepository {
     //TODO : à tester
     public function findByTableAndColumnName($table,$column,$valeur)
     {
-        $query = $this->getDb();
-        echo 'query';
-        print_r($query);
-        
+      $query = $this->getDb();
+      echo 'query';
+      print_r($query);
+      $valeur = (string)$valeur;
+      echo $column;
         //TODO : faire la reque^te avec un prepare puis execute
         
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
-        $myQuery = $query->prepare('SELECT * FROM ' . $table 
-            . " WHERE $column" . '= ' . (string) $valeur);
+        $myQuery = $query->prepare("SELECT * 
+                                    FROM `$table`
+                                    WHERE '$column' = '$valeur'");
+        print_r($myQuery);
         $myQuery->execute();
         if(!$myQuery){
-            throw new \Exception('La requête n\'a trouvé aucune donnée.');
+            return false;
            
         } else {
-            return $myQuery;
+          return $myQuery;   
         }
-        
-       /*
+        /*
         try {
             echo inverse(5) . "\n";
             echo inverse(0) . "\n";
@@ -144,15 +146,34 @@ class EntityRepository {
      * membre à partir des données du $_POST
      * @return type
      */
-    public function register()
+    public function register($values)
     {
         //TODO : faire un prepare puis execute pour une meilleur sécurité
         //***************************************************************
         // (échappe automatiquement toutes les valeurs)
         // array_keys me permet de parcourrir les indices plutot que les valeur pour annoncer les champs.
-        $query = $this->getDb()->query('INSERT INTO '. $this->getTableName() 
+      $table = $this->getTableName();
+      $values = array_map(
+        function($value) {
+          return "'".$value."'"; 
+        },
+        $values);
+
+      $valuesToInsert = implode(",", $values);
+      $columns = implode(",", array_keys($values));
+        
+      $query = $this->getDb()->prepare("INSERT INTO $table ($columns)
+                                          VALUES ($valuesToInsert);"
+                                      );
+      
+      echo "requete";
+      print_r($query);
+      $query->execute();
+      return $this->getDb()->lastInsertId(); // dernier identifiant généré"
+      
+        /*$query = $this->getDb()->query('INSERT INTO '. $this->getTableName() 
                 . '(' . implode(',',array_keys($_POST)) . ') '
-                . 'VALUES (' . "'" . implode("','", $_POST) . "'" . ')'); 
-        return $this->getDb()->lastInsertId(); // dernier identifiant généré
+                . 'VALUES (' . "'" . implode("','", $_POST) . "'" . ')'); */
+        
     }
 }

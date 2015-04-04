@@ -16,6 +16,7 @@ require 'Controller.php';
 require "/../model/repository/MembreRepository.php";
     //permet d'utiliser les méthodes du trait ValidatorController
 require 'ValidatorController.php';
+require 'FilterController.php';
 
 
 use controller\Controller;
@@ -203,7 +204,19 @@ class VisiteurController extends Controller
             
 		//filtrer les données
                 //TODO : externaliser le processus dans une classe FilterController
-            $pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
+                       
+            $pseudo  = \controller\FilterController::filterPostString('pseudo');
+            $mdp     = \repository\MembreRepository::hashMdp(FilterController::filterPostString('mdp'));
+            $nom     = \controller\FilterController::filterPostString('nom');
+            $prenom  = \controller\FilterController::filterPostString('prenom');
+            $email   = \controller\FilterController::filterPostEmail('email');
+            $sexe    = \controller\FilterController::filterPostString('sexe');
+            $ville   = \controller\FilterController::filterPostString('ville');
+            $cp      = \controller\FilterController::filterPostString('cp');
+            $adresse = \controller\FilterController::filterPostString('adresse');
+            
+            
+            /*$pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
             $mdp= \repository\MembreRepository::hashMdp(trim(filter_input
                     (INPUT_POST, 'mdp', FILTER_SANITIZE_STRING)));
             $nom = trim(filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING));
@@ -211,18 +224,19 @@ class VisiteurController extends Controller
             $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
             $ville = trim(filter_input(INPUT_POST, 'ville', FILTER_SANITIZE_STRING));
             $cp = trim(filter_input(INPUT_POST, 'cp', FILTER_SANITIZE_STRING));
-            $adresse = trim(filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING));
+            $adresse = trim(filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING));*/
             //$pseudo = trim(htmlentities($_POST['pseudo'], ENT_QUOTES));
             //array_filter($_POST, 'trim_value');
-            $arrayFilteredValues = [
-                "pseudo"=> $pseudo,
-                "mdp"=> $mdp,
-                "nom"=> $nom,
-                "prenom"=> $prenom,
-                "email"=> $email,
-                "ville"=> $ville,
-                "cp"=> $cp,
-                "adresse"=> $adresse
+            $filteredMember = [
+                "pseudo"  => $pseudo,
+                "mdp"     => $mdp,
+                "nom"     => $nom,
+                "prenom"  => $prenom,
+                "email"   => $email,
+                "sexe"    => $sexe,
+                "ville"   => $ville,
+                "cp"      => $cp,
+                "adresse" => $adresse,
             ];
             
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
@@ -231,54 +245,39 @@ class VisiteurController extends Controller
             //Si la méthode findMembreByPseudo a retourné true (le pseudo existe déja)
             if ($obj === true){
                 $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
-            }else{
+            } else {
             //TODO : faire un filterValidator qui filtre le $_Post et qui
             //retourne un array de données qui seront ensuite validées par isFormValid
-            if (!ValidatorController::isFormValid($arrayFilteredValues)){
-                
-            
-            
-                   
-            
+              if (!ValidatorController::isFormValid($filteredMember)){
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
-           
                 require __DIR__ . '/../views/viewParameters.php';
                 $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
                 $this->render($this->layout, $this->inscriptionTemplate, array(
-                'arrayErrors' => $arrayErrors
-                )); 
+                  'arrayErrors' => $arrayErrors,
+                )
+              ); 
             } else {
-                //Si le formulaire passe la validation
-
-                      //echo 'else';  
-                //On appelle la méthdoe getRepository avec comme argument le nom de la table (Membre)
-                $futurMembre = new \repository\EntityRepository();
-                $futurMembre = parent::getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
-			//on appelle la méthode registerMembre de MembreRepository
-                        //cette méthode appelle la méthode register de EntityRepository
-                        //Résultat : insertion du nouveau membre dans la BDD
+              //Si le formulaire passe la validation
+              //echo 'else';  
+              //On appelle la méthdoe getRepository avec comme argument le nom de la table (Membre)
+              $futurMembre = new \repository\EntityRepository();
+              $futurMembre = parent::getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
+			  //on appelle la méthode registerMembre de MembreRepository
+              //cette méthode appelle la méthode register de EntityRepository
+              //Résultat : insertion du nouveau membre dans la BDD
+              $idMembre = $futurMembre->registerMembre($filteredMember);
                 
-              
-                
-                $idMembre = $futurMembre->registerMembre();
-                        
-                                                
 			//$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
 			// var_dump($lemploye);
-			
-			
-                        session_start();
-                        $_SESSION['pseudo'] = $_POST['pseudo'];                     
-                        $_SESSION['email'] = $_POST['email'];
-                        
-                        header("location:index.php?controller=MembreController&method=displayIndexMembre");
-                        
-			
+			  session_start();
+              $_SESSION['pseudo'] = $pseudo;                     
+              $_SESSION['email'] = $email;
+              
+              header("location:index.php?controller=MembreController&method=displayIndexMembre");
             }
-            //
-            //récupérer avec un $_POST les données du formulaire d'inscription
+        //récupérer avec un $_POST les données du formulaire d'inscription
         }//END if $arrayErrors est vide (donc aucune erreur)
 		// render : permet de rendre un affichage
         //connexion à la bdd

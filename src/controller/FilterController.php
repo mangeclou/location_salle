@@ -17,41 +17,42 @@ abstract class FilterController extends controller{
     
     //Fonctions de filtre
     //========================
-    public function trimValue(&$value)
+    public static function trimValue(&$value)
     {
         //on enlève les espace en début et fin de la valeur
         $value = trim($value);
     }
     
-    public function filterPostString($string)
+    public static function filterPostString($string)
     {
-        $filteredString = filter_input(INPUT_POST, $string, FILTER_SANITIZE_STRING);
+        $filteredString = trim(filter_input(INPUT_POST, $string, FILTER_SANITIZE_STRING));
         return $filteredString;
     }
     
-    public function filterPostInt($int)
+    public static function filterPostInt($int)
     {
-        $filteredInt = filter_input(INPUT_POST, $int, FILTER_SANITIZE_NUMBER_INT);
+        $filteredInt = trim(filter_input(INPUT_POST, trim($int), FILTER_SANITIZE_NUMBER_INT));
         return $filteredInt;
     }
     
-    public function filterPostEmail($email)
+    public static function filterPostEmail($email)
     {
-        $filteredEmail = filter_input(INPUT_POST, $email, FILTER_SANITIZE_EMAIL);
+        $filteredEmail = trim(filter_input(INPUT_POST, trim($email), FILTER_SANITIZE_EMAIL));
         return $filteredEmail;
     }
-    
-    
-    public function filterPostData()
+        
+    public static function filterPostData()
     {
         array_filter($_POST, self::trimValue());    // the data in $_POST is trimmed
-
-$postfilter =    // set up the filters to be used with the trimmed post array
-    array(
-            'user_tasks'                        =>    array('filter' => FILTER_SANITIZE_STRING, 'flags' => !FILTER_FLAG_STRIP_LOW),    // removes tags. formatting code is encoded -- add nl2br() when displaying
-            'username'                            =>    array('filter' => FILTER_SANITIZE_ENCODED, 'flags' => FILTER_FLAG_STRIP_LOW),    // we are using this in the url
-            'mod_title'                            =>    array('filter' => FILTER_SANITIZE_ENCODED, 'flags' => FILTER_FLAG_STRIP_LOW),    // we are using this in the url
-        );
+         // set up the filters to be used with the trimmed post array
+        $postfilter = array(
+            'user_tasks'  =>    array('filter' => FILTER_SANITIZE_STRING,
+                'flags' => !FILTER_FLAG_STRIP_LOW),    // removes tags. formatting code is encoded -- add nl2br() when displaying
+            'username'    =>    array('filter' => FILTER_SANITIZE_ENCODED,
+                'flags' => FILTER_FLAG_STRIP_LOW),    // we are using this in the url
+            'mod_title'   =>    array('filter' => FILTER_SANITIZE_ENCODED,
+                'flags' => FILTER_FLAG_STRIP_LOW),    // we are using this in the url
+            );
     }
     
     
