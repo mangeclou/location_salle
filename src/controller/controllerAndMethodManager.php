@@ -43,7 +43,7 @@ class controllerAndMethodManager{
                         'visiteur'=>[
                             'creerMembre',
                             'displayCgv',
-                            'displayConnexion',
+                            'connexion',
                             'displayIndex',
                             'displayInscription',
                             'displayMdpperdu',

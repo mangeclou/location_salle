@@ -92,12 +92,12 @@ class VisiteurController extends Controller
         return $this->render($this->layout, $this->cgvTemplate, $this->cgvParameters);  
     }
           
-    public function displayConnexion()
+/*    public function displayConnexion()
     {
         require __DIR__ . '/../views/viewParameters.php';
         $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
         return $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
-    }
+    }*/
     
     public function displayContact()
     {
@@ -300,53 +300,63 @@ class VisiteurController extends Controller
     public function connexion()
     {
         //si la session est définie, donc si l'utilisateur est déjà connecté
-        if(isset($_SESSION)){
-            //on redirige vers la page d'accueil pour les membres
-            header("location:index.php?controller=MembreController&method=displayIndexMembre");
-        }  else {
+      if(isset($_SESSION)){
+        //on redirige vers la page d'accueil pour les membres
+        header("location:index.php?controller=MembreController&method=displayIndexMembre");
+      } else {
             //On teste si le $_POST contient quelque chose,
             //Si le formulaire n'a pas été soumis
-            if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
-                (!filter_has_var(INPUT_POST, 'mdp'))){
+        if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
+            (!filter_has_var(INPUT_POST, 'mdp'))){
                 //  si oui, on teste dans la bdd si
                 //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
-                
-                }//END if !$_POST
-                $testMembre = new \repository\EntityRepository();
-                $testMembre = parent::getRepository('Membre');
-                
-                $pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
-                $hashedMdp = trim(filter_has_var(password_hash(INPUT_POST, 'pseudo'), PASSWORD_DEFAULT));
-                
-                $testMembre->findMembreByPseudo($pseudo); // on récupère les informations de l'utilisateur
-                
-                //on appelle la méthode findMembreMdp
-                $testMembre->findMembreMdp($table, $pseudo, $valeur);
-    
-                if($testMembre->num_rows != 0) { // si on obtient un résultat 
-               
-                    $membre = $selection_membre->fetch_assoc(); 
-                    //cf PHP Cookbook p552
-                    if(password_verify($password, $hash)) {
-        
-                        // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
-                        foreach($membre as $indice=>$valeur){
-                            if($indice != 'mdp'){
-                               $_SESSION['utilisateur'][$indice] = $valeur; // nous créons l'indice utilisateur (tableau aray multidimensionnel) qui contiendra toutes les informations de l'utilisateur sauf le mdp
-                            }
-                        }
-                        header("location:profil.php");// les pseudo et mdp étant ok on redirige sur la page profil 
+                require __DIR__ . '/../views/viewParameters.php';
+                $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
+                $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+        } else {
+          //Hash du mdp du post
+          $mdp     = \repository\MembreRepository::hashMdp(FilterController::filterPostString('mdp'));
+          $pseudo  = \controller\FilterController::filterPostString('pseudo');
+          //Comparaison entre le mdp fourni et le mdp en base
+          $testMembre = new \repository\EntityRepository();
+          $testMembre = parent::getRepository('Membre');
+          
+          
+          //$pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
+          //$hashedMdp = trim(filter_has_var(password_hash(INPUT_POST, 'pseudo'), PASSWORD_DEFAULT));
+          //on récupère le pseudo correspondant au pseudo entré en post
+          //$testMembre->findMembreByPseudo($pseudo); 
+          
+          //on appelle la méthode findMembreMdp
+          $testMembre->findMembrePseudoAndMdp($pseudo, $mdp);
+          if($testMembre->num_rows != 0) { // si on obtient un résultat 
+            $membre = $selection_membre->fetch_assoc(); 
+            //cf PHP Cookbook p552
+            if(password_verify($password, $hash)) {
+              
+                      // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
+              foreach($membre as $indice=>$valeur){
+                if($indice != 'mdp'){
+                  $_SESSION['utilisateur'][$indice] = $valeur; // nous créons l'indice utilisateur (tableau aray multidimensionnel) qui contiendra toutes les informations de l'utilisateur sauf le mdp
+                }
+              }
+              header("location:profil.php");// les pseudo et mdp étant ok on redirige sur la page profil 
                         // debug($_SESSION);
-                        } else {
-                            $msg .= "<div class='bg-danger' height='30' style='padding: 10px'><p>Erreur de mdp !</p></div>";
-                        }
+            } else {
+              $msg .= "<div class='bg-danger' height='30' style='padding: 10px'>
+              <p>Erreur de mdp !</p></div>";
+            }
                         //$msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Pseudo Ok !</p></div>";
-                        } else {
-                            $msg .= "<div class='bg-danger' height='30' style='padding: 10px'><p>Erreur de Pseudo !</p></div>";
-                    }
-            //Si non, on
+          } else {
+            $msg .= "<div class='bg-danger' height='30' style='padding: 10px'>
+              <p>Erreur de Pseudo !</p></div>";
+          }
         }
-    }//END function connexion
+         
+          //END if !$_POST
+            //Si non, on
+      }
+  }//END function connexion
 }//===========================
 //END Class VisiteurController
     

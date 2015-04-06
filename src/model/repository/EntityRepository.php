@@ -106,8 +106,8 @@ class EntityRepository {
         
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
         $myQuery = $query->prepare("SELECT * 
-                                    FROM `$table`
-                                    WHERE '$column' = '$valeur'");
+                                    FROM $table
+                                    WHERE $column = $valeur;");
         print_r($myQuery);
         $myQuery->execute();
         if(!$myQuery){

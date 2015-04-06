@@ -20,6 +20,19 @@ class MembreRepository extends EntityRepository {
         return $this->find($id); // on va voir la méthode findAll() de EntityRepository
     }
     
+    public function findMembrePseudoAndMdp($pseudo, $hashed_mdp)
+    {
+      $query = $this->getDb();
+      //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $myQuery = $query->prepare("SELECT id
+                                    FROM membre 
+                                    WHERE pseudo = :pseudo
+                                    AND mdp = :mdp");
+        $myQuery->execute(array(
+          'pseudo' => $pseudo,
+          'mdp' => $hashed_mdp));
+    }
+  
     public function findMembreByPseudo($pseudo)
     {
       $table = 'membre';
