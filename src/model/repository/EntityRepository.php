@@ -12,6 +12,9 @@ namespace repository;
 
 require_once '/../../manager/PDOManager.php';
 use Manager\PDOManager;
+use PDO;
+require_once '/../entity/Membre.php';
+use entity\Membre;
 /**
  * Description of EntityRepository
  *
@@ -105,17 +108,23 @@ class EntityRepository {
         //TODO : faire la reque^te avec un prepare puis execute
         
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
-        $myQuery = $query->prepare("SELECT * 
+      $myQuery = $query->prepare("SELECT * 
                                     FROM $table
-                                    WHERE $column = $valeur;");
-        print_r($myQuery);
-        $myQuery->execute();
-        if(!$myQuery){
-            return false;
-           
-        } else {
-          return $myQuery;   
-        }
+                                    WHERE $column = :valeur;");
+      //$myQuery->bindParam(':table', $table, PDO::PARAM_STR);
+      //$myQuery->bindParam(':column', $column, PDO::PARAM_STR);
+      $myQuery->bindParam(':valeur', $valeur, PDO::PARAM_STR);
+      print_r($myQuery);
+
+      $myQuery->execute();
+      $membreTst = new Membre();
+      
+      $resultatQuery = $myQuery->fetchAll(\PDO::FETCH_CLASS, 'entity\\' . ucfirst($this->getTableName()));
+      if(!$resultatQuery){
+        return false;
+      } else {
+        return $resultatQuery;   
+      }
         /*
         try {
             echo inverse(5) . "\n";
@@ -125,19 +134,7 @@ class EntityRepository {
         }
         */
         
-        $myQuery->execute();
-        
-        
-        
-        $resultatQuery = $Myquery->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
-
-        if(!$resultatQuery) {
-            return false;
-        }
-        else {
-            // return $q->fetch(PDO::FETCH_ASSOC);
-            return $resultatQuery;
-        }
+   
     }
     
     

@@ -318,19 +318,21 @@ class VisiteurController extends Controller
           $mdp     = \repository\MembreRepository::hashMdp(FilterController::filterPostString('mdp'));
           $pseudo  = \controller\FilterController::filterPostString('pseudo');
           //Comparaison entre le mdp fourni et le mdp en base
-          $testMembre = new \repository\EntityRepository();
-          $testMembre = parent::getRepository('Membre');
+          $testMembre = new \repository\MembreRepository();
+          //$testMembre = parent::getRepository('Membre');
           
-          
+          print_r(get_class($testMembre));
           //$pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
           //$hashedMdp = trim(filter_has_var(password_hash(INPUT_POST, 'pseudo'), PASSWORD_DEFAULT));
           //on récupère le pseudo correspondant au pseudo entré en post
           //$testMembre->findMembreByPseudo($pseudo); 
           
           //on appelle la méthode findMembreMdp
-          $testMembre->findMembrePseudoAndMdp($pseudo, $mdp);
-          if($testMembre->num_rows != 0) { // si on obtient un résultat 
-            $membre = $selection_membre->fetch_assoc(); 
+          
+          $newMembre = $testMembre->findMembrePseudoAndMdp($pseudo, $mdp);
+          var_dump($newMembre);
+          if ($newMembre->rowCount()) { // si on obtient un résultat 
+            $membre = $newMembre->fetch(PDO::FETCH_ASSOC);
             //cf PHP Cookbook p552
             if(password_verify($password, $hash)) {
               

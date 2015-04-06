@@ -4,9 +4,9 @@
 //	Ce fichier vendor/Repository/EmployeRepository.php donne une erreur lors d'un test sur son url mais c'est normal car il compose l'application et ce n'est donc pas un point d'entrée.
 
 namespace repository;
-
 require_once 'EntityRepository.php';
-USE repository\EntityRepository; // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
+use PDO;
+use repository\EntityRepository; // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
 
 class MembreRepository extends EntityRepository {
 
@@ -24,13 +24,16 @@ class MembreRepository extends EntityRepository {
     {
       $query = $this->getDb();
       //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
-        $myQuery = $query->prepare("SELECT id
+
+      $myQuery = $query->prepare("SELECT *
                                     FROM membre 
                                     WHERE pseudo = :pseudo
                                     AND mdp = :mdp");
-        $myQuery->execute(array(
-          'pseudo' => $pseudo,
-          'mdp' => $hashed_mdp));
+      $myQuery->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+      $myQuery->bindParam(':mdp', $hashed_mdp, PDO::PARAM_STR);
+   
+      $myQuery->execute();
+      return $myQuery->fetchAll();
     }
   
     public function findMembreByPseudo($pseudo)
