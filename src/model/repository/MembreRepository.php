@@ -19,21 +19,39 @@ class MembreRepository extends EntityRepository {
     {
         return $this->find($id); // on va voir la méthode findAll() de EntityRepository
     }
-    
-    public function findMembrePseudoAndMdp($pseudo, $hashed_mdp)
+    /**
+     * [[Description]]
+     * @param  [[Type]] $pseudo     [[Description]]
+     * @param  [[Type]] $hashed_mdp [[Description]]
+     * @return boolean  [[Description]]
+     */
+    public function findMembrePseudoAndMdp($pseudo/*, $hashed_mdp*/)
     {
-      $query = $this->getDb();
+      $db = $this->getDb();
       //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
 
-      $myQuery = $query->prepare("SELECT *
-                                    FROM membre 
-                                    WHERE pseudo = :pseudo
-                                    AND mdp = :mdp");
-      $myQuery->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-      $myQuery->bindParam(':mdp', $hashed_mdp, PDO::PARAM_STR);
+      $query = $db->prepare("SELECT pseudo, mdp
+                                  FROM membre 
+                                  WHERE pseudo = :pseudo;");
+                                  //AND mdp = :mdp;");
+      $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+      //$myQuery->bindParam(':mdp', $hashed_mdp, PDO::PARAM_STR);
    
-      $myQuery->execute();
-      return $myQuery->fetchAll();
+      $query->execute();
+      echo 'data';
+      //print_r($data);
+      /*if ($data) {*/
+      
+       $data = $query->fetch(PDO::FETCH_ASSOC);
+        if (count($data) < 1) {
+           return false;
+        } else {
+          return $data;
+        }
+   /*   } else {
+       // return false;
+      }*/
+      
     }
   
     public function findMembreByPseudo($pseudo)

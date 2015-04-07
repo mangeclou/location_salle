@@ -297,6 +297,9 @@ class VisiteurController extends Controller
         }//END if !isset $_SESSION
     }//END creerMembre()
     
+    /**
+     * Connexion function for members of the site
+     */
     public function connexion()
     {
         //si la session est définie, donc si l'utilisateur est déjà connecté
@@ -314,12 +317,13 @@ class VisiteurController extends Controller
                 $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
                 $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
         } else {
-          //Hash du mdp du post
-          $mdp     = \repository\MembreRepository::hashMdp(FilterController::filterPostString('mdp'));
+          //mdp du post
+          $mdpForm     = FilterController::filterPostString('mdp');
           $pseudo  = \controller\FilterController::filterPostString('pseudo');
           //Comparaison entre le mdp fourni et le mdp en base
           $testMembre = new \repository\MembreRepository();
           //$testMembre = parent::getRepository('Membre');
+          
           
           print_r(get_class($testMembre));
           //$pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
@@ -329,38 +333,35 @@ class VisiteurController extends Controller
           
           //on appelle la méthode findMembreMdp
           
-          $newMembre = $testMembre->findMembrePseudoAndMdp($pseudo, $mdp);
+          $newMembre = $testMembre->findMembrePseudoAndMdp($pseudo);
+          echo 'newMembre';
           var_dump($newMembre);
-          if ($newMembre->rowCount()) { // si on obtient un résultat 
-            $membre = $newMembre->fetch(PDO::FETCH_ASSOC);
+          if ($newMembre) { // si on obtient un résultat 
+            //$membre = $newMembre->fetch(PDO::FETCH_ASSOC);
             //cf PHP Cookbook p552
-            if(password_verify($password, $hash)) {
+            echo $newMembre['mdp'];
+            echo $mdpForm;
+            $hash = '$2y$10$fmkazv66zFEvpyARwlbRuugRI';
+            //le password_verify retourne faux :/
+            if (password_verify($mdpForm, $hash /*$newMembre['mdp']*/)) {
               
                       // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
-              foreach($membre as $indice=>$valeur){
-                if($indice != 'mdp'){
-                  $_SESSION['utilisateur'][$indice] = $valeur; // nous créons l'indice utilisateur (tableau aray multidimensionnel) qui contiendra toutes les informations de l'utilisateur sauf le mdp
-                }
-              }
-              header("location:profil.php");// les pseudo et mdp étant ok on redirige sur la page profil 
-                        // debug($_SESSION);
+              //foreach ($membre as $indice=>$valeur) {
+              $_SESSION["member"]["logged"] = true;
+              $_SESSION["member"]["mail"]   = $newMembre['email'];
+              $_SESSION["member"]["pseudo"] = $newMembre['pseudo'];
+              header("location:index.php?controller=MembreController&method=displayIndexMembre");
             } else {
-              $msg .= "<div class='bg-danger' height='30' style='padding: 10px'>
-              <p>Erreur de mdp !</p></div>";
+              echo ("Mauvais mot de passe ou pseudo 1");
             }
-                        //$msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Pseudo Ok !</p></div>";
-          } else {
-            $msg .= "<div class='bg-danger' height='30' style='padding: 10px'>
-              <p>Erreur de Pseudo !</p></div>";
-          }
-        }
          
           //END if !$_POST
             //Si non, on
-      }
-  }//END function connexion
-}//===========================
-//END Class VisiteurController
-    
-    
+          } else {
+            echo ("Mauvais mot de passe ou pseudo 2");      
+          }
+        }
+      }//===========================
 
+    }//END function connexion
+}//END Class VisiteurController
