@@ -340,17 +340,20 @@ class VisiteurController extends Controller
             //$membre = $newMembre->fetch(PDO::FETCH_ASSOC);
             //cf PHP Cookbook p552
             echo $newMembre['mdp'];
-            echo $mdpForm;
-            $hash = '$2y$10$fmkazv66zFEvpyARwlbRuugRI';
+            echo 'mdp form '.$mdpForm;
+            //echo 
+            $hash = '$2y$10$UH8pecCMUNEYAdiQ85y8C.1EuGYyU0J/PAlZsxXCORFmdA7g7SPSW';
             //le password_verify retourne faux :/
             if (password_verify($mdpForm, $hash /*$newMembre['mdp']*/)) {
               
                       // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
               //foreach ($membre as $indice=>$valeur) {
-              $_SESSION["member"]["logged"] = true;
-              $_SESSION["member"]["mail"]   = $newMembre['email'];
-              $_SESSION["member"]["pseudo"] = $newMembre['pseudo'];
+              session_start();
+              $_SESSION["logged"] = true;
+              $_SESSION["mail"]   = $newMembre['email'];
+              $_SESSION["pseudo"] = $newMembre['pseudo'];
               header("location:index.php?controller=MembreController&method=displayIndexMembre");
+              echo 'bravo';
             } else {
               echo ("Mauvais mot de passe ou pseudo 1");
             }
