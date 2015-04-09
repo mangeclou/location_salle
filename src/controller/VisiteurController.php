@@ -341,12 +341,13 @@ class VisiteurController extends Controller
             //cf PHP Cookbook p552
             echo $newMembre['mdp'];
             echo $mdpForm;
-            $hash = '$2y$10$fmkazv66zFEvpyARwlbRuugRI';
+            //$hash = '$2y$10$fmkazv66zFEvpyARwlbRuugRI';
             //le password_verify retourne faux :/
-            if (password_verify($mdpForm, $hash /*$newMembre['mdp']*/)) {
+            if (password_verify($mdpForm, $newMembre['mdp'])) {
               
                       // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
               //foreach ($membre as $indice=>$valeur) {
+              session_start();
               $_SESSION["member"]["logged"] = true;
               $_SESSION["member"]["mail"]   = $newMembre['email'];
               $_SESSION["member"]["pseudo"] = $newMembre['pseudo'];
