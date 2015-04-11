@@ -68,12 +68,12 @@ class MembreController extends MainController
      * A l'instantiation de la classe on vérifie si la session existe, si elle
      * n'existe pas on redirige vers l'accueil pour les visiteurs
      */
-  
-    /*public function __construct() {
+    public function __construct() {
        if(!isset($_SESSION)){
            header('location:index.php?controller=VisiteurController&method=displayIndex');
        }
-    }*/
+    
+    }/
     
     
     
@@ -104,20 +104,21 @@ class MembreController extends MainController
        //on utilise la méthode render du parent Controller pour afficher la page
        return $this->render($this->layout, $this->contactTemplate, $this->contactParameters);  
     }
+   
     /**
      * [[Description]]
      * @return [[Type]] [[Description]]
      */
     public function displayIndexMembre() 
     {
-        session_start();
-      //on require le fichier de config de la view
+
+        //session_start();
+        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
         //on va chercher les paramètres dans l'array viewpageParameters
         $this->indexMembreParameters = $viewPageParameters['membre']['index_membre'];
         //on utilise la méthode render du parent Controller pour afficher la page
-      echo $_SESSION['email'];
-      
+      //echo $_SESSION['email'];
         return $this->render($this->layout, $this->indexMembreTemplate, $this->indexMembreParameters);  
     }
     
