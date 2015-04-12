@@ -1,0 +1,307 @@
+* [33mcommit 22487fbf2be5a3e95ba6dbe708fc646ba6d592f2[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Wed Apr 8 23:22:24 2015 +0200
+[31m|[m 
+[31m|[m     Correction on connexion
+[31m|[m  
+* [33mcommit 38de8893ee8610b95910cab5ad20215ed29deef9[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Tue Apr 7 23:54:32 2015 +0200
+[31m|[m 
+[31m|[m     Correction on connexion wip
+[31m|[m  
+* [33mcommit 14cfa71011424556d6665af286361d7060983a30[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Mon Apr 6 23:14:34 2015 +0200
+[31m|[m 
+[31m|[m     Modifications on register and connexion, wip
+[31m|[m  
+* [33mcommit 2efd29e0d2643a60b8559d2465570219f01015c8[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Mon Apr 6 18:06:53 2015 +0200
+[31m|[m 
+[31m|[m     Start of connexion, membrerepository method to be corrected and controller edited
+[31m|[m  
+* [33mcommit 39431acaf4bff58dd203437e758e725cdcf2b776[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Sun Apr 5 00:08:51 2015 +0200
+[31m|[m 
+[31m|[m     Corrections on Register
+[31m|[m  
+* [33mcommit 8e16e354149190e26b3d392efcf704cbeb0455e7[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Thu Feb 26 23:17:42 2015 +0100
+[31m|[m 
+[31m|[m     Connexion et filtre des données
+[31m|[m     
+[31m|[m     Suite de connexion et filtrage des données de membre
+[31m|[m  
+* [33mcommit f932930bad05428be61b5fcfb7d8ac1461bd42c5[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Wed Feb 25 21:18:09 2015 +0100
+[31m|[m 
+[31m|[m     Suite méthode connnexion
+[31m|[m     
+[31m|[m     Suite de la méthode connexion de la classe VisiteurConnexion
+[31m|[m  
+* [33mcommit fc82e675cfd9c56038733553596471955a136d13[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Sun Feb 22 19:07:04 2015 +0100
+[31m|[m 
+[31m|[m     Ajout nouveau backup sql
+[31m|[m     
+[31m|[m     ajout nouveau backup de la BDD
+[31m|[m  
+* [33mcommit 7a9183300240b3ca24f39cfe088be72915c37610[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Sun Feb 22 19:01:01 2015 +0100
+[31m|[m 
+[31m|[m     Version 17/02/15
+[31m|[m     
+[31m|[m     Gestion de l'inscription
+[31m|[m     Reste pbs pour la redir ensuite
+[31m|[m     Début de la méthode connexion
+[31m|[m  
+* [33mcommit 5b034a4fc13f3bd18d00d06c5600ea0548c54c28[m
+[31m|[m Author: mangeclou <yoannarres@gmail.com>
+[31m|[m Date:   Thu Feb 19 23:23:50 2015 +0100
+[31m|[m 
+[31m|[m     Version 17/02/15
+[31m|[m     
+[31m|[m     Début fix de la méthode creerMembre()
+[31m|[m     Ajouter une gestion d'exception
+[31m|[m    
+*   [33mcommit da8360de7e3e07e1c085a31dae26698f2ebeb1ba[m
+[32m|[m[33m\[m  Merge: b2424f3 bc21c99
+[32m|[m [33m|[m Author: mangeclou <yoannarres@gmail.com>
+[32m|[m [33m|[m Date:   Thu Feb 19 22:31:45 2015 +0100
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Merge remote-tracking branch 'origin/newmaster' into newmaster
+[32m|[m [33m|[m     
+[32m|[m [33m|[m     Conflicts:
+[32m|[m [33m|[m     	nbproject/private/private.xml
+[32m|[m [33m|[m   
+[32m|[m * [33mcommit bc21c99bd9c2458f763cab93a58b29a5141f6bdb[m
+[32m|[m [33m|[m Author: mangeclou <yoannarres@gmail.com>
+[32m|[m [33m|[m Date:   Tue Feb 17 23:33:58 2015 +0100
+[32m|[m [33m|[m 
+[32m|[m [33m|[m     Version 17/02/15
+[32m|[m [33m|[m     
+[32m|[m [33m|[m     Maj ValidatorController.
+[32m|[m [33m|[m     TODO : valider l'adresse
+[32m|[m [33m|[m   
+* [33m|[m [33mcommit b2424f3e80305c70a734f12821581cef96b42dc1[m
+[33m|[m[33m/[m  Author: mangeclou <yoannarres@gmail.com>
+[33m|[m   Date:   Thu Feb 19 22:29:35 2015 +0100
+[33m|[m   
+[33m|[m       Netbeans commit
+[33m|[m  
+* [33mcommit 778fcd24733a12c022410f30c933cb4e48982b42[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Sun Feb 15 23:17:00 2015 +0100
+[33m|[m 
+[33m|[m     Version 15/02/2015
+[33m|[m     
+[33m|[m     Update to VisiteurController
+[33m|[m  
+* [33mcommit 56c995a077e041b96820d5c519d1b3733834cec2[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Sat Feb 14 13:14:45 2015 +0100
+[33m|[m 
+[33m|[m     Update README.md
+[33m|[m  
+* [33mcommit 421de00121743391c7862214782ddf2d3bf48c63[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Mon Feb 2 17:53:10 2015 +0100
+[33m|[m 
+[33m|[m     Version 02/02/2015
+[33m|[m     
+[33m|[m     Classes fitlerController et ValidatorController
+[33m|[m  
+* [33mcommit 722c34a7e754d5a0d2841b82dffe191529f06cfc[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Sun Feb 1 23:49:12 2015 +0100
+[33m|[m 
+[33m|[m     Version 1/02/15
+[33m|[m     
+[33m|[m     Première passe sur les entités.
+[33m|[m     Début sur les repository
+[33m|[m  
+* [33mcommit ba4df7dc20d1dc7a8fa7f353454208a7c38a971f[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Sat Jan 17 00:03:02 2015 +0100
+[33m|[m 
+[33m|[m     Version 16/01/15
+[33m|[m     
+[33m|[m     Début Avis.php
+[33m|[m  
+* [33mcommit 305bec1e85fe6b94010e9bb7d893ceddca65f040[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Fri Jan 16 17:33:19 2015 +0100
+[33m|[m 
+[33m|[m     Version 16/01/15
+[33m|[m     
+[33m|[m     version 17h
+[33m|[m  
+* [33mcommit acac4348841992d4e2f6036975340aa12a6554bd[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Fri Jan 16 13:10:06 2015 +0100
+[33m|[m 
+[33m|[m     Version 16/01/15
+[33m|[m     
+[33m|[m     Version 13h
+[33m|[m  
+* [33mcommit f3713781cb71571ce7e1e45175544a8e0a2153d7[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Thu Jan 15 16:52:58 2015 +0100
+[33m|[m 
+[33m|[m     Version 15/01/15
+[33m|[m     
+[33m|[m     avec autoload et fonction dynamic à changer dans controller
+[33m|[m     ne fonctionne pas, la classe (VisiteurController par ex) n'est pas
+[33m|[m     trouvée
+[33m|[m  
+* [33mcommit 670cecd970397eb90aaa47ae77ceed9fc971f5e7[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Wed Jan 14 17:03:58 2015 +0100
+[33m|[m 
+[33m|[m     Version 14/01/15
+[33m|[m     
+[33m|[m     Maj footer
+[33m|[m  
+* [33mcommit 1349eeedc743ee4273059faa74335ac03cf9e905[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Wed Jan 14 16:33:30 2015 +0100
+[33m|[m 
+[33m|[m     Version 14/01/15
+[33m|[m     
+[33m|[m     Commit netbeans
+[33m|[m  
+* [33mcommit f38029b4708960fa124edd2650fed1356f5a2a8d[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Wed Jan 14 16:32:45 2015 +0100
+[33m|[m 
+[33m|[m     Version 14/01/15
+[33m|[m     
+[33m|[m     Rédaction template de view
+[33m|[m  
+* [33mcommit 7fcec0b5deb39591d3d4f2654b39464ab5d66e5c[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Tue Jan 13 17:09:37 2015 +0100
+[33m|[m 
+[33m|[m     Version 13/01/14 17h
+[33m|[m     
+[33m|[m     ->l'include du head et du header ne marche plus, il devrait se faire
+[33m|[m     depuis le layout.php (note : on peut ajotuer des valeurs dans
+[33m|[m     viewParameters et y inclure les chemins pour les includes)
+[33m|[m  
+* [33mcommit 6655064a0e8fffb9fb02c5a8f1e58fbed7bc5f8d[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Tue Jan 13 13:10:39 2015 +0100
+[33m|[m 
+[33m|[m     Version 13/01/15
+[33m|[m     
+[33m|[m     Version du matin
+[33m|[m  
+* [33mcommit c06a683fd31831d882d30a98e659b896a546561c[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Tue Jan 13 09:18:32 2015 +0100
+[33m|[m 
+[33m|[m     netbeans commit
+[33m|[m  
+* [33mcommit ffd5e43b0bf4a37084284bb1711954591afed0dc[m
+[33m|[m Author: mangeclou <yoannarres@gmail.com>
+[33m|[m Date:   Mon Jan 12 17:00:17 2015 +0100
+[33m|[m 
+[33m|[m     Version 12/01/15
+[33m|[m     
+[33m|[m     Ajout .htaccess (temporaire)
+[33m|[m    
+*   [33mcommit 2ea459ed28fc8f99a08f72ef92b393dbcf5f3e4d[m
+[34m|[m[35m\[m  Merge: 125f64e c3398fa
+[34m|[m [35m|[m Author: mangeclou <yoannarres@gmail.com>
+[34m|[m [35m|[m Date:   Mon Jan 12 09:13:44 2015 +0100
+[34m|[m [35m|[m 
+[34m|[m [35m|[m     Merge remote-tracking branch 'origin/master'
+[34m|[m [35m|[m     
+[34m|[m [35m|[m     Conflicts:
+[34m|[m [35m|[m     	nbproject/private/private.xml
+[34m|[m [35m|[m   
+[34m|[m * [33mcommit c3398fa46405dbc5b15f60ea6e5a2ca60285da98[m
+[34m|[m [35m|[m Author: mangeclou <yoannarres@gmail.com>
+[34m|[m [35m|[m Date:   Sun Jan 11 23:22:57 2015 +0100
+[34m|[m [35m|[m 
+[34m|[m [35m|[m     Version 11/01/15
+[34m|[m [35m|[m     
+[34m|[m [35m|[m     Mise à jour controller et index.php ->les views commencent à marcher
+[34m|[m [35m|[m     -- TODO : les viewparameters et la classe ViewManager qui gère les meta
+[34m|[m [35m|[m     données (title et meta)
+[34m|[m [35m|[m     -- TODO : appeller les bons liens dans le menu (pour l'isntant des liens
+[34m|[m [35m|[m     du type (
+[34m|[m [35m|[m     http://lokisalle.git.local/index.php?controller=VisiteurController&method=displayIndex)
+[34m|[m [35m|[m     : pb car sont dans des includes (même nom mais nom de dossier différent
+[34m|[m [35m|[m     _> variable
+[34m|[m [35m|[m   
+* [35m|[m [33mcommit 125f64e317497eb465c4f8329df72e01dd5ceed0[m
+[35m|[m[35m/[m  Author: mangeclou <yoannarres@gmail.com>
+[35m|[m   Date:   Mon Jan 12 09:12:12 2015 +0100
+[35m|[m   
+[35m|[m       Correction netbeans xml
+[35m|[m       
+[35m|[m       Correction netbeans xml
+[35m|[m  
+* [33mcommit 9356dc1ee39e1b5b9a1252d8ed455ef5c24cf1e4[m
+[35m|[m Author: mangeclou <yoannarres@gmail.com>
+[35m|[m Date:   Fri Jan 9 13:13:58 2015 +0100
+[35m|[m 
+[35m|[m     Maj 09/01 matin
+[35m|[m     
+[35m|[m     Maj 09/01 matin  toujours pb instantiation du controller
+[35m|[m  
+* [33mcommit 783bb608ff5916029c070082ef562c6abce92c36[m
+[35m|[m Author: mangeclou <yoannarres@gmail.com>
+[35m|[m Date:   Thu Jan 8 22:49:46 2015 +0100
+[35m|[m 
+[35m|[m     Mise à jour index.php
+[35m|[m     
+[35m|[m     Mise à jour index.php
+[35m|[m  
+* [33mcommit d6a24ca23da7506afae9630e4261023a3446c094[m
+[35m|[m Author: mangeclou <yoannarres@gmail.com>
+[35m|[m Date:   Thu Jan 8 17:01:31 2015 +0100
+[35m|[m 
+[35m|[m     Mise à jour
+[35m|[m     
+[35m|[m     Mise à jour
+[35m|[m  
+* [33mcommit b848b25bf18743b2a9511ac10b1494fe916e1f0b[m
+[35m|[m Author: mangeclou <yoannarres@gmail.com>
+[35m|[m Date:   Thu Jan 8 17:00:19 2015 +0100
+[35m|[m 
+[35m|[m     Correction dossier documentation
+[35m|[m     
+[35m|[m     Correction.
+[35m|[m  
+* [33mcommit 8a54a8db4495f82a1a23bfa650a614d918e96bec[m
+[35m|[m Author: mangeclou <yoannarres@gmail.com>
+[35m|[m Date:   Thu Jan 8 16:52:50 2015 +0100
+[35m|[m 
+[35m|[m     Restructuration de l'arborescence
+[35m|[m     
+[35m|[m     Rangement de l'arboresence
+[35m|[m     Classe Config, fichier parameters
+[35m|[m     Début des entity : salle, user et membre
+[35m|[m  
+* [33mcommit 4672564161ce2cd45b37ae6fd4f81c48bbb16548[m
+[35m|[m Author: mangeclou <yoannarres@gmail.com>
+[35m|[m Date:   Thu Jan 8 09:51:36 2015 +0100
+[35m|[m 
+[35m|[m     Commit initial
+[35m|[m     
+[35m|[m     Début de modélisation et pages php
+[35m|[m  
+* [33mcommit 4cb1519f818381dcf86d1001cd43daa229df1b09[m
+  Author: mangeclou <yoannarres@gmail.com>
+  Date:   Thu Jan 8 09:47:54 2015 +0100
+  
+      Initial commit

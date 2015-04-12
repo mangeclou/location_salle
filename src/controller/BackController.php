@@ -84,12 +84,18 @@ class BackController extends MainController
     protected $statistiqueTemplate = 'statistique.php';
     protected $statistiqueParameters;
     
-    /*
-    public function __construct() 
-    {
-        echo "instantiation réussie.";
-        
-    }*/
+    
+    /**
+     * A l'instantiation de la classe on vérifie si la session existe, si elle
+     * n'existe pas on redirige vers l'accueil pour les visiteurs
+     */
+    public function __construct() {
+      //Checker si c'est nécessaire de faire un session_start à l'instanciation
+        session_start();
+        if (!isset($_SESSION["email"])) {
+            header('location:index.php?controller=VisiteurController&method=displayIndex');
+        }        
+    }
         
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur

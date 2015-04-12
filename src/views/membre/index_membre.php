@@ -28,7 +28,7 @@
                     <button type="submit">Voir ce lieu</button>
                 </form>
             </div>
-            <a href="connexion.php">Connectez vous</a>
+            <a href="connexion.php">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
         </div><!--END .col -->
 	<div class="col_30">
             <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
@@ -46,7 +46,7 @@
                     <button type="submit">Voir ce lieu</button>
                 </form>
             </div>
-            <a href="connexion.php">Connectez vous</a>
+            <a href="connexion.php">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
         </div><!--END .col -->
 	 
 	<div class="col_30">
@@ -65,7 +65,7 @@
                     <button type="submit">Voir ce lieu</button>
                 </form>
             </div>
-            <a href="connexion.php">Connectez vous</a>
+            <a href="connexion.php">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
      
         </div><!--END .col -->
     </div><!--END .container-box -->

@@ -347,6 +347,7 @@ class VisiteurController extends Controller
               
                       // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
               //foreach ($membre as $indice=>$valeur) {
+              session_start();
               $_SESSION["logged"] = true;
               $_SESSION["mail"]   = $newMembre['email'];
               $_SESSION["pseudo"] = $newMembre['pseudo'];
