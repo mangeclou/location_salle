@@ -1,22 +1,19 @@
 <?php
-/*==================================================================================*/
- /*   OBSOLETE, DEVENU UN SERVICE                                                   */
 
-/*==================================================================================*/
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-namespace controller;
+namespace service;
 
 /**
  * Description of FilterController
  *
  * 
  */
-abstract class FilterController extends controller{
+abstract class FilterService{
     
     //Fonctions de filtre
     //========================
@@ -56,8 +53,5 @@ abstract class FilterController extends controller{
             'mod_title'   =>    array('filter' => FILTER_SANITIZE_ENCODED,
                 'flags' => FILTER_FLAG_STRIP_LOW),    // we are using this in the url
             );
-    }
-    
-    
-    
+    }        
 }

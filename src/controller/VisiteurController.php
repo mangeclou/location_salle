@@ -12,7 +12,7 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
-use service\UrlService;
+use service\UrlService AS UrlService;
 
 require 'Controller.php';
 require "/../model/repository/MembreRepository.php";
@@ -286,20 +286,20 @@ class VisiteurController extends Controller
     public function connexion()
     {
         //si la session est définie, donc si l'utilisateur est déjà connecté
-      if(isset($_SESSION)){
-        //on redirige vers la page d'accueil pour les membres
-        header("location:index.php?controller=MembreController&method=displayIndexMembre");
-      } else {
+        //TODO : ajouter une autre condition ?
+        if(isset($_SESSION)){
+            //on redirige vers la page d'accueil pour les membres
+            UrlService::redirect("MembreController", "displayIndexMembre");
+        //If the user is not already connected as a member
+        } else {
             //On teste si le $_POST contient quelque chose,
             //Si le formulaire n'a pas été soumis
-        if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
-            (!filter_has_var(INPUT_POST, 'mdp'))){
+            if ((filter_has_var(INPUT_POST, 'pseudo')) &&
+                (filter_has_var(INPUT_POST, 'mdp'))){
                 //  si oui, on teste dans la bdd si
                 //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
-                require __DIR__ . '/../views/viewParameters.php';
-                $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
-                $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
-        } else {
+               //methode du service
+      
           //mdp du post
           $mdpForm     = FilterController::filterPostString('mdp');
           $pseudo  = \controller\FilterController::filterPostString('pseudo');
@@ -346,8 +346,12 @@ class VisiteurController extends Controller
           } else {
             echo ("Mauvais mot de passe ou pseudo 2");      
           }
-        }
+        
       }//===========================
-
+        //If nothing has been posted
+        require __DIR__ . '/../views/viewParameters.php';
+        $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
+        $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+    }
     }//END function connexion
 }//END Class VisiteurController

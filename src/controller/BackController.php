@@ -13,7 +13,7 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 include 'Controller.php';
-USE controller\Controller AS MainController;
+use controller\Controller AS MainController;
 
 class BackController extends MainController
 {

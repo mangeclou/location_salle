@@ -25,17 +25,17 @@ class MembreRepository extends EntityRepository {
      * @param  [[Type]] $hashed_mdp [[Description]]
      * @return boolean  [[Description]]
      */
-    public function findMembrePseudoAndMdp($pseudo/*, $hashed_mdp*/)
+    public function findMembrePseudoAndMdp($pseudo, $hashed_mdp)
     {
       $db = $this->getDb();
       //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
 
       $query = $db->prepare("SELECT pseudo, mdp
                                   FROM membre 
-                                  WHERE pseudo = :pseudo;");
-                                  //AND mdp = :mdp;");
+                                  WHERE pseudo = :pseudo
+                                  AND mdp = :mdp;");
       $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-      //$myQuery->bindParam(':mdp', $hashed_mdp, PDO::PARAM_STR);
+      $query->bindValue(':mdp', $hashed_mdp, PDO::PARAM_STR);
    
       $query->execute();
       echo 'data';
