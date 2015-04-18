@@ -54,6 +54,42 @@ class MembreRepository extends EntityRepository {
       
     }
   
+    /**
+     * [[Description]]
+     * @param  [[Type]] $pseudo     [[Description]]
+     * @param  [[Type]] $hashed_mdp [[Description]]
+     * @return boolean  [[Description]]
+     */
+    public function findAdminPseudodMdp($pseudo/*, $hashed_mdp*/)
+    {
+      $db = $this->getDb();
+      //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+
+      $query = $db->prepare("SELECT pseudo, mdp,
+                                  FROM membre 
+                                  WHERE pseudo = :pseudo
+                                  AND statut = 1;");
+                                  //AND mdp = :mdp;");
+      $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+      //$myQuery->bindParam(':mdp', $hashed_mdp, PDO::PARAM_STR);
+   
+      $query->execute();
+      echo 'data';
+      //print_r($data);
+      /*if ($data) {*/
+      
+       $data = $query->fetch(PDO::FETCH_ASSOC);
+        if (count($data) < 1) {
+           return false;
+        } else {
+          return $data;
+        }
+   /*   } else {
+       // return false;
+      }*/
+      
+    }
+  
     public function findMembreByPseudo($pseudo)
     {
       $table = 'membre';

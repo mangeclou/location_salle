@@ -12,20 +12,18 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
+use service\UrlService;
+
 require 'Controller.php';
 require "/../model/repository/MembreRepository.php";
     //permet d'utiliser les méthodes du trait ValidatorController
 require 'ValidatorController.php';
 require 'FilterController.php';
-
-
-use controller\Controller;
+require 'UrlService.php';
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends Controller
 {
-
-    
     //default layout of the pages
     protected $layout = 'layout.php';
      
@@ -214,19 +212,7 @@ class VisiteurController extends Controller
             $ville   = \controller\FilterController::filterPostString('ville');
             $cp      = \controller\FilterController::filterPostString('cp');
             $adresse = \controller\FilterController::filterPostString('adresse');
-            
-            
-            /*$pseudo = trim(filter_input(INPUT_POST, 'pseudo', FILTER_SANITIZE_STRING));
-            $mdp= \repository\MembreRepository::hashMdp(trim(filter_input
-                    (INPUT_POST, 'mdp', FILTER_SANITIZE_STRING)));
-            $nom = trim(filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING));
-            $prenom = trim(filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING));
-            $email = trim(filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL));
-            $ville = trim(filter_input(INPUT_POST, 'ville', FILTER_SANITIZE_STRING));
-            $cp = trim(filter_input(INPUT_POST, 'cp', FILTER_SANITIZE_STRING));
-            $adresse = trim(filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING));*/
-            //$pseudo = trim(htmlentities($_POST['pseudo'], ENT_QUOTES));
-            //array_filter($_POST, 'trim_value');
+             
             $filteredMember = [
                 "pseudo"  => $pseudo,
                 "mdp"     => $mdp,
@@ -263,10 +249,7 @@ class VisiteurController extends Controller
               //echo 'else';  
               //On appelle la méthdoe getRepository avec comme argument le nom de la table (Membre)
               $futurMembre = new \repository\EntityRepository();
-              $futurMembre = parent::getRepository('Membre'); // on envoi le nom de la table : employe, et bref on récupère un objet "EmployeRepository" mais on ne le met pas dans une propriété de la classe.
-			  //on appelle la méthode registerMembre de MembreRepository
-              //cette méthode appelle la méthode register de EntityRepository
-              //Résultat : insertion du nouveau membre dans la BDD
+              $futurMembre = parent::getRepository('Membre');
               $idMembre = $futurMembre->registerMembre($filteredMember);
                 
 			//$lemploye = $employe->getFindEmploye($idEmploye); // on récupère tous les employes via une req sql et il s'agit d'un tableau ARRAY composé d'objet.
@@ -325,7 +308,7 @@ class VisiteurController extends Controller
           //$testMembre = parent::getRepository('Membre');
           
           
-          print_r(get_class($testMembre));
+          //print_r(get_class($testMembre));
           //$pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
           //$hashedMdp = trim(filter_has_var(password_hash(INPUT_POST, 'pseudo'), PASSWORD_DEFAULT));
           //on récupère le pseudo correspondant au pseudo entré en post
@@ -334,8 +317,8 @@ class VisiteurController extends Controller
           //on appelle la méthode findMembreMdp
           
           $newMembre = $testMembre->findMembrePseudoAndMdp($pseudo);
-          echo 'newMembre';
-          var_dump($newMembre);
+          //echo 'newMembre';
+          //var_dump($newMembre);
           if ($newMembre) { // si on obtient un résultat 
             //$membre = $newMembre->fetch(PDO::FETCH_ASSOC);
             //cf PHP Cookbook p552
@@ -345,7 +328,8 @@ class VisiteurController extends Controller
             //le password_verify retourne faux :/
             if (password_verify($mdpForm, $newMembre['mdp'])) {
               
-                      // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
+             
+              // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
               //foreach ($membre as $indice=>$valeur) {
               session_start();
               $_SESSION["logged"] = true;
