@@ -13,7 +13,7 @@ namespace service;
  *
  * 
  */
-abstract class FilterService{
+class FilterService{
     
     //Fonctions de filtre
     //========================

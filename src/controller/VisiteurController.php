@@ -13,13 +13,18 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 use service\UrlService AS UrlService;
+use service\FilterService AS UrlService;
+use service\ValidatorService AS ValidatorService;
+use service\ConnexionlService AS ConnexionService;
+use model\repository\MembreRepository AS MembreRepository;
 
 require 'Controller.php';
-require "/../model/repository/MembreRepository.php";
+require "../model/repository/MembreRepository.php";
     //permet d'utiliser les méthodes du trait ValidatorController
-require 'ValidatorController.php';
-require 'FilterController.php';
-require 'UrlService.php';
+require '../service/ValidatorService.php';
+require '../service/FilterService.php';
+require '../service/ConnexionService.php';
+require '../service/UrlService.php';
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends Controller
@@ -67,9 +72,6 @@ class VisiteurController extends Controller
     protected $reservationDetailTemplate = 'reservation_detail.php';
     protected $reservationDetailParameters;
 
-    //GETTERS
-       
-       
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
     *
@@ -77,7 +79,7 @@ class VisiteurController extends Controller
     * @param $template : the html template of this page
     * @param $parameters : an array of some parameters
     */
-         
+    
     /**
      * Va chercher les paramètres de cgv depuis l'array de viewParameters.php
      */
@@ -201,8 +203,7 @@ class VisiteurController extends Controller
         } else {
             
 		//filtrer les données
-                //TODO : externaliser le processus dans une classe FilterController
-                       
+            
             $pseudo  = \controller\FilterController::filterPostString('pseudo');
             $mdp     = \repository\MembreRepository::hashMdp(FilterController::filterPostString('mdp'));
             $nom     = \controller\FilterController::filterPostString('nom');
@@ -223,6 +224,7 @@ class VisiteurController extends Controller
                 "ville"   => $ville,
                 "cp"      => $cp,
                 "adresse" => $adresse,
+                "statut"  => 0;
             ];
             
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
@@ -287,7 +289,16 @@ class VisiteurController extends Controller
     {
         //si la session est définie, donc si l'utilisateur est déjà connecté
         //TODO : ajouter une autre condition ?
-        if(isset($_SESSION)){
+        if (filter_has_var(INPUT_POST, 'pseudo') &&
+                filter_has_var(INPUT_POST, 'mdp')) {
+            //Call connexionService
+            ConnexionService::connexion( "VisiteurController",
+                    "displayIndexVisiteur",
+                    "MembreController",
+                    "displayIndexMembre"                   
+                                       )
+        }
+/*        if(isset($_SESSION)){
             //on redirige vers la page d'accueil pour les membres
             UrlService::redirect("MembreController", "displayIndexMembre");
         //If the user is not already connected as a member
@@ -301,8 +312,8 @@ class VisiteurController extends Controller
                //methode du service
       
           //mdp du post
-          $mdpForm     = FilterController::filterPostString('mdp');
-          $pseudo  = \controller\FilterController::filterPostString('pseudo');
+          $mdpForm    = FilterService::filterPostString('mdp');
+          $pseudo     = \controller\FilterController::filterPostString('pseudo');
           //Comparaison entre le mdp fourni et le mdp en base
           $testMembre = new \repository\MembreRepository();
           //$testMembre = parent::getRepository('Membre');
@@ -327,8 +338,6 @@ class VisiteurController extends Controller
             //$hash = '$2y$10$fmkazv66zFEvpyARwlbRuugRI';
             //le password_verify retourne faux :/
             if (password_verify($mdpForm, $newMembre['mdp'])) {
-              
-             
               // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
               //foreach ($membre as $indice=>$valeur) {
               session_start();
@@ -347,11 +356,11 @@ class VisiteurController extends Controller
             echo ("Mauvais mot de passe ou pseudo 2");      
           }
         
-      }//===========================
+      }*///===========================
         //If nothing has been posted
         require __DIR__ . '/../views/viewParameters.php';
         $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
         $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
-    }
+    
     }//END function connexion
 }//END Class VisiteurController

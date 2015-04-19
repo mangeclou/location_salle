@@ -6,7 +6,7 @@
  */
 namespace service;
 
-static class UrlService()
+class UrlService
 {
     /**
      * [[Description]]

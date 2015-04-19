@@ -20,7 +20,8 @@ use entity\Membre;
  *
  * @author stagiaire
  */
-class EntityRepository {
+class EntityRepository
+{
     private $db;
     public function __construct(){}
 //-------
@@ -100,41 +101,31 @@ class EntityRepository {
     //TODO : à tester
     public function findByTableAndColumnName($table,$column,$valeur)
     {
-      $query = $this->getDb();
-      echo 'query';
-      print_r($query);
-      $valeur = (string)$valeur;
-      echo $column;
+        $query = $this->getDb();
+        echo 'query';
+        print_r($query);
+        $valeur = (string)$valeur;
+        //echo $column;
         //TODO : faire la reque^te avec un prepare puis execute
-        
-        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
-      $myQuery = $query->prepare("SELECT * 
-                                    FROM $table
-                                    WHERE $column = :valeur;");
-      //$myQuery->bindParam(':table', $table, PDO::PARAM_STR);
-      //$myQuery->bindParam(':column', $column, PDO::PARAM_STR);
-      $myQuery->bindParam(':valeur', $valeur, PDO::PARAM_STR);
-      print_r($myQuery);
 
-      $myQuery->execute();
-      $membreTst = new Membre();
-      
-      $resultatQuery = $myQuery->fetchAll(\PDO::FETCH_CLASS, 'entity\\' . ucfirst($this->getTableName()));
-      if(!$resultatQuery){
-        return false;
-      } else {
-        return $resultatQuery;   
-      }
-        /*
-        try {
-            echo inverse(5) . "\n";
-            echo inverse(0) . "\n";
-        } catch (Exception $e) {
-            echo 'Exception reçue : ',  $e->getMessage(), "\n";
-        }
-        */
-        
-   
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $myQuery = $query->prepare("SELECT * 
+                    FROM $table
+                    WHERE $column = :valeur;");
+        //$myQuery->bindParam(':table', $table, PDO::PARAM_STR);
+        //$myQuery->bindParam(':column', $column, PDO::PARAM_STR);
+        $myQuery->bindParam(':valeur', $valeur, PDO::PARAM_STR);
+        //print_r($myQuery);
+
+        $myQuery->execute();
+        //$membreTst = new Membre();
+
+        $resultatQuery = $myQuery->fetchAll(\PDO::FETCH_CLASS, 'entity\\' . ucfirst($this->getTableName()));
+        if (!$resultatQuery) {
+            return false;
+        } else {
+            return $resultatQuery;   
+        }   
     }
     
     
@@ -145,28 +136,25 @@ class EntityRepository {
      */
     public function register($values)
     {
-        //TODO : faire un prepare puis execute pour une meilleur sécurité
-        //***************************************************************
         // (échappe automatiquement toutes les valeurs)
-        // array_keys me permet de parcourrir les indices plutot que les valeur pour annoncer les champs.
-      $table = $this->getTableName();
-      $values = array_map(
+        $table = $this->getTableName();
+        $values = array_map(
         function($value) {
           return "'".$value."'"; 
         },
         $values);
 
-      $valuesToInsert = implode(",", $values);
-      $columns = implode(",", array_keys($values));
+        $valuesToInsert = implode(",", $values);
+        $columns = implode(",", array_keys($values));
         
-      $query = $this->getDb()->prepare("INSERT INTO $table ($columns)
-                                          VALUES ($valuesToInsert);"
+        $query = $this->getDb()->prepare("INSERT INTO $table ($columns)
+                                          VALUES (:values);"
                                       );
-      
-      echo "requete";
-      print_r($query);
-      $query->execute();
-      return $this->getDb()->lastInsertId(); // dernier identifiant généré"
+        $query->bindParam(':values', $valuesToInsert, PDO::PARAM_STR);
+        //echo "requete";
+        //print_r($query);
+        $query->execute();
+        return $this->getDb()->lastInsertId(); // dernier identifiant généré"
       
         /*$query = $this->getDb()->query('INSERT INTO '. $this->getTableName() 
                 . '(' . implode(',',array_keys($_POST)) . ') '

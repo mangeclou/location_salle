@@ -77,6 +77,8 @@ class MembreController extends MainController
         //echo $_SESSION["email"];
     }
     
+    public function connection_
+    
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
     *

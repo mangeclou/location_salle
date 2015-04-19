@@ -12,7 +12,19 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
-include 'Controller.php';
+require 'Controller.php';
+require 'Controller.php';
+require '../model/repository/BackRepository.php';
+require '../service/ValidatorService.php';
+require '../service/FilterService.php';
+require '../service/ConnexionService.php';
+require '../service/UrlService.php';
+
+use service\UrlService AS UrlService;
+use service\FilterService AS UrlService;
+use service\ValidatorService AS ValidatorService;
+use service\ConnexionlService AS ConnexionService;
+use \model\repository\BackRepository AS BackRepository;
 use controller\Controller AS MainController;
 
 class BackController extends MainController
@@ -90,32 +102,59 @@ class BackController extends MainController
     public function connexionAdmin()
     {
         //si la session est définie, donc si l'utilisateur est déjà connecté
-      if(isset($_SESSION)){
-        //on redirige vers la page d'accueil pour les membres
-        header("location:index.php?controller=MembreController&method=displayIndexMembre");
-      } else {
+        //TODO : ajouter une autre condition ?
+        if (filter_has_var(INPUT_POST, 'pseudo') &&
+                filter_has_var(INPUT_POST, 'mdp')) {
+            
+            if (findAdminPseudoAndMdp
+            
+            //Call connexionService
+            ConnexionService::connexion( "VisiteurController",
+                    "displayIndexVisiteur",
+                    "MembreController",
+                    "displayIndexMembre"                   
+                                       )
+        }
+/*        if(isset($_SESSION)){
+            //on redirige vers la page d'accueil pour les membres
+            UrlService::redirect("MembreController", "displayIndexMembre");
+        //If the user is not already connected as a member
+        } else {
             //On teste si le $_POST contient quelque chose,
             //Si le formulaire n'a pas été soumis
-        if ((!filter_has_var(INPUT_POST, 'pseudo')) &&
-            (!filter_has_var(INPUT_POST, 'mdp'))){
+            if ((filter_has_var(INPUT_POST, 'pseudo')) &&
+                (filter_has_var(INPUT_POST, 'mdp'))){
                 //  si oui, on teste dans la bdd si
                 //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
-                require __DIR__ . '/../views/viewParameters.php';
-                $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
-                $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
-        } else {
+               //methode du service
+      
           //mdp du post
-          $mdpForm     = FilterController::filterPostString('mdp');
-          $pseudo  = \controller\FilterController::filterPostString('pseudo');
+          $mdpForm    = FilterService::filterPostString('mdp');
+          $pseudo     = \controller\FilterController::filterPostString('pseudo');
           //Comparaison entre le mdp fourni et le mdp en base
           $testMembre = new \repository\MembreRepository();
+          //$testMembre = parent::getRepository('Membre');
+          
+          
+          //print_r(get_class($testMembre));
+          //$pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
+          //$hashedMdp = trim(filter_has_var(password_hash(INPUT_POST, 'pseudo'), PASSWORD_DEFAULT));
+          //on récupère le pseudo correspondant au pseudo entré en post
+          //$testMembre->findMembreByPseudo($pseudo); 
+          
           //on appelle la méthode findMembreMdp
           
           $newMembre = $testMembre->findMembrePseudoAndMdp($pseudo);
-        
+          //echo 'newMembre';
+          //var_dump($newMembre);
           if ($newMembre) { // si on obtient un résultat 
+            //$membre = $newMembre->fetch(PDO::FETCH_ASSOC);
+            //cf PHP Cookbook p552
+            //echo $newMembre['mdp'];
+            //echo $mdpForm;
+            //$hash = '$2y$10$fmkazv66zFEvpyARwlbRuugRI';
+            //le password_verify retourne faux :/
             if (password_verify($mdpForm, $newMembre['mdp'])) {
-             
               // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
               //foreach ($membre as $indice=>$valeur) {
               session_start();
@@ -133,10 +172,14 @@ class BackController extends MainController
           } else {
             echo ("Mauvais mot de passe ou pseudo 2");      
           }
-        }
-      }//===========================
-
-    }//END function connexion  
+        
+      }*///===========================
+        //If nothing has been posted
+        require __DIR__ . '/../views/viewParameters.php';
+        $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
+        $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+    
+    }//END function connexion
     
   
     /**
