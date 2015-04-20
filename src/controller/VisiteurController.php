@@ -13,7 +13,7 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 use service\UrlService AS UrlService;
-use service\FilterService AS UrlService;
+use service\FilterService AS FilterService;
 use service\ValidatorService AS ValidatorService;
 use service\ConnexionlService AS ConnexionService;
 use model\repository\MembreRepository AS MembreRepository;
@@ -224,7 +224,7 @@ class VisiteurController extends Controller
                 "ville"   => $ville,
                 "cp"      => $cp,
                 "adresse" => $adresse,
-                "statut"  => 0;
+                "statut"  => 0,
             ];
             
             //ensuite tester si le pseudo existe déjà dans la base avec findMembreByPseudo()
@@ -234,18 +234,18 @@ class VisiteurController extends Controller
             if ($obj === true){
                 $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
             } else {
-            //TODO : faire un filterValidator qui filtre le $_Post et qui
-            //retourne un array de données qui seront ensuite validées par isFormValid
-              if (!ValidatorController::isFormValid($filteredMember)){
+            //If the pseudo doesn't exist
+                if (!ValidatorController::isFormValid($filteredMember)){
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
                 require __DIR__ . '/../views/viewParameters.php';
                 $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
-                $this->render($this->layout, $this->inscriptionTemplate, array(
-                  'arrayErrors' => $arrayErrors,
-                )
-              ); 
+                $this->render($this->layout,
+                              $this->inscriptionTemplate, array(
+                                'arrayErrors' => $arrayErrors,
+                              )
+                        ); 
             } else {
               //Si le formulaire passe la validation
               //echo 'else';  
@@ -290,14 +290,19 @@ class VisiteurController extends Controller
         //si la session est définie, donc si l'utilisateur est déjà connecté
         //TODO : ajouter une autre condition ?
         if (filter_has_var(INPUT_POST, 'pseudo') &&
-                filter_has_var(INPUT_POST, 'mdp')) {
+            filter_has_var(INPUT_POST, 'mdp') ) {
             //Call connexionService
-            ConnexionService::connexion( "VisiteurController",
-                    "displayIndexVisiteur",
-                    "MembreController",
-                    "displayIndexMembre"                   
-                                       )
+            ConnexionService::connexion("VisiteurController",
+                                        "displayIndexVisiteur",
+                                        "MembreController",
+                                        "displayIndexMembre"                   
+                                       );
         }
+        //If nothing has been posted, the connexion form is displayed
+        require __DIR__ . '/../views/viewParameters.php';
+            $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
+            $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+        
 /*        if(isset($_SESSION)){
             //on redirige vers la page d'accueil pour les membres
             UrlService::redirect("MembreController", "displayIndexMembre");
@@ -357,10 +362,7 @@ class VisiteurController extends Controller
           }
         
       }*///===========================
-        //If nothing has been posted
-        require __DIR__ . '/../views/viewParameters.php';
-        $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
-        $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+        
     
     }//END function connexion
 }//END Class VisiteurController

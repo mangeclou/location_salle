@@ -19,6 +19,7 @@ class MembreRepository extends UserRepository {
     {
         return $this->find($id); // on va voir la méthode findAll() de EntityRepository
     }
+    
     /**
      * [[Description]]
      * @param  [[Type]] $pseudo     [[Description]]
@@ -28,13 +29,13 @@ class MembreRepository extends UserRepository {
     public function findMembrePseudoAndMdp($pseudo, $hashed_mdp)
     {
         $table ="membre";
-        return $this->findUserPseudoAndMdp($pseudo, $hashed_mdp, $table)         
+        return $this->findUserPseudoAndMdp($pseudo, $hashed_mdp, $table);         
     }
        
     public function findMembreByPseudo($pseudo)
     {
         $table = 'membre';
-        return findUserByPseudo($pseudo, $table)       
+        return findUserByPseudo($pseudo, $table);    
     }
 
     public function registerMembre($membreValues)
