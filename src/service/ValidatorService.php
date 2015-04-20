@@ -279,7 +279,7 @@ class ValidatorService
      */
     public static function validateNom($nom)
     {
-        $valid = array[];
+        $valid = array();
         //A TESTER
         if ($nom ==="") {
             //return 'Veuillez saisir un nom.';

@@ -10,21 +10,21 @@
  *
  * @author stagiaire
  */
-namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
+namespace controller;
 
 use service\UrlService AS UrlService;
+use service\MembreService AS MembreService;
 use service\FilterService AS FilterService;
 use service\ValidatorService AS ValidatorService;
-use service\ConnexionlService AS ConnexionService;
 use model\repository\MembreRepository AS MembreRepository;
 
 require 'Controller.php';
-require "../model/repository/MembreRepository.php";
+require "/../model/repository/MembreRepository.php";
     //permet d'utiliser les méthodes du trait ValidatorController
-require '../service/ValidatorService.php';
-require '../service/FilterService.php';
-require '../service/ConnexionService.php';
-require '../service/UrlService.php';
+require '/../service/ValidatorService.php';
+require '/../service/MembreService.php';
+require '/../service/FilterService.php';
+require '/../service/UrlService.php';
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends Controller
@@ -84,7 +84,7 @@ class VisiteurController extends Controller
      * Va chercher les paramètres de cgv depuis l'array de viewParameters.php
      */
     
-    public function displayCgv() 
+    public function displayCgv()
     {
         //on utilise la méthode render du parent Controller
         require __DIR__ . '/../views/viewParameters.php';
@@ -292,7 +292,7 @@ class VisiteurController extends Controller
         if (filter_has_var(INPUT_POST, 'pseudo') &&
             filter_has_var(INPUT_POST, 'mdp') ) {
             //Call connexionService
-            ConnexionService::connexion("VisiteurController",
+            MembreService::connexion("VisiteurController",
                                         "displayIndexVisiteur",
                                         "MembreController",
                                         "displayIndexMembre"                   
