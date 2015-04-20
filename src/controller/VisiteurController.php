@@ -12,19 +12,19 @@
  */
 namespace controller;
 
-use service\UrlService AS UrlService;
+//use service\UrlService AS UrlService;
 use service\MembreService AS MembreService;
-use service\FilterService AS FilterService;
-use service\ValidatorService AS ValidatorService;
-use model\repository\MembreRepository AS MembreRepository;
+//use service\FilterService AS FilterService;
+//use service\ValidatorService AS ValidatorService;
+//use model\repository\MembreRepository AS MembreRepository;
 
 require 'Controller.php';
-require "/../model/repository/MembreRepository.php";
+//require "/../model/repository/MembreRepository.php";
     //permet d'utiliser les méthodes du trait ValidatorController
-require '/../service/ValidatorService.php';
+//require '/../service/ValidatorService.php';
 require '/../service/MembreService.php';
-require '/../service/FilterService.php';
-require '/../service/UrlService.php';
+//require '/../service/FilterService.php';
+//require '/../service/UrlService.php';
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends Controller
@@ -175,9 +175,24 @@ class VisiteurController extends Controller
      */
     public function creerMembre()
     {
+        $ms = new MembreService();
+        $ms->createMembre();
+        if (isset($arrayErrors)) {
+            //on récupère $arrayErrors qui est retourné par les méthodes de la classe
+            //ValidatorController et on affiche le formulaire avec les données de message
+            //d'erreur
+                require __DIR__ . '/../views/viewParameters.php';
+                $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+                $this->render($this->layout,
+                              $this->inscriptionTemplate, array(
+                                'arrayErrors' => $arrayErrors,
+                              )
+                        );  
+        }
+    }
         //TODO : tester que le visiteur n'est pas un membre connecté, si c'est le cas faire
         //un header("location:#") vers l'accueil membre
-        if(isset($_SESSION)){
+        /*if(isset($_SESSION)){
             //on redirige vers la page d'accueil pour les membres
             header("location:index.php?controller=MembreController&method=displayIndexMembre");
         }  else {
@@ -260,10 +275,10 @@ class VisiteurController extends Controller
               $_SESSION['pseudo'] = $pseudo;                     
               $_SESSION['email'] = $email;
               
-              header("location:index.php?controller=MembreController&method=displayIndexMembre");
-            }
+            //  header("location:index.php?controller=MembreController&method=displayIndexMembre");*/
+           // }
         //récupérer avec un $_POST les données du formulaire d'inscription
-        }//END if $arrayErrors est vide (donc aucune erreur)
+        //}//END if $arrayErrors est vide (donc aucune erreur)
 		// render : permet de rendre un affichage
         //connexion à la bdd
        
@@ -276,11 +291,11 @@ class VisiteurController extends Controller
     return $insertion_utilisateur;
          * 
          */
-            }//END if $_POST n'est pas vide
+            //}//END if $_POST n'est pas vide
         
        
-        }//END if !isset $_SESSION
-    }//END creerMembre()
+        //}//END if !isset $_SESSION
+    //}//END creerMembre()
     
     /**
      * Connexion function for members of the site
@@ -291,8 +306,9 @@ class VisiteurController extends Controller
         //TODO : ajouter une autre condition ?
         if (filter_has_var(INPUT_POST, 'pseudo') &&
             filter_has_var(INPUT_POST, 'mdp') ) {
-            //Call connexionService
-            MembreService::connexion("VisiteurController",
+            //Instantiates the service class to use connexion method 
+            $cm = new MembreService();
+            $cm->connexionMembre("VisiteurController",
                                         "displayIndexVisiteur",
                                         "MembreController",
                                         "displayIndexMembre"                   

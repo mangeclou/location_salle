@@ -60,10 +60,9 @@ class EntityRepository
 
         $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'entity\\' . $this->getTableName()); // on récupère un tableau array composé d'objets. FETCH_CLASS fais une instanciation de Employe, en remplissant les propriétés qui correspondent aux noms des champs SQL. (c'est pourquoi il faut avoir la même ortographe entre les propriétés et les noms SQL). Il rempli tous meme les private et protected.
         // Pour chaque ligne SQL il instancie un objet. Donc il déclenche aussi l'autoload..
-        if(!$resultatQuery) { // si la query ne fonctionne pas
+        if (!$resultatQuery) { // si la query ne fonctionne pas
             return false;
-        }
-        else { // sinon, on retourne les résultats
+        } else { // sinon, on retourne les résultats
             return $resultatQuery;
         }
     }
@@ -82,10 +81,9 @@ class EntityRepository
                 . ' WHERE id' . ucfirst($this->getTableName()) . '= ' . (int) $id); 
         $resultatQuery = $query->fetchAll(\PDO::FETCH_CLASS, 'Entity\\' . $this->getTableName());
 
-        if(!$resultatQuery) {
+        if (!$resultatQuery) {
             return false;
-        }
-        else {
+        } else {
             // return $q->fetch(PDO::FETCH_ASSOC);
             return $resultatQuery;
         }

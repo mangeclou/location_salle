@@ -7,12 +7,12 @@
  */
 namespace service;
 
-require 'FilterService.php';
-require '../model/Repository/MembreRepository.php';
+//require 'FilterService.php';
+//require '/../model/Repository/MembreRepository.php';
 
 use repository\MembreRepository as MembreRepository;
 
-class ConnexionService
+class UserService
 {
 
     protected function sessionExist()
@@ -24,7 +24,7 @@ class ConnexionService
         }
     }  
     
-    protected function startSession($email, $pseudo)
+    protected function startSessionUser($email, $pseudo)
     {
         session_start();
         $_SESSION["email"]   = $email;
@@ -41,15 +41,35 @@ class ConnexionService
         }
     }
     
+    /**
+     * [[Description]]
+     * @return boolean [[Description]]
+     */
+    protected function postCreateUserExist()
+    {
+        if (filter_has_var(INPUT_POST, 'pseudo') &&
+            filter_has_var(INPUT_POST, 'mdp')    &&
+            filter_has_var(INPUT_POST, 'nom')    &&
+            filter_has_var(INPUT_POST, 'prenom') &&
+            filter_has_var(INPUT_POST, 'email')  &&
+            filter_has_var(INPUT_POST, 'ville')  &&
+            filter_has_var(INPUT_POST, 'cp')     &&
+            filter_has_var(INPUT_POST, 'adresse')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 
-    static private function redirect($controller, $method)
+    protected function redirect($controller, $method)
     {
         header("location:index.php?controller=" .ucfirst($controller) ."&method=" .$method);
     }
       
-    static private function verifyAlreadyAuthenticated()
+    protected function verifyAlreadyAuthenticated()
     {
-        if (isset($this->$session)) {
+        if (isset($_SESSION)) {
             return true;
         } else {
             return false;

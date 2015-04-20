@@ -475,20 +475,20 @@ class ValidatorService
      * @param type $form
      * @return boolean
      */
-    public static function isFormValid(/*$pseudo,$mdp,$prenom,$email,$sexe,$ville,
+    public function isFormValid(/*$pseudo,$mdp,$prenom,$email,$sexe,$ville,
             $cp,$adresse*/$array){
-            echo 'array de isformvalid';
-             var_dump($array);
+            //echo 'array de isformvalid';
+             //var_dump($array);
              //exit();
-        if((self::validatePseudo($array['pseudo']) === true)
-                && (self::validateMdp($array['mdp']) === true)
-                && (self::validateNom($array['nom']) === true)
-                && (self::validatePrenom($array['prenom']) === true)
-                && (self::validateEmail($array['email']) === true)
-                && (self::validateSexe($array['sexe']) === true)
-                && (self::validateVille($array['ville']) === true)
-                && (self::validateCp($array['cp']) === true)
-                && (self::validateAdresse($array['adresse']) === true)
+        if ((self::validatePseudo($array['pseudo']) === true)
+            && (self::validateMdp($array['mdp']) === true)
+            && (self::validateNom($array['nom']) === true)
+            && (self::validatePrenom($array['prenom']) === true)
+            && (self::validateEmail($array['email']) === true)
+            && (self::validateSexe($array['sexe']) === true)
+            && (self::validateVille($array['ville']) === true)
+            && (self::validateCp($array['cp']) === true)
+            && (self::validateAdresse($array['adresse']) === true)
                 ){
             return true;
         }  else {

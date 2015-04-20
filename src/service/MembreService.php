@@ -2,17 +2,21 @@
 /**
  * Services related to the connexion to the site for a user
  * Must be autonomous with no dependencies to the controllers
+ * Each time it is used in a method the object should be instantiated
  *
  * @author yoann
  */
 namespace service;
 
 require 'FilterService.php';
+require 'UrlService.php';
 require 'UserService.php';
-require '../model/Repository/MembreRepository.php';
+require '/../model/repository/MembreRepository.php';
 
-use repository\MembreRepository as MembreRepository;
-use UserService;
+use \repository\MembreRepository as MembreRepository;
+use service\UserService AS UserService;
+use service\FilterService AS FilterService;
+use service\UrlService AS UrlService;
 
 class MembreService extends UserService
 {
@@ -42,52 +46,113 @@ class MembreService extends UserService
         }
     }
         
-    protected function connexionMembre()
+    public function connexionMembre()
     {
-        
-    //si la session est définie, donc si l'utilisateur est déjà connecté
-    if (self::verifyAlreadyAuthenticatedMembre()) {
-        //Redirect
-        self::redirectMembre();
-    } else {
-          //On teste si le $_POST contient quelque chose,
-          //Si le formulaire n'a pas été soumis
-        if (!parent::postConnexionExist()) {
-       
-        //Filter post
-        $mdp     = FilterService::filterPostString('mdp');
-        $pseudo  = FilterService::filterPostString('pseudo');
-        $connexionErrors ="";
-        
-        $testMembre = new MembreRepository();
-        //Check if the pseudo exists in the db
-        $newMembre  = $testMembre->findMembrePseudo($pseudo);
-
-        if ($newMembre) { // si on obtient un résultat 
-          if (password_verify($mdpForm, $newMembre['mdp'])) {
-
-            // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
-            //foreach ($membre as $indice=>$valeur) {
-            session_start();
-            $_SESSION["email"]   = $newMembre['email'];
-            $_SESSION["pseudo"]  = $newMembre['pseudo'];
+        //Check if the user is already authenticated
+        if (self::verifyAlreadyAuthenticatedMembre()) {
             //Redirect
-            self::redirect($controllerAuth, $methodAuth );
-            //echo 'bravo';
-          } else {
-            return $connexionErrors = "badPassword";
-          }
-        //END if !$_POST
-          //Si non, on
+            self::redirectMembre();
         } else {
-            return $connexionErrors = "badPasswordOrLogin";     
-        }
-      
-    }//END if postConnexionExist()
-        //If there is nothing in the post, redirect to the controller
-    //that will display the page with the form
-        parent::redirect("VisiteurController", "displayConnexion"); 
-    }
+            //If the post has been submited
+            if (parent::postConnexionExist()) {
+                //Filter post
+                $fs     = new FilterService();
+                $mdp    = $fs->filterPostString('mdp');
+                $pseudo = $fs->filterPostString('pseudo');
+                $connexionErrors ="";
 
-  }//END function connexion
+                $testMembre = new MembreRepository();
+                //Method to find the form pseudo
+                $newMembre  = $testMembre->findMembreByPseudo($pseudo);
+                //If the pseudo exixts in the db
+                if ($newMembre) {
+                    //Check if the password of the post matches the hased password in the db
+                    if (password_verify($mdpForm, $newMembre['mdp'])) {
+                        //foreach ($membre as $indice=>$valeur) {
+                        parent::startSessionUser($newMembre['email'], $newMembre['pseudo']);
+
+                        //Redirect
+                        self::redirect($controllerAuth, $methodAuth );
+                        //echo 'bravo';
+                    } else {
+                        return $connexionErrors = "badPassword";
+                    }
+                    //END if !$_POST
+                  //Si non, on
+                } else {
+                    return $connexionErrors = "badPasswordOrLogin";     
+                }
+
+            }//END if postConnexionExist()
+        //If there is nothing in the post, redirect to the controller
+        //that will display the page with the form
+        parent::redirect("VisiteurController", "displayConnexion"); 
+        }
+
+    }//END function connexion
+    
+    public function createMembre()
+    {
+       //Check if the user is already authenticated
+        if (self::verifyAlreadyAuthenticatedMembre()) {
+            //Redirect
+            self::redirectMembre();
+        //If the user is not already authenticated
+        } else {
+            //If the form has not been posted
+            if (!parent::postCreateUserExist) {
+                //Filter post
+                $fs     = new FilterService();
+                $pseudo  = $fs->filterPostString('pseudo');
+                $mdp     = \repository\MembreRepository::hashMdp($fs->filterPostString('mdp'));
+                $nom     = $fs->filterPostString('nom');
+                $prenom  = $fs->filterPostString('prenom');
+                $email   = $fs->filterPostEmail('email');
+                $sexe    = $fs->filterPostString('sexe');
+                $ville   = $fs->filterPostString('ville');
+                $cp      = $fs->filterPostString('cp');
+                $adresse = $fs->filterPostString('adresse');
+            
+                $filteredMember = [
+                    "pseudo"  => $pseudo,
+                    "mdp"     => $mdp,
+                    "nom"     => $nom,
+                    "prenom"  => $prenom,
+                    "email"   => $email,
+                    "sexe"    => $sexe,
+                    "ville"   => $ville,
+                    "cp"      => $cp,
+                    "adresse" => $adresse,
+                    "statut"  => 0,
+                ];
+                //Check if the pseudo in the form already exists in the db  
+                $obj = new MembreRepository();
+                $obj ->findMembreByPseudo($pseudo);
+                //If the pseudo already exists
+                if ($obj === true){
+                    $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
+                //If the pseudo doesn't exist
+                } else {
+                    $vc = new ValidatorService();
+                    $validation = $vc->isFormValid($filteredMember);
+                    //Check if the form pass the validation test
+                    if ($validation !== true) {
+                        ///Returns the arrayErrors
+                        return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
+                    //If the form is validated         
+                    } else {
+                        //RegisterMembre make the query to register the membre to db
+                        $mr = new MembreRepository();
+                        $mr->registerMembre($filteredMember);
+
+                        parent::startSessionUser($newMembre['email'], $newMembre['pseudo']);
+                        redirectMembre();
+                    }
+                
+                }//END if $pseudo doesn't exist
+           
+            }//END if !postCreateUserExist
+            parent::redirect("VisiteurController", "displayConnexion");
+        }//END else verifyAlreadyAuthenticatedMembre
+    }//END createMembre()
 }

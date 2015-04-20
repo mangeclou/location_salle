@@ -13,7 +13,7 @@ class UrlService
      * @param [[Type]] $controller [[Description]]
      * @param [[Type]] $method     [[Description]]
      */
-    static public function redirect($controller, $method)
+    public function redirect($controller, $method)
     {
         header("location:index.php?controller=" .ucfirst($controller) ."&method=" .$method);
     }    

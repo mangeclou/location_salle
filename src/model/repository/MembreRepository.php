@@ -35,7 +35,7 @@ class MembreRepository extends UserRepository {
     public function findMembreByPseudo($pseudo)
     {
         $table = 'membre';
-        return findUserByPseudo($pseudo, $table);    
+        return $this->findUserByPseudo($pseudo, $table);    
     }
 
     public function registerMembre($membreValues)

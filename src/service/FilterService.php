@@ -23,25 +23,26 @@ class FilterService{
         $value = trim($value);
     }
     
-    public static function filterPostString($string)
+    public function filterPostString($string)
     {
         $filteredString = trim(filter_input(INPUT_POST, $string, FILTER_SANITIZE_STRING));
         return $filteredString;
     }
     
-    public static function filterPostInt($int)
+    public function filterPostInt($int)
     {
         $filteredInt = trim(filter_input(INPUT_POST, trim($int), FILTER_SANITIZE_NUMBER_INT));
         return $filteredInt;
     }
     
-    public static function filterPostEmail($email)
+    public function filterPostEmail($email)
     {
         $filteredEmail = trim(filter_input(INPUT_POST, trim($email), FILTER_SANITIZE_EMAIL));
         return $filteredEmail;
     }
-        
-    public static function filterPostData()
+    
+    //Not tested
+    public function filterPostData()
     {
         array_filter($_POST, self::trimValue());    // the data in $_POST is trimmed
          // set up the filters to be used with the trimmed post array

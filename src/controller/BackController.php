@@ -13,17 +13,17 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 require 'Controller.php';
-require 'Controller.php';
+//require 'Controller.php';
 require '../model/repository/BackRepository.php';
-require '../service/ValidatorService.php';
-require '../service/FilterService.php';
-require '../service/ConnexionService.php';
-require '../service/UrlService.php';
+//require '../service/ValidatorService.php';
+//require '../service/FilterService.php';
+//require '../service/ConnexionService.php';
+//require '../service/UrlService.php';
 
-use service\UrlService AS UrlService;
-use service\FilterService AS UrlService;
-use service\ValidatorService AS ValidatorService;
-use service\ConnexionlService AS ConnexionService;
+//use service\UrlService AS UrlService;
+//use service\FilterService AS UrlService;
+//use service\ValidatorService AS ValidatorService;
+//use service\ConnexionlService AS ConnexionService;
 use \model\repository\BackRepository AS BackRepository;
 use controller\Controller AS MainController;
 
