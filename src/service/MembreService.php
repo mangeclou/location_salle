@@ -46,7 +46,7 @@ class MembreService extends UserService
         }
     }
         
-    public function connexionMembre()
+    public function connexionMembre($controllerAuth, $methodAuth)
     {
         //Check if the user is already authenticated
         if (self::verifyAlreadyAuthenticatedMembre()) {
@@ -65,11 +65,12 @@ class MembreService extends UserService
                 //Method to find the form pseudo
                 $newMembre  = $testMembre->findMembreByPseudo($pseudo);
                 //If the pseudo exixts in the db
-                if ($newMembre) {
+                print_r($newMembre);
+                if (isset($newMembre)) {
                     //Check if the password of the post matches the hased password in the db
-                    if (password_verify($mdpForm, $newMembre['mdp'])) {
+                    if (password_verify($mdp, $newMembre[0]->getMdp())) {
                         //foreach ($membre as $indice=>$valeur) {
-                        parent::startSessionUser($newMembre['email'], $newMembre['pseudo']);
+                        parent::startSessionUser($newMembre[0]->getEmail(), $newMembre[0]->getPseudo());
 
                         //Redirect
                         self::redirect($controllerAuth, $methodAuth );
@@ -86,7 +87,7 @@ class MembreService extends UserService
             }//END if postConnexionExist()
         //If there is nothing in the post, redirect to the controller
         //that will display the page with the form
-        parent::redirect("VisiteurController", "displayConnexion"); 
+        //parent::redirect("VisiteurController", "connexion"); 
         }
 
     }//END function connexion

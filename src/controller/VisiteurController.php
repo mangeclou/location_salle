@@ -308,17 +308,16 @@ class VisiteurController extends Controller
             filter_has_var(INPUT_POST, 'mdp') ) {
             //Instantiates the service class to use connexion method 
             $cm = new MembreService();
-            $cm->connexionMembre("VisiteurController",
-                                        "displayIndexVisiteur",
-                                        "MembreController",
+            $cm->connexionMembre("MembreController",
                                         "displayIndexMembre"                   
                                        );
-        }
+        } else {
         //If nothing has been posted, the connexion form is displayed
-        require __DIR__ . '/../views/viewParameters.php';
+            echo "no post";
+            require __DIR__ . '/../views/viewParameters.php';
             $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
             $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
-        
+        }
 /*        if(isset($_SESSION)){
             //on redirige vers la page d'accueil pour les membres
             UrlService::redirect("MembreController", "displayIndexMembre");
