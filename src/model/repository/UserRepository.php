@@ -35,8 +35,8 @@ class UserRepository extends EntityRepository {
         } else {
           return $data;
         }  
-    }  
-  
+    }
+      
     public function findUserByPseudo($pseudo, $table)
     {
         $column = 'pseudo';

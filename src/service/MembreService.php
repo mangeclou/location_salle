@@ -36,9 +36,7 @@ class MembreService extends UserService
     {
         if (parent::verifyAlreadyAuthenticated()) {
             if (isset($this->session["email"])  &&
-                isset($this->session["pseudo"]) &&
-                isset($this->session["email"])
-               ) {
+                isset($this->session["pseudo"])) {
                 return true;
             } else {
                 return false;

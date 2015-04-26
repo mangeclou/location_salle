@@ -49,5 +49,53 @@ class MembreRepository extends UserRepository {
         // on fait appel à la méthode register de EntityRepository
         $table ="membre";
         return $this->register($membreValues);
-    }         
+    }  
+    
+    public function verifyStatut($pseudo)
+    {
+        $table = 'membre';
+        return $this->findUserByEmail($email, $table);
+    }
+    
+     /**
+     * [[Description]]
+     * @param  [[Type]] $pseudo     [[Description]]
+     * @param  [[Type]] $hashed_mdp [[Description]]
+     * @return boolean  [[Description]]
+     */
+    public function findMembreStatut($pseudo)
+    {
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+
+        $query = $db->prepare("SELECT statut
+                                      FROM membre
+                                      WHERE pseudo = :pseudo;");
+
+        $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+        $query->execute();
+
+        $data = $query->fetch(PDO::FETCH_OBJ);
+        
+        return $data;          
+    }
+    
+    public function findAdminByPseudo($pseudo)
+    {
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+
+        $query = $db->prepare("SELECT pseudo, email, mdp, statut
+                                      FROM membre
+                                      WHERE pseudo = :pseudo
+                                      AND statut = 1;");
+
+        $query->bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
+        $query->execute();
+        
+        
+        $data = $query->fetch(PDO::FETCH_OBJ);
+        
+        return $data;          
+    }
 }
