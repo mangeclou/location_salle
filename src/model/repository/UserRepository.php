@@ -42,6 +42,12 @@ class UserRepository extends EntityRepository {
         $column = 'pseudo';
         return $this->findByTableAndColumnName($table, $column, $pseudo);
     }
+    
+    public function findUserByEmail($email, $table)
+    {
+        $column = 'email';
+        return $this->findByTableAndColumnName($table, $column, $email);
+    }
         
     /**
      * Trim and hash a string password

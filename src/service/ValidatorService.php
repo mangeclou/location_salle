@@ -371,7 +371,7 @@ class ValidatorService
             return 'Veuillez saisir un mot de passe de moins de 30 caract&egrave;res..';
         }
         if (strlen($mdp)< 7 ){
-            return 'Veuillez saisir un pseudo d\'au moins 7 caract&egrave;res.';
+            return 'Veuillez saisir un mot de passe d\'au moins 7 caract&egrave;res.';
         }
         if(!preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$mdp)){
             return 'Vous utilisez des caractères non supportés.';
@@ -429,7 +429,7 @@ class ValidatorService
     public static function validateSexe($sexe)
     {
         //On autorise uniquement les lettre "m" ou "f"
-        if(!($sexe == 'm')||!($sexe == 'f')){
+        if(!$sexe == 'm'||!$sexe == 'f'){
            return 'Veuillez saisir un sexe valide.';
         }
         return true;
@@ -494,16 +494,17 @@ class ValidatorService
         }  else {
             //Si au moins un validateur renvoie false, on crée un array de
             // toutes les erreurs
-            $arrayErrors = [
-                errorPseudo => self::validatePseudo(),
-                errorMdp => self::validateMdp(),
-                errorNom => self::validateNom(),
-                errorPrenom => self::validatePrenom(),
-                errorEmail => self::validateEmail(),
-                errorSexe => self::validateSexe(),
-                errorVille => self::validateVille(),
-                errorCp => self::validateCp(),
-                errorAdresse => self::validateAdresse(),
+            
+            return $arrayErrors = [
+                "errorPseudo"  => self::validatePseudo($array['pseudo']),
+                "errorMdp"     => self::validateMdp($array['mdp']),
+                "errorNom"     => self::validateNom($array['nom']),
+                "errorPrenom"  => self::validatePrenom($array['prenom']),
+                "errorEmail"   => self::validateEmail($array['email']),
+                "errorSexe"    => self::validateSexe($array['sexe']),
+                "errorVille"   => self::validateVille($array['ville']),
+                "errorCp"      => self::validateCp($array['cp']),
+                "errorAdresse" => self::validateAdresse($array['adresse']),
             ];
         }
     }

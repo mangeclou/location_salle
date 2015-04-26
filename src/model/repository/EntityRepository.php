@@ -136,9 +136,9 @@ class EntityRepository
     {
         // (échappe automatiquement toutes les valeurs)
         $table = $this->getTableName();
-        $values = array_map(
+        /*$values = array_map(
         function($value) {
-          return "'".$value."'"; 
+          return '"'.$value.'"'; 
         },
         $values);
 
@@ -148,10 +148,24 @@ class EntityRepository
         $query = $this->getDb()->prepare("INSERT INTO $table ($columns)
                                           VALUES (:values);"
                                       );
-        $query->bindParam(':values', $valuesToInsert, PDO::PARAM_STR);
+        $temp = $query->bindParam(':values', $valuesToInsert, PDO::PARAM_STR);
+        */
+        
+        
         //echo "requete";
         //print_r($query);
-        $query->execute();
+        //print_r($valuesToInsert);
+        //$query->debugDumpParams(); 
+
+        //exit();
+        
+        $columnString = implode(',', array_keys($values));
+        $valueString = implode(',', array_fill(0, count($values), '?'));
+
+        $query = $this->getDb()->prepare("INSERT INTO $table ({$columnString}) VALUES ({$valueString})");
+        $query->execute(array_values($values));
+        //$query->execute();
+        
         return $this->getDb()->lastInsertId(); // dernier identifiant généré"
       
         /*$query = $this->getDb()->query('INSERT INTO '. $this->getTableName() 

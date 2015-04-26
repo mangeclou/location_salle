@@ -24,7 +24,20 @@ class Membre extends User {
 	 * @access protected
 	 */
 	protected  $prenom;
-
+    
+    /**
+	 * 
+	 * @var string
+	 * @access protected
+	 */
+	protected  $pseudo;
+    
+     /**
+	 * 
+	 * @var string
+	 * @access protected
+	 */
+	protected  $mdp;
 	/**
 	 * 
 	 * @var string
@@ -59,6 +72,13 @@ class Membre extends User {
 	 * @access protected
 	 */
 	protected  $adresse;
+    
+    /**
+	 * 
+	 * @var string
+	 * @access protected
+	 */
+	protected  $statut;
 
 
     //----------- GETTERS -----------------
@@ -66,62 +86,90 @@ class Membre extends User {
     {
         return $this->nom;
     }
+    
+    public function getPseudo()
+    {
+        return $this->pseudo;
+    }
+    
+    public function getMdp()
+    {
+        return $this->mdp;
+    }
+    
     public function getPrenom()
     {
         return $this->prenom;
     }
+    
     public function getEmail()
     {
         return $this->email;
     }
+    
     public function getSexe()
     {
         return $this->sexe;
     }
+    
     public function getVille()
     {
         return $this->ville;
     }
+    
     public function getCp()
     {
         return $this->cp;
+    }
+    
+    public function getStatut()
+    {
+        return $this->statut;
     }
    
     //--------- SETTERS ------------------
     public function setNom($nom)
     {
-        if(is_string($nom)) {
-            $this->nom = $nom;
-        }
+        return $this->nom = $nom;
     }
-    public function setPrenom(string $prenom)
+    
+    public function setPrenom($prenom)
     {
-        if(is_string($prenom)) {
-            $this->prenom = $prenom;
-        }
+        return $this->prenom = $prenom;
     }
+    
+    public function setPseudo($pseudo)
+    {
+        return $this->pseudo = $pseudo;
+    }
+    
+    public function setMdp($mdp)
+    {
+        return $this->mdp = $mdp;
+    }
+    
     public function setEmail($email)
     {
         return $this->email = $email;
     }
+    
     public function setSexe($sexe)
     {
-        if($sexe === 'm'|| $sexe === 'f') {
-            return $this->sexe = $sexe;
-        }  else {
-            echo "Veuillez saisir 'm' ou 'f'";
-        }
+        return $this->sexe = $sexe;
     }
+    
     public function setVille($ville)
     {
-        if(is_string($ville)) {
-            $this->ville = $ville;
-        }
+        return $this->ville = $ville;
     }
+    
     public function setCp($cp)
     {
-        if(is_int($cp)) {
-            $this->cp = $cp;
-        }
+        return $this->cp = $cp;
+    }
+    
+    public function setStatut($statut)
+    {
+        return $this->statut = (int)$statut;
     }
 }

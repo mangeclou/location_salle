@@ -11,12 +11,14 @@ namespace service;
 require 'FilterService.php';
 require 'UrlService.php';
 require 'UserService.php';
+require 'ValidatorService.php';
 require '/../model/repository/MembreRepository.php';
 
 use \repository\MembreRepository as MembreRepository;
-use service\UserService AS UserService;
-use service\FilterService AS FilterService;
-use service\UrlService AS UrlService;
+use \service\UserService AS UserService;
+use \service\FilterService AS FilterService;
+use \service\ValidatorService AS ValidatorService;
+use \service\UrlService AS UrlService;
 
 class MembreService extends UserService
 {
@@ -27,7 +29,7 @@ class MembreService extends UserService
      */
     public function redirectMembre()
     {
-        return parent::redirect("MembreController", "displayIndexmembre");        
+        return parent::redirect("MembreController", "displayIndexMembre");        
     }
       
     public function verifyAlreadyAuthenticatedMembre()
@@ -65,13 +67,13 @@ class MembreService extends UserService
                 //Method to find the form pseudo
                 $newMembre  = $testMembre->findMembreByPseudo($pseudo);
                 //If the pseudo exixts in the db
-                print_r($newMembre);
+                //print_r($newMembre);
                 if (isset($newMembre)) {
                     //Check if the password of the post matches the hased password in the db
                     if (password_verify($mdp, $newMembre[0]->getMdp())) {
                         //foreach ($membre as $indice=>$valeur) {
                         parent::startSessionUser($newMembre[0]->getEmail(), $newMembre[0]->getPseudo());
-
+                        
                         //Redirect
                         self::redirect($controllerAuth, $methodAuth );
                         //echo 'bravo';
@@ -94,18 +96,18 @@ class MembreService extends UserService
     
     public function createMembre()
     {
-       //Check if the user is already authenticated
+        //Check if the user is already authenticated
         if (self::verifyAlreadyAuthenticatedMembre()) {
             //Redirect
             self::redirectMembre();
         //If the user is not already authenticated
         } else {
             //If the form has not been posted
-            if (!parent::postCreateUserExist) {
+            //if (parent::postCreateUserExist()) {
                 //Filter post
-                $fs     = new FilterService();
+                $fs      = new FilterService();
                 $pseudo  = $fs->filterPostString('pseudo');
-                $mdp     = \repository\MembreRepository::hashMdp($fs->filterPostString('mdp'));
+                $mdp     = $fs->filterPostString('mdp');
                 $nom     = $fs->filterPostString('nom');
                 $prenom  = $fs->filterPostString('prenom');
                 $email   = $fs->filterPostEmail('email');
@@ -127,33 +129,53 @@ class MembreService extends UserService
                     "statut"  => 0,
                 ];
                 //Check if the pseudo in the form already exists in the db  
-                $obj = new MembreRepository();
-                $obj ->findMembreByPseudo($pseudo);
-                //If the pseudo already exists
-                if ($obj === true){
-                    $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
-                //If the pseudo doesn't exist
-                } else {
-                    $vc = new ValidatorService();
-                    $validation = $vc->isFormValid($filteredMember);
-                    //Check if the form pass the validation test
-                    if ($validation !== true) {
-                        ///Returns the arrayErrors
-                        return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
-                    //If the form is validated         
-                    } else {
-                        //RegisterMembre make the query to register the membre to db
-                        $mr = new MembreRepository();
-                        $mr->registerMembre($filteredMember);
-
-                        parent::startSessionUser($newMembre['email'], $newMembre['pseudo']);
-                        redirectMembre();
-                    }
+                $mr         = new MembreRepository();
+                $findPseudo = $mr ->findMembreByPseudo($pseudo);
+                $findEmail  = $mr ->findMembreByEmail($email);
+                //print_r($mr);
+                //print_r($filteredMember);
                 
-                }//END if $pseudo doesn't exist
+                //exit();
+            
+                //If the pseudo already exists
+                if ($findPseudo === true) {
+                    $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
+                }
+                //If the email already exists
+                if ($findEmail === true) {
+                    $arrayErrors[] = 'Veuillez choisir un autre email.';
+                }
+                //If the pseudo doesn't exist
+                //} else {                   
+                $vs = new ValidatorService();
+                $validation = $vs->isFormValid($filteredMember);
+                //Check if the form pass the validation test
+                if ($validation !== true) {
+                    ///Returns the arrayErrors
+                    return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
+                //If the form is validated         
+                } else {
+                    // print_r($validation);
+                    if ($validation === true) {
+                        $filteredMember["mdp"] = \repository\MembreRepository::hashMdp($filteredMember["mdp"]);
+                        //RegisterMembre make the query to register the membre to db
+                        //$mr = new MembreRepository();
+                        //echo "<br></br>";
+                        //print_r($filteredMember);
+                        //exit();
+                        $mr->registerMembre($filteredMember);
+                       // print_r($query);
+                       // exit();
+                        parent::startSessionUser($filteredMember['email'], $filteredMember['pseudo']);
+                        self::redirectMembre();
+                    }
+                }//END if $validation !== true
            
-            }//END if !postCreateUserExist
-            parent::redirect("VisiteurController", "displayConnexion");
+            //} else {//END if !postCreateUserExist
+                //echo '$ post';
+                //print_r($_POST);
+              //  parent::redirect("VisiteurController", "creerMembre");
         }//END else verifyAlreadyAuthenticatedMembre
+        
     }//END createMembre()
 }

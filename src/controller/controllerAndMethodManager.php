@@ -45,7 +45,7 @@ class controllerAndMethodManager{
                             'displayCgv',
                             'connexion',
                             'displayIndex',
-                            'displayInscription',
+                            'displayInscription',                            
                             'displayMdpperdu',
                             'displayMention',
                             'displayPlan',

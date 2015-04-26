@@ -13,7 +13,7 @@
 namespace controller;
 
 //use service\UrlService AS UrlService;
-use service\MembreService AS MembreService;
+use \service\MembreService AS MembreService;
 //use service\FilterService AS FilterService;
 //use service\ValidatorService AS ValidatorService;
 //use model\repository\MembreRepository AS MembreRepository;
@@ -175,9 +175,19 @@ class VisiteurController extends Controller
      */
     public function creerMembre()
     {
-        $ms = new MembreService();
-        $ms->createMembre();
-        if (isset($arrayErrors)) {
+        if (filter_has_var(INPUT_POST, 'pseudo') &&
+            filter_has_var(INPUT_POST, 'mdp')    &&
+            filter_has_var(INPUT_POST, 'nom')    &&
+            filter_has_var(INPUT_POST, 'prenom') &&
+            filter_has_var(INPUT_POST, 'email')  &&
+            filter_has_var(INPUT_POST, 'ville')  &&
+            filter_has_var(INPUT_POST, 'cp')     &&
+            filter_has_var(INPUT_POST, 'adresse')) {
+            
+            $ms = new MembreService();
+            $ms->createMembre();
+            if (isset($arrayErrors)) {
+            
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
@@ -188,7 +198,20 @@ class VisiteurController extends Controller
                                 'arrayErrors' => $arrayErrors,
                               )
                         );  
+            } 
+            
+        } else {
+            require __DIR__ . '/../views/viewParameters.php';
+            $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+            $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);
         }
+        
+        /*require __DIR__ . '/../views/viewParameters.php';
+            $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+            $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);*/
+        
+        
+              
     }
         //TODO : tester que le visiteur n'est pas un membre connecté, si c'est le cas faire
         //un header("location:#") vers l'accueil membre
@@ -307,8 +330,8 @@ class VisiteurController extends Controller
         if (filter_has_var(INPUT_POST, 'pseudo') &&
             filter_has_var(INPUT_POST, 'mdp') ) {
             //Instantiates the service class to use connexion method 
-            $cm = new MembreService();
-            $cm->connexionMembre("MembreController",
+            $ms = new MembreService();
+            $ms->connexionMembre("MembreController",
                                         "displayIndexMembre"                   
                                        );
         } else {

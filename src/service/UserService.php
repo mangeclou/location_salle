@@ -55,6 +55,7 @@ class UserService
             filter_has_var(INPUT_POST, 'ville')  &&
             filter_has_var(INPUT_POST, 'cp')     &&
             filter_has_var(INPUT_POST, 'adresse')) {
+            
             return true;
         } else {
             return false;

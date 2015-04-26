@@ -6,7 +6,7 @@
 namespace repository;
 require_once 'UserRepository.php';
 //use PDO;
-use repository\UserRepository; // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
+use \repository\UserRepository; // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
 
 class MembreRepository extends UserRepository {
 
@@ -37,10 +37,17 @@ class MembreRepository extends UserRepository {
         $table = 'membre';
         return $this->findUserByPseudo($pseudo, $table);    
     }
+    
+    public function findMembreByEmail($email)
+    {
+        $table = 'membre';
+        return $this->findUserByEmail($email, $table);
+    }
 
     public function registerMembre($membreValues)
     {
         // on fait appel à la méthode register de EntityRepository
+        $table ="membre";
         return $this->register($membreValues);
     }         
 }
