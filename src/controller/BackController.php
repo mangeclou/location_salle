@@ -19,11 +19,13 @@ require '../model/repository/BackRepository.php';
 //require '../service/FilterService.php';
 //require '../service/ConnexionService.php';
 //require '../service/UrlService.php';
+require '/../service/Admin/UserAdminService.php';
 
 //use service\UrlService AS UrlService;
 //use service\FilterService AS UrlService;
 //use service\ValidatorService AS ValidatorService;
 //use service\ConnexionlService AS ConnexionService;
+use \service\Admin\UserAdminService AS UAService;
 use \model\repository\BackRepository AS BackRepository;
 use controller\Controller AS MainController;
 
@@ -106,14 +108,16 @@ class BackController extends MainController
         if (filter_has_var(INPUT_POST, 'pseudo') &&
                 filter_has_var(INPUT_POST, 'mdp')) {
             
-            if (findAdminPseudoAndMdp
-            
-            //Call connexionService
-            ConnexionService::connexion( "VisiteurController",
-                    "displayIndexVisiteur",
-                    "MembreController",
-                    "displayIndexMembre"                   
-                                       )
+            $uas = new UAService();
+            $uas->connexionAdmin("BackController",
+                                        "displayIndexBack"                   
+                                       );
+        } else {
+        //If nothing has been posted, the connexion form is displayed
+            echo "no post";
+            require __DIR__ . '/../views/viewParameters.php';
+            $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
+            $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
         }
 /*        if(isset($_SESSION)){
             //on redirige vers la page d'accueil pour les membres
