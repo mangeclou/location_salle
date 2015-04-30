@@ -116,7 +116,7 @@ class BackController extends MainController
         //If nothing has been posted, the connexion form is displayed
             echo "no post";
             require __DIR__ . '/../views/viewParameters.php';
-            $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
+            $this->connexionParameters = $viewPageParameters['back']['connexion_back']; 
             $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
         }
 /*        if(isset($_SESSION)){
@@ -179,9 +179,9 @@ class BackController extends MainController
         
       }*///===========================
         //If nothing has been posted
-        require __DIR__ . '/../views/viewParameters.php';
+       /* require __DIR__ . '/../views/viewParameters.php';
         $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
-        $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
+        $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  */
     
     }//END function connexion
     

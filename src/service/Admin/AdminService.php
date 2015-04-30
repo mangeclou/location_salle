@@ -49,7 +49,7 @@ class AdminService extends UserService
     }
     
     /**
-     * [[Description]]
+     * TODO : à tester
      * @param  [[Type]] $controllerAuth [[Description]]
      * @param  [[Type]] $methodAuth     [[Description]]
      * @return [[Type]] [[Description]]
@@ -98,6 +98,10 @@ class AdminService extends UserService
         }
     }//END function connexion
     
+    /**
+     * TODO : à tester
+     * @return [[Type]] [[Description]]
+     */
     public function addAdmin()
     {
        //If the form has not been posted

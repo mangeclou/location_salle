@@ -41,6 +41,12 @@ class FilterService{
         return $filteredEmail;
     }
     
+    public function filterPostUrl($url)
+    {
+        $filteredUrl = trim(filter_input(INPUT_POST, trim($url), FILTER_SANITIZE_URL));
+        return $filteredUrl;
+    }
+        
     //Not tested
     public function filterPostData()
     {

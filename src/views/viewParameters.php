@@ -16,6 +16,14 @@ $viewPageParameters = array (
                     "meta" => array (
                     ),
                 ),
+                "connexion_back" => array (
+                   "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Contact",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    ),
+                ),
                 "contact_back" => array (
                     "head_inc" => "/inc/back/head.inc.php",
                     "title" => "Contact",
