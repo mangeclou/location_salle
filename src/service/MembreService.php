@@ -8,16 +8,16 @@
  */
 namespace service;
 
-require 'FilterService.php';
-require 'UrlService.php';
-require 'UserService.php';
-require 'ValidatorService.php';
-require '/../model/repository/MembreRepository.php';
+require_once 'FilterService.php';
+require_once 'UrlService.php';
+require_once 'UserService.php';
+require_once '/validator/UserValidatorService.php';
+require_once '/../model/repository/MembreRepository.php';
 
 use \repository\MembreRepository as MembreRepository;
 use \service\UserService AS UserService;
 use \service\FilterService AS FilterService;
-use \service\ValidatorService AS ValidatorService;
+use \service\UserValidatorService AS ValidatorService;
 use \service\UrlService AS UrlService;
 
 class MembreService extends UserService

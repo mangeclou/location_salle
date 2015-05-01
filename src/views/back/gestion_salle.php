@@ -1,13 +1,13 @@
 	<div class="big-title-back">
-            <h1>Gestion des produits</h1>
+            <h1>Gestion des salles</h1>
         </div>
 	<div class="container-box">
               
             <div class="salle-back">
                     
                 <form  action="gestion_produit.php">
-                    <button type="submit" name="addSalle">Ajouter une salle</button>
-                    <button type="submit" name="displaySalle">Affichage des salles</button>
+                    <a href="index.php?controller=BackController&method=addNewSalle">Ajouter une salle</a>
+                    <a href="index.php?controller=BackController&method=displaySalle">Affichage des salles</a>
                 </form>
                 
 

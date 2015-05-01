@@ -11,13 +11,13 @@ namespace service\Admin;
 require '../FilterService.php';
 require '../UrlService.php';
 require '../UserService.php';
-require '../ValidatorService.php';
+require '../UserValidatorService.php';
 require '/../model/repository/MembreRepository.php';
 
 use \repository\MembreRepository as MembreRepository;
 use \service\UserService AS UserService;
 use \service\FilterService AS FilterService;
-use \service\ValidatorService AS ValidatorService;
+use \service\UserValidatorService AS ValidatorService;
 use \service\UrlService AS UrlService;
 
 class AdminService extends UserService

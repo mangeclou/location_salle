@@ -13,20 +13,15 @@
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
 require 'Controller.php';
-//require 'Controller.php';
-require '../model/repository/BackRepository.php';
-//require '../service/ValidatorService.php';
-//require '../service/FilterService.php';
-//require '../service/ConnexionService.php';
-//require '../service/UrlService.php';
+require '/../model/repository/BackRepository.php';
+require '/../model/repository/SalleRepository.php';
 require '/../service/Admin/UserAdminService.php';
+require '/../service/Admin/SalleService.php';
 
-//use service\UrlService AS UrlService;
-//use service\FilterService AS UrlService;
-//use service\ValidatorService AS ValidatorService;
-//use service\ConnexionlService AS ConnexionService;
 use \service\Admin\UserAdminService AS UAService;
+use \service\Admin\SalleService AS SalleService;
 use \model\repository\BackRepository AS BackRepository;
+use \repository\SalleRepository AS SalleRepository;
 use controller\Controller AS MainController;
 
 class BackController extends MainController
@@ -35,6 +30,9 @@ class BackController extends MainController
     protected $layout = 'layout.php';
     
     //liste des templates et des paramètres pour chaque page
+    protected $addSalleTemplate = 'add_salle.php';
+    protected $addSalleParameters;
+    
     protected $cgvBackTemplate = 'cgv_back.php';
     protected $cgvBackParameters;
     
@@ -68,6 +66,9 @@ class BackController extends MainController
     protected $indexBackTemplate = 'index_back.php';
     protected $indexBackParameters;
     
+    protected $displaySalleTemplate = 'display_salle.php';
+    protected $displaySalleParameters;
+    
     protected $mdpperduBackTemplate = 'index_back.php';
     protected $mdpperduBackParameters;
     
@@ -98,106 +99,68 @@ class BackController extends MainController
     protected $statistiqueTemplate = 'statistique.php';
     protected $statistiqueParameters;
     
-     /**
-     * Connexion function for admin of the site
-     */
-    public function connexionAdmin()
-    {
-        //si la session est définie, donc si l'utilisateur est déjà connecté
-        //TODO : ajouter une autre condition ?
-        if (filter_has_var(INPUT_POST, 'pseudo') &&
-                filter_has_var(INPUT_POST, 'mdp')) {
-            
-            $uas = new UAService();
-            $uas->connexionAdmin("BackController",
-                                        "displayIndexBack"                   
-                                       );
-        } else {
-        //If nothing has been posted, the connexion form is displayed
-            echo "no post";
-            require __DIR__ . '/../views/viewParameters.php';
-            $this->connexionParameters = $viewPageParameters['back']['connexion_back']; 
-            $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  
-        }
-/*        if(isset($_SESSION)){
-            //on redirige vers la page d'accueil pour les membres
-            UrlService::redirect("MembreController", "displayIndexMembre");
-        //If the user is not already connected as a member
-        } else {
-            //On teste si le $_POST contient quelque chose,
-            //Si le formulaire n'a pas été soumis
-            if ((filter_has_var(INPUT_POST, 'pseudo')) &&
-                (filter_has_var(INPUT_POST, 'mdp'))){
-                //  si oui, on teste dans la bdd si
-                //le couple pseudo / mdp existe, si oui on affiche la page indexMembre
-               //methode du service
-      
-          //mdp du post
-          $mdpForm    = FilterService::filterPostString('mdp');
-          $pseudo     = \controller\FilterController::filterPostString('pseudo');
-          //Comparaison entre le mdp fourni et le mdp en base
-          $testMembre = new \repository\MembreRepository();
-          //$testMembre = parent::getRepository('Membre');
-          
-          
-          //print_r(get_class($testMembre));
-          //$pseudo = trim(filter_has_var(INPUT_POST, 'pseudo'));
-          //$hashedMdp = trim(filter_has_var(password_hash(INPUT_POST, 'pseudo'), PASSWORD_DEFAULT));
-          //on récupère le pseudo correspondant au pseudo entré en post
-          //$testMembre->findMembreByPseudo($pseudo); 
-          
-          //on appelle la méthode findMembreMdp
-          
-          $newMembre = $testMembre->findMembrePseudoAndMdp($pseudo);
-          //echo 'newMembre';
-          //var_dump($newMembre);
-          if ($newMembre) { // si on obtient un résultat 
-            //$membre = $newMembre->fetch(PDO::FETCH_ASSOC);
-            //cf PHP Cookbook p552
-            //echo $newMembre['mdp'];
-            //echo $mdpForm;
-            //$hash = '$2y$10$fmkazv66zFEvpyARwlbRuugRI';
-            //le password_verify retourne faux :/
-            if (password_verify($mdpForm, $newMembre['mdp'])) {
-              // $msg .= "<div class='bg-success' height='30' style='padding: 10px'><p>Mdp Ok !</p></div>";
-              //foreach ($membre as $indice=>$valeur) {
-              session_start();
-              $_SESSION["logged"] = true;
-              $_SESSION["mail"]   = $newMembre['email'];
-              $_SESSION["pseudo"] = $newMembre['pseudo'];
-              header("location:index.php?controller=MembreController&method=displayIndexMembre");
-              //echo 'bravo';
-            } else {
-              echo ("Mauvais mot de passe ou pseudo 1");
-            }
-         
-          //END if !$_POST
-            //Si non, on
-          } else {
-            echo ("Mauvais mot de passe ou pseudo 2");      
-          }
-        
-      }*///===========================
-        //If nothing has been posted
-       /* require __DIR__ . '/../views/viewParameters.php';
-        $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
-        $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  */
-    
-    }//END function connexion
-    
-  
     /**
      * A l'instantiation de la classe on vérifie si la session existe, si elle
      * n'existe pas on redirige vers l'accueil pour les visiteurs
+     * 
+     * /!\ PB car la méthode connexion ne peut pas fonctionner
      */
     public function __construct() {
-      //Checker si c'est nécessaire de faire un session_start à l'instanciation
         session_start();
-        if (!isset($_SESSION["email"])) {
+        if (!(isset($_SESSION["email"]) && isset($_SESSION["admin"]))) {
             header('location:index.php?controller=VisiteurController&method=displayIndex');
-        }        
+        }
+       print_r($_SESSION);
     }
+    
+    public function addNewSalle() 
+    {
+            print_r($_POST);
+        if (filter_has_var(INPUT_POST, 'pays')        &&
+            filter_has_var(INPUT_POST, 'ville')       &&
+            filter_has_var(INPUT_POST, 'adresse')     &&
+            filter_has_var(INPUT_POST, 'cp')          &&
+            filter_has_var(INPUT_POST, 'titre')       &&
+            filter_has_var(INPUT_POST, 'description') &&
+            filter_has_var(INPUT_POST, 'photo')       &&
+            filter_has_var(INPUT_POST, 'capacite')    &&
+            filter_has_var(INPUT_POST, 'categorie')
+           ) {
+            echo "premier if";
+             print_r($_POST);
+            $ss = new SalleService();
+            echo "coucou";
+            $ss->addSalle();
+            if (isset($arrayErrors)) {
+            //on récupère $arrayErrors qui est retourné par les méthodes de la classe
+            //ValidatorController et on affiche le formulaire avec les données de message
+            //d'erreur
+                require __DIR__ . '/../views/viewParameters.php';
+                $this->inscriptionParameters = $viewPageParameters['back']['gestion_salle'];
+                $this->render($this->layout,
+                              $this->inscriptionTemplate, array(
+                                'arrayErrors' => $arrayErrors,
+                              )
+                        );  
+            } 
+            
+        } else {
+            require __DIR__ . '/../views/viewParameters.php';
+            $this->addSalleParameters = $viewPageParameters['back']['add_new_salle'];
+            $this->render($this->layout, $this->addSalleTemplate, $this->addSalleParameters);
+        }
         
+        /*require __DIR__ . '/../views/viewParameters.php';
+            $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+            $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);*/
+        
+        
+              
+    
+    }
+    
+    
+          
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
     *
@@ -406,6 +369,20 @@ class BackController extends MainController
         $this->reservationDetailBackParameters = $viewPageParameters['back']['reservation_detail_back'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->reservationDetailBackTemplate, $this->reservationDetailBackParameters);  
+    }
+    
+    
+    public function displaySalle() 
+    {
+       
+        $sr = new SalleRepository();
+        $allSalles = $sr->getAllSalle();
+        //on require le fichier de config de la view
+       require __DIR__ . '/../views/viewParameters.php';
+       //on va chercher les paramètres dans l'array viewpageParameters
+       $this->displaySalleParameters = $viewPageParameters['back']['display_salle'];
+       //on utilise la méthode render du parent Controller pour afficher la page
+       return $this->render($this->layout, $this->displaySalleTemplate, $this->displaySalleParameters); 
     }
     
     public function displayStatistique() 

@@ -9,14 +9,14 @@
 namespace service;
 
 /**
- * Description of ValidatorController
+ * Description of SalleValidatorController
  *
  * @author yoann
  */
-class ValidatorService
+class SalleValidatorService
 {
 
-    protected $countryList = array(
+    private static $countryList = array(
         "AF" => "Afghanistan",
         "ZA" => "Afrique du Sud",
         "AL" => "Albanie",
@@ -269,31 +269,10 @@ class ValidatorService
     
     public static function getCountryList()
     {
-        return $this->countryList;
+        return self::$countryList;
     }
     
-    /**
-     * 
-     * @param type $nom
-     * @return string
-     */
-    public static function validateNom($nom)
-    {
-        $valid = array();
-        //A TESTER
-        if ($nom ==="") {
-            //return 'Veuillez saisir un nom.';
-            return "Veuillez saisir un nom.";
-        }
-
-        if (!preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/", $nom)) {
-            //return 'Votre nom ne peut pas contenir de chiffre.';
-            return "Certains caractères ne sont pas supportés.";
-        }
-         
-        return true;
-    }
-    
+        
     /**
      * 
      * @param type $nom
@@ -308,8 +287,11 @@ class ValidatorService
         if (!is_string($ville)){
             return 'Votre ville ne peut pas contenir uniquement des chiffres.';
         }
-        if (!preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$ville)){
+        if (!preg_match("/^[a-zA-Z\'áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$ville)){
             return 'Certains caractères ne sont pas supportés.';
+        }
+        if((strlen($ville)> 50)){
+           return 'Votre nom de ville est trop long.';
         }
         return true;
     }
@@ -319,92 +301,50 @@ class ValidatorService
      * @param type $nom
      * @return string
      */
-    public static function validatePrenom($prenom)
+    public static function validateTitre($titre)
     {
         //A TESTER
-        if ($prenom ===""){
-            return 'Veuillez saisir un prénom.';
+        if ($titre ===""){
+            return 'Veuillez saisir un titre.';
         }
-        if (!is_string($prenom)){
-            return 'Votre prénom ne peut pas contenir uniquement des chiffres.';
+        if (!is_string($titre)){
+            return 'Votre titre ne peut pas contenir uniquement des chiffres.';
         }
-        if (!preg_match("/^[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$prenom)){
-            return 'Votre prénom ne peut pas contenir de chiffre.';
+        if (!preg_match("/^[a-zA-Z0-9\'áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$titre)){
+            return 'Le titre contient des caractères invalides.';
+        }
+        if((strlen($titre)> 50)){
+           return 'Votre titre est trop long.';
+        }
+        
+        return true;
+    }
+    
+    /**
+     * 
+     * @param type $nom
+     * @return string
+     */
+    public static function validateDescription($description)
+    {
+        //A TESTER
+        if ($description ===""){
+            return 'Veuillez saisir une description.';
+        }
+        if (!is_string($description)){
+            return 'Votre description ne peut pas contenir uniquement des chiffres.';
+        }
+        if (!preg_match("/^[a-zA-Z0-9\'áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ\s-]+/",$description)){
+            return 'La description contient des caractères invalides.';
+        }
+        
+        if((strlen($description)> 255)){
+           return 'Votre description est trop longue.';
         }
               
         return true;
     }
-    
-    /**
-     * 
-     * @param type $email
-     * @return type
-     * @throws Exception
-     */
-    public static function validateEmail($email)
-    {
-        //On teste la validité de l'email
-        
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)== false){
-            return 'Veuillez saisir un email valide.';
-        } 
-        if ($email ===""){
-            return 'Veuillez saisir un email.';
-        }
-        //si l'arrayErrors est vide on retourne l'email, sinon on retourne l'arrayErrors
-        
-        return true;
-        
-    }
-    /**
-     * 
-     * @param type $email
-     * @return type
-     * @throws Exception
-     */
-    public static function validateMdp($mdp)
-    {
-        if ($mdp ===""){
-            return 'Veuillez saisir un mot de passe.';
-        }
-        if (strlen($mdp)> 30 ){
-            return 'Veuillez saisir un mot de passe de moins de 30 caract&egrave;res..';
-        }
-        if (strlen($mdp)< 7 ){
-            return 'Veuillez saisir un mot de passe d\'au moins 7 caract&egrave;res.';
-        }
-        if(!preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$mdp)){
-            return 'Vous utilisez des caractères non supportés.';
-        }
-        return true;
-    }
-    
-    /**
-     * Teste si le pseudo est valide, retourne un arrayErrors si c'est le cas et
-     * sinon retourne le pseudo
-     * @param type $pseudo
-     * @return boolean
-     */
-    public static function validatePseudo($pseudo)
-    {
-        if ($pseudo ===""){
-            return 'Veuillez saisir un pseudo.';
-        }
-        if (strlen($pseudo)> 30 ){
-            return 'Veuillez saisir un pseudo de moins de 30 caract&egrave;res..';
-        }
-        if (strlen($pseudo)< 3 ){
-            return 'Veuillez saisir un pseudo d\'au moins 3 caract&egrave;res.';
-        }
-        if (!is_string($pseudo)){
-            return 'Votre pseudo ne peut pas contenir uniquement des chiffres.';
-        }
-        if(!preg_match("/^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ#*£$._\s-]+/",$pseudo)){
-            return 'Vous utilisez des caractères non supportés.';
-        }
-        
-        return true;
-    }
+       
     /**
      * 
      * @param type $cp
@@ -420,20 +360,7 @@ class ValidatorService
                 
         return true;
     }
-    /**
-     * 
-     * @param type $sexe
-     * @return type
-     * @throws Exception
-     */
-    public static function validateSexe($sexe)
-    {
-        //On autorise uniquement les lettre "m" ou "f"
-        if(!$sexe == 'm'||!$sexe == 'f'){
-           return 'Veuillez saisir un sexe valide.';
-        }
-        return true;
-    }
+   
     /**
      * 
      * @param type $pays
@@ -443,7 +370,7 @@ class ValidatorService
     public static function validatePays($pays)
     {
         //On autorise uniquement les noms de pays valides
-        if(!in_array($pays, getCountryList())){
+        if(!in_array($pays, self::getCountryList())){
           return 'Veuillez saisir un pays valide.';
         }
         return true;
@@ -451,7 +378,7 @@ class ValidatorService
     
     /**
      * 
-     * @param type $email
+     * @param type $adresse
      * @return type
      * @throws Exception
      */
@@ -468,6 +395,60 @@ class ValidatorService
         return true;
     }
     
+    /**
+     * [[Description]]
+     * @param  [[Type]]       $adresse [[Description]]
+     * @return string|boolean [[Description]]
+     */
+    public static function validatePhoto($photo)
+    {
+        //On teste la validité de la photo
+        
+        if (empty($photo)){
+            return 'Veuillez saisir un lien.';
+        } 
+       /* if (strlen($photo) >250){
+            return 'Votre lien est trop long.';
+        }*/
+        return true;
+    }
+    
+    /**
+     * [[Description]]
+     * @param  [[Type]]       $capacite [[Description]]
+     * @return string|boolean [[Description]]
+     */
+    public static function validateCapacite($capacite)
+    {
+        //On teste la validité de la capacite
+        
+        if (empty($capacite)) {
+            return 'Veuillez saisir une capacite.';
+        }
+        if (!is_numeric($capacite)) {
+            return 'Veuillez saisir un nombre entier.';
+        }
+        if ($capacite >999999){
+            return 'Votre capacité est trop grande.';
+        }
+        return true;
+    }
+    
+     public static function validateCategorie($categorie)
+    {
+        //On teste la validité de la capacite
+        
+        if (empty($categorie)) {
+            return 'Veuillez saisir une catégorie.';
+        }
+        if (!is_string($categorie)) {
+            return 'Vous devez saisir des caractères.';
+        }
+        if ($categorie !== "reunion"){
+            return "Votre catégorie n'est pas valide.";
+        }
+        return true;
+    }
     
     /**
      * @desc Validateur pour le formulaire inscription, on lui passe $_POST, on peut donc
@@ -480,15 +461,15 @@ class ValidatorService
             //echo 'array de isformvalid';
              //var_dump($array);
              //exit();
-        if ((self::validatePseudo($array['pseudo']) === true)
-            && (self::validateMdp($array['mdp']) === true)
-            && (self::validateNom($array['nom']) === true)
-            && (self::validatePrenom($array['prenom']) === true)
-            && (self::validateEmail($array['email']) === true)
-            && (self::validateSexe($array['sexe']) === true)
+        if ((self::validatePays($array['pays']) === true)
             && (self::validateVille($array['ville']) === true)
-            && (self::validateCp($array['cp']) === true)
             && (self::validateAdresse($array['adresse']) === true)
+            && (self::validateCp($array['cp']) === true)
+            && (self::validateTitre($array['titre']) === true)
+            && (self::validateDescription($array['description']) === true)
+            && (self::validatePhoto($array['photo']) === true)
+            && (self::validateCapacite($array['capacite']) === true)
+            && (self::validateCategorie($array['categorie']) === true)
                 ){
             return true;
         }  else {
@@ -496,15 +477,15 @@ class ValidatorService
             // toutes les erreurs
             
             return $arrayErrors = [
-                "errorPseudo"  => self::validatePseudo($array['pseudo']),
-                "errorMdp"     => self::validateMdp($array['mdp']),
-                "errorNom"     => self::validateNom($array['nom']),
-                "errorPrenom"  => self::validatePrenom($array['prenom']),
-                "errorEmail"   => self::validateEmail($array['email']),
-                "errorSexe"    => self::validateSexe($array['sexe']),
-                "errorVille"   => self::validateVille($array['ville']),
-                "errorCp"      => self::validateCp($array['cp']),
-                "errorAdresse" => self::validateAdresse($array['adresse']),
+                "errorPays"        => self::validatePays($array['pays']),
+                "errorVille"       => self::validateVille($array['ville']),
+                "errorAdresse"     => self::validateAdresse($array['adresse']),
+                "errorCp"          => self::validateCp($array['cp']),
+                "errorTitre"       => self::validateTitre($array['titre']),
+                "errorDescription" => self::validateDescription($array['description']),
+                "errorPhoto"       => self::validatePhoto($array['photo']),
+                "errorCapacite"    => self::validateCapacite($array['capacite']),
+                "errorCategorie"   => self::validateCategorie($array['categorie']),
             ];
         }
     }

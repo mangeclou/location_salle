@@ -19,6 +19,7 @@ class controllerAndMethodManager{
                                    'BackController'];
     
     public static $arrayMethods = ['back'=>[
+                            'addNewSalle',
                             'displayEnvoiNewsletter',
                             'displayGestionAvis',
                             'displayGestionCommande',
@@ -31,19 +32,21 @@ class controllerAndMethodManager{
                             'displayProfilBack',
                             'displayRechercheBack',
                             'displayReservationBack',
-                            'displayStatistique'
+                            'displaySalle',
+                            'displayStatistique',                            
                             ],
                         'membre'=>[
                             'displayContact',
                             'displayIndexMembre',
                             'displayNewsletterInscription',
                             'displayPanier',
-                            'displayProfil'
+                            'displayProfil',
                             ],
                         'visiteur'=>[
+                            'connexion',
+                            'connexionAdmin',
                             'creerMembre',
                             'displayCgv',
-                            'connexion',
                             'displayIndex',
                             'displayInscription',                            
                             'displayMdpperdu',

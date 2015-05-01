@@ -15,15 +15,7 @@ $viewPageParameters = array (
                     "footer_inc" => "/inc/back/footer.inc.php",
                     "meta" => array (
                     ),
-                ),
-                "connexion_back" => array (
-                   "head_inc" => "/inc/back/head.inc.php",
-                    "title" => "Contact",
-                    "header_inc" => "/inc/back/header.inc.php",
-                    "footer_inc" => "/inc/back/footer.inc.php",
-                    "meta" => array (
-                    ),
-                ),
+                ),               
                 "contact_back" => array (
                     "head_inc" => "/inc/back/head.inc.php",
                     "title" => "Contact",
@@ -39,6 +31,22 @@ $viewPageParameters = array (
                     "footer_inc" => "/inc/back/footer.inc.php",
                     "meta" => array (
                     ),
+                ),
+                "add_new_salle" => array (
+                   "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Ajouter une salle",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    ),
+                ),
+                 "display_salle" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Gestion des produits",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    )
                 ),
                 "envoi_newsletter" => array (
                     "head_inc" => "/inc/back/head.inc.php",
@@ -299,6 +307,14 @@ $viewPageParameters = array (
                     "footer_inc" => "/inc/visiteur/footer.inc.php",
                     "meta" => array (
                     )
+                ),
+                "connexion_back" => array (
+                   "head_inc" => "/inc/visiteur/head.inc.php",
+                    "title" => "Se connecter au back office",
+                    "header_inc" => "/inc/visiteur/header.inc.php",
+                    "footer_inc" => "/inc/visiteur/footer.inc.php",
+                    "meta" => array (
+                    ),
                 ),
                 "contact" => array (
                     "head_inc" => "/inc/visiteur/head.inc.php",

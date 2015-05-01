@@ -12,19 +12,14 @@
  */
 namespace controller;
 
-//use service\UrlService AS UrlService;
-use \service\MembreService AS MembreService;
-//use service\FilterService AS FilterService;
-//use service\ValidatorService AS ValidatorService;
-//use model\repository\MembreRepository AS MembreRepository;
-
 require 'Controller.php';
-//require "/../model/repository/MembreRepository.php";
-    //permet d'utiliser les méthodes du trait ValidatorController
-//require '/../service/ValidatorService.php';
+require '/../model/repository/BackRepository.php';
+require '/../service/Admin/UserAdminService.php';
 require '/../service/MembreService.php';
-//require '/../service/FilterService.php';
-//require '/../service/UrlService.php';
+
+use \service\MembreService AS MembreService;
+use \service\Admin\UserAdminService AS UAService;
+use \model\repository\BackRepository AS BackRepository;
 
 //VisiteurController hérite de Controller pour pouvoir utiliser la méthode render()
 class VisiteurController extends Controller
@@ -38,6 +33,9 @@ class VisiteurController extends Controller
        
     protected $connexionTemplate = 'connexion.php';
     protected $connexionParameters;
+    
+    protected $connexionBackTemplate = 'connexion_back.php';
+    protected $connexionBackParameters;
     
     protected $contactTemplate = 'contact.php';
     protected $contactParameters;
@@ -403,4 +401,27 @@ class VisiteurController extends Controller
         
     
     }//END function connexion
+    
+     /**
+     * Connexion function for admins of the site
+     */
+    public function connexionAdmin()
+    {
+        //si la session est définie, donc si l'utilisateur est déjà connecté
+        //TODO : ajouter une autre condition ?
+        if (filter_has_var(INPUT_POST, 'pseudo') &&
+                filter_has_var(INPUT_POST, 'mdp')) {
+            
+            $uas = new UAService();
+            $uas->connexionAdmin("BackController",
+                                        "displayIndexBack"                   
+                                       );
+        } else {
+        //If nothing has been posted, the connexion form is displayed
+            echo "no post";
+            require __DIR__ . '/../views/viewParameters.php';
+            $this->connexionBackParameters = $viewPageParameters['visiteur']['connexion_back']; 
+            $this->render($this->layout, $this->connexionBackTemplate, $this->connexionBackParameters);  
+        }
+    }//END function connexionAdmin
 }//END Class VisiteurController

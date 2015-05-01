@@ -5,23 +5,43 @@
 
 namespace repository;
 
-require_once 'EntityRepository.php';
-USE repository\EntityRepository; // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
+require_once '\EntityRepository.php';
+
+use PDO;
+use \repository\EntityRepository AS EntityRepository;
+ // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
 
 class SalleRepository extends EntityRepository {
 
     public function getAllSalle()
     {
-        return $this->findAll(); // on va voir la méthode findAll() de EntityRepository
+        return $this->findAll();
     }
 
     public function findSalleById($id)
     {
-        return $this->find($id); // on va voir la méthode findAll() de EntityRepository
+        return $this->find($id);
     }
 
-    public function registerSalle()
+    public function registerSalle($salleValues)
     {
-        return $this->register(); // on va voir la méthode findAll() de EntityRepository
+        
+        return $this->register($salleValues);
+    }
+    
+    public function findSalleByTitre($titre)
+    {
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $query = $db->prepare("SELECT titre
+                                      FROM salle
+                                      WHERE titre = :titre;");
+
+        $query->bindValue(':titre', $titre, PDO::PARAM_STR);
+        $query->execute();
+        
+        $data = $query->fetch(PDO::FETCH_LAZY);
+        
+        return $data;          
     }
 }

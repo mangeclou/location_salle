@@ -8,11 +8,11 @@
  */
 namespace service\Admin;
 
-require '../FilterService.php';
-require '../UrlService.php';
-require '../UserService.php';
-require '../ValidatorService.php';
-require '/../model/repository/MembreRepository.php';
+require '/../FilterService.php';
+require '/../UrlService.php';
+require '/../UserService.php';
+require '/../validator/UserValidatorService.php';
+require '/../../model/repository/MembreRepository.php';
 
 use \repository\MembreRepository as MembreRepository;
 use \service\UserService AS UserService;
@@ -48,6 +48,13 @@ class UserAdminService extends UserService
         }
     }
     
+    protected function startSessionAdmin($email, $pseudo)
+    {
+        parent::startSessionUser($email, $pseudo);
+        $_SESSION["admin"]   = true;      
+        
+    }
+    
     /**
      * [[Description]]
      * @param  [[Type]] $controllerAuth [[Description]]
@@ -72,12 +79,15 @@ class UserAdminService extends UserService
                 $mr = new MembreRepository();
                 //Method to find the form pseudo
                 $newMembre  = $mr->findAdminByPseudo($pseudo);
+                
+                /*print_r($newMembre);
+                exit();*/
                 //If the pseudo exists in the db with admin status
                 if (isset($newMembre)) {
                     //Check if the password of the post matches the hashed password in the db
-                    if (password_verify($mdp, $newMembre[0]->getMdp())) {
+                    if (password_verify($mdp, $newMembre["mdp"])) {
                         //foreach ($membre as $indice=>$valeur) {
-                        parent::startSessionUser($newMembre[0]->getEmail(), $newMembre[0]->getPseudo());
+                        self::startSessionAdmin($newMembre["email"], $newMembre["pseudo"]);
                         
                         //Redirect
                         self::redirect($controllerAuth, $methodAuth );
