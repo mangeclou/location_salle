@@ -7,8 +7,6 @@ $msg = '';
     <div class="big_title">
         <h1>Ajout Salle</h1>
     </div>
-      
- 
     <div class="container-box">
 	<div class="col_50">
             <div class="form-inscription">

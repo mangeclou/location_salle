@@ -28,13 +28,8 @@ class SalleService
         header("location:index.php?controller=" .ucfirst($controller) ."&method=" .$method);
     }
     
-    public function addSalle()
+    protected function FilterSalle()
     {
-
-       //If the form has not been posted
-        //if (parent::postCreateUserExist()) {
-        //Filter post
-         echo "coucou";
         $fs          = new FilterService();
         $pays        = $fs->filterPostString('pays');
         $ville       = $fs->filterPostString('ville');
@@ -46,7 +41,6 @@ class SalleService
         $capacite    = $fs->filterPostString('capacite');    
         $categorie   = $fs->filterPostString('categorie');    
 
-        echo "coucou";
         $filteredSalle = [
             "pays"        => $pays,
             "ville"       => $ville,
@@ -57,15 +51,44 @@ class SalleService
             "photo"       => $photo,   
             "capacite"    => $capacite,      
             "categorie"   => $categorie,         
-          
-        
+        ];
+        return $filteredSalle;        
+    }
+    
+    public function addSalle()
+    {
+
+       //If the form has not been posted
+        //if (parent::postCreateUserExist()) {
+        //Filter post
+        $fs          = new FilterService();
+        $pays        = $fs->filterPostString('pays');
+        $ville       = $fs->filterPostString('ville');
+        $adresse     = $fs->filterPostString('adresse');
+        $cp          = $fs->filterPostString('cp');    
+        $titre       = $fs->filterPostString('titre');    
+        $description = $fs->filterPostString('description');    
+        $photo       = $fs->filterPostUrl('photo');    
+        $capacite    = $fs->filterPostString('capacite');    
+        $categorie   = $fs->filterPostString('categorie');    
+
+        $filteredSalle = [
+            "pays"        => $pays,
+            "ville"       => $ville,
+            "adresse"     => $adresse,   
+            "cp"          => $cp,          
+            "titre"       => $titre,
+            "description" => $description,
+            "photo"       => $photo,   
+            "capacite"    => $capacite,      
+            "categorie"   => $categorie,         
         ];
         //Check if the titre in the form already exists in the db  (the titre is 
         //unique in the db)
-        $mr         = new SalleRepository();
-        $findTitre = $mr ->findSalleByTitre($titre);
+        $sr         = new SalleRepository();
+        $findTitre = $sr ->findSalleByTitre($titre);
         $arrayErrors = [];
-        print_r($mr);
+        //print_r($mr);
         //print_r($filteredMember);
         //exit();
         //If the titre already exists
@@ -78,14 +101,14 @@ class SalleService
         //Check if the form pass the validation test
         if ($validation !== true) {
             ///Returns the arrayErrors
-            print_r($validation);
-            exit();
+            //print_r($validation);
+            //exit();
             return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
         //If the form is validated         
         } else {
             if ($validation === true) {
                 //Add salle data to db
-                $mr->registerSalle($filteredSalle);
+                $sr->registerSalle($filteredSalle);
                // print_r($query);
                // exit();
                
@@ -93,12 +116,53 @@ class SalleService
                 self::redirect("BackController", "displaySalle");
             }
         }//END if $validation !== true
-    }//END addAdmin()  
+    }//END addSalle()  
     
     
-    public function editSalle()
+
+    
+    public function editSalleService()
     {
-        
+        //If the form has not been posted
+        //if (parent::postCreateUserExist()) {
+        //Filter post
+        $filteredSalle = $this->FilterSalle();
+        //Check if the titre in the form already exists in the db  (the titre is 
+        //unique in the db)
+        $sr          = new SalleRepository();
+        $findTitre   = $sr ->findSalleByTitre($filteredSalle['titre']);
+        $arrayErrors = [];
+        //print_r($mr);
+        //print_r($filteredMember);
+        //exit();
+        //If the titre already exists
+        if ($findTitre === true) {
+            $arrayErrors[] = 'Veuillez choisir un autre titre.';
+        }        
+        //If the pseudo doesn't exist
+        $vs = new ValidatorService();
+        $validation = $vs->isFormValid($filteredSalle);
+        //Check if the form pass the validation test
+        if ($validation !== true) {
+            ///Returns the arrayErrors
+            //print_r($validation);
+            //exit();
+            return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
+        //If the form is validated         
+        } else {
+            if ($validation === true) {
+                //The id of the salle to be edited is taken from the $_GET
+                $filteredSalle["id_salle"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+                //Add salle data to db
+                $sr->updateSalle($filteredSalle);
+               // print_r($query);
+               // exit();
+               
+                echo "Salle ajoutée";
+                self::redirect("BackController", "displaySalle");
+            }
+        }//END if $validation !== true
+       
     }
     
     public function deleteSalle()

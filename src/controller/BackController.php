@@ -42,6 +42,9 @@ class BackController extends MainController
     protected $createNewAdminTemplate = 'create_new_admin.php';
     protected $createNewAdminParameters;
         
+    protected $editSalleTemplate = 'edit_salle.php';
+    protected $editSalleParameters;
+    
     protected $envoiNewsletterTemplate = 'envoi_newsletter.php';
     protected $envoiNewsletterParameters;
     
@@ -113,9 +116,8 @@ class BackController extends MainController
        //print_r($_SESSION);
     }
     
-    public function addNewSalle() 
+    public function verifyEmptyPostSalle()
     {
-            print_r($_POST);
         if (filter_has_var(INPUT_POST, 'pays')        &&
             filter_has_var(INPUT_POST, 'ville')       &&
             filter_has_var(INPUT_POST, 'adresse')     &&
@@ -126,10 +128,18 @@ class BackController extends MainController
             filter_has_var(INPUT_POST, 'capacite')    &&
             filter_has_var(INPUT_POST, 'categorie')
            ) {
-            echo "premier if";
-             print_r($_POST);
+            return true;
+        } else {
+            return false;
+        }
+       
+    }
+
+    public function addNewSalle() 
+    {
+        if($this->verifyEmptyPostSalle() === true) {
+
             $ss = new SalleService();
-            echo "coucou";
             $ss->addSalle();
             if (isset($arrayErrors)) {
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
@@ -149,6 +159,38 @@ class BackController extends MainController
             $this->addSalleParameters = $viewPageParameters['back']['add_new_salle'];
             $this->render($this->layout, $this->addSalleTemplate, $this->addSalleParameters);
         }
+    }
+    
+    public function editSalle() 
+    {
+        if ($this->verifyEmptyPostSalle() === true) {
+
+            $ss = new SalleService();
+            $ss->editSalleService();
+            if (isset($arrayErrors)) {
+            //on récupère $arrayErrors qui est retourné par les méthodes de la classe
+            //ValidatorController et on affiche le formulaire avec les données de message
+            //d'erreur
+                require __DIR__ . '/../views/viewParameters.php';
+                $this->inscriptionParameters = $viewPageParameters['back']['gestion_salle'];
+                $this->render($this->layout,
+                              $this->inscriptionTemplate, array(
+                                'arrayErrors' => $arrayErrors,
+                              )
+                        );  
+            } 
+            
+        } else {
+            $sr = new SalleRepository();
+            $editSalle = $sr->findSalleById($_GET["id"]);
+            
+            require __DIR__ . '/../views/viewParameters.php';
+            
+            $viewPageParameters['back']['edit_salle']['meta'] = $editSalle;
+           
+            $this->editSalleParameters = $viewPageParameters['back']['edit_salle'];
+            $this->render($this->layout, $this->editSalleTemplate, $this->editSalleParameters);
+        }
         
         /*require __DIR__ . '/../views/viewParameters.php';
             $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
@@ -158,7 +200,6 @@ class BackController extends MainController
               
     
     }
-    
     
           
     /**

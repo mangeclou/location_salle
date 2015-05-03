@@ -43,8 +43,8 @@
                     <td><?php echo($row["capacite"]); ?></td>
                     <td><?php echo($row["categorie"]); ?></td>
                                       
-                    <td><a href="<?php /*echo base_url('admin/dashboard/edit/' . $row->c_id);*/ ?>" title="Modifier"><i class="fa fa-pencil"></i></a></td>
-                    <td><a href="<?php /*echo base_url('admin/dashboard/delete/' . $row->c_id);*/ ?>" onclick="return deleteConfirm()" title="Supprimer"><i class="fa fa-trash"></i></a></td>
+                    <td><a href="<?php echo "index.php?controller=BackController&method=editSalle&id=".$row['id_salle'] ?>" title="Modifier"><i class="fa fa-pencil"></i></a></td>
+                    <td><a href="<?php echo "index.php?controller=BackController&method=deleteSalle&id=".$row['id_salle'] ?>" onclick="confirm('Etes vous sûr ?')" title="Supprimer"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 <?php endforeach; ?>
                 <?php  /*endif;*/ ?>

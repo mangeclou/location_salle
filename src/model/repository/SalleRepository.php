@@ -30,7 +30,19 @@ class SalleRepository extends EntityRepository {
 
     public function findSalleById($id)
     {
-        return $this->find($id);
+        $id_salle = (int)$id;
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $query = $db->prepare("SELECT *
+                                FROM salle
+                                WHERE id_salle = :id_salle;");
+
+        $query->bindValue(':id_salle', $id_salle, PDO::PARAM_INT);
+        $query->execute();
+        
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        
+        return $data;          
     }
 
     public function registerSalle($salleValues)
@@ -51,6 +63,35 @@ class SalleRepository extends EntityRepository {
         $query->execute();
         
         $data = $query->fetch(PDO::FETCH_LAZY);
+        
+        return $data;          
+    }
+    
+    public function updateSalle($values)
+    {
+        print_r($values);
+        //exit();
+        extract($values);
+        
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $query = $db->prepare("UPDATE salle
+                                SET pays = :pays, ville= :ville, cp=:cp, titre=:titre, description= :description,
+                                    photo= :photo, capacite= :capacite, categorie = :categorie
+                                    WHERE id_salle = :id_salle;");
+
+        $query->bindValue(':id_salle', $id_salle, PDO::PARAM_INT);
+        $query->bindValue(':pays', $pays, PDO::PARAM_STR);
+        $query->bindValue(':ville', $ville, PDO::PARAM_STR);
+        $query->bindValue(':cp', $cp, PDO::PARAM_STR);
+        $query->bindValue(':titre', $titre, PDO::PARAM_STR);
+        $query->bindValue(':description', $description, PDO::PARAM_STR);
+        $query->bindValue(':photo', $photo, PDO::PARAM_STR);
+        $query->bindValue(':capacite', $capacite, PDO::PARAM_STR);
+        $query->bindValue(':categorie', $categorie, PDO::PARAM_STR);
+        $query->execute();
+        
+        $data = $query->fetch(PDO::FETCH_ASSOC);
         
         return $data;          
     }
