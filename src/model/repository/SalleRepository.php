@@ -15,7 +15,17 @@ class SalleRepository extends EntityRepository {
 
     public function getAllSalle()
     {
-        return $this->findAll();
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+
+        $query = $db->prepare( "SELECT *
+                                FROM salle;");
+
+        $query->execute();
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;          
     }
 
     public function findSalleById($id)

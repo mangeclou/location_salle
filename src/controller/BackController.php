@@ -22,7 +22,7 @@ use \service\Admin\UserAdminService AS UAService;
 use \service\Admin\SalleService AS SalleService;
 use \model\repository\BackRepository AS BackRepository;
 use \repository\SalleRepository AS SalleRepository;
-use controller\Controller AS MainController;
+use \controller\Controller AS MainController;
 
 class BackController extends MainController
 {
@@ -110,7 +110,7 @@ class BackController extends MainController
         if (!(isset($_SESSION["email"]) && isset($_SESSION["admin"]))) {
             header('location:index.php?controller=VisiteurController&method=displayIndex');
         }
-       print_r($_SESSION);
+       //print_r($_SESSION);
     }
     
     public function addNewSalle() 
@@ -374,15 +374,17 @@ class BackController extends MainController
     
     public function displaySalle() 
     {
-       
         $sr = new SalleRepository();
         $allSalles = $sr->getAllSalle();
         //on require le fichier de config de la view
-       require __DIR__ . '/../views/viewParameters.php';
-       //on va chercher les paramètres dans l'array viewpageParameters
-       $this->displaySalleParameters = $viewPageParameters['back']['display_salle'];
-       //on utilise la méthode render du parent Controller pour afficher la page
-       return $this->render($this->layout, $this->displaySalleTemplate, $this->displaySalleParameters); 
+        require __DIR__ . '/../views/viewParameters.php';
+        
+        $viewPageParameters['back']['display_salle']['meta'] = $allSalles;
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->displaySalleParameters = $viewPageParameters['back']['display_salle'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        
+        return $this->render($this->layout, $this->displaySalleTemplate, $this->displaySalleParameters); 
     }
     
     public function displayStatistique() 

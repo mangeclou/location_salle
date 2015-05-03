@@ -11,39 +11,44 @@
                 </form>
                 <?php /*if($query->num_rows() > 0):*/ ?>
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="back-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Pays</th>
+                        <th>Ville</th>
+                        <th>Adresse</th>
+                        <th>Cp</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Photo</th>
+                        <th>Capacite</th>
+                        <th>Categorie</th>
+                        <th>Editer</th>
+                        <th>Supprimer</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                <?php foreach($this->displaySalleParameters["meta"] as $row): ?>
                 <tr>
-                    <th>ID</th>
-                    <th>Pays</th>
-                    <th>Ville</th>
-                    <th>Rubrique</th>
-                    <th>Adresse</th>
-                    <th>Cp</th>
-                    <th>Titre</th>
-                    <th>Description</th>
-                    <th>Photo</th>
-                    <th>Capacite</th>
-                    <th>Categorie</th>
-                </tr>
-                <!--<?php /*foreach($query->result() as $row):*/ ?>-->
-                <tr>
-                    <td>test<?php /*echo $row->c_id;*/ ?></td>
-                    <td>test<?php /*echo $row->c_title;*/ ?></td>
-                    <td>test<?php /*echo character_limiter($row->c_content, 64);*/ ?></td>
-                    <td>test<?php /*echo $row->r_title;*/ ?></td>
-                    <td>teste<?php /*echo date("d/m/Y à H:i:s", strtotime($row->c_cdate));*/ ?></td>
-                    <td>test<?php /*echo date("d/m/Y à H:i:s", strtotime($row->c_udate));*/ ?></td>
-                    <td>test<?php /*echo date("d/m/Y à H:i:s", strtotime($row->c_udate));*/ ?></td>
-                    <td>tset<?php /*echo date("d/m/Y à H:i:s", strtotime($row->c_udate));*/ ?></td>
-                    <td>test<?php /*echo date("d/m/Y à H:i:s", strtotime($row->c_udate));*/ ?></td>
-                    <td>teset<?php /*echo date("d/m/Y à H:i:s", strtotime($row->c_udate));*/ ?></td>
-                    <td>test<?php /*echo date("d/m/Y à H:i:s", strtotime($row->c_udate));*/ ?></td>
+                    
+                    <td><?php echo($row["id_salle"]); ?></td>
+                    <td><?php echo($row["pays"]); ?></td>
+                    <td><?php echo($row["ville"]); ?></td>
+                    <td><?php echo($row["adresse"]); ?></td>
+                    <td><?php echo($row["cp"]); ?></td>
+                    <td><?php echo($row["titre"]); ?></td>
+                    <td><?php echo($row["description"]); ?></td>
+                    <td><?php echo($row["photo"]); ?></td>
+                    <td><?php echo($row["capacite"]); ?></td>
+                    <td><?php echo($row["categorie"]); ?></td>
+                                      
                     <td><a href="<?php /*echo base_url('admin/dashboard/edit/' . $row->c_id);*/ ?>" title="Modifier"><i class="fa fa-pencil"></i></a></td>
                     <td><a href="<?php /*echo base_url('admin/dashboard/delete/' . $row->c_id);*/ ?>" onclick="return deleteConfirm()" title="Supprimer"><i class="fa fa-trash"></i></a></td>
                 </tr>
-                <?php /*endforeach;*/ ?>
+                <?php endforeach; ?>
                 <?php  /*endif;*/ ?>
-                
+                </tbody>
             </table><!-- end .table .table-hover -->
         </div><!-- end .table-responsive -->
 

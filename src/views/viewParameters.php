@@ -42,7 +42,7 @@ $viewPageParameters = array (
                 ),
                  "display_salle" => array (
                     "head_inc" => "/inc/back/head.inc.php",
-                    "title" => "Gestion des produits",
+                    "title" => "Gestion des salles",
                     "header_inc" => "/inc/back/header.inc.php",
                     "footer_inc" => "/inc/back/footer.inc.php",
                     "meta" => array (

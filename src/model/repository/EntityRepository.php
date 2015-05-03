@@ -53,6 +53,8 @@ class EntityRepository
         // FROM le nom de la table recherchée
         $query = $this->getDb();
         $query->prepare('SELECT * FROM ' . $this->getTableName());
+        //print_r($query);
+        //exit();
         $query->execute();
 		// echo PDO::FETCH_PROPS_LATE;
 		// echo PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE;
