@@ -147,10 +147,11 @@ class SalleService
             ///Returns the arrayErrors
             //print_r($validation);
             //exit();
-            return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
+            
         //If the form is validated         
         } else {
             if ($validation === true) {
+                echo "validation true";
                 //The id of the salle to be edited is taken from the $_GET
                 $filteredSalle["id_salle"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
                 //Add salle data to db

@@ -69,30 +69,31 @@ class SalleRepository extends EntityRepository {
     
     public function updateSalle($values)
     {
-        print_r($values);
+        //print_r($values);
         //exit();
         extract($values);
         
         $db = $this->getDb();
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
         $query = $db->prepare("UPDATE salle
-                                SET pays = :pays, ville= :ville, cp=:cp, titre=:titre, description= :description,
+                                SET pays = :pays, ville= :ville, adresse= :adresse, cp=:cp, titre=:titre, description= :description,
                                     photo= :photo, capacite= :capacite, categorie = :categorie
                                     WHERE id_salle = :id_salle;");
 
         $query->bindValue(':id_salle', $id_salle, PDO::PARAM_INT);
         $query->bindValue(':pays', $pays, PDO::PARAM_STR);
         $query->bindValue(':ville', $ville, PDO::PARAM_STR);
+        $query->bindValue(':adresse', $adresse, PDO::PARAM_STR);
         $query->bindValue(':cp', $cp, PDO::PARAM_STR);
         $query->bindValue(':titre', $titre, PDO::PARAM_STR);
         $query->bindValue(':description', $description, PDO::PARAM_STR);
         $query->bindValue(':photo', $photo, PDO::PARAM_STR);
         $query->bindValue(':capacite', $capacite, PDO::PARAM_STR);
         $query->bindValue(':categorie', $categorie, PDO::PARAM_STR);
-        $query->execute();
-        
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        
-        return $data;          
+        $update = $query->execute();
+        //print_r($temp);
+        //$data = $query->fetch(PDO::FETCH_ASSOC);
+       // print_r($data);
+        return $update;          
     }
 }
