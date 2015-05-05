@@ -96,4 +96,20 @@ class SalleRepository extends EntityRepository {
        // print_r($data);
         return $update;          
     }
+    
+    public function deleteSalle($id){
+ 
+    $db = $this->getDb();
+    $query = $db->prepare( "DELETE FROM Salle
+                            WHERE id = :id;");
+ 
+    $query->bindValue(':id', $id, PDO::PARAM_INT);    
+ 
+    $delete = $query->execute();
+    if (!is_null($delete)) {
+        return true;
+    } else {
+        return false;
+    }
+    }
 }

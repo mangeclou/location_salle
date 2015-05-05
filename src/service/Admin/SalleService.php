@@ -166,8 +166,8 @@ class SalleService
        
     }
     
-    public function deleteSalle()
+    public function deleteSalleService()
     {
-        
+        deleteSalle();
     }
 }
