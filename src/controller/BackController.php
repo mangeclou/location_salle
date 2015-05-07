@@ -195,13 +195,20 @@ class BackController extends MainController
         /*require __DIR__ . '/../views/viewParameters.php';
             $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
             $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);*/
-        
-        
-              
-    
     }
     
-          
+    public function deleteSalle() 
+    {
+        $ss = new SalleService();
+        
+        $idSalle = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+        $ss->deleteSalleService($idSalle);
+        //The id of the salle to be edited is taken from the $_GET
+      
+        
+    }
+    
+    
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
     *

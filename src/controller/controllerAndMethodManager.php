@@ -21,6 +21,7 @@ class controllerAndMethodManager{
     public static $arrayMethods = ['back'=>[
                             'addNewSalle',
                             'editSalle',
+                            'deleteSalle',
                             'displayEnvoiNewsletter',
                             'displayGestionAvis',
                             'displayGestionCommande',

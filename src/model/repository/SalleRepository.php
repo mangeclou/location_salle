@@ -99,9 +99,10 @@ class SalleRepository extends EntityRepository {
     
     public function deleteSalle($id){
  
+       $id=(int)$id;
     $db = $this->getDb();
     $query = $db->prepare( "DELETE FROM Salle
-                            WHERE id = :id;");
+                            WHERE id_salle = :id;");
  
     $query->bindValue(':id', $id, PDO::PARAM_INT);    
  

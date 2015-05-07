@@ -156,18 +156,18 @@ class SalleService
                 $filteredSalle["id_salle"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
                 //Add salle data to db
                 $sr->updateSalle($filteredSalle);
-               // print_r($query);
-               // exit();
-               
-                echo "Salle ajoutée";
+              
                 self::redirect("BackController", "displaySalle");
             }
         }//END if $validation !== true
        
     }
     
-    public function deleteSalleService()
+    public function deleteSalleService($id)
     {
-        deleteSalle();
+        echo $id;
+        $sr         = new SalleRepository();
+        $sr ->deleteSalle($id);
+         self::redirect("BackController", "displaySalle");
     }
 }
