@@ -61,7 +61,8 @@ class SalleService
        //If the form has not been posted
         //if (parent::postCreateUserExist()) {
         //Filter post
-        $fs          = new FilterService();
+        $filteredSalle = $this->FilterSalle();
+       /* $fs          = new FilterService();
         $pays        = $fs->filterPostString('pays');
         $ville       = $fs->filterPostString('ville');
         $adresse     = $fs->filterPostString('adresse');
@@ -82,7 +83,7 @@ class SalleService
             "photo"       => $photo,   
             "capacite"    => $capacite,      
             "categorie"   => $categorie,         
-        ];
+        ];*/
         //Check if the titre in the form already exists in the db  (the titre is 
         //unique in the db)
         $sr         = new SalleRepository();
@@ -92,6 +93,7 @@ class SalleService
         //If the titre already exists
         if ($findTitre === true) {
             $arrayErrors[] = 'Veuillez choisir un autre titre.';
+            self::redirect("BackController", "addSalle");
         }        
         //If the pseudo doesn't exist
         $vs = new ValidatorService();
@@ -131,7 +133,7 @@ class SalleService
         //If the titre already exists
         if ($findTitre === true) {
             $arrayErrors[] = 'Veuillez choisir un autre titre.';
-             self::redirect("BackController", "editSalle");
+            self::redirect("BackController", "editSalle");
         }        
         //If the pseudo doesn't exist
         $vs = new ValidatorService();

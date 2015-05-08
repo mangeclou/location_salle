@@ -5,10 +5,10 @@
               
             <div class="salle-back">
                     
-                <form  action="gestion_produit.php">
-                    <a href="index.php?controller=BackController&method=addNewSalle">Ajouter une salle</a>
-                    <a href="index.php?controller=BackController&method=displaySalle">Affichage des salles</a>
-                </form>
+                <!--<form  action="gestion_produit.php">-->
+                    <a class="button" href="index.php?controller=BackController&method=addNewSalle">Ajouter une salle</a>
+               <!--     <a href="index.php?controller=BackController&method=displaySalle">Affichage des salles</a>-->
+              <!--  </form>-->
                 <?php /*if($query->num_rows() > 0):*/ ?>
         <div class="table-responsive">
             <table class="back-table">

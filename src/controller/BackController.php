@@ -166,24 +166,28 @@ class BackController extends MainController
         if($this->verifyPostSalle() === true) {
 
             $ss = new SalleService();
-            $ss->addSalle();
-            if (isset($arrayErrors)) {
+            $salle = $ss->addSalleService();
+            
+            //If there is at least one error in the form
+            if (self::verifyErrorSalle($salle)) {
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
                 require __DIR__ . '/../views/viewParameters.php';
-                $this->inscriptionParameters = $viewPageParameters['back']['gestion_salle'];
+                $viewPageParameters['back']['add_new_salle']['meta']['errors'] = $salle;
+                $this->addSalleParameters = $viewPageParameters['back']['add_new_salle'];
                 $this->render($this->layout,
-                              $this->inscriptionTemplate, array(
-                                'arrayErrors' => $arrayErrors,
-                              )
+                              $this->addSalleTemplate,
+                               $this->addSalleParameters
                         );  
             } 
             
         } else {
             require __DIR__ . '/../views/viewParameters.php';
             $this->addSalleParameters = $viewPageParameters['back']['add_new_salle'];
-            $this->render($this->layout, $this->addSalleTemplate, $this->addSalleParameters);
+            $this->render($this->layout,
+                          $this->addSalleTemplate,
+                          $this->addSalleParameters);
         }
     }
     

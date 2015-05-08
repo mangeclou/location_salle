@@ -78,7 +78,7 @@ class controllerAndMethodManager{
             //supprime 'controller' du nom du controller et le fait commencer par
             //une minuscule
            $controller = lcfirst($controller);
-           echo $controller .'<br>';
+           //echo $controller .'<br>';
            //$pos = strpos($haystack, $needle);
           //$controllerNew = strtr($controller, 'Controller', '$controller');
            
