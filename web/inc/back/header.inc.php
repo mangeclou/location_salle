@@ -11,7 +11,7 @@
                 <li><a href="index.php?controller=BackController&method=displayProfilBack">Profil</a></li>
             </ul>
             <ul>
-                <li><a href="index.php?controller=BackController&method=displayGestionSalle">Gestion salles</a></li>
+                <li><a href="index.php?controller=BackController&method=displaySalle">Gestion salles</a></li>
                 <li><a href="index.php?controller=BackController&method=displayGestionProduit">Gestion produits</a></li>
                 <li><a href="index.php?controller=BackController&method=displayGestionMembre">Gestion membres</a></li>
                 <li><a href="index.php?controller=BackController&method=displayGestionCommande">Gestion commandes</a></li>

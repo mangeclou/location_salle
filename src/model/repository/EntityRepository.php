@@ -53,8 +53,7 @@ class EntityRepository
         // FROM le nom de la table recherchée
         $query = $this->getDb();
         $query->prepare('SELECT * FROM ' . $this->getTableName());
-        //print_r($query);
-        //exit();
+       
         $query->execute();
 		// echo PDO::FETCH_PROPS_LATE;
 		// echo PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE;
@@ -102,12 +101,7 @@ class EntityRepository
     public function findByTableAndColumnName($table,$column,$valeur)
     {
         $query = $this->getDb();
-        echo 'query';
-        print_r($query);
         $valeur = (string)$valeur;
-        //echo $column;
-        //TODO : faire la reque^te avec un prepare puis execute
-
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
         $myQuery = $query->prepare("SELECT * 
                     FROM $table
@@ -115,7 +109,7 @@ class EntityRepository
         //$myQuery->bindParam(':table', $table, PDO::PARAM_STR);
         //$myQuery->bindParam(':column', $column, PDO::PARAM_STR);
         $myQuery->bindParam(':valeur', $valeur, PDO::PARAM_STR);
-        //print_r($myQuery);
+        
 
         $myQuery->execute();
         //$membreTst = new Membre();
@@ -152,15 +146,9 @@ class EntityRepository
                                       );
         $temp = $query->bindParam(':values', $valuesToInsert, PDO::PARAM_STR);
         */
-        
-        
-        //echo "requete";
-        //print_r($query);
-        //print_r($valuesToInsert);
+         
         //$query->debugDumpParams(); 
 
-        //exit();
-        
         $columnString = implode(',', array_keys($values));
         $valueString = implode(',', array_fill(0, count($values), '?'));
 

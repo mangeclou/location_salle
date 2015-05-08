@@ -20,5 +20,3 @@ $parameters = array(
         'server'=>RACINE_SERVEUR
     ) */
 );
-
-var_dump($parameters);

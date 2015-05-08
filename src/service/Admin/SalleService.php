@@ -88,9 +88,7 @@ class SalleService
         $sr         = new SalleRepository();
         $findTitre = $sr ->findSalleByTitre($titre);
         $arrayErrors = [];
-        //print_r($mr);
-        //print_r($filteredMember);
-        //exit();
+       
         //If the titre already exists
         if ($findTitre === true) {
             $arrayErrors[] = 'Veuillez choisir un autre titre.';
@@ -101,17 +99,14 @@ class SalleService
         //Check if the form pass the validation test
         if ($validation !== true) {
             ///Returns the arrayErrors
-            //print_r($validation);
-            //exit();
+           
             return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
         //If the form is validated         
         } else {
             if ($validation === true) {
                 //Add salle data to db
                 $sr->registerSalle($filteredSalle);
-               // print_r($query);
-               // exit();
-               
+                 
                 echo "Salle ajoutée";
                 self::redirect("BackController", "displaySalle");
             }
@@ -132,9 +127,7 @@ class SalleService
         $sr          = new SalleRepository();
         $findTitre   = $sr ->findSalleByTitre($filteredSalle['titre']);
         $arrayErrors = [];
-        //print_r($mr);
-        //print_r($filteredMember);
-        //exit();
+       
         //If the titre already exists
         if ($findTitre === true) {
             $arrayErrors[] = 'Veuillez choisir un autre titre.';
@@ -145,13 +138,10 @@ class SalleService
         //Check if the form pass the validation test
         if ($validation !== true) {
             ///Returns the arrayErrors
-            //print_r($validation);
-            //exit();
-            
+            return $arrayErrors;
         //If the form is validated         
         } else {
-            if ($validation === true) {
-                echo "validation true";
+            if ($validation === true) {               
                 //The id of the salle to be edited is taken from the $_GET
                 $filteredSalle["id_salle"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
                 //Add salle data to db

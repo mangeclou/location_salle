@@ -10,10 +10,13 @@
 	<div class="col_50">
             <div class="form-inscription">
 		<h2>Modifier une salle</h2>
+                <?php if(isset($this->editSalleParameters["meta"]["errors"]))
+                                    echo htmlspecialchars($this->editSalleParameters["meta"]["errors"]); ?>
                 <form method="post" action="">
                     <fieldset class="form-inscription">
                         <div class="inscription_champ"> 
                             <label for="pays">Pays</label>
+                            
                             <input type="text" id="pays" name="pays" maxlength="50" 
                                    placeholder="Pays..." class="form-control" 
                                    value="<?php if(isset($this->editSalleParameters["meta"]["pays"]))

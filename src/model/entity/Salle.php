@@ -6,6 +6,7 @@
  */
 namespace entity; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 USE repository\SalleRepository;
+
 class Salle {
 
 	/**

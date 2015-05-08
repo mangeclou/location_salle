@@ -168,15 +168,19 @@ class BackController extends MainController
             $ss = new SalleService();
             $ss->editSalleService();
             if (isset($arrayErrors)) {
-            //on récupère $arrayErrors qui est retourné par les méthodes de la classe
-            //ValidatorController et on affiche le formulaire avec les données de message
-            //d'erreur
+                //on récupère $arrayErrors qui est retourné par les méthodes de la classe
+                //ValidatorController et on affiche le formulaire avec les données de message
+                //d'erreur
+                echo 'erreurs';
                 require __DIR__ . '/../views/viewParameters.php';
-                $this->inscriptionParameters = $viewPageParameters['back']['gestion_salle'];
+                
+                $viewPageParameters['back']['edit_salle']['meta']['errors'] = $arrayErrors;
+                $this->editSalleParameters = $viewPageParameters['back']['edit_salle'];
                 $this->render($this->layout,
-                              $this->inscriptionTemplate, array(
+                              $this->editSalleTemplate,
+                              $this->editSalleParameters/*array(
                                 'arrayErrors' => $arrayErrors,
-                              )
+                              )*/
                         );  
             } 
             
@@ -189,7 +193,9 @@ class BackController extends MainController
             $viewPageParameters['back']['edit_salle']['meta'] = $editSalle;
            
             $this->editSalleParameters = $viewPageParameters['back']['edit_salle'];
-            $this->render($this->layout, $this->editSalleTemplate, $this->editSalleParameters);
+            $this->render($this->layout,
+                          $this->editSalleTemplate,
+                          $this->editSalleParameters);
         }
         
         /*require __DIR__ . '/../views/viewParameters.php';

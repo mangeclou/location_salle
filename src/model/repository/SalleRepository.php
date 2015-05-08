@@ -69,8 +69,6 @@ class SalleRepository extends EntityRepository {
     
     public function updateSalle($values)
     {
-        //print_r($values);
-        //exit();
         extract($values);
         
         $db = $this->getDb();
@@ -91,9 +89,7 @@ class SalleRepository extends EntityRepository {
         $query->bindValue(':capacite', $capacite, PDO::PARAM_STR);
         $query->bindValue(':categorie', $categorie, PDO::PARAM_STR);
         $update = $query->execute();
-        //print_r($temp);
-        //$data = $query->fetch(PDO::FETCH_ASSOC);
-       // print_r($data);
+       
         return $update;          
     }
     

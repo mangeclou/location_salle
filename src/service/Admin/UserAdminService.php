@@ -79,9 +79,7 @@ class UserAdminService extends UserService
                 $mr = new MembreRepository();
                 //Method to find the form pseudo
                 $newMembre  = $mr->findAdminByPseudo($pseudo);
-                
-                /*print_r($newMembre);
-                exit();*/
+                                
                 //If the pseudo exists in the db with admin status
                 if (isset($newMembre)) {
                     //Check if the password of the post matches the hashed password in the db
@@ -128,9 +126,7 @@ class UserAdminService extends UserService
         $mr         = new MembreRepository();
         $findPseudo = $mr ->findMembreByPseudo($pseudo);
         $findEmail  = $mr ->findMembreByEmail($email);
-        //print_r($mr);
-        //print_r($filteredMember);
-        //exit();
+      
         //If the pseudo already exists
         if ($findPseudo === true) {
             $arrayErrors[] = 'Veuillez choisir un autre pseudo.';
@@ -153,8 +149,7 @@ class UserAdminService extends UserService
                 $filteredMember["mdp"] = \repository\MembreRepository::hashMdp($filteredMember["mdp"]);
                 //Add admin data to db
                 $mr->registerMembre($filteredMember);
-               // print_r($query);
-               // exit();
+              
                 parent::startSessionUser($filteredMember['email'], $filteredMember['pseudo']);
                 //Temp
                 echo "Admin ajouté";

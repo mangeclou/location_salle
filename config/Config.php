@@ -30,10 +30,3 @@ class Config {
         return $this->parameters['siteParam'];       
     }
 }
-
-/*
-$a = new Config();
-$a->getSiteParam();
-$a->getParametersConnect();
- * 
- */
