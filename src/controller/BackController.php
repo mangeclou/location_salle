@@ -116,7 +116,11 @@ class BackController extends MainController
        //print_r($_SESSION);
     }
     
-    public function verifyEmptyPostSalle()
+    /**
+     * Check if all the fields of the form contain something
+     * @return boolean true if full, false if at least one empty field
+     */
+    public function verifyPostSalle()
     {
         if (filter_has_var(INPUT_POST, 'pays')        &&
             filter_has_var(INPUT_POST, 'ville')       &&
@@ -134,10 +138,32 @@ class BackController extends MainController
         }
        
     }
+    
+    /**
+     * Check if there is at least one error in the salle form
+     * @param  [[Type]] $salle [[Description]]
+     * @return boolean  true if there is at least one error, false if no error
+     */
+    public function verifyErrorSalle($salle)
+    {
+        if (isset($salle) && ($salle["errorPays"] !== true        ||
+                              $salle["errorVille"] !== true       ||  
+                              $salle["errorAdresse"] !== true     ||
+                              $salle["errorCp"] !== true          ||
+                              $salle["errorTitre"] !== true       ||
+                              $salle["errorDescription"] !== true ||
+                              $salle["errorPhoto"] !== true       ||
+                              $salle["errorCapacite"] !== true) 
+           ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function addNewSalle() 
     {
-        if($this->verifyEmptyPostSalle() === true) {
+        if($this->verifyPostSalle() === true) {
 
             $ss = new SalleService();
             $ss->addSalle();
@@ -163,18 +189,20 @@ class BackController extends MainController
     
     public function editSalle() 
     {
-        if ($this->verifyEmptyPostSalle() === true) {
+        if ($this->verifyPostSalle() === true) {
 
             $ss = new SalleService();
-            $ss->editSalleService();
-            if (isset($arrayErrors)) {
+            $salle = $ss->editSalleService();
+            
+            //If there is at least one error in the form
+            if (self::verifyErrorSalle($salle)) {
                 //on récupère $arrayErrors qui est retourné par les méthodes de la classe
                 //ValidatorController et on affiche le formulaire avec les données de message
                 //d'erreur
                 echo 'erreurs';
                 require __DIR__ . '/../views/viewParameters.php';
                 
-                $viewPageParameters['back']['edit_salle']['meta']['errors'] = $arrayErrors;
+                $viewPageParameters['back']['edit_salle']['meta']['errors'] = $salle;
                 $this->editSalleParameters = $viewPageParameters['back']['edit_salle'];
                 $this->render($this->layout,
                               $this->editSalleTemplate,

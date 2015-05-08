@@ -10,13 +10,16 @@
 	<div class="col_50">
             <div class="form-inscription">
 		<h2>Modifier une salle</h2>
-                <?php if(isset($this->editSalleParameters["meta"]["errors"]))
-                                    echo htmlspecialchars($this->editSalleParameters["meta"]["errors"]); ?>
+                
                 <form method="post" action="">
                     <fieldset class="form-inscription">
                         <div class="inscription_champ"> 
                             <label for="pays">Pays</label>
-                            
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorPays'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorPays'] !== true)
+                                    echo "<span class='error'>"
+                                    .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorPays'])
+                                    ."</span>"; ?>
                             <input type="text" id="pays" name="pays" maxlength="50" 
                                    placeholder="Pays..." class="form-control" 
                                    value="<?php if(isset($this->editSalleParameters["meta"]["pays"]))
@@ -25,6 +28,11 @@
 
                         <div class="inscription_champ"> 
                             <label for="ville">Ville</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorVille'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorVille'] !== true)
+                                    echo "<span class='error'>" 
+                                    .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorVille'])
+                                    ."</span>"; ?>
                             <input type="text" id="ville" name="ville" maxlength="14"
                                placeholder="Ville..." class="form-control"
                                value="<?php if(isset($this->editSalleParameters["meta"]["ville"]))
@@ -33,6 +41,11 @@
 
                         <div class="inscription_champ"> 
                             <label for="adresse">Adresse</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorAdresse'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorAdresse'] !== true)
+                                    echo "<span class='error'>"
+                                    .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorAdresse'])
+                                    ."</span>"; ?>
                             <input type="text" id="adresse" name="adresse"
                                placeholder="Adresse..." class="form-control"
                                value="<?php if(isset($this->editSalleParameters["meta"]["adresse"]))
@@ -41,6 +54,11 @@
 
                         <div class="inscription_champ"> 
                             <label for="cp">Code postal</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorCp'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorCp'] !== true)
+                                    echo "<span class='error'>"
+                                    .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorCp'])
+                                    ."</span>"; ?>
                             <input type="text" id="cp" name="cp"
                                placeholder="Code postal..." class="form-control"
                                value="<?php if(isset($this->editSalleParameters["meta"]["cp"]))
@@ -49,6 +67,11 @@
 
                         <div class="inscription_champ"> 
                             <label for="titre">Titre</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorTitre'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorTitre'] !== true)
+                                    echo "<span class='error'>"
+                                    .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorTitre'])
+                                    ."</span>"; ?>
                             <input type="text" id="titre" name="titre"
                                placeholder="Titre..." class="form-control"
                                value="<?php if(isset($this->editSalleParameters["meta"]["titre"]))
@@ -57,6 +80,11 @@
 
                         <div class="inscription_champ"> 
                             <label for="description">Description</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorDescription'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorDescription'] !== true)
+                                    echo "<span class='error'>"
+                                    .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorDescription'])
+                                    ."</span>"; ?>
                             <textarea id="description" name="description"
                                placeholder="Description..." class="form-control">
                                     <?php if(isset($this->editSalleParameters["meta"]["description"]))
@@ -66,6 +94,11 @@
 
                         <div class="inscription_champ"> 
                             <label for="photo">Photo</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorPhoto'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorPhoto'] !== true)
+                                    echo "<span class='error'>"
+                                    .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorPhoto'])
+                                    ."</span>"; ?>
                             <input type="file" id="Photo" name="photo"
                                placeholder="Photo" class="form-control" 
                                value="<?php if(isset($this->editSalleParameters["meta"]["photo"]))
@@ -74,14 +107,25 @@
 
                         <div class="inscription_champ"> 
                             <label for="capacite">Capacite</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorCapacite'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorCapacite'] !== true)
+                                    echo "<span class='error'>" 
+                            .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorCapacite'])
+                            ."</span>"; ?>
                             <input type="text" id="capacite" name="capacite" 
                                placeholder="Capacite..." class="form-control" 
                                value="<?php if(isset($this->editSalleParameters["meta"]["capacite"]))
-                                    echo htmlspecialchars($this->editSalleParameters["meta"]["capacite"]); ?>" />
+                                    echo htmlspecialchars($this->editSalleParameters["meta"]["capacite"]) ; ?>" />
                         </div>
 
                         <div class="inscription_champ"> 
                             <label for="categorie">Categorie</label>
+                            <?php if(isset($this->editSalleParameters["meta"]["errors"]['errorCategorie'])
+                              && $this->editSalleParameters["meta"]["errors"]['errorCategorie'] !== true)
+                                    echo "<span class='error'>" 
+                                .htmlspecialchars($this->editSalleParameters["meta"]["errors"]['errorCategorie'])
+                                ."</span>"; ?>
+                            
                             <select name="categorie" id="categorie">
                                 <option value="<?php if(isset($this->editSalleParameters["meta"]["categorie"]))
                                     echo htmlspecialchars($this->editSalleParameters["meta"]["categorie"]); ?>">Reunion</option>                                

@@ -353,6 +353,9 @@ class SalleValidatorService
      */
     public static function validateCp($cp)
     {
+        if (empty($cp)){
+            return 'Veuillez saisir un code postal.';
+        } 
         //On autorise au maximum 12 caractères
         if((strlen($cp)> 12)){
            return 'Votre code postal est trop long.';

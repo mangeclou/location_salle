@@ -100,7 +100,7 @@ class SalleService
         if ($validation !== true) {
             ///Returns the arrayErrors
            
-            return $arrayErrors;//array( 'arrayErrors' => $arrayErrors)
+            return $validation;//array( 'arrayErrors' => $arrayErrors)
         //If the form is validated         
         } else {
             if ($validation === true) {
@@ -131,14 +131,15 @@ class SalleService
         //If the titre already exists
         if ($findTitre === true) {
             $arrayErrors[] = 'Veuillez choisir un autre titre.';
+             self::redirect("BackController", "editSalle");
         }        
         //If the pseudo doesn't exist
         $vs = new ValidatorService();
         $validation = $vs->isFormValid($filteredSalle);
         //Check if the form pass the validation test
         if ($validation !== true) {
-            ///Returns the arrayErrors
-            return $arrayErrors;
+            //Returns the arrayErrors
+            return $validation;
         //If the form is validated         
         } else {
             if ($validation === true) {               
