@@ -6,6 +6,8 @@
 
 $(document).ready(function(){
    $( "#date" ).datepicker(); 
+   $( "#date_first" ).datepicker(); 
+   $( "#date_second" ).datepicker(); 
    
    /* 
     $( ".modal" ).dialog({

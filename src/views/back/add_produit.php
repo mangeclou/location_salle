@@ -22,15 +22,16 @@ print_r($_POST);
                     <fieldset class="form-inscription">
                          <div class="inscription_champ"> 
                             <label for="categorie">Choix de la salle</label>
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorVille'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorVille'] !== true)
+                                    echo "<span class='error'>" 
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorVille'])
+                                    ."</span>"; ?>
                             <select name="categorie" id="categorie">
                         <?php   foreach ($this->addProduitParameters["meta"] as $key => $value) {
-                                    foreach ($value as $key2 => $value2) {
-                                        echo "<option value='" .$value2."'>" .$value2 ."</option>";
-                                    }
+                                    echo "<option value='" .$value['id_Produit'] ."'>" .$value['id_Produit'] ." | " .$value['titre'] ." | " .$value['adresse'] ." " .$value['cp'] ." " .$value['ville']  ."</option>";
                                 }
-                                
-                                
-                                ?>
+                            ?>
                                 
                                
                               
@@ -38,23 +39,35 @@ print_r($_POST);
                         </div> 
 
                         <div class="inscription_champ"> 
-                            <label for="ville">Ville</label>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorVille'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorVille'] !== true)
+                            <label for="date_first">Date d'arrivée</label>
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorDateArrivee'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorDateArrivee'] !== true)
                                     echo "<span class='error'>" 
-                                    .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorVille'])
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDateArrivee'])
                                     ."</span>"; ?>
-                            <input type="text" id="ville" name="ville" maxlength="14"
-                               placeholder="Ville..." class="form-control"
-                               value="<?php if(isset($_POST['ville'])) echo $_POST['ville'] ?>" />
+                            <input type="date" id="date_first" name="date_arrivee" maxlength="14"
+                               placeholder="Date..." class="form-control"
+                               value="<?php if(isset($_POST['date_arrivee'])) echo $_POST['date_arrivee'] ?>" />
+                        </div>
+                        
+                        <div class="inscription_champ"> 
+                            <label for="date_second">Date de départ</label>
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorDateDepart'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorDateArrivee'] !== true)
+                                    echo "<span class='error'>" 
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDateDepart'])
+                                    ."</span>"; ?>
+                            <input type="date" id="date_second" name="date_depart" maxlength="14"
+                               placeholder="Date..." class="form-control"
+                               value="<?php if(isset($_POST['date_arrivee'])) echo $_POST['date_arrivee'] ?>" />
                         </div>
 
                         <div class="inscription_champ"> 
                             <label for="adresse">Adresse</label>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorAdresse'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorAdresse'] !== true)
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorAdresse'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorAdresse'] !== true)
                                     echo "<span class='error'>"
-                                    .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorAdresse'])
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorAdresse'])
                                     ."</span>"; ?>
                             <input type="text" id="adresse" name="adresse"
                                placeholder="Adresse..." class="form-control"
@@ -63,10 +76,10 @@ print_r($_POST);
 
                         <div class="inscription_champ"> 
                             <label for="cp">Code postal</label>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorCp'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorCp'] !== true)
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorCp'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorCp'] !== true)
                                     echo "<span class='error'>"
-                                    .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorCp'])
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorCp'])
                                     ."</span>"; ?>
                             <input type="text" id="cp" name="cp"
                                placeholder="Code postal..." class="form-control"
@@ -75,10 +88,10 @@ print_r($_POST);
 
                         <div class="inscription_champ"> 
                             <label for="titre">Titre</label>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorTitre'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorTitre'] !== true)
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorTitre'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorTitre'] !== true)
                                     echo "<span class='error'>"
-                                    .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorTitre'])
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorTitre'])
                                     ."</span>"; ?>
                             <input type="text" id="titre" name="titre"
                                placeholder="Titre..." class="form-control"
@@ -87,10 +100,10 @@ print_r($_POST);
 
                         <div class="inscription_champ"> 
                             <label for="description">Description</label>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorDescription'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorDescription'] !== true)
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorDescription'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorDescription'] !== true)
                                     echo "<span class='error'>"
-                                    .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorDescription'])
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDescription'])
                                     ."</span>"; ?>
                             <textarea id="description" name="description"
                                placeholder="Description..." class="form-control"
@@ -99,10 +112,10 @@ print_r($_POST);
 
                         <div class="inscription_champ"> 
                             <label for="photo">Photo</label>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorPhoto'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorPhoto'] !== true)
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorPhoto'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorPhoto'] !== true)
                                     echo "<span class='error'>"
-                                    .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorPhoto'])
+                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorPhoto'])
                                     ."</span>"; ?>
                             <input type="file" id="Photo" name="photo"
                                placeholder="Photo" class="form-control" 
@@ -111,15 +124,15 @@ print_r($_POST);
 
                         <div class="inscription_champ"> 
                             <label for="capacite">Capacite</label>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorCategorie'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorCategorie'] !== true)
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorCategorie'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorCategorie'] !== true)
                                     echo "<span class='error'>" 
-                                .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorCategorie'])
+                                .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorCategorie'])
                                 ."</span>"; ?>
-                            <?php if(isset($this->addSalleParameters["meta"]["errors"]['errorCapacite'])
-                              && $this->addSalleParameters["meta"]["errors"]['errorCapacite'] !== true)
+                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorCapacite'])
+                              && $this->addProduitParameters["meta"]["errors"]['errorCapacite'] !== true)
                                     echo "<span class='error'>" 
-                            .htmlspecialchars($this->addSalleParameters["meta"]["errors"]['errorCapacite'], ENT_QUOTES)
+                            .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorCapacite'], ENT_QUOTES)
                             ."</span>"; ?>
                             <input type="text" id="capacite" name="capacite" 
                                placeholder="Capacite..." class="form-control" 
