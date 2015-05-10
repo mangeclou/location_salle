@@ -32,6 +32,9 @@ class BackController extends MainController
     protected $layout = 'layout.php';
     
     //liste des templates et des paramètres pour chaque page
+    protected $addProduitTemplate = 'add_produit.php';
+    protected $addProduitParameters;
+    
     protected $addSalleTemplate = 'add_salle.php';
     protected $addSalleParameters;
     
@@ -127,7 +130,7 @@ class BackController extends MainController
     {
         //array_walk($array, self::checkPost($array));
         foreach ($array as $value) {
-            if (filter_has_var(INPUT_POST, $value))
+            if (!filter_has_var(INPUT_POST, $value))
             {
                 return false;
             }
@@ -175,9 +178,52 @@ class BackController extends MainController
         return $this->render($this->layout, $this->displayProduitTemplate, $this->displayProduitParameters); 
     }
     
-    
-    
-    
+    public function addNewProduit()
+    {
+        //If there is something in the POST
+        $produit = array("date_arrivee",
+                         "date_depart",
+                         "id_salle",
+                         "id_promo",
+                         "prix",
+                         "etat");
+        if (self::verifyPost($produit)) {
+            $ss = new SalleService();
+            $salle = $ss->addSalleService();
+            //If there is at least one error in the form
+            if (self::verifyErrorSalle($salle)) {
+            //on récupère $arrayErrors qui est retourné par les méthodes de la classe
+            //ValidatorController et on affiche le formulaire avec les données de message
+            //d'erreur
+                require __DIR__ . '/../views/viewParameters.php';
+                $viewPageParameters['back']['add_new_produit']['meta']['errors'] = $salle;
+                $this->addSalleParameters = $viewPageParameters['back']['add_new_produit'];
+                $this->render($this->layout,
+                              $this->addProduiteTemplate,
+                              $this->addProduitParameters
+                        );  
+            } 
+        //If there is nothing in the POST, the form is displayed
+        } else {
+            echo "toto";
+            $sr = new SalleRepository();
+            $allSalles = $sr->getAllSalle();
+            
+            require __DIR__ . '/../views/viewParameters.php';
+                    
+            $viewPageParameters['back']['add_new_produit']['meta'] = $allSalles;           
+            
+            //on va chercher les paramètres dans l'array viewpageParameters
+            $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];
+            //on utilise la méthode render du parent Controller pour afficher la page
+            
+            $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];
+            $this->render($this->layout,
+                          $this->addProduitTemplate,
+                          $this->addProduitParameters);
+        }
+    }
+        
     /**
      * Check if there is at least one error in the salle form
      * @param  [[Type]] $salle [[Description]]
