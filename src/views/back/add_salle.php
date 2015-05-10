@@ -4,6 +4,8 @@
 echo 'post';
 print_r($_POST);
 
+
+
 ?>
 
     <div class="big_title">
@@ -24,7 +26,7 @@ print_r($_POST);
                                     ."</span>"; ?>
                             <input type="text" id="pays" name="pays" maxlength="50" 
                                    placeholder="Pays..." class="form-control" 
-                                   value="<?php if(isset($_POST['pays'])) echo $_POST['pays'] ?>" />
+                                   value="<?php if (isset($_POST['pays'])){ echo $_POST['pays']; } elseif (isset($this->addSalleParameters["meta"]["pays"])) { echo $this->addSalleParameters["meta"]["pays"];}?>" />
                         </div>
 
                         <div class="inscription_champ"> 

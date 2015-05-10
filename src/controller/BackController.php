@@ -120,7 +120,7 @@ class BackController extends MainController
      * Check if all the fields of the form contain something
      * @return boolean true if full, false if at least one empty field
      */
-    public function verifyPostSalle()
+    public static function verifyPostSalle()
     {
         if (filter_has_var(INPUT_POST, 'pays')        &&
             filter_has_var(INPUT_POST, 'ville')       &&
@@ -128,7 +128,7 @@ class BackController extends MainController
             filter_has_var(INPUT_POST, 'cp')          &&
             filter_has_var(INPUT_POST, 'titre')       &&
             filter_has_var(INPUT_POST, 'description') &&
-            filter_has_var(INPUT_POST, 'photo')       &&
+            //filter_has_var(INPUT_POST, 'photo')       &&
             filter_has_var(INPUT_POST, 'capacite')    &&
             filter_has_var(INPUT_POST, 'categorie')
            ) {
@@ -144,16 +144,16 @@ class BackController extends MainController
      * @param  [[Type]] $salle [[Description]]
      * @return boolean  true if there is at least one error, false if no error
      */
-    public function verifyErrorSalle($salle)
+    public static function verifyErrorSalle($salle)
     {
-        if (isset($salle) && ($salle["errorPays"] !== true        ||
-                              $salle["errorVille"] !== true       ||  
-                              $salle["errorAdresse"] !== true     ||
-                              $salle["errorCp"] !== true          ||
-                              $salle["errorTitre"] !== true       ||
-                              $salle["errorDescription"] !== true ||
-                              $salle["errorPhoto"] !== true       ||
-                              $salle["errorCapacite"] !== true) 
+        if ($salle["errorPays"] !== true        ||
+            $salle["errorVille"] !== true       ||  
+            $salle["errorAdresse"] !== true     ||
+            $salle["errorCp"] !== true          ||
+            $salle["errorTitre"] !== true       ||
+            $salle["errorDescription"] !== true ||
+            //$salle["errorPhoto"] !== true       ||
+            $salle["errorCapacite"] !== true 
            ) {
             return true;
         } else {
@@ -163,13 +163,15 @@ class BackController extends MainController
 
     public function addNewSalle() 
     {
-        if($this->verifyPostSalle() === true) {
-
+        //If there is something in the POST
+        if (self::verifyPostSalle()) {
+            echo "ok";
             $ss = new SalleService();
             $salle = $ss->addSalleService();
-            
+            echo "toto";
             //If there is at least one error in the form
             if (self::verifyErrorSalle($salle)) {
+                echo "not verify";
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
@@ -178,11 +180,12 @@ class BackController extends MainController
                 $this->addSalleParameters = $viewPageParameters['back']['add_new_salle'];
                 $this->render($this->layout,
                               $this->addSalleTemplate,
-                               $this->addSalleParameters
+                              $this->addSalleParameters
                         );  
             } 
-            
+        //If there is nothing in the POST, the form is displayed
         } else {
+            echo 'nothing posted';
             require __DIR__ . '/../views/viewParameters.php';
             $this->addSalleParameters = $viewPageParameters['back']['add_new_salle'];
             $this->render($this->layout,
@@ -193,7 +196,7 @@ class BackController extends MainController
     
     public function editSalle() 
     {
-        if ($this->verifyPostSalle() === true) {
+        if (self::verifyPostSalle() === true) {
 
             $ss = new SalleService();
             $salle = $ss->editSalleService();

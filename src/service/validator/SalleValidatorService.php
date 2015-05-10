@@ -470,7 +470,7 @@ class SalleValidatorService
             && (self::validateCp($array['cp']) === true)
             && (self::validateTitre($array['titre']) === true)
             && (self::validateDescription($array['description']) === true)
-            && (self::validatePhoto($array['photo']) === true)
+            //&& (self::validatePhoto($array['photo']) === true)
             && (self::validateCapacite($array['capacite']) === true)
             && (self::validateCategorie($array['categorie']) === true)
                 ){
@@ -486,7 +486,7 @@ class SalleValidatorService
                 "errorCp"          => self::validateCp($array['cp']),
                 "errorTitre"       => self::validateTitre($array['titre']),
                 "errorDescription" => self::validateDescription($array['description']),
-                "errorPhoto"       => self::validatePhoto($array['photo']),
+                //"errorPhoto"       => self::validatePhoto($array['photo']),
                 "errorCapacite"    => self::validateCapacite($array['capacite']),
                 "errorCategorie"   => self::validateCategorie($array['categorie']),
             ];

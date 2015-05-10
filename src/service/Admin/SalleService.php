@@ -28,7 +28,7 @@ class SalleService
         header("location:index.php?controller=" .ucfirst($controller) ."&method=" .$method);
     }
     
-    protected function FilterSalle()
+    protected static function FilterSalle()
     {
         $fs          = new FilterService();
         $pays        = $fs->filterPostString('pays');
@@ -55,13 +55,13 @@ class SalleService
         return $filteredSalle;        
     }
     
-    public function addSalle()
+    public function addSalleService()
     {
 
        //If the form has not been posted
         //if (parent::postCreateUserExist()) {
         //Filter post
-        $filteredSalle = $this->FilterSalle();
+        $filteredSalle = self::FilterSalle();
        /* $fs          = new FilterService();
         $pays        = $fs->filterPostString('pays');
         $ville       = $fs->filterPostString('ville');
@@ -86,33 +86,35 @@ class SalleService
         ];*/
         //Check if the titre in the form already exists in the db  (the titre is 
         //unique in the db)
-        $sr         = new SalleRepository();
-        $findTitre = $sr ->findSalleByTitre($titre);
+        $sr          = new SalleRepository();
+        $findTitre   = $sr ->findSalleByTitre($filteredSalle["titre"]);
         $arrayErrors = [];
        
         //If the titre already exists
         if ($findTitre === true) {
             $arrayErrors[] = 'Veuillez choisir un autre titre.';
             self::redirect("BackController", "addSalle");
-        }        
+        }    
+        
         //If the pseudo doesn't exist
-        $vs = new ValidatorService();
+        $vs         = new ValidatorService();
         $validation = $vs->isFormValid($filteredSalle);
         //Check if the form pass the validation test
+        print_r($validation);
         if ($validation !== true) {
-            ///Returns the arrayErrors
-           
+            //Returns the arrayErrors
+            echo "not ok valid";
             return $validation;//array( 'arrayErrors' => $arrayErrors)
         //If the form is validated         
         } else {
-            if ($validation === true) {
                 //Add salle data to db
+            echo "salle service else";
                 $sr->registerSalle($filteredSalle);
                  
                 echo "Salle ajoutée";
                 self::redirect("BackController", "displaySalle");
             }
-        }//END if $validation !== true
+        //END if $validation !== true
     }//END addSalle()  
     
     
@@ -123,7 +125,7 @@ class SalleService
         //If the form has not been posted
         //if (parent::postCreateUserExist()) {
         //Filter post
-        $filteredSalle = $this->FilterSalle();
+        $filteredSalle = self::FilterSalle();
         //Check if the titre in the form already exists in the db  (the titre is 
         //unique in the db)
         $sr          = new SalleRepository();
@@ -141,17 +143,18 @@ class SalleService
         //Check if the form pass the validation test
         if ($validation !== true) {
             //Returns the arrayErrors
+            echo "not ok valid";
             return $validation;
         //If the form is validated         
         } else {
-            if ($validation === true) {               
+                            
                 //The id of the salle to be edited is taken from the $_GET
                 $filteredSalle["id_salle"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
                 //Add salle data to db
                 $sr->updateSalle($filteredSalle);
               
                 self::redirect("BackController", "displaySalle");
-            }
+            
         }//END if $validation !== true
        
     }

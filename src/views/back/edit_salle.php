@@ -27,7 +27,7 @@ print_r($_POST);
                                    placeholder="Pays..." class="form-control" 
                                    value="<?php if(isset($this->editSalleParameters["meta"]["pays"]))
                                     echo htmlspecialchars($this->editSalleParameters["meta"]["pays"]);
-                                          if (isset($_POST["pays"])) echo htmlspecialchars($_POST["pays"], ENT_QUOTES);
+                                          /*if (isset($_POST["pays"])) echo htmlspecialchars($_POST["pays"], ENT_QUOTES);*/
                                           ?>" />
                         </div>
 
