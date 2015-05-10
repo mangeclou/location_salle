@@ -12,7 +12,7 @@
             </ul>
             <ul>
                 <li><a href="index.php?controller=BackController&method=displaySalle">Gestion salles</a></li>
-                <li><a href="index.php?controller=BackController&method=displayGestionProduit">Gestion produits</a></li>
+                <li><a href="index.php?controller=BackController&method=displayProduit">Gestion produits</a></li>
                 <li><a href="index.php?controller=BackController&method=displayGestionMembre">Gestion membres</a></li>
                 <li><a href="index.php?controller=BackController&method=displayGestionCommande">Gestion commandes</a></li>
                 <li><a href="index.php?controller=BackController&method=displayGestionAvis">Gestion avis</a></li>

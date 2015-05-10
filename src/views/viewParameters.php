@@ -104,7 +104,23 @@ $viewPageParameters = array (
                     "meta" => array (
                     )
                 ),
-                "gestion_salle" => array (
+                "display_produit" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Gestion des produits",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    )
+                ),
+                "add_new_produit" => array (
+                    "head_inc" => "/inc/back/head.inc.php",
+                    "title" => "Gestion des produits",
+                    "header_inc" => "/inc/back/header.inc.php",
+                    "footer_inc" => "/inc/back/footer.inc.php",
+                    "meta" => array (
+                    )
+                ),
+                "edit_produit" => array (
                     "head_inc" => "/inc/back/head.inc.php",
                     "title" => "Gestion des produits",
                     "header_inc" => "/inc/back/header.inc.php",

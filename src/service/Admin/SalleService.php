@@ -103,15 +103,13 @@ class SalleService
         print_r($validation);
         if ($validation !== true) {
             //Returns the arrayErrors
-            echo "not ok valid";
             return $validation;//array( 'arrayErrors' => $arrayErrors)
         //If the form is validated         
         } else {
                 //Add salle data to db
             echo "salle service else";
                 $sr->registerSalle($filteredSalle);
-                 
-                echo "Salle ajoutée";
+             
                 self::redirect("BackController", "displaySalle");
             }
         //END if $validation !== true

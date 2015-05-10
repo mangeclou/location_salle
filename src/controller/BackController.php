@@ -15,6 +15,7 @@ namespace controller; // toujours le même nom que le dossier, pour que l'autolo
 require 'Controller.php';
 require '/../model/repository/BackRepository.php';
 require '/../model/repository/SalleRepository.php';
+require '/../model/repository/ProduitRepository.php';
 require '/../service/Admin/UserAdminService.php';
 require '/../service/Admin/SalleService.php';
 
@@ -22,6 +23,7 @@ use \service\Admin\UserAdminService AS UAService;
 use \service\Admin\SalleService AS SalleService;
 use \model\repository\BackRepository AS BackRepository;
 use \repository\SalleRepository AS SalleRepository;
+use \repository\ProduitRepository AS ProduitRepository;
 use \controller\Controller AS MainController;
 
 class BackController extends MainController
@@ -57,8 +59,8 @@ class BackController extends MainController
     protected $gestionMembreTemplate = 'gestion_membre.php';
     protected $gestionMembreParameters;
     
-    protected $gestionProduitTemplate = 'gestion_produit.php';
-    protected $gestionProduitParameters;
+    protected $displayProduitTemplate = 'display_produit.php';
+    protected $displayProduitParameters;
 
     protected $gestionPromoTemplate = 'gestion_promo.php';
     protected $gestionPromoParameters;
@@ -116,6 +118,25 @@ class BackController extends MainController
        //print_r($_SESSION);
     }
     
+    /** Checks if the form has been posted
+     * @param  $array with the name of all the elements of the form
+     * @return true if the post has been posted
+     * @return false if the post has not been posted
+     */
+    public static function verifyPost($array)
+    {
+        //array_walk($array, self::checkPost($array));
+        foreach ($array as $value) {
+            if (filter_has_var(INPUT_POST, $value))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    
+    
     /**
      * Check if all the fields of the form contain something
      * @return boolean true if full, false if at least one empty field
@@ -138,6 +159,24 @@ class BackController extends MainController
         }
        
     }
+    
+    public function displayProduit()
+    {
+        $sr = new ProduitRepository();
+        $allProduits = $sr->getAllProduit();
+        //on require le fichier de config de la view
+        require __DIR__ . '/../views/viewParameters.php';
+        
+        $viewPageParameters['back']['display_produit']['meta'] = $allProduits;
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->displayProduitParameters = $viewPageParameters['back']['display_produit'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        
+        return $this->render($this->layout, $this->displayProduitTemplate, $this->displayProduitParameters); 
+    }
+    
+    
+    
     
     /**
      * Check if there is at least one error in the salle form
@@ -332,12 +371,7 @@ class BackController extends MainController
     
     public function displayGestionProduit() 
     {
-       //on require le fichier de config de la view
-        require __DIR__ . '/../views/viewParameters.php';
-        //on va chercher les paramètres dans l'array viewpageParameters
-        $this->gestionProduitParameters = $viewPageParameters['back']['gestion_produit'];
-        //on utilise la méthode render du parent Controller pour afficher la page
-        return $this->render($this->layout, $this->gestionProduitTemplate, $this->gestionProduitParameters);  
+      
     }
     
     public function displayGestionPromo() 
