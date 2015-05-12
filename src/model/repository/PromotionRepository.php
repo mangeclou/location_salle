@@ -5,16 +5,32 @@
 
 namespace repository;
 
-require_once 'EntityRepository.php';
-USE repository\EntityRepository; // l'utilisation du namespace permet d'extends la classe lors de l'héritage alors qu'il n'y a pas encore eu d'instanciation. //  USE déclenche l'autoload pour que la classe soit chargée et ainsi éviter une erreur.
+require_once '\EntityRepository.php';
+
+use PDO;
+use \repository\EntityRepository AS EntityRepository;
 
 class PromotionRepository extends EntityRepository {
 
+    /**
+     * Gets all the promotions
+     * @return Array with all the salles
+     */
     public function getAllPromotion()
     {
-        return $this->findAll(); // on va voir la méthode findAll() de EntityRepository
-    }
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
 
+        $query = $db->prepare( "SELECT *
+                                FROM promotion;");
+
+        $query->execute();
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;          
+    }
+    
     public function findPromotionById($id)
     {
         return $this->find($id); // on va voir la méthode findAll() de EntityRepository

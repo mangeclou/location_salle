@@ -13,6 +13,10 @@ use \repository\EntityRepository AS EntityRepository;
 
 class SalleRepository extends EntityRepository {
 
+    /**
+     * Gets all the salles
+     * @return Array with all the salles
+     */
     public function getAllSalle()
     {
         $db = $this->getDb();

@@ -15,6 +15,7 @@ namespace controller; // toujours le même nom que le dossier, pour que l'autolo
 require 'Controller.php';
 require '/../model/repository/BackRepository.php';
 require '/../model/repository/SalleRepository.php';
+require '/../model/repository/PromotionRepository.php';
 require '/../model/repository/ProduitRepository.php';
 require '/../service/Admin/UserAdminService.php';
 require '/../service/Admin/SalleService.php';
@@ -24,6 +25,7 @@ use \service\Admin\SalleService AS SalleService;
 use \model\repository\BackRepository AS BackRepository;
 use \repository\SalleRepository AS SalleRepository;
 use \repository\ProduitRepository AS ProduitRepository;
+use \repository\PromotionRepository AS PromotionRepository;
 use \controller\Controller AS MainController;
 
 class BackController extends MainController
@@ -206,12 +208,15 @@ class BackController extends MainController
         //If there is nothing in the POST, the form is displayed
         } else {
             echo "toto";
-            $sr = new SalleRepository();
+            $sr        = new SalleRepository();
             $allSalles = $sr->getAllSalle();
+            $pr        = new PromotionRepository();
+            $allPromos = $pr->getAllPromotion();
             
             require __DIR__ . '/../views/viewParameters.php';
                     
-            $viewPageParameters['back']['add_new_produit']['meta'] = $allSalles;           
+            $viewPageParameters['back']['add_new_produit']['meta']['salles'] = $allSalles;          
+            $viewPageParameters['back']['add_new_produit']['meta']['promos'] = $allPromos;          
             
             //on va chercher les paramètres dans l'array viewpageParameters
             $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];
