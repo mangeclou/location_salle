@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace service;
+namespace service\validator;
 
 /**
  * Description of SalleValidatorController

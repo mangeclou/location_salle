@@ -144,6 +144,7 @@ class BackController extends MainController
     
     /**
      * Check if all the fields of the form contain something
+     * TODO : add to the Services
      * @return boolean true if full, false if at least one empty field
      */
     public static function verifyPostSalle()
@@ -163,6 +164,52 @@ class BackController extends MainController
             return false;
         }
        
+    }
+    
+    /**
+     * Check if there is at least one error in the salle form
+     * TODO : add to the Services
+     * @param  [[Type]] $salle [[Description]]
+     * @return boolean  true if there is at least one error, false if no error
+     */
+    public static function verifyErrorSalle($salle)
+    {
+        if ($salle["errorPays"] !== true        ||
+            $salle["errorVille"] !== true       ||  
+            $salle["errorAdresse"] !== true     ||
+            $salle["errorCp"] !== true          ||
+            $salle["errorTitre"] !== true       ||
+            $salle["errorDescription"] !== true ||
+            //$salle["errorPhoto"] !== true       ||
+            $salle["errorCapacite"] !== true 
+           ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+        /**
+     * Check if there is at least one error in the salle form
+     * TODO : add to the Services
+     * @param  [[Type]] $salle [[Description]]
+     * @return boolean  true if there is at least one error, false if no error
+     */
+    public static function verifyErrorProduit($produit)
+    {
+        if ($salle["errorSalle"] !== true        ||
+            $salle["errorVille"] !== true       ||  
+            $salle["errorAdresse"] !== true     ||
+            $salle["errorCp"] !== true          ||
+            $salle["errorTitre"] !== true       ||
+            $salle["errorDescription"] !== true ||
+            //$salle["errorPhoto"] !== true       ||
+            $salle["errorCapacite"] !== true 
+           ) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public function displayProduit()
@@ -190,31 +237,30 @@ class BackController extends MainController
                          "prix",
                          "etat");
         if (self::verifyPost($produit)) {
-            $ss = new SalleService();
-            $salle = $ss->addSalleService();
+            $ps      = new ProduitService();
+            $produit = $ss->addProduitService();
             //If there is at least one error in the form
-            if (self::verifyErrorSalle($salle)) {
+            if (self::verifyErrorProduit($produit)) {
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
                 require __DIR__ . '/../views/viewParameters.php';
                 $viewPageParameters['back']['add_new_produit']['meta']['errors'] = $salle;
-                $this->addSalleParameters = $viewPageParameters['back']['add_new_produit'];
+                $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];
                 $this->render($this->layout,
-                              $this->addProduiteTemplate,
+                              $this->addProduitTemplate,
                               $this->addProduitParameters
                         );  
             } 
         //If there is nothing in the POST, the form is displayed
         } else {
-            echo "toto";
             $sr        = new SalleRepository();
             $allSalles = $sr->getAllSalle();
             $pr        = new PromotionRepository();
             $allPromos = $pr->getAllPromotion();
             
             require __DIR__ . '/../views/viewParameters.php';
-                    
+               
             $viewPageParameters['back']['add_new_produit']['meta']['salles'] = $allSalles;          
             $viewPageParameters['back']['add_new_produit']['meta']['promos'] = $allPromos;          
             
@@ -229,27 +275,7 @@ class BackController extends MainController
         }
     }
         
-    /**
-     * Check if there is at least one error in the salle form
-     * @param  [[Type]] $salle [[Description]]
-     * @return boolean  true if there is at least one error, false if no error
-     */
-    public static function verifyErrorSalle($salle)
-    {
-        if ($salle["errorPays"] !== true        ||
-            $salle["errorVille"] !== true       ||  
-            $salle["errorAdresse"] !== true     ||
-            $salle["errorCp"] !== true          ||
-            $salle["errorTitre"] !== true       ||
-            $salle["errorDescription"] !== true ||
-            //$salle["errorPhoto"] !== true       ||
-            $salle["errorCapacite"] !== true 
-           ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
     public function addNewSalle() 
     {

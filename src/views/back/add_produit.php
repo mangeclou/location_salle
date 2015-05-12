@@ -21,13 +21,13 @@ print_r($_POST);
                 <form method="post" action="" enctype="multipart/form-data">
                     <fieldset class="form-inscription">
                          <div class="inscription_champ"> 
-                            <label for="categorie">Choix de la salle</label>
+                            <label for="salle">Choix de la salle</label>
                             <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorVille'])
                               && $this->addProduitParameters["meta"]["errors"]['errorVille'] !== true)
                                     echo "<span class='error'>" 
                                     .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorVille'])
                                     ."</span>"; ?>
-                            <select name="categorie" id="categorie">
+                            <select name="salle" id="salle">
                             <?php   foreach ($this->addProduitParameters["meta"]["salles"] as $key => $value) {
                                     echo "<option value='" .$value['id_salle'] ."'>" .$value['id_salle'] ." | " .$value['titre'] ." | " .$value['adresse'] ." " .$value['cp'] ." " .$value['ville']  ."</option>";
                                 }
@@ -72,13 +72,13 @@ print_r($_POST);
                         </div>
 
                         <div class="inscription_champ"> 
-                            <label for="cp">Code promo</label>
+                            <label for="promotion">Code promo</label>
                             <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorPromo'])
                               && $this->addProduitParameters["meta"]["errors"]['errorPromo'] !== true)
                                     echo "<span class='error'>"
                                     .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorPromo'])
                                     ."</span>"; ?>
-                             <select name="categorie" id="categorie">
+                             <select name="promotion" id="promotion">
                         <?php   foreach ($this->addProduitParameters["meta"]["promos"] as $key => $value) {
                                     echo "<option value='" .$value['id_promo'] ."'>" .$value['id_promo'] ." | " .$value['code_promo'] ." | " .$value['reduction'] ." "  ."</option>";
                                 }
