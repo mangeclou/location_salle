@@ -42,7 +42,7 @@ print_r($_POST);
                                     echo "<span class='error'>" 
                                     .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDateArrivee'])
                                     ."</span>"; ?>
-                            <input type="date" id="date_first" name="date_arrivee" maxlength="14"
+                            <input id="datetimepicker" type="text" name="date_arrivee" maxlength="14"
                                placeholder="Date..." class="form-control"
                                value="<?php if(isset($_POST['date_arrivee'])) echo $_POST['date_arrivee'] ?>" />
                         </div>
@@ -54,7 +54,7 @@ print_r($_POST);
                                     echo "<span class='error'>" 
                                     .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDateDepart'])
                                     ."</span>"; ?>
-                            <input type="date" id="date_second" name="date_depart" maxlength="14"
+                            <input id="datetimepicker_2" type="text" name="date_depart" maxlength="14"
                                placeholder="Date..." class="form-control"
                                value="<?php if(isset($_POST['date_arrivee'])) echo $_POST['date_arrivee'] ?>" />
                         </div>

@@ -1,3 +1,6 @@
+<link rel="stylesheet" type="text/css" href="/datetimepicker-master/jquery.datetimepicker.css" >
+<!--<script src="jquery.js"></script>-->
+<script src="/datetimepicker-master/jquery.datetimepicker.js"></script>
 <footer>
      <nav class="footer-menu">
         <ul>
