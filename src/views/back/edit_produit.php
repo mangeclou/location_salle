@@ -5,12 +5,12 @@ print_r($_POST);
 
 
     <div class="big_title">
-        <h1>Ajout produit</h1>
+        <h1>Modifier produit</h1>
     </div>
     <div class="container-box">
 	<div class="col_50">
             <div class="form-inscription">
-		<h2>Ajouter un produit</h2>
+		<h2>Modifier un produit</h2>
                 <form method="post" action="" enctype="multipart/form-data">
                     <fieldset class="form-inscription">
                          <div class="inscription_champ"> 

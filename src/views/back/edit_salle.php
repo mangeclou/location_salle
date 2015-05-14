@@ -1,10 +1,3 @@
-<?php
-    echo 'meta';
-    print_r($this->editSalleParameters["meta"]);
-echo 'post';
-print_r($_POST);
-?>
-
     <div class="big_title">
         <h1>Ajout Salle</h1>
     </div>

@@ -33,7 +33,19 @@ class PromotionRepository extends EntityRepository {
     
     public function findPromotionById($id)
     {
-        return $this->find($id); // on va voir la méthode findAll() de EntityRepository
+        $id = (int)$id;
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $query = $db->prepare("SELECT *
+                                FROM promotion
+                                WHERE id_promo = :id;");
+
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+        
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        
+        return $data;          
     }
 
     public function registerPromotion()

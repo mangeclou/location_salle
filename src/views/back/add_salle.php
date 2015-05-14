@@ -1,8 +1,8 @@
 <?php
-    echo 'meta';
+/*    echo 'meta';
     print_r($this->addSalleParameters);
 echo 'post';
-print_r($_POST);
+print_r($_POST);*/
 
 
 

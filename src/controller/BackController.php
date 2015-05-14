@@ -19,11 +19,13 @@ require '/../model/repository/PromotionRepository.php';
 require '/../model/repository/ProduitRepository.php';
 require '/../service/Admin/UserAdminService.php';
 require '/../service/Admin/SalleService.php';
+require '/../service/Admin/ProduitService.php';
 //require '/../service/UserService.php';
 
 use \service\UserService AS UserService;
 use \service\Admin\UserAdminService AS UAService;
 use \service\Admin\SalleService AS SalleService;
+use \service\Admin\ProduitService AS ProduitService;
 use \model\repository\BackRepository AS BackRepository;
 use \repository\SalleRepository AS SalleRepository;
 use \repository\ProduitRepository AS ProduitRepository;
@@ -38,6 +40,9 @@ class BackController extends MainController
     //liste des templates et des paramètres pour chaque page
     protected $addProduitTemplate = 'add_produit.php';
     protected $addProduitParameters;
+    
+    protected $editProduitTemplate = 'edit_produit.php';
+    protected $editProduitParameters;
     
     protected $addSalleTemplate = 'add_salle.php';
     protected $addSalleParameters;
@@ -189,7 +194,14 @@ class BackController extends MainController
         }
     }
     
-        /**
+    /*==============================================================================*/
+    /*     ----------------                              -----------------          */
+    /*     ----------------          PRODUIT             -----------------          */
+    /*     ----------------                              -----------------          */
+    /*==============================================================================*/
+    
+    
+    /**
      * Check if there is at least one error in the salle form
      * TODO : add to the Services
      * @param  [[Type]] $salle [[Description]]
@@ -197,14 +209,11 @@ class BackController extends MainController
      */
     public static function verifyErrorProduit($produit)
     {
-        if ($salle["errorSalle"] !== true        ||
-            $salle["errorVille"] !== true       ||  
-            $salle["errorAdresse"] !== true     ||
-            $salle["errorCp"] !== true          ||
-            $salle["errorTitre"] !== true       ||
-            $salle["errorDescription"] !== true ||
-            //$salle["errorPhoto"] !== true       ||
-            $salle["errorCapacite"] !== true 
+        if ($produit["errorSalle"] !== true        ||
+            $produit["errorDateArrivee"] !== true       ||  
+            $produit["errorDateDepart"] !== true     ||
+            $produit["errorPrix"] !== true          ||
+            $produit["errorPromotion"] !== true           
            ) {
             return true;
         } else {
@@ -235,17 +244,18 @@ class BackController extends MainController
                          "id_salle",
                          "id_promo",
                          "prix",
-                         "etat");
+                         );
         if (self::verifyPost($produit)) {
+            echo 'coucou';
             $ps      = new ProduitService();
-            $produit = $ss->addProduitService();
+            $produit = $ps->addProduitService();
             //If there is at least one error in the form
             if (self::verifyErrorProduit($produit)) {
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
                 require __DIR__ . '/../views/viewParameters.php';
-                $viewPageParameters['back']['add_new_produit']['meta']['errors'] = $salle;
+                $viewPageParameters['back']['add_new_produit']['meta']['errors'] = $produit;
                 $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];
                 $this->render($this->layout,
                               $this->addProduitTemplate,
@@ -274,6 +284,78 @@ class BackController extends MainController
                           $this->addProduitParameters);
         }
     }
+    
+     /**
+     * Edit an existing Produit
+     */
+    public function editProduit() 
+    {
+         //If there is something in the POST
+        $produit = array("date_arrivee",
+                         "date_depart",
+                         "id_salle",
+                         "id_promo",
+                         "prix",
+                         "etat");
+        if (self::verifyPost($produit)) {
+
+            $ps = new ProduitService();
+            $produit = $ps->editProduitService();
+            
+            //If there is at least one error in the form
+            if (self::verifyErrorProduit($produit)) {
+                //on récupère $arrayErrors qui est retourné par les méthodes de la classe
+                //ValidatorController et on affiche le formulaire avec les données de message
+                //d'erreur
+                echo 'erreurs';
+                require __DIR__ . '/../views/viewParameters.php';
+                
+                $viewPageParameters['back']['edit_produit']['meta']['errors'] = $produit;
+                $this->editProduitParameters = $viewPageParameters['back']['edit_produit'];
+                $this->render($this->layout,
+                              $this->editProduitTemplate,
+                              $this->editProduitParameters
+                        );  
+            } 
+            
+        } else {
+            $pr = new ProduitRepository();
+            $editProduit = $pr->findProduitById($_GET["id"]);
+            
+            require __DIR__ . '/../views/viewParameters.php';
+            
+            $viewPageParameters['back']['edit_produit']['meta'] = $editProduit;
+           
+            $this->editProduitParameters = $viewPageParameters['back']['edit_produit'];
+            $this->render($this->layout,
+                          $this->editProduitTemplate,
+                          $this->editProduitParameters);
+        }
+        
+        /*require __DIR__ . '/../views/viewParameters.php';
+            $this->inscriptionParameters = $viewPageParameters['visiteur']['inscription'];
+            $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);*/
+    }
+    
+    /**
+     * Delete an existing salle
+     */
+    public function deleteProduit() 
+    {
+        $ps = new ProduitService();
+        
+        $idProduit = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+        $ps->deleteProduitService($idProduit);
+        //The id of the salle to be edited is taken from the $_GET
+    }
+    
+    /*==============================================================================*/
+    /*     ----------------                              -----------------          */
+    /*     ----------------            SALLE             -----------------          */
+    /*     ----------------                              -----------------          */
+    /*==============================================================================*/
+    
+    
     /**
      * Adds a new salle
      */
@@ -281,13 +363,11 @@ class BackController extends MainController
     {
         //If there is something in the POST
         if (self::verifyPostSalle()) {
-            echo "ok";
             $ss = new SalleService();
             $salle = $ss->addSalleService();
-            echo "toto";
             //If there is at least one error in the form
             if (self::verifyErrorSalle($salle)) {
-                echo "not verify";
+            
             //on récupère $arrayErrors qui est retourné par les méthodes de la classe
             //ValidatorController et on affiche le formulaire avec les données de message
             //d'erreur
@@ -301,7 +381,6 @@ class BackController extends MainController
             } 
         //If there is nothing in the POST, the form is displayed
         } else {
-            echo 'nothing posted';
             require __DIR__ . '/../views/viewParameters.php';
             $this->addSalleParameters = $viewPageParameters['back']['add_new_salle'];
             $this->render($this->layout,
@@ -311,7 +390,7 @@ class BackController extends MainController
     }
     
     /**
-     * Edit and existing salle
+     * Edit an existing salle
      */
     public function editSalle() 
     {

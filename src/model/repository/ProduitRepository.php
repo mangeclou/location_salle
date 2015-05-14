@@ -29,11 +29,41 @@ public function getAllProduit()
 
     public function findProduitById($id)
     {
-        return $this->find($id); // on va voir la méthode findAll() de EntityRepository
+        $id = (int)$id;
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $query = $db->prepare("SELECT *
+                                FROM produit
+                                WHERE id_produit = :id;");
+
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+        
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        
+        return $data;          
     }
 
-    public function registerProduit()
+    public function registerProduit($produit)
     {
-        return $this->register(); // on va voir la méthode findAll() de EntityRepository
+        return $this->register($produit); // on va voir la méthode findAll() de EntityRepository
+    }
+    
+    public function deleteProduit($id)
+    {
+ 
+        $id=(int)$id;
+        $db = $this->getDb();
+        $query = $db->prepare( "DELETE FROM produit
+                            WHERE id_produit = :id;");
+ 
+        $query->bindValue(':id', $id, PDO::PARAM_INT);    
+ 
+        $delete = $query->execute();
+        if (!is_null($delete)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

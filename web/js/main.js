@@ -8,8 +8,14 @@ $(document).ready(function(){
    $( "#date" ).datepicker(); 
    $( "#date_first" ).datepicker(); 
    $( "#date_second" ).datepicker(); 
-   jQuery('#datetimepicker').datetimepicker();
-   jQuery('#datetimepicker_2').datetimepicker();
+   jQuery('#datetimepicker').datetimepicker({
+       format:'Y-m-d H:i:s',
+       lang:'fr'
+   });
+   jQuery('#datetimepicker_2').datetimepicker({
+       format:'Y-m-d H:i:s',
+       lang:'fr'
+   });
    /* 
     $( ".modal" ).dialog({
     modal: true

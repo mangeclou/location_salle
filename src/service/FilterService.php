@@ -46,6 +46,16 @@ class FilterService{
         $filteredUrl = trim(filter_input(INPUT_POST, trim($url), FILTER_SANITIZE_URL));
         return $filteredUrl;
     }
+    
+    public function filterPostDatetime($datetime)
+    {
+       // $datetime = trim(preg_replace("([^0-9/])", "", $_POST[$datetime]));
+        setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+        date_default_timezone_set('Europe/Paris');
+        //$datetime = new \DateTime();
+        $datetime = trim(filter_input(INPUT_POST, $datetime, FILTER_SANITIZE_STRING));
+        return $datetime;
+    }
         
     //Not tested
     public function filterPostData()

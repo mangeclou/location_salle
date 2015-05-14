@@ -11,17 +11,17 @@ namespace service\Admin;
 require_once '/../FilterService.php';
 require_once '/../UrlService.php';
 require_once '/../UserService.php';
-require_once '/../validator/SalleValidatorService.php';
+require_once '/../validator/ProduitValidatorService.php';
 require_once '/../../model/repository/SalleRepository.php';
 
 use \repository\SalleRepository as SalleRepository;
 use \repository\ProduitRepository as ProduitRepository;
 use \service\UserService AS UserService;
 use \service\FilterService AS FilterService;
-use \service\SalleValidatorService AS ValidatorService;
+use \service\validator\ProduitValidatorService AS ValidatorService;
 use \service\UrlService AS UrlService;
 
-class SalleService
+class ProduitService
 {
     
     protected function redirect($controller, $method)
@@ -32,20 +32,21 @@ class SalleService
     protected static function FilterProduit()
     {
         $fs           = new FilterService();
-        $salle        = $fs->filterPostString('salle');
-        $date_arrivee = $fs->filterPostString('date_arrivee');
-        $date_depart  = $fs->filterPostString('date_depart');
+        $salle        = $fs->filterPostString('id_salle');
+        $date_arrivee = $fs->filterPostDatetime('date_arrivee');
+        $date_depart  = $fs->filterPostDatetime('date_depart');
         $prix         = $fs->filterPostString('prix');    
-        $promotion    = $fs->filterPostString('promotion');    
-
-        $filteredPromotion = [
-            "salle"        => $salle,
+        $promotion    = $fs->filterPostString('id_promo');    
+        print_r($_POST);
+echo $date_depart;
+        $filteredProduit = [
+            "id_salle"        => $salle,
             "date_arrivee" => $date_arrivee,
             "date_depart"  => $date_depart,   
             "prix"         => $prix,          
-            "promotion"    => $promotion,          
+            "id_promo"    => $promotion,          
         ];
-        return $filteredPromotion;        
+        return $filteredProduit;        
     }
     
     public function addProduitService()
@@ -55,11 +56,11 @@ class SalleService
         //if (parent::postCreateUserExist()) {
         //Filter post
         $filteredProduit = self::FilterProduit();
-        
         $arrayErrors = [];
-       
+        echo 'filtered produit';
+       print_r($filteredProduit);
         $vs         = new ValidatorService();
-        $validation = $vs->isFormValid($filteredPromotion);
+        $validation = $vs->isFormValid($filteredProduit);
         //Check if the form pass the validation test
         print_r($validation);
         if ($validation !== true) {
@@ -77,26 +78,27 @@ class SalleService
         //END if $validation !== true
     }//END addSalle()  
       
-    public function editSalleService()
+    public function editProduitService()
     {
         //If the form has not been posted
         //if (parent::postCreateUserExist()) {
         //Filter post
-        $filteredSalle = self::FilterSalle();
-        //Check if the titre in the form already exists in the db  (the titre is 
-        //unique in the db)
-        $sr          = new SalleRepository();
-        $findTitre   = $sr ->findSalleByTitre($filteredSalle['titre']);
+        $filteredProduit = self::FilterProduit();
+        //TODO : add a repo method that checks if there is already one produit with
+        //the same date_arrivee and the same id_salle 
+        //Check if the produit doesn't already exist
+        //TODO
         $arrayErrors = [];
        
-        //If the titre already exists
-        if ($findTitre === true) {
+        //If the produit already exists
+       /* if ($findProduit === true) {
             $arrayErrors[] = 'Veuillez choisir un autre titre.';
             self::redirect("BackController", "editSalle");
-        }        
-        //If the pseudo doesn't exist
+        }      */  
+        
+        //If the produit doesn't exist
         $vs = new ValidatorService();
-        $validation = $vs->isFormValid($filteredSalle);
+        $validation = $vs->isFormValid($filteredProduit);
         //Check if the form pass the validation test
         if ($validation !== true) {
             //Returns the arrayErrors
@@ -106,21 +108,21 @@ class SalleService
         } else {
                             
                 //The id of the salle to be edited is taken from the $_GET
-                $filteredSalle["id_salle"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
+                $filteredProduit["id_produit"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
                 //Add salle data to db
-                $sr->updateSalle($filteredSalle);
+                $pr->updateProduit($filteredProduit);
               
-                self::redirect("BackController", "displaySalle");
+                self::redirect("BackController", "displayProduit");
             
         }//END if $validation !== true
        
     }
     
-    public function deleteSalleService($id)
+    public function deleteProduitService($id)
     {
         echo $id;
-        $sr         = new SalleRepository();
-        $sr ->deleteSalle($id);
-         self::redirect("BackController", "displaySalle");
+        $sr         = new ProduitRepository();
+        $sr ->deleteProduit($id);
+         self::redirect("BackController", "displayProduit");
     }
 }

@@ -13,25 +13,14 @@
 require_once(__DIR__ . '/../src/autoload.php');
 require_once(__DIR__ .'/../src/controller/controllerAndMethodManager.php');
 
-//use \controller\Controller;
 
- //use controller\VisiteurController;
- //echo Autoload::$nb . '<br>';
- //$objet = new VisiteurController();
-
- //print_r($objet);
- //exit();
  $controller = $_GET['controller'];
  $methodName = $_GET['method'];
- echo $controller . "<br>";
- 
+
  $path = __DIR__ . '\..\src\controller\\' . $controller . '.php';
  include $path;
  $controllerName = 'controller\\'. $controller;
-  echo $controllerName . "<br>";
- //$obj = new $class;
- //print_r($obj);
- //exit();
+ 
  
  //on appelle deux méthodes de controllerAndMethodManager pour checker, instancier
  //et appeler la bonne méthode

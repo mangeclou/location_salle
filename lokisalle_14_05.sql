@@ -39,21 +39,27 @@ INSERT INTO `membre` (`id_membre`, `pseudo`, `mdp`, `nom`, `prenom`, `email`, `s
 
 -- Export de données de la table lokisalle.produit : ~0 rows (environ)
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
+INSERT INTO `produit` (`id_produit`, `date_arrivee`, `date_depart`, `id_salle`, `id_promo`, `prix`, `etat`) VALUES
+	(6, '2015-05-14 19:29:01', '2015-05-22 19:29:07', 5, 1, 500, 0),
+	(7, '2015-05-13 20:13:31', '2015-05-22 20:13:33', 5, 1, 218, 0);
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 
--- Export de données de la table lokisalle.promotion : ~0 rows (environ)
+-- Export de données de la table lokisalle.promotion : ~2 rows (environ)
 /*!40000 ALTER TABLE `promotion` DISABLE KEYS */;
+INSERT INTO `promotion` (`id_promo`, `code_promo`, `reduction`) VALUES
+	(1, '21234', 10),
+	(2, '32542', 12);
 /*!40000 ALTER TABLE `promotion` ENABLE KEYS */;
 
 -- Export de données de la table lokisalle.salle : ~6 rows (environ)
 /*!40000 ALTER TABLE `salle` DISABLE KEYS */;
 INSERT INTO `salle` (`id_salle`, `pays`, `ville`, `adresse`, `cp`, `titre`, `description`, `photo`, `capacite`, `categorie`) VALUES
-	(1, 'France', 'Paris', '45 rue de la Paix', '75016', 'Salle royale', 'Notre plus belle salle de réunion', '', 0, 'reunion'),
-	(5, 'France', 'Paris', '21 Boulevard des Capucines', '75009', 'Une super salle', 'Une super salle à deux pas de l&#39;Opéra et accessible facilement par un bus depuis Orly.', 'jtl.jpg', 12442, 'reunion'),
-	(7, 'France', 'Paris', '21 Boulevard des Capucines', '75009', 'Une super salle 2', 'aerazerzer', 'jtl.jpg', 12442, 'reunion'),
-	(9, 'France', 'Paris', '21 Boulevard des Capucines', '75009', 'Une super salle 5', 'tzertzert', 'jtl.jpg', 12442, 'reunion'),
+	(5, 'France', 'Paris', 'France', '75009', 'Une super salle', 'Une super salle à deux pas de l&#39;Opéra et accessible facilement par un bus depuis Orly.', 'rideaux.jpg', 212, 'reunion'),
+	(7, 'France', 'Paris', 'France', '75009', 'Une super salle 8', 'Une salle très confortable pour un espace dynamique.', '', 12442, 'reunion'),
+	(9, 'France', 'Paris', 'France', '75009', 'Une super salle 5', 'Une salle de dimension réduite pour les réunion d&#39;affaire de moins de 10 personnes.', 'rideaux.jpg', 10, 'reunion'),
 	(10, 'France', 'Lyon', '33 Quai Arloing', '69009', 'Quai 33', 'Centre d&#39;affaires et de business development\r\nimplanté à Lyon Vaise', 'rideaux.jpg', 250, 'reunion'),
-	(11, 'France', 'Paris', '1/13 Quai de Grenelle', '75015', 'Espace de réunion', 'L&#39;espace de réunion parfait', 'brucenauman_0.jpg', 250, 'reunion');
+	(11, 'France', 'Paris', '1/13 Quai de Grenelle', '75015', 'Espace de réunion', 'L&#39;espace de réunion parfait', 'brucenauman_0.jpg', 250, 'reunion'),
+	(13, 'France', 'Paris', '15 rue de Saintonge', '75003', 'Petite salle du Marais', 'Une salle pour vos réunion en petit comité', '', 12, 'reunion');
 /*!40000 ALTER TABLE `salle` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
