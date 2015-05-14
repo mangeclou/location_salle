@@ -19,7 +19,9 @@ require '/../model/repository/PromotionRepository.php';
 require '/../model/repository/ProduitRepository.php';
 require '/../service/Admin/UserAdminService.php';
 require '/../service/Admin/SalleService.php';
+//require '/../service/UserService.php';
 
+use \service\UserService AS UserService;
 use \service\Admin\UserAdminService AS UAService;
 use \service\Admin\SalleService AS SalleService;
 use \model\repository\BackRepository AS BackRepository;
@@ -139,9 +141,7 @@ class BackController extends MainController
         }
         return true;
     }
-    
-    
-    
+        
     /**
      * Check if all the fields of the form contain something
      * TODO : add to the Services
@@ -274,9 +274,9 @@ class BackController extends MainController
                           $this->addProduitParameters);
         }
     }
-        
-
-
+    /**
+     * Adds a new salle
+     */
     public function addNewSalle() 
     {
         //If there is something in the POST
@@ -310,6 +310,9 @@ class BackController extends MainController
         }
     }
     
+    /**
+     * Edit and existing salle
+     */
     public function editSalle() 
     {
         if (self::verifyPostSalle() === true) {
@@ -354,6 +357,9 @@ class BackController extends MainController
             $this->render($this->layout, $this->inscriptionTemplate, $this->inscriptionParameters);*/
     }
     
+    /**
+     * Delete an existing salle
+     */
     public function deleteSalle() 
     {
         $ss = new SalleService();
@@ -361,11 +367,8 @@ class BackController extends MainController
         $idSalle = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
         $ss->deleteSalleService($idSalle);
         //The id of the salle to be edited is taken from the $_GET
-      
-        
     }
-    
-    
+        
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
     *
@@ -445,12 +448,7 @@ class BackController extends MainController
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->gestionMembreTemplate, $this->gestionMembreParameters);  
     }
-    
-    public function displayGestionProduit() 
-    {
-      
-    }
-    
+        
     public function displayGestionPromo() 
     {
        //on require le fichier de config de la view
@@ -571,7 +569,10 @@ class BackController extends MainController
         return $this->render($this->layout, $this->reservationDetailBackTemplate, $this->reservationDetailBackParameters);  
     }
     
-    
+    /**
+     * Display the existing salles
+     * @return [[Type]] [[Description]]
+     */
     public function displaySalle() 
     {
         $sr = new SalleRepository();
@@ -595,6 +596,13 @@ class BackController extends MainController
         $this->statistiqueParameters = $viewPageParameters['back']['statistique'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout, $this->statistiqueTemplate, $this->statistiqueParameters);  
+    }
+    
+    public function deconnectAdmin() 
+    {
+        $us = new UserService;
+        $us->deconnect();
+        header('location:index.php?controller=VisiteurController&method=displayIndex');
     }
                 
 }

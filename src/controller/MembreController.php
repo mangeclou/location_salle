@@ -12,8 +12,11 @@
  */
 namespace controller; // toujours le même nom que le dossier, pour que l'autoload puisse trouver le fichier
 
-include 'Controller.php';
-USE controller\Controller AS MainController;
+require '/../service/Admin/SalleService.php';
+require 'Controller.php';
+
+use \service\UserService AS UserService;
+use controller\Controller AS MainController;
 
 class MembreController extends MainController
 {
@@ -229,9 +232,10 @@ class MembreController extends MainController
                              $this->reservationDetailMembreParameters);  
     }
     
-    public function deconnexion() 
+    public function deconnectMembre() 
     {
-        session_destroy();
+        $us = new UserService;
+        $us->deconnect();
         header('location:index.php?controller=VisiteurController&method=displayIndex');
     }
             

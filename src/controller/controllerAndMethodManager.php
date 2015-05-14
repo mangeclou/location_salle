@@ -39,12 +39,13 @@ class controllerAndMethodManager{
                             'displayProfilBack',
                             'displayRechercheBack',
                             'displayReservationBack',
-                           
+                            'deconnectAdmin',
                             'displayStatistique',                            
                             ],
                         'membre'=>[
                             'displayContact',
                             'displayIndexMembre',
+                            'deconnectMembre',
                             'displayNewsletterInscription',
                             'displayPanier',
                             'displayProfil',

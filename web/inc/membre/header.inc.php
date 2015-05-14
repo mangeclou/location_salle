@@ -6,7 +6,7 @@
                 <li><a href="index.php?controller=MembreController&method=displayIndexMembre">Accueil</a></li>
                 <li><a href="index.php?controller=MembreController&method=displayReservationMembre">Réservation</a></li>
                 <li><a href="index.php?controller=MembreController&method=displayRechercheMembre">Recherche</a></li>
-                <li><a href="index.php?controller=MembreController&method=deconnexion">Se déconnecter</a></li>
+                <li><a href="index.php?controller=MembreController&method=deconnectMembre">Se déconnecter</a></li>
             </ul>
         </nav>
 </header>

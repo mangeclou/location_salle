@@ -62,6 +62,15 @@ class UserService
         }
     }
     
+    /**
+     * Destroy the current session.
+     * @return [[Type]] [[Description]]
+     */
+    public function deconnect()
+    {
+        $_SESSION = array();
+        return session_destroy();
+    }
 
     protected function redirect($controller, $method)
     {

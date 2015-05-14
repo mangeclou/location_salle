@@ -6,7 +6,7 @@
                 <li><a href="index.php?controller=BackController&method=displayIndexBack">Accueil</a></li>
                 <li><a href="index.php?controller=BackController&method=displayReservationBack">Réservation</a></li>
                 <li><a href="index.php?controller=BackController&method=displayRechercheBack">Recherche</a></li>
-                <li><a href="">Se déconnecter</a></li>
+                <li><a href="index.php?controller=BackController&method=deconnectAdmin">Se déconnecter</a></li>
                 <li><a href="index.php?controller=BackController&method=displayPanierBack">Panier</a></li>
                 <li><a href="index.php?controller=BackController&method=displayProfilBack">Profil</a></li>
             </ul>
