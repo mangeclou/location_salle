@@ -1,5 +1,5 @@
 <?php
-print_r($_POST);
+print_r($this->editProduitParameters["meta"]);
 
 ?>
 
@@ -15,13 +15,13 @@ print_r($_POST);
                     <fieldset class="form-inscription">
                          <div class="inscription_champ"> 
                             <label for="salle">Choix de la salle</label>
-                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorVille'])
-                              && $this->addProduitParameters["meta"]["errors"]['errorVille'] !== true)
+                            <?php if(isset($this->editProduitParameters["meta"]["errors"]['errorSalle'])
+                              && $this->editProduitParameters["meta"]["errors"]['errorSalle'] !== true)
                                     echo "<span class='error'>" 
-                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorVille'])
+                                    .htmlspecialchars($this->editProduitParameters["meta"]["errors"]['errorSalle'])
                                     ."</span>"; ?>
                             <select name="id_salle" id="salle">
-                            <?php   foreach ($this->addProduitParameters["meta"]["salles"] as $key => $value) {
+                            <?php   foreach ($this->editProduitParameters["meta"]["salles"] as $key => $value) {
                                     echo "<option value='" .$value['id_salle'] ."'>" .$value['id_salle'] ." | " .$value['titre'] ." | " .$value['adresse'] ." " .$value['cp'] ." " .$value['ville']  ."</option>";
                                 }
                             ?>
@@ -30,41 +30,43 @@ print_r($_POST);
 
                         <div class="inscription_champ"> 
                             <label for="date_first">Date d'arrivée</label>
-                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorDateArrivee'])
-                              && $this->addProduitParameters["meta"]["errors"]['errorDateArrivee'] !== true)
+                            <?php if(isset($this->editProduitParameters["meta"]["errors"]['errorDateArrivee'])
+                              && $this->editProduitParameters["meta"]["errors"]['errorDateArrivee'] !== true)
                                     echo "<span class='error'>" 
-                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDateArrivee'])
+                                    .htmlspecialchars($this->editProduitParameters["meta"]["errors"]['errorDateArrivee'])
                                     ."</span>"; ?>
                             <input id="datetimepicker" type="text" name="date_arrivee" maxlength="14"
                                placeholder="Date..." class="form-control"
-                               value="<?php if(isset($_POST['date_arrivee'])) echo $_POST['date_arrivee'] ?>" />
+                               value="<?php if(isset($this->editSalleParameters["meta"]["date_arrivee"]))
+                                    echo htmlspecialchars($this->editSalleParameters["meta"]["date_arrivee"]); 
+                                   if (isset($_POST["ville"])) echo htmlspecialchars($_POST["date_arrivee"], ENT_QUOTES)?>" />
                         </div>
                         
                         <div class="inscription_champ"> 
                             <label for="date_second">Date de départ</label>
-                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorDateDepart'])
-                              && $this->addProduitParameters["meta"]["errors"]['errorDateArrivee'] !== true)
+                            <?php if(isset($this->editProduitParameters["meta"]["errors"]['errorDateDepart'])
+                              && $this->editProduitParameters["meta"]["errors"]['errorDateArrivee'] !== true)
                                     echo "<span class='error'>" 
-                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDateDepart'])
+                                    .htmlspecialchars($this->editProduitParameters["meta"]["errors"]['errorDateDepart'])
                                     ."</span>"; ?>
                             <input id="datetimepicker_2" type="text" name="date_depart" maxlength="14"
                                placeholder="Date..." class="form-control"
                                value="<?php if(isset($_POST['date_depart'])) echo $_POST['date_depart'] ?>" />
                             
                             <?php
-                            if(isset($this->addProduitParameters["meta"]["errors"]['errorDateInterval'])
-                              && $this->addProduitParameters["meta"]["errors"]['errorDateInterval'] !== true)
+                            if(isset($this->editProduitParameters["meta"]["errors"]['errorDateInterval'])
+                              && $this->editProduitParameters["meta"]["errors"]['errorDateInterval'] !== true)
                                     echo "<span class='error'>" 
-                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorDateInterval'])
+                                    .htmlspecialchars($this->editProduitParameters["meta"]["errors"]['errorDateInterval'])
                                     ."</span>"; ?>
                         </div>
 
                         <div class="inscription_champ"> 
                             <label for="prix">Prix</label>
-                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorPrix'])
-                              && $this->addProduitParameters["meta"]["errors"]['errorPrix'] !== true)
+                            <?php if(isset($this->editProduitParameters["meta"]["errors"]['errorPrix'])
+                              && $this->editProduitParameters["meta"]["errors"]['errorPrix'] !== true)
                                     echo "<span class='error'>"
-                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorPrix'])
+                                    .htmlspecialchars($this->editProduitParameters["meta"]["errors"]['errorPrix'])
                                     ."</span>"; ?>
                             <input type="number" id="prix" name="prix"
                                placeholder="Prix..." class="form-control"
@@ -73,13 +75,13 @@ print_r($_POST);
 
                         <div class="inscription_champ"> 
                             <label for="promotion">Code promo</label>
-                            <?php if(isset($this->addProduitParameters["meta"]["errors"]['errorPromo'])
-                              && $this->addProduitParameters["meta"]["errors"]['errorPromo'] !== true)
+                            <?php if(isset($this->editProduitParameters["meta"]["errors"]['errorPromo'])
+                              && $this->editProduitParameters["meta"]["errors"]['errorPromo'] !== true)
                                     echo "<span class='error'>"
-                                    .htmlspecialchars($this->addProduitParameters["meta"]["errors"]['errorPromo'])
+                                    .htmlspecialchars($this->editProduitParameters["meta"]["errors"]['errorPromo'])
                                     ."</span>"; ?>
                              <select name="id_promo" id="promotion">
-                            <?php foreach ($this->addProduitParameters["meta"]["promos"] as $key => $value) {
+                            <?php foreach ($this->editProduitParameters["meta"]["promos"] as $key => $value) {
                                     echo "<option value='" .$value['id_promo'] ."'>" .$value['id_promo'] ." | " .$value['code_promo'] ." | " .$value['reduction'] ." "  ."</option>";
                                 }
                             ?>

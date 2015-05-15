@@ -58,11 +58,9 @@ echo $date_depart;
         $filteredProduit = self::FilterProduit();
         $arrayErrors = [];
         echo 'filtered produit';
-       print_r($filteredProduit);
         $vs         = new ValidatorService();
         $validation = $vs->isFormValid($filteredProduit);
         //Check if the form pass the validation test
-        print_r($validation);
         if ($validation !== true) {
             //Returns the arrayErrors
             return $validation;//array( 'arrayErrors' => $arrayErrors)
@@ -110,6 +108,7 @@ echo $date_depart;
                 //The id of the salle to be edited is taken from the $_GET
                 $filteredProduit["id_produit"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
                 //Add salle data to db
+                $pr = new ProduitRepository();
                 $pr->updateProduit($filteredProduit);
               
                 self::redirect("BackController", "displayProduit");

@@ -210,9 +210,9 @@ class BackController extends MainController
     public static function verifyErrorProduit($produit)
     {
         if ($produit["errorSalle"] !== true        ||
-            $produit["errorDateArrivee"] !== true       ||  
-            $produit["errorDateDepart"] !== true     ||
-            $produit["errorPrix"] !== true          ||
+            $produit["errorDateArrivee"] !== true  ||  
+            $produit["errorDateDepart"] !== true   ||
+            $produit["errorPrix"] !== true         ||
             $produit["errorPromotion"] !== true           
            ) {
             return true;
@@ -307,8 +307,14 @@ class BackController extends MainController
                 //on récupère $arrayErrors qui est retourné par les méthodes de la classe
                 //ValidatorController et on affiche le formulaire avec les données de message
                 //d'erreur
-                echo 'erreurs';
+                $sr        = new SalleRepository();
+                $allSalles = $sr->getAllSalle();
+                $prm        = new PromotionRepository();
+                $allPromos = $prm->getAllPromotion();
+                
                 require __DIR__ . '/../views/viewParameters.php';
+                $viewPageParameters['back']['edit_produit']['meta']['salles'] = $allSalles;          
+                $viewPageParameters['back']['edit_produit']['meta']['promos'] = $allPromos; 
                 
                 $viewPageParameters['back']['edit_produit']['meta']['errors'] = $produit;
                 $this->editProduitParameters = $viewPageParameters['back']['edit_produit'];
@@ -319,11 +325,16 @@ class BackController extends MainController
             } 
             
         } else {
+            $sr        = new SalleRepository();
+            $allSalles = $sr->getAllSalle();
+            $prm        = new PromotionRepository();
+            $allPromos = $prm->getAllPromotion();
             $pr = new ProduitRepository();
             $editProduit = $pr->findProduitById($_GET["id"]);
             
             require __DIR__ . '/../views/viewParameters.php';
-            
+            $viewPageParameters['back']['edit_produit']['meta']['salles'] = $allSalles;          
+            $viewPageParameters['back']['edit_produit']['meta']['promos'] = $allPromos; 
             $viewPageParameters['back']['edit_produit']['meta'] = $editProduit;
            
             $this->editProduitParameters = $viewPageParameters['back']['edit_produit'];
