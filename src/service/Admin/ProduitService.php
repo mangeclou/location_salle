@@ -32,12 +32,12 @@ class ProduitService
     protected static function FilterProduit()
     {
         $fs           = new FilterService();
-        $salle        = $fs->filterPostString('id_salle');
+        $salle        = $fs->filterPostInt('id_salle');
         $date_arrivee = $fs->filterPostDatetime('date_arrivee');
         $date_depart  = $fs->filterPostDatetime('date_depart');
         $prix         = $fs->filterPostString('prix');    
-        $promotion    = $fs->filterPostString('id_promo');    
-        print_r($_POST);
+        $promotion    = $fs->filterPostInt('id_promo');    
+      /*  print_r($_POST);*/
 echo $date_depart;
         $filteredProduit = [
             "id_salle"        => $salle,
@@ -57,7 +57,6 @@ echo $date_depart;
         //Filter post
         $filteredProduit = self::FilterProduit();
         $arrayErrors = [];
-        echo 'filtered produit';
         $vs         = new ValidatorService();
         $validation = $vs->isFormValid($filteredProduit);
         //Check if the form pass the validation test
@@ -81,6 +80,7 @@ echo $date_depart;
         //If the form has not been posted
         //if (parent::postCreateUserExist()) {
         //Filter post
+        echo 'hihi';
         $filteredProduit = self::FilterProduit();
         //TODO : add a repo method that checks if there is already one produit with
         //the same date_arrivee and the same id_salle 
@@ -95,8 +95,10 @@ echo $date_depart;
         }      */  
         
         //If the produit doesn't exist
+        echo 'hoho';
         $vs = new ValidatorService();
         $validation = $vs->isFormValid($filteredProduit);
+        print_r($validation);
         //Check if the form pass the validation test
         if ($validation !== true) {
             //Returns the arrayErrors
@@ -104,6 +106,7 @@ echo $date_depart;
             return $validation;
         //If the form is validated         
         } else {
+            echo 'coucou';
                             
                 //The id of the salle to be edited is taken from the $_GET
                 $filteredProduit["id_produit"] = (int)filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);

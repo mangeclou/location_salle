@@ -66,4 +66,25 @@ public function getAllProduit()
             return false;
         }
     }
+    
+    public function updateProduit($values)
+    {
+        extract($values);
+        
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+        $query = $db->prepare("UPDATE produit
+                                SET date_arrivee = :date_arrivee, date_depart= :date_depart, id_salle= :id_salle, id_promo=:id_promo, prix=:prix
+                                    WHERE id_produit = :id_produit;");
+
+        $query->bindValue(':id_produit', $id_produit, PDO::PARAM_INT);
+        $query->bindValue(':date_arrivee', $date_arrivee, PDO::PARAM_STR);
+        $query->bindValue(':date_depart', $date_depart, PDO::PARAM_STR);
+        $query->bindValue(':id_salle', $id_salle, PDO::PARAM_INT);
+        $query->bindValue(':id_promo', $id_promo, PDO::PARAM_INT);
+        $query->bindValue(':prix', $prix, PDO::PARAM_INT);
+        $update = $query->execute();
+       
+        return $update;          
+    }
 }

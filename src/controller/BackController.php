@@ -127,7 +127,6 @@ class BackController extends MainController
         if (!(isset($_SESSION["email"]) && isset($_SESSION["admin"]))) {
             header('location:index.php?controller=VisiteurController&method=displayIndex');
         }
-       //print_r($_SESSION);
     }
     
     /** Checks if the form has been posted
@@ -213,6 +212,7 @@ class BackController extends MainController
             $produit["errorDateArrivee"] !== true  ||  
             $produit["errorDateDepart"] !== true   ||
             $produit["errorPrix"] !== true         ||
+            $produit["errorDateInterval"] !== true ||
             $produit["errorPromotion"] !== true           
            ) {
             return true;
@@ -246,7 +246,6 @@ class BackController extends MainController
                          "prix",
                          );
         if (self::verifyPost($produit)) {
-            echo 'coucou';
             $ps      = new ProduitService();
             $produit = $ps->addProduitService();
             //If there is at least one error in the form
@@ -274,8 +273,8 @@ class BackController extends MainController
             $viewPageParameters['back']['add_new_produit']['meta']['salles'] = $allSalles;          
             $viewPageParameters['back']['add_new_produit']['meta']['promos'] = $allPromos;          
             
-            //on va chercher les paramètres dans l'array viewpageParameters
-            $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];
+           /* //on va chercher les paramètres dans l'array viewpageParameters
+            $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];*/
             //on utilise la méthode render du parent Controller pour afficher la page
             
             $this->addProduitParameters = $viewPageParameters['back']['add_new_produit'];
@@ -295,13 +294,11 @@ class BackController extends MainController
                          "date_depart",
                          "id_salle",
                          "id_promo",
-                         "prix",
-                         "etat");
+                         "prix");
         if (self::verifyPost($produit)) {
 
             $ps = new ProduitService();
             $produit = $ps->editProduitService();
-            
             //If there is at least one error in the form
             if (self::verifyErrorProduit($produit)) {
                 //on récupère $arrayErrors qui est retourné par les méthodes de la classe
@@ -309,12 +306,14 @@ class BackController extends MainController
                 //d'erreur
                 $sr        = new SalleRepository();
                 $allSalles = $sr->getAllSalle();
-                $prm        = new PromotionRepository();
+                $prm       = new PromotionRepository();
+                $pr          = new ProduitRepository();
                 $allPromos = $prm->getAllPromotion();
-                
+                $editProduit = $pr->findProduitById($_GET["id"]);
                 require __DIR__ . '/../views/viewParameters.php';
-                $viewPageParameters['back']['edit_produit']['meta']['salles'] = $allSalles;          
-                $viewPageParameters['back']['edit_produit']['meta']['promos'] = $allPromos; 
+                $viewPageParameters['back']['edit_produit']['meta'] = $editProduit;
+                $viewPageParameters['back']['edit_produit']['meta']['external']['salles'] = $allSalles;          
+                $viewPageParameters['back']['edit_produit']['meta']['external']['promos'] = $allPromos; 
                 
                 $viewPageParameters['back']['edit_produit']['meta']['errors'] = $produit;
                 $this->editProduitParameters = $viewPageParameters['back']['edit_produit'];
@@ -323,19 +322,22 @@ class BackController extends MainController
                               $this->editProduitParameters
                         );  
             } 
-            
+        //If there is nothing in the POST  
         } else {
-            $sr        = new SalleRepository();
-            $allSalles = $sr->getAllSalle();
-            $prm        = new PromotionRepository();
-            $allPromos = $prm->getAllPromotion();
-            $pr = new ProduitRepository();
+            $sr          = new SalleRepository();
+            $allSalles   = $sr->getAllSalle();
+            $prm         = new PromotionRepository();
+            $allPromos   = $prm->getAllPromotion();
+            $pr          = new ProduitRepository();
             $editProduit = $pr->findProduitById($_GET["id"]);
             
             require __DIR__ . '/../views/viewParameters.php';
-            $viewPageParameters['back']['edit_produit']['meta']['salles'] = $allSalles;          
-            $viewPageParameters['back']['edit_produit']['meta']['promos'] = $allPromos; 
             $viewPageParameters['back']['edit_produit']['meta'] = $editProduit;
+            $viewPageParameters['back']['edit_produit']['meta']['external']['salles'] = $allSalles;          
+            $viewPageParameters['back']['edit_produit']['meta']['external']['promos'] = $allPromos; 
+               
+            $this->editProduitParameters = $viewPageParameters['back']['edit_produit'];
+            //$viewPageParameters['back']['edit_produit']['meta'] = $editProduit;
            
             $this->editProduitParameters = $viewPageParameters['back']['edit_produit'];
             $this->render($this->layout,
@@ -415,7 +417,6 @@ class BackController extends MainController
                 //on récupère $arrayErrors qui est retourné par les méthodes de la classe
                 //ValidatorController et on affiche le formulaire avec les données de message
                 //d'erreur
-                echo 'erreurs';
                 require __DIR__ . '/../views/viewParameters.php';
                 
                 $viewPageParameters['back']['edit_salle']['meta']['errors'] = $salle;
