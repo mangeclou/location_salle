@@ -22,16 +22,16 @@ print_r($this->indexParameters["meta"]["salles"]["ville"]);
                 <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
             <div class="date">
                 <p><i class="fa fa-calendar"></i>
-Du <?php echo($row["date_arrivee"]); ?></p>
+Du <?php echo($value["date_arrivee"]); ?></p>
                 <p><i class="fa fa-calendar"></i>
-Au <?php echo($row["date_depart"]); ?></p>
+Au <?php echo($value["date_depart"]); ?></p>
             </div>
             <div class="lieu">
-		        <p><i class="fa fa-map-marker"><?php echo($row["salles"]["ville"]); ?></i>
+		        <p><i class="fa fa-map-marker"><?php echo($key["ville"]); ?></i>
 Paris</p>
             </div>
             <div class="prix">
-		        <p><?php echo($row["prix"]); ?> €</p>
+		        <p><?php echo($value["prix"]); ?> €</p>
             </div>
             <div class="btn">
                 <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
