@@ -12,13 +12,29 @@ use \repository\EntityRepository AS EntityRepository;
 
 class ProduitRepository extends EntityRepository {
 
-public function getAllProduit()
+    public function getAllProduit()
     {
         $db = $this->getDb();
         //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
 
         $query = $db->prepare( "SELECT *
                                 FROM produit;");
+
+        $query->execute();
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;          
+    }
+    
+    public function getAllAvailableProduit()
+    {
+        $db = $this->getDb();
+        //NOTE : ajouter un throw new Exception et un try catch dans le cas où la requête ne trouve aucune colonne
+
+        $query = $db->prepare( "SELECT *
+                                FROM produit
+                                WHERE etat = 0;");
 
         $query->execute();
 
@@ -87,4 +103,5 @@ public function getAllProduit()
        
         return $update;          
     }
+
 }

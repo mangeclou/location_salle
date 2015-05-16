@@ -120,6 +120,26 @@ iframe{
 }
 
 
+/*Front */
+.small-box {
+   /* border: solid 1px #D3D3D3;*/
+    padding: 1em;
+    margin-right: 1em;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.12),
+                      0 1px 2px 0 rgba(0,0,0,.24);
+  -moz-box-shadow:    0 1px 3px 0 rgba(0,0,0,.12),
+                      0 1px 2px 0 rgba(0,0,0,.24);
+  box-shadow:         0 1px 3px 0 rgba(0,0,0,.12),
+                      0 1px 2px 0 rgba(0,0,0,.24);
+}
+
+
+/* ----Links---*/
+a {
+    text-decoration: none;
+    color: cornflowerblue;
+}
+
 /* ----FORMS---*/
 .btn form button{
 	margin-bottom: 10px;

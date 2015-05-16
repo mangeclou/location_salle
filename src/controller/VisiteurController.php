@@ -16,7 +16,11 @@ require 'Controller.php';
 require '/../model/repository/BackRepository.php';
 require '/../service/Admin/UserAdminService.php';
 require '/../service/MembreService.php';
+require '/../model/repository/ProduitRepository.php';
+require '/../model/repository/SalleRepository.php';
 
+use \repository\ProduitRepository AS ProduitRepository;
+use \repository\SalleRepository AS SalleRepository;
 use \service\MembreService AS MembreService;
 use \service\Admin\UserAdminService AS UAService;
 use \model\repository\BackRepository AS BackRepository;
@@ -106,12 +110,26 @@ class VisiteurController extends Controller
     
     public function displayIndex()
     {
+        $pr          = new ProduitRepository();
+        $allProduits = $pr->getAllAvailableProduit();
+        $sr    = new SalleRepository();  
+        foreach ($allProduits as $produit) {
+            $salles = $sr->findSalleById($produit['id_salle']); 
+        }
+  
+        //$salle       = $sr->findSalleById();
+            
+        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
-        $this->indexParameters = $viewPageParameters['visiteur']['index_visiteur']; 
-        return $this->render($this->layout, $this->indexTemplate, $this->indexParameters);  
+         
+        $viewPageParameters['visiteur']['index_visiteur']['meta'] = $allProduits;
+        $viewPageParameters['visiteur']['index_visiteur']['meta']["salles"] = $salles;
+        //on va chercher les paramètres dans l'array viewpageParameters
+        $this->indexParameters = $viewPageParameters['visiteur']['index_visiteur'];
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->indexTemplate, $this->indexParameters);
     }
         
-     //continuer
     public function displayMdpperdu()
     {
         require __DIR__ . '/../views/viewParameters.php';

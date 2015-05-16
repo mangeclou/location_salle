@@ -1,3 +1,6 @@
+<?php
+print_r($this->indexParameters["meta"]["salles"]["ville"]);
+?>
     <div class="carousel_wrapper">
         <div class="carousel">
             <div class="slide">
@@ -12,61 +15,36 @@
 	    <h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
     </div>
     <div class="container-box">
-        <div class="col_30">
-            <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
+        <?php if(!empty($this->indexParameters["meta"])): ?>
+        <?php foreach($this->indexParameters["meta"] as $key => $value): ?>
+            <div class="col_30">
+                <div class="small-box">
+                <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
             <div class="date">
-		<p>Du 13 déc 2015 au 17 déc 2015</p>
+                <p><i class="fa fa-calendar"></i>
+Du <?php echo($row["date_arrivee"]); ?></p>
+                <p><i class="fa fa-calendar"></i>
+Au <?php echo($row["date_depart"]); ?></p>
             </div>
             <div class="lieu">
-		<p>Paris</p>
+		        <p><i class="fa fa-map-marker"><?php echo($row["salles"]["ville"]); ?></i>
+Paris</p>
             </div>
             <div class="prix">
-		<p>600 €</p>
+		        <p><?php echo($row["prix"]); ?> €</p>
             </div>
             <div class="btn">
                 <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
                     <button type="button">Voir ce lieu</button>
                 </a>
             </div>
-		<a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
+		    <a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
         </div><!--END .col -->
-	<div class="col_30">
-            <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
-            <div class="date">
-                <p>Du 15 déc 2015 au 19 déc 2015</p>
-            </div>
-            <div class="lieu">
-                <p>Nantes</p>
-            </div>
-            <div class="prix">
-                <p>400 €</p>
-            </div>
-            <div class="btn">
-                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
-                    <button type="button">Voir ce lieu</button>
-                </a>
-            </div>
-            <a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
-        </div><!--END .col -->
-	<div class="col_30">
-            <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
-            <div class="date">
-                <p>Du 12 jan 2015 au 18 jan 2015</p>
-            </div>
-            <div class="lieu">
-                <p>Lyon</p>
-            </div>
-            <div class="prix">
-                <p>400 €</p>
-            </div>
-            <div class="btn">
-                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
-                    <button type="button">Voir ce lieu</button>
-                </a>
-            </div>
-            <a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
-     
-        </div><!--END .col -->
+        
+                    
+         </div>
+        <?php endforeach; ?>
+        <?php endif ?>
     </div>
   
 	
