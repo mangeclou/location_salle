@@ -37,16 +37,45 @@ a.brand_logo{
 /*	BACK OFFICE           */
 /*======================= */
 .container.back-office header{
-	display: block;
+	display: inline-block;
+    width: 20%;
 }
 
 .container.back-office nav.main_menu{
     display: block;
 	background: lightgrey;
 	vertical-align: top;
+   
 }
 
-nav.main_menu ul li{
-    display: inline-block;
-    padding-right: 20px;
+.container.back-office nav.main_menu ul.back-office, .container.back-office nav.main_menu ul.menu-main {
+    background: #F8F8F8;
+    padding-left: 0;
+    
 }
+
+
+.container.back-office nav.main_menu ul.back-office li,.container.back-office nav.main_menu ul.menu-main li{
+    display: block;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: solid 1px #DDDDDD;
+    border-right: solid 1px #DDDDDD;
+}
+
+.container.back-office nav.main_menu ul.back-office li:hover,.container.back-office nav.main_menu ul.menu-main li:hover {
+    background: #DDE8ED;
+}
+
+.container.back-office nav.main_menu ul.back-office li a,.container.back-office nav.main_menu ul.menu-main li a {
+    text-decoration: none;
+    color: #008CBA;
+}
+
+/*.container.back-office nav.main_menu ul li{
+    display: inline-block;
+   
+    padding-right: 20px;
+}*/

@@ -1,9 +1,9 @@
-        <div class="big_title">
-		<h1>Profil</h1>
-                <h2>Administrateur</h2>
-	</div>
-	<div class="container-box">
-	
+
+	<div class="container-box back-office">
+	   <div class="big_title">
+           <h1>Profil</h1>
+           <h2>Administrateur</h2>
+	   </div>
 		<div class="col_50">
                     <p>Pseudo :<span></span></p>
                     <p>Email :<span></span></p>

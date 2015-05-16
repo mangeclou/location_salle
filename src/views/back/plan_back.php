@@ -1,8 +1,7 @@
-	<div class="big-title-back">
+	<div class="container-box back-office">
+        <div class="big-title-back">
             <h1>Gestion des avis</h1>
-        </div>
-	<div class="container-box">
-              
+        </div>      
                 <div class="col_60">
                     <ul>
                         <li><a href="index.php?controller=BackController&method=displayIndexBack">Accueil</a></li>

@@ -1,8 +1,7 @@
-	<div class="big-title">
+	<div class="container-box  back-office">
+        <div class="big-title">
             <h1>Conditions générales de vente</h1>
-        </div>
-	<div class="container-box">
-              
+        </div>      
             <div class="col_60">
                     
                 <p>ATTENTION :veuillez noter que le présent site "Lokisalle" est un site fictif.</p>

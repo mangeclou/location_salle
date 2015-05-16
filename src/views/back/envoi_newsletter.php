@@ -1,8 +1,7 @@
-	<div class="big-title-back">
+	<div class="container-box back-office">
+        <div class="big-title-back">
             <h1>Envoyer la newsletter</h1>
         </div>
-	<div class="container-box">
-    
             <div class="col_50">
                 <div class="form-newsletter">
                     <h2>Nombre d'abonnés à la newsletter : <?php //ajouter code;?></h2>

@@ -2,15 +2,16 @@
     <header>
         <a class="brand_logo"><img src="/web/img/logo.png" alt=""></a>
         <nav class="main_menu">
-            <ul>
+            <ul class="menu-main">
                 <li><a href="index.php?controller=BackController&method=displayIndexBack">Accueil</a></li>
                 <li><a href="index.php?controller=BackController&method=displayReservationBack">Réservation</a></li>
                 <li><a href="index.php?controller=BackController&method=displayRechercheBack">Recherche</a></li>
-                <li><a href="index.php?controller=BackController&method=deconnectAdmin">Se déconnecter</a></li>
+                <li><i class="fa fa-sign-out"></i>
+<a href="index.php?controller=BackController&method=deconnectAdmin">Se déconnecter</a></li>
                 <li><a href="index.php?controller=BackController&method=displayPanierBack">Panier</a></li>
                 <li><a href="index.php?controller=BackController&method=displayProfilBack">Profil</a></li>
             </ul>
-            <ul>
+            <ul class="back-office">
                 <li><a href="index.php?controller=BackController&method=displaySalle">Gestion salles</a></li>
                 <li><a href="index.php?controller=BackController&method=displayProduit">Gestion produits</a></li>
                 <li><a href="index.php?controller=BackController&method=displayGestionMembre">Gestion membres</a></li>

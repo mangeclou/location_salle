@@ -1,8 +1,7 @@
-    <div class="big_title">
-        <h1>Ajout Salle</h1>
-    </div>
- 
-    <div class="container-box">
+    <div class="container-box back-office">
+        <div class="big_title">
+            <h1>Ajout Salle</h1>
+        </div>
 	<div class="col_50">
             <div class="form-inscription">
 		<h2>Modifier une salle</h2>

@@ -1,7 +1,8 @@
-	<div class="big-title-back">
+
+	<div class="container-box back-office">
+        <div class="big-title-back">
             <h1>Créer un nouveau compte administrateur</h1>
         </div>
-	<div class="container-box">
 	<div class="col_50">
 		<div class="form-inscription">
 		<h2>Inscription</h2>

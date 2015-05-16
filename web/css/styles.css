@@ -193,8 +193,26 @@ img.btn_recherche{
 
 .back-office {
    font-family: roboto;
+    padding-left: 0;
+    margin: inherit;
+    width: 100%;
 }
 
+.big-title-back h1 {
+    text-align: left;
+}
+
+.container-box.back-office {
+    display: inline-block;
+    width: 65%;
+    vertical-align: top;
+    margin-left: 1em;
+    text-align: left;
+}
+
+.salle-back a.button {
+    text-align: left;
+}
 
 .button {
     font-size: 0.61111rem;
@@ -206,8 +224,7 @@ img.btn_recherche{
     border-style: solid;
     border-width: 0;
     color: #ffffff;
-    cursor: pointer;
-    display: inline-block;
+    cursor: pointer;   
     font-family: "Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif !important;
     font-size: 0.88889rem;
     font-weight: normal;
@@ -220,12 +237,19 @@ img.btn_recherche{
     transition: background-color 300ms ease-out 0s;
 }
 
+footer.back-office ul li a {
+   text-decoration: none;
+    color: #008CBA;
+}
+
+
+
 /*========================*/
 /*	TABLES               */
 /*======================= */
 
 div.table-responsive{
-    background: #fafafa;
+    background: #F5F5F5;
 }
 
 table.back-table{
@@ -236,7 +260,8 @@ table.back-table{
 	/*box-shadow: inset 0 1px 0 #fff;*/
 	font-size: 12px;
 	line-height: 24px;
-	margin: 30px auto;
+	margin-top: 30px;
+    margin-left: 0;
 	text-align: left;
    
 }

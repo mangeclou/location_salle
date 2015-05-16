@@ -1,8 +1,8 @@
-	<div class="big-title">
+
+	<div class="container-box back-office">
+        <div class="big-title">
             <h1>Panier</h1>
-        </div>
-	<div class="container-box">
-              
+        </div>      
                 <div class="table">
                     <table>
                         

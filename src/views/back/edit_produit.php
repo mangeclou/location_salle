@@ -1,7 +1,7 @@
-    <div class="big_title">
+    <div class="container-box back-office">
+            <div class="big_title">
         <h1>Modifier produit</h1>
     </div>
-    <div class="container-box">
 	<div class="col_50">
             <div class="form-inscription">
 		<h2>Modifier un produit</h2>

@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="/datetimepicker-master/jquery.datetimepicker.css" >
 <!--<script src="jquery.js"></script>-->
 <script src="/datetimepicker-master/jquery.datetimepicker.js"></script>
-<footer>
+<footer class="back-office">
      <nav class="footer-menu">
         <ul>
             <li><a href="index.php?controller=BackController&method=displayMentionBack">Mentions légales</a></li>

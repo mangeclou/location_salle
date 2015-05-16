@@ -1,8 +1,7 @@
-	<div class="big-title">
+	<div class="container-box back-office">
+        <div class="big-title">
             <h1>Contact</h1>
         </div>
-	<div class="container-box">
-    
             <div class="col_50">
                 <div class="form-contact">
                     <form method="post" action="">

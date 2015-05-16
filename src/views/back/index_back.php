@@ -1,4 +1,6 @@
-	<div class="carousel_wrapper">
+	
+	<div class="container-box back-office">
+        <div class="carousel_wrapper">
             <div class="carousel">
 		<div class="slide">
                     <h2>Présentation 1</h2>
@@ -11,7 +13,6 @@
 	<div class="big_title">
             <h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
 	</div>
-	<div class="container-box">
     <div class="col_30">
 		<img src="/web/img/home_box.jpg" alt="" class="small_img"> 
 		<div class="date">

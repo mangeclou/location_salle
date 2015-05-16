@@ -1,17 +1,7 @@
-<?php
-/*    echo 'meta';
-    print_r($this->addSalleParameters);
-echo 'post';
-print_r($_POST);*/
-
-
-
-?>
-
-    <div class="big_title">
-        <h1>Ajout Salle</h1>
-    </div>
-    <div class="container-box">
+    <div class="container-box back-office">
+        <div class="big_title">
+            <h1>Ajout Salle</h1>
+        </div>
 	<div class="col_50">
             <div class="form-inscription">
 		<h2>Ajouter une salle</h2>

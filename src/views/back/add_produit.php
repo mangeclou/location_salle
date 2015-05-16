@@ -1,13 +1,7 @@
-<?php
-print_r($_POST);
-
-?>
-
-
-    <div class="big_title">
-        <h1>Ajout produit</h1>
-    </div>
-    <div class="container-box">
+    <div class="container-box back-office">
+        <div class="big_title">
+            <h1>Ajout produit</h1>
+        </div>
 	<div class="col_50">
             <div class="form-inscription">
 		<h2>Ajouter un produit</h2>

@@ -1,8 +1,7 @@
-	<div class="big-title-back">
+	<div class="container-box back-office">
+        <div class="big-title-back">
             <h1>Gestion des promo</h1>
-        </div>
-	<div class="container-box">
-              
+        </div>      
             <div class="promo-back">
                     
                 <form  action="gestion_produit.php">

@@ -1,8 +1,8 @@
-	<div class="big_title">
-		<h1>Réserver une salle de réunion à la date qui vous convient(back office)</h1>
-	</div>
-	<div class="container-box">
-	
+
+	<div class="container-box back-office">
+        <div class="big_title">
+            <h1>Réserver une salle de réunion à la date qui vous convient(back office)</h1>
+        </div>
             <div class="col_30">
 		<a href="reservation_details.php">
 			<img src="img/home_box.jpg" alt="" class="small_img">

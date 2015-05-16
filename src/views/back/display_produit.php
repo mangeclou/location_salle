@@ -1,8 +1,7 @@
-	<div class="big-title-back">
+    <div class="container-box back-office">
+        <div class="big-title-back">
             <h1>Gestion des produits</h1>
-    </div>
-	<div class="container-box">
-              
+        </div>     
         <div class="salle-back">
             <a class="button" href="index.php?controller=BackController&method=addNewProduit">Ajouter un produit</a>
             <div class="table-responsive">
@@ -43,7 +42,7 @@
 
             </div><!--END .avis-table -->
         
-        </div><!--END .container-box -->
+    </div><!--END .container-box -->
   	
 </div><!--END .container -->
 

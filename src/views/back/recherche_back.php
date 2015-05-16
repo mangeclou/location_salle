@@ -1,10 +1,11 @@
+	<div class="container-box back-office">
         <div class="big_title">
-		<h1>Rechercher la salle</h1>
-	</div>
+            <h1>Rechercher la salle</h1>
+	    </div>
 	<div class="recherche_form">
             <h2>Nombre de résultats : <span>3</span></h2>
 		<fieldset> 
-                    <legend>Rercherche</legend> 
+            <legend>Rercherche</legend> 
 			<div class="recherche_champ"> 
                             <label for="date">Date
 				<input id="date" name="date" type="date" required autofocus> 
@@ -28,7 +29,6 @@
 			
 		</fieldset>
 	</div>
-	<div class="container-box">
             <div class="col box">
 		<img src="/web/iimg/home_box.jpg" alt="" class="small_img"> 
 		<div class="date">
