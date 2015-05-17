@@ -58,8 +58,8 @@ class MembreController extends MainController
     protected $rechercheMembreTemplate = 'recherche_membre.php';
     protected $rechercheMembreParameters;
     
-    protected $reservationDetailMembreTemplate = 'reservation_detail_membre.php';
-    protected $reservationDetailMembreParameters;
+    protected $displayReservationDetailMembreTemplate = 'reservation_detail_membre.php';
+    protected $displayReservationDetailMembreParameters;
     
     protected $reservationMembreTemplate = 'reservation_membre.php';
     protected $reservationMembreParameters;
@@ -246,14 +246,26 @@ class MembreController extends MainController
     
     public function displayReservationDetailMembre() 
     {
-       //on require le fichier de config de la view
+        $pr          = new ProduitRepository();
+        //$produit = $pr->getAllAvailableProduit();
+        $sr          = new SalleRepository();  
+        $produit = $pr->findProduitById($_GET["id"]);
+        $salle = $sr->findSalleById($produit['id_salle']); 
+       
+        //$salle       = $sr->findSalleById();
+            
+        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['membre']['reservation_detail_membre']['meta'] = $produit;
+        $viewPageParameters['membre']['reservation_detail_membre']["salle"] = $salle;
         //on va chercher les paramètres dans l'array viewpageParameters
-        $this->reservationDetailMembreParameters = $viewPageParameters['membre']['reservation_detail_membre'];
+         $this->displayReservationDetailMembreParameters = $viewPageParameters['membre']['reservation_detail_membre'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout,
-                             $this->reservationDetailMembreTemplate,
-                             $this->reservationDetailMembreParameters);  
+                             $this->displayReservationDetailMembreTemplate,
+                             $this->displayReservationDetailMembreParameters);
+      
     }
     
     public function deconnectMembre() 

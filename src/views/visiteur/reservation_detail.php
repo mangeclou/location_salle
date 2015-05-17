@@ -1,8 +1,8 @@
-	<div class="container-box">
-        <div class="big_title">
-		<h1>Salle Chambord</h1>
+<div class="container-box">
+    <div class="big_title">
+		<h1><?php echo $this->displayReservationDetailParameters["salle"]["titre"]; ?></h1>
 	</div>
-	<div class="col_60">
+	<div class="col_70">
 		<div class="carousel_wrapper">
 			<div class="small_carousel">
 				<div class="slide">
@@ -12,73 +12,52 @@
 		</div><!--END .carousel_wrapper -->
 	</div>
 	
-	<div class="col_40">
-		<ul class="description>">
+	<div class="col_30">
+		
             
-            <?php if(!empty($this->reservationDetailParameters["meta"])): ?>
-            <?php foreach($this->reservationDetailParameters["meta"] as $key => $value): ?>
-            <div class="col_30">
-                <div class="small-box">
+            <?php if(!empty($this->displayReservationDetailParameters["meta"])): ?>
+
+          
+                <div class="medium-box">
                
-            <div class="date">
+            <div class="detail">
                 <p><i class="fa fa-calendar"></i>
-Du <?php echo($value["date_arrivee"]); ?></p>
+Du <?php echo $this->displayReservationDetailParameters["meta"]["date_arrivee"]; ?></p>
                 <p><i class="fa fa-calendar"></i>
-Au <?php echo($value["date_depart"]); ?></p>
+Au <?php echo $this->displayReservationDetailParameters["meta"]["date_depart"];  ?></p>
             </div>
-            <div class="lieu">
-		        <p><i class="fa fa-map-marker">
-                    <?php foreach ($this->reservationDetailParameters["salles"][$key] as $key2 => $value2) echo ($value2["ville"]); ?>
-                    </i>
+            <div class="detail">
+		        <p><i class="fa fa-map-marker"></i>
+                    <?php echo $this->displayReservationDetailParameters["salle"]["ville"]; ?>
+                    
 
                 </p>
             </div>
+            <div class="detail">
+		        <p><i class="fa fa-user"></i>
+                    <?php echo $this->displayReservationDetailParameters["salle"]["capacite"]; ?>
+                    
+                </p>
+            </div>
+            <div class="detail">
+		        <p><i class="fa fa-user"></i>
+                    <?php echo $this->displayReservationDetailParameters["salle"]["categorie"]; ?>
+                   
+                </p>
+            </div>
+                    
             <div class="prix">
-		        <p><?php echo($value["prix"]); ?> €</p>
-            </div>
-            <div class="btn">
-                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
-                    <button type="button">Voir ce lieu</button>
-                </a>
-            </div>
+		        <p><?php echo $this->displayReservationDetailParameters["meta"]["prix"]; ?> €</p>
+            </div>            
 		    <a href="index.php?controller=MembreController&method=displayPanierMembre">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
         </div><!--END .col -->
-        
-                    
-         </div>
-        <?php endforeach; ?>
+       
         <?php endif ?>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-			
-			<li>Date de départ : <time datetime="2015-01-17">17 jan 2015</time></li>
-			<li>Prix : <span>600 €</span></li>
-			<li>Capacité : <span>200</span> personnes</li>
-			<li>Catégorie : <span>réunion</span></li>
-		</ul>
-		<p>vos mille et un souhaits... Caméléon créatif et festif, le domaine
-		de Dangu se prête à vos envies de réceptions, d’événements
-		professionnels ou de performances artistiques. Concert, cocktail,
-		garden party, dîner spectacle, séjour d’enregistrement au
-		château… : à vous d'allonger la liste !</p>
-	</div><!--END .col box_50 -->
-	
+   
+	</div><!--END .col_30 -->
+	<div class="wide">
+         <p><?php echo $this->displayReservationDetailParameters["salle"]["description"]; ?></p>
+    </div>
 	<div class="col_60"> <!-- TODO : pouvoir gérer des variables à partir de l'url pour rendre dynamique le lien, peut etre juste avec google maps-->
 		<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
 		src="http://www.openstreetmap.org/export/embed.html?bbox=2.3360109329223633%2C48.85000404312576%2C2.357490062713623%2C48.860493990176394&amp;layer=mapnik" 
@@ -91,11 +70,11 @@ Au <?php echo($value["date_depart"]); ?></p>
 	</div><!--END .col box_60 -->
 	
 	<div class="col_40">
-		<img src="" class="icon"><!-- Icone type vous etes ici-->
 		<h2>Accès</h2>
 		<address>
-			6 Rue de la Roquette<br>
-			75011 Paris
+            <i class="fa fa-map-marker"></i><br/>
+            <?php echo $this->displayReservationDetailParameters["salle"]["adresse"]; ?><br/>
+			<?php echo $this->displayReservationDetailParameters["salle"]["cp"]; ?> <?php echo $this->displayReservationDetailParameters["salle"]["ville"]; ?>
 		</address>
 	</div><!--END .col box_40 -->
 	

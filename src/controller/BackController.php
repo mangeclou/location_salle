@@ -110,8 +110,8 @@ class BackController extends MainController
     protected $reservationBackTemplate = 'reservation_back.php';
     protected $reservationBackParameters;
     
-    protected $reservationDetailBackTemplate = 'reservation_detail_back.php';
-    protected $reservationDetailBackParameters;
+    protected $displayReservationDetailBackTemplate = 'reservation_detail_back.php';
+    protected $displayReservationDetailBackParameters;
     
     protected $statistiqueTemplate = 'statistique.php';
     protected $statistiqueParameters;
@@ -676,12 +676,25 @@ class BackController extends MainController
     
     public function displayReservationDetailBack() 
     {
+         $pr          = new ProduitRepository();
+        //$produit = $pr->getAllAvailableProduit();
+        $sr          = new SalleRepository();  
+        $produit = $pr->findProduitById($_GET["id"]);
+        $salle = $sr->findSalleById($produit['id_salle']); 
+       
+        //$salle       = $sr->findSalleById();
+            
         //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['back']['reservation_detail_back']['meta'] = $produit;
+        $viewPageParameters['back']['reservation_detail_back']["salle"] = $salle;
         //on va chercher les paramètres dans l'array viewpageParameters
-        $this->reservationDetailBackParameters = $viewPageParameters['back']['reservation_detail_back'];
+         $this->displayReservationDetailBackParameters = $viewPageParameters['back']['reservation_detail_back'];
         //on utilise la méthode render du parent Controller pour afficher la page
-        return $this->render($this->layout, $this->reservationDetailBackTemplate, $this->reservationDetailBackParameters);  
+        return $this->render($this->layout,
+                             $this->displayReservationDetailBackTemplate,
+                             $this->displayReservationDetailBackParameters);
     }
     
     /**

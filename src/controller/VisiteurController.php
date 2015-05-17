@@ -71,8 +71,8 @@ class VisiteurController extends Controller
     protected $reservationTemplate = 'reservation.php';
     protected $reservationParameters;
     
-    protected $reservationDetailTemplate = 'reservation_detail.php';
-    protected $reservationDetailParameters;
+    protected $displayReservationDetailTemplate = 'reservation_detail.php';
+    protected $displayReservationDetailParameters;
 
     /**
     * Controlleur qui détermine la logique et les conditions pour les pages affichées par un visiteur
@@ -196,9 +196,8 @@ class VisiteurController extends Controller
     {
         $pr          = new ProduitRepository();
         //$produit = $pr->getAllAvailableProduit();
-        
-        $produit = $sr->findProduitById($_GET["id"]);
         $sr          = new SalleRepository();  
+        $produit = $pr->findProduitById($_GET["id"]);
         $salle = $sr->findSalleById($produit['id_salle']); 
        
         //$salle       = $sr->findSalleById();
@@ -206,14 +205,14 @@ class VisiteurController extends Controller
         //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
          
-        $viewPageParameters['visiteur']['reservation_detail']['meta'] = $allProduits;
-        $viewPageParameters['visiteur']['reservation_detail']["salles"] = $salles;
+        $viewPageParameters['visiteur']['reservation_detail']['meta'] = $produit;
+        $viewPageParameters['visiteur']['reservation_detail']["salle"] = $salle;
         //on va chercher les paramètres dans l'array viewpageParameters
-        $this->reservationDetailParameters = $viewPageParameters['visiteur']['reservation_detail'];
+        $this->displayReservationDetailParameters = $viewPageParameters['visiteur']['reservation_detail'];
         //on utilise la méthode render du parent Controller pour afficher la page
         return $this->render($this->layout,
-                             $this->reservationDetailTemplate,
-                             $this->reservationDetailParameters);
+                             $this->displayReservationDetailTemplate,
+                             $this->displayReservationDetailParameters);
     }
     
     /**

@@ -51,7 +51,7 @@ class controllerAndMethodManager{
                             'displayPanierMembre',
                             'displayProfil',
                             'displayReservationMembre',
-                            'displayReservationdetailMembre',
+                            'displayReservationDetailMembre',
                             ],
                         'visiteur'=>[
                             'connexion',
@@ -65,7 +65,7 @@ class controllerAndMethodManager{
                             'displayPlan',
                             'displayRecherche',
                             'displayReservation',
-                            'displayReservationdetail',
+                            'displayReservationDetail',
                             ]
                         ];
     

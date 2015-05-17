@@ -34,7 +34,7 @@ Au <?php echo($value["date_depart"]); ?></p>
 		        <p><?php echo($value["prix"]); ?> €</p>
             </div>
             <div class="btn">
-                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
+                <a href="<?php echo "index.php?controller=VisiteurController&method=displayReservationDetail&id=".$value['id_produit'] ?>">
                     <button type="button">Voir ce lieu</button>
                 </a>
             </div>
