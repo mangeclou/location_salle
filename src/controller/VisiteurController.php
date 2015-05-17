@@ -112,18 +112,17 @@ class VisiteurController extends Controller
     {
         $pr          = new ProduitRepository();
         $allProduits = $pr->getAllAvailableProduit();
-        $sr    = new SalleRepository();  
-        foreach ($allProduits as $produit) {
-            $salles = $sr->findSalleById($produit['id_salle']); 
+        $sr          = new SalleRepository();  
+        foreach ($allProduits as $key => $produit) {
+            $salles[$key]["salles"]  = $sr->findSalleById($produit['id_salle']); 
         }
-  
         //$salle       = $sr->findSalleById();
             
         //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
          
         $viewPageParameters['visiteur']['index_visiteur']['meta'] = $allProduits;
-        $viewPageParameters['visiteur']['index_visiteur']['meta']["salles"] = $salles;
+        $viewPageParameters['visiteur']['index_visiteur']["salles"] = $salles;
         //on va chercher les paramètres dans l'array viewpageParameters
         $this->indexParameters = $viewPageParameters['visiteur']['index_visiteur'];
         //on utilise la méthode render du parent Controller pour afficher la page
@@ -174,16 +173,47 @@ class VisiteurController extends Controller
     
     public function displayReservation()
     {
+        $pr          = new ProduitRepository();
+        $allProduits = $pr->getAllAvailableProduit();
+        $sr          = new SalleRepository();  
+        foreach ($allProduits as $key => $produit) {
+            $salles[$key]["salles"]  = $sr->findSalleById($produit['id_salle']); 
+        }
+        //$salle       = $sr->findSalleById();
+            
+        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['visiteur']['reservation']['meta'] = $allProduits;
+        $viewPageParameters['visiteur']['reservation']["salles"] = $salles;
+        //on va chercher les paramètres dans l'array viewpageParameters
         $this->reservationParameters = $viewPageParameters['visiteur']['reservation'];
-        return $this->render($this->layout, $this->reservationTemplate, $this->reservationParameters);  
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout, $this->reservationTemplate, $this->reservationParameters); 
     }
         
     public function displayReservationdetail()
     {
+        $pr          = new ProduitRepository();
+        //$produit = $pr->getAllAvailableProduit();
+        
+        $produit = $sr->findProduitById($_GET["id"]);
+        $sr          = new SalleRepository();  
+        $salle = $sr->findSalleById($produit['id_salle']); 
+       
+        //$salle       = $sr->findSalleById();
+            
+        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['visiteur']['reservation_detail']['meta'] = $allProduits;
+        $viewPageParameters['visiteur']['reservation_detail']["salles"] = $salles;
+        //on va chercher les paramètres dans l'array viewpageParameters
         $this->reservationDetailParameters = $viewPageParameters['visiteur']['reservation_detail'];
-        return $this->render($this->layout, $this->reservationDetailTemplate, $this->reservationDetailParameters);  
+        //on utilise la méthode render du parent Controller pour afficher la page
+        return $this->render($this->layout,
+                             $this->reservationDetailTemplate,
+                             $this->reservationDetailParameters);
     }
     
     /**
@@ -352,7 +382,6 @@ class VisiteurController extends Controller
                                        );
         } else {
         //If nothing has been posted, the connexion form is displayed
-            echo "no post";
             require __DIR__ . '/../views/viewParameters.php';
             $this->connexionParameters = $viewPageParameters['visiteur']['connexion']; 
             $this->render($this->layout, $this->connexionTemplate, $this->connexionParameters);  

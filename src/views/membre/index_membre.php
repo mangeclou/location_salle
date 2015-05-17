@@ -1,76 +1,56 @@
-    <div class="carousel_wrapper">
-	<div class="carousel">
-            <div class="slide">
-		<h2>Présentation 1</h2>
-		<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula faucibus sodales.
-                    Nulla posuere, est sed volutpat ullamcorper, est nunc dignissim eros, ut imperdiet augue risus et est.</p>
-		<img src="img/home_presentation.jpg" alt="" class="big_img"> 
-            </div><!--END .slide -->
-	</div><!--END .carousel -->
-    </div><!--END .carousel_wrapper -->
-    <div class="big_title">
-	<h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
-    </div>
     <div class="container-box">
-        <div class="col_30">
-            <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
+        <div class="carousel_wrapper">
+            <div class="carousel">
+                <div class="slide">
+                    <h2>Présentation 1</h2>
+                    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula faucibus sodales.
+                        Nulla posuere, est sed volutpat ullamcorper, est nunc dignissim eros, ut imperdiet augue risus et est.</p>
+                    <img src="img/home_presentation.jpg" alt="" class="big_img"> 
+                </div><!--END .slide -->
+            </div><!--END .carousel -->
+        </div><!--END .carousel_wrapper -->
+        <div class="big_title">
+            <h1>Lokisalle vous aide à trouver la salle de réunion qui vous convient.</h1>
+        </div>
+        <?php if(!empty($this->indexMembreParameters["meta"])): ?>
+        <?php foreach($this->indexMembreParameters["meta"] as $key => $value): ?>
+            <div class="col_30">
+                <div class="small-box">
+                <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
             <div class="date">
-                <p>Du 13 déc 2015 au 17 déc 2015</p>
+                <p><i class="fa fa-calendar"></i>
+Du <?php echo($value["date_arrivee"]); ?></p>
+                <p><i class="fa fa-calendar"></i>
+Au <?php echo($value["date_depart"]); ?></p>
             </div>
             <div class="lieu">
-                <p>Paris</p>
+		        <p><i class="fa fa-map-marker">
+                    <?php foreach ($this->indexMembreParameters["salles"][$key] as $key2 => $value2) echo ($value2["ville"]); ?>
+                    </i>
+
+                </p>
             </div>
             <div class="prix">
-                <p>600 €</p>
+		        <p><?php echo($value["prix"]); ?> €</p>
             </div>
             <div class="btn">
-                <form  action="reservation_details.php">
-                    <button type="submit">Voir ce lieu</button>
-                </form>
+                <a href="index.php?controller=MembreController&method=displayReservationdetailMembre">
+                    <button type="button">Voir ce lieu</button>
+                </a>
             </div>
-            <a href="connexion.php">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
+		    <a href="index.php?controller=MembreController&method=displayPanierMembre">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
         </div><!--END .col -->
-	<div class="col_30">
-            <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
-            <div class="date">
-                    <p>Du 15 déc 2015 au 19 déc 2015</p>
-            </div>
-            <div class="lieu">
-                    <p>Nantes</p>
-            </div>
-            <div class="prix">
-                    <p>400 €</p>
-            </div>
-            <div class="btn">
-                <form  action="reservation_details.php">
-                    <button type="submit">Voir ce lieu</button>
-                </form>
-            </div>
-            <a href="connexion.php">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
-        </div><!--END .col -->
-	 
-	<div class="col_30">
-            <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
-            <div class="date">
-                <p>Du 12 jan 2015 au 18 jan 2015</p>
-            </div>
-            <div class="lieu">
-                <p>Lyon</p>
-            </div>
-            <div class="prix">
-                <p>400 €</p>
-            </div>
-            <div class="btn">
-                <form  action="reservation_details.php">
-                    <button type="submit">Voir ce lieu</button>
-                </form>
-            </div>
-            <a href="connexion.php">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
-     
-        </div><!--END .col -->
-    </div><!--END .container-box -->
+        
+                    
+         </div>
+        <?php endforeach; ?>
+        <?php endif ?>
+    </div>
+  
 	
 </div><!--END .container -->
 
    
+
+
 

@@ -1,6 +1,3 @@
-<?php
-print_r($this->indexParameters["meta"]["salles"]["ville"]);
-?>
     <div class="carousel_wrapper">
         <div class="carousel">
             <div class="slide">
@@ -27,8 +24,11 @@ Du <?php echo($value["date_arrivee"]); ?></p>
 Au <?php echo($value["date_depart"]); ?></p>
             </div>
             <div class="lieu">
-		        <p><i class="fa fa-map-marker"><?php echo($key["ville"]); ?></i>
-Paris</p>
+		        <p><i class="fa fa-map-marker">
+                    <?php foreach ($this->indexParameters["salles"][$key] as $key2 => $value2) echo ($value2["ville"]); ?>
+                    </i>
+
+                </p>
             </div>
             <div class="prix">
 		        <p><?php echo($value["prix"]); ?> €</p>
@@ -38,7 +38,7 @@ Paris</p>
                     <button type="button">Voir ce lieu</button>
                 </a>
             </div>
-		    <a href="index.php?controller=VisiteurController&method=displayConnexion">Connectez vous</a>
+		    <a href="index.php?controller=VisiteurController&method=connexion">Connectez vous</a>
         </div><!--END .col -->
         
                     

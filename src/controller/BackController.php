@@ -562,12 +562,23 @@ class BackController extends MainController
     
     public function displayIndexBack() 
     {
+        $pr          = new ProduitRepository();
+        $allProduits = $pr->getAllAvailableProduit();
+        $sr          = new SalleRepository();  
+        foreach ($allProduits as $key => $produit) {
+            $salles[$key]["salles"]  = $sr->findSalleById($produit['id_salle']); 
+        }
+        //$salle       = $sr->findSalleById();
+            
         //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['back']['index_back']['meta'] = $allProduits;
+        $viewPageParameters['back']['index_back']["salles"] = $salles;
         //on va chercher les paramètres dans l'array viewpageParameters
         $this->indexBackParameters = $viewPageParameters['back']['index_back'];
         //on utilise la méthode render du parent Controller pour afficher la page
-        return $this->render($this->layout, $this->indexBackTemplate, $this->indexBackParameters);  
+        return $this->render($this->layout, $this->indexBackTemplate, $this->indexBackParameters);
     }
             
     public function displayMdpperduBack() 
@@ -642,12 +653,25 @@ class BackController extends MainController
     
     public function displayReservationBack() 
     {
+        $pr          = new ProduitRepository();
+        $allProduits = $pr->getAllAvailableProduit();
+        $sr          = new SalleRepository();  
+        foreach ($allProduits as $key => $produit) {
+            $salles[$key]["salles"]  = $sr->findSalleById($produit['id_salle']); 
+        }
+        //$salle       = $sr->findSalleById();
+            
         //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['back']['reservation_back']['meta'] = $allProduits;
+        $viewPageParameters['back']['reservation_back']["salles"] = $salles;
         //on va chercher les paramètres dans l'array viewpageParameters
         $this->reservationBackParameters = $viewPageParameters['back']['reservation_back'];
         //on utilise la méthode render du parent Controller pour afficher la page
-        return $this->render($this->layout, $this->reservationBackTemplate, $this->reservationBackParameters);  
+        return $this->render($this->layout,
+                             $this->reservationBackTemplate,
+                             $this->reservationBackParameters);  
     }
     
     public function displayReservationDetailBack() 

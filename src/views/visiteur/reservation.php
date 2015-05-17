@@ -1,134 +1,40 @@
-        <div class="big_title">
-            <h1>Réserver une salle de réunion à la date qui vous convient</h1>
-	</div>
 	<div class="container-box">
-	
+	    <div class="big_title">
+            <h1>Réserver une salle de réunion à la date qui vous convient</h1>
+	    </div>
+                   <?php if(!empty($this->reservationParameters["meta"])): ?>
+        <?php foreach($this->reservationParameters["meta"] as $key => $value): ?>
             <div class="col_30">
-                <a href="reservation_details.php">
-                        <img src="img/home_box.jpg" alt="" class="small_img">
+                <div class="small-box">
+                <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
+            <div class="date">
+                <p><i class="fa fa-calendar"></i>
+Du <?php echo($value["date_arrivee"]); ?></p>
+                <p><i class="fa fa-calendar"></i>
+Au <?php echo($value["date_depart"]); ?></p>
+            </div>
+            <div class="lieu">
+		        <p><i class="fa fa-map-marker">
+                    <?php foreach ($this->reservationParameters["salles"][$key] as $key2 => $value2) echo ($value2["ville"]); ?>
+                    </i>
+
+                </p>
+            </div>
+            <div class="prix">
+		        <p><?php echo($value["prix"]); ?> €</p>
+            </div>
+            <div class="btn">
+                <a href="<?php echo "index.php?controller=VisiteurController&method=displayReservationDetail&id=".$value['id_produit'] ?>">
+                    <button type="button">Voir ce lieu</button>
                 </a>
-                <div class="date">
-                        <p>Du 13 déc 2015 au 17 déc 2015</p>
-                </div>
-                <div class="lieu">
-                        <p>Paris</p>
-                </div>
-                <div class="prix">
-                        <p>600 €</p>
-                </div>
-                <div class="btn">
-                        <form  action="reservation_details.php">
-                                <button type="submit">Voir ce lieu</button>
-                        </form>
-                </div>
-                                    <a href="connexion.php">Connectez vous</a>
-            </div><!--END .col -->
-
-            <div class="col_30">
-                <a href="reservation_details.php">
-                        <img src="img/home_box.jpg" alt="" class="small_img">
-                </a> 
-                <div class="date">
-                        <p>Du 15 déc 2015 au 19 déc 2015</p>
-                </div>
-                <div class="lieu">
-                        <p>Nantes</p>
-                </div>
-                <div class="prix">
-                        <p>400 €</p>
-                </div>
-                <div class="btn">
-                        <form  action="reservation_details.php">
-                                <button type="submit">Voir ce lieu</button>
-                        </form>
-                </div>
-                                    <a href="connexion.php">Connectez vous</a>
-            </div><!--END .col -->
-
-            <div class="col_30">
-                <a href="reservation_details.php">
-                        <img src="img/home_box.jpg" alt="" class="small_img">
-                </a>
-                <div class="date">
-                        <p>Du 12 jan 2015 au 18 jan 2015</p>
-                </div>
-                <div class="lieu">
-                        <p>Lyon</p>
-                </div>
-                <div class="prix">
-                        <p>400 €</p>
-                </div>
-                <div class="btn">
-                        <form  action="reservation_details.php">
-                                <button type="submit">Voir ce lieu</button>
-                        </form>
-                </div>
-                                <a href="connexion.php">Connectez vous</a>
-            </div><!--END .col -->
-
-            <div class="col_30">
-                <a href="reservation_details.php">
-                        <img src="img/home_box.jpg" alt="" class="small_img">
-                </a> 
-                <div class="date">
-                        <p>Du 13 déc 2015 au 17 déc 2015</p>
-                </div>
-                <div class="lieu">
-                        <p>Paris</p>
-                </div>
-                <div class="prix">
-                        <p>600 €</p>
-                </div>
-                <div class="btn">
-                        <form  action="reservation_details.php">
-                                <button type="submit">Voir ce lieu</button>
-                        </form>
-                </div>
-                                    <a href="connexion.php">Connectez vous</a>
-            </div><!--END .col -->
-
-            <div class="col_30">
-                <a href="reservation_details.php">
-                        <img src="img/home_box.jpg" alt="" class="small_img">
-                </a>
-                <div class="date">
-                        <p>Du 15 déc 2015 au 19 déc 2015</p>
-                </div>
-                <div class="lieu">
-                        <p>Nantes</p>
-                </div>
-                <div class="prix">
-                        <p>400 €</p>
-                </div>
-                <div class="btn">
-                        <form  action="reservation_details.php">
-                                <button type="submit">Voir ce lieu</button>
-                        </form>
-                </div>
-                                <a href="connexion.php">Connectez vous</a>
-            </div><!--END .col -->
-
-            <div class="col_30">
-                <a href="reservation_details.php">
-                        <img src="img/home_box.jpg" alt="" class="small_img">
-                </a> 
-                <div class="date">
-                        <p>Du 12 jan 2015 au 18 jan 2015</p>
-                </div>
-                <div class="lieu">
-                        <p>Lyon</p>
-                </div>
-                <div class="prix">
-                        <p>400 €</p>
-                </div>
-                <div class="btn">
-                        <form  action="reservation_details.php">
-                                <button type="submit">Voir ce lieu</button>
-                        </form>
-                </div>
-                                    <a href="connexion.php">Connectez vous</a>
-            </div><!--END .col -->
-		
+            </div>
+		    <a href="index.php?controller=VisiteurController&method=connexion">Connectez vous</a>
+        </div><!--END .col -->
+        
+                    
+         </div>
+        <?php endforeach; ?>
+        <?php endif ?>
 	</div><!--END .container-box -->
   
     </div><!--END .container -->

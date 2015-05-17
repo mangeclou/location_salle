@@ -1,4 +1,5 @@
-	<div class="big_title">
+	<div class="container-box">
+        <div class="big_title">
 		<h1>Salle Chambord</h1>
 	</div>
 	<div class="col_60">
@@ -13,7 +14,59 @@
 	
 	<div class="col_40">
 		<ul class="description>">
-			<li>Date d'arrivée : <time datetime="2015-01-12">12 jan 2015</time></li>
+            
+            <?php if(!empty($this->reservationDetailParameters["meta"])): ?>
+            <?php foreach($this->reservationDetailParameters["meta"] as $key => $value): ?>
+            <div class="col_30">
+                <div class="small-box">
+               
+            <div class="date">
+                <p><i class="fa fa-calendar"></i>
+Du <?php echo($value["date_arrivee"]); ?></p>
+                <p><i class="fa fa-calendar"></i>
+Au <?php echo($value["date_depart"]); ?></p>
+            </div>
+            <div class="lieu">
+		        <p><i class="fa fa-map-marker">
+                    <?php foreach ($this->reservationDetailParameters["salles"][$key] as $key2 => $value2) echo ($value2["ville"]); ?>
+                    </i>
+
+                </p>
+            </div>
+            <div class="prix">
+		        <p><?php echo($value["prix"]); ?> €</p>
+            </div>
+            <div class="btn">
+                <a href="index.php?controller=VisiteurController&method=displayReservationdetail">
+                    <button type="button">Voir ce lieu</button>
+                </a>
+            </div>
+		    <a href="index.php?controller=MembreController&method=displayPanierMembre">Ajouter au panier <i class="fa fa-cart-plus"></i></a>
+        </div><!--END .col -->
+        
+                    
+         </div>
+        <?php endforeach; ?>
+        <?php endif ?>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+			
 			<li>Date de départ : <time datetime="2015-01-17">17 jan 2015</time></li>
 			<li>Prix : <span>600 €</span></li>
 			<li>Capacité : <span>200</span> personnes</li>
@@ -69,5 +122,6 @@
 		</div>
 	
 	</div><!--END .col_60 -->
+    </div>
 	
 	</div><!--END .container -->

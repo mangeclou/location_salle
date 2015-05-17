@@ -14,7 +14,11 @@ namespace controller; // toujours le même nom que le dossier, pour que l'autolo
 
 require '/../service/Admin/SalleService.php';
 require 'Controller.php';
+require '/../model/repository/ProduitRepository.php';
+require_once '/../model/repository/SalleRepository.php';
 
+use \repository\ProduitRepository AS ProduitRepository;
+use \repository\SalleRepository AS SalleRepository;
 use \service\UserService AS UserService;
 use controller\Controller AS MainController;
 
@@ -113,17 +117,26 @@ class MembreController extends MainController
      */
     public function displayIndexMembre()
     {
-       
-        echo $_SESSION["email"];
+     
+        $pr         = new ProduitRepository();
+        $allProduits = $pr->getAllAvailableProduit();
+        $sr          = new SalleRepository();  
+        foreach ($allProduits as $key => $produit) {
+            $salles[$key]["salles"]  = $sr->findSalleById($produit['id_salle']); 
+        }
+        //$salle       = $sr->findSalleById();
+            
         //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['membre']['index_membre']['meta'] = $allProduits;
+        $viewPageParameters['membre']['index_membre']["salles"] = $salles;
         //on va chercher les paramètres dans l'array viewpageParameters
         $this->indexMembreParameters = $viewPageParameters['membre']['index_membre'];
         //on utilise la méthode render du parent Controller pour afficher la page
-        //echo $_SESSION['email'];
         return $this->render($this->layout,
                              $this->indexMembreTemplate,
-                             $this->indexMembreParameters);  
+                             $this->indexMembreParameters);      
     }
     
     public function displayMdpperduMembre()
@@ -210,8 +223,19 @@ class MembreController extends MainController
     
     public function displayReservationMembre()
     {
-       //on require le fichier de config de la view
+        $pr          = new ProduitRepository();
+        $allProduits = $pr->getAllAvailableProduit();
+        $sr          = new SalleRepository();  
+        foreach ($allProduits as $key => $produit) {
+            $salles[$key]["salles"]  = $sr->findSalleById($produit['id_salle']); 
+        }
+        //$salle       = $sr->findSalleById();
+            
+        //on require le fichier de config de la view
         require __DIR__ . '/../views/viewParameters.php';
+         
+        $viewPageParameters['membre']['reservation_membre']['meta'] = $allProduits;
+        $viewPageParameters['membre']['reservation_membre']["salles"] = $salles;
         //on va chercher les paramètres dans l'array viewpageParameters
         $this->reservationMembreParameters = $viewPageParameters['membre']['reservation_membre'];
         //on utilise la méthode render du parent Controller pour afficher la page
