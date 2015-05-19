@@ -1,56 +1,7 @@
 <?php
 
 $msg = '';
-/*
-            preg_match() :
-            # => declare le début et la fin de l'expression reguliere
-            ^ => indique le début de la chaine
-            $ => indique la fin de la chaine 
-            + => autorise la répétition des caractères
-       */
-   /*if($_POST)
-    {
-       
-       $verif_caracteres = preg_match('#^[a-zA-Z0-9._-]+$#', $_POST['pseudo']); // return 0 si mauvais caractères dans le pseudo sinon return 1
-       
-       
-       
-       if(!$verif_caracteres && !empty($_POST['pseudo']))
-       {
-            $msg .= "<div class='alert alert-danger' height='30' style='padding: 10px'><p>Caractères acceptés : A à Z et de 0 à 9 !</p> </div>";
-       }
-       if(strlen($_POST['pseudo']) < 4 || strlen($_POST['pseudo']) > 14)
-       {
-            $msg .= "<div class='alert alert-danger' height='30' style='padding: 10px'><p>Le pseudo doit avoir entre 4 et 14 caractères inclus !</p> </div>";
-       }
-       if(strlen($_POST['mdp']) < 4 || strlen($_POST['mdp']) > 14)
-       {
-            $msg .= "<div class='alert alert-danger' height='30' style='padding: 10px'><p>Le Mot de passe doit avoir entre 4 et 14 caractères inclus !</p> </div>";
-       }
-       
-       if(empty($msg)) // si je n'ai pas de message d'erreur donc les controles sont ok !
-       {
-            $membre = executeRequete("SELECT * FROM membre WHERE pseudo='$_POST[pseudo]'");
-            
-            if($membre->num_rows > 0)
-            {
-                $msg .= "<div class='alert alert-danger' height='30' style='padding: 10px'><p>Pseudo indisponible !</p> </div>";
-            }
-            else
-            {           
-               foreach($_POST AS $indice => $valeur)
-               {
-                    $_POST[$indice] = htmlentities($valeur, ENT_QUOTES);
-               }
-               extract($_POST); // crée une variable pour chaque indice du tableau array. chaque variable contient la valeur correspondante
-               executeRequete("INSERT INTO membre (pseudo, mdp, nom, prenom, email, sexe, ville, cp, adresse) VALUES ('$pseudo', '$mdp', '$nom', '$prenom', '$email', '$sexe', '$ville', '$cp', '$adresse')");
-               
-               $msg .= "<div class='alert alert-success' height='30' style='padding: 10px'><p>Inscription Ok !</p></div>";
-            }   
-       }
-    } 
 
-*/
 ?>
 
     <div class="big_title">
@@ -125,7 +76,7 @@ $msg = '';
                             <label for="adresse">Adresse</label>
                             <textarea id="adresse" name="adresse" class="form-control" placeholder="adresse..." ><?php if(isset($_POST['adresse'])) echo $_POST['adresse'] ?></textarea>
                         </div> 
-                        <button type="submit" <!--name="inscription" -->>Inscription</button>
+                        <button type="submit" name="inscription">Inscription</button>
                     </fieldset>
                     <?php
                         //on récupère les erreurs depuis les paramètres de la méthode render

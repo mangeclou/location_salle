@@ -6,7 +6,7 @@
 		<div class="carousel_wrapper">
 			<div class="small_carousel">
 				<div class="slide">
-					<img src="/web/img/home_presentation.jpg" alt="" class="big_img"> 
+					<img src="/img/salle.jpg" alt="" class="big_img"> 
 				</div><!--END .slide -->
 			</div><!--END .carousel -->
 		</div><!--END .carousel_wrapper -->

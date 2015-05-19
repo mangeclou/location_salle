@@ -7,19 +7,32 @@
 *
 */
 header{
-	display: inline-block;
+	display: block;
+    background: white;
+    margin-left: -15px;
+    margin-right: -15px;
+    
 }
 
 nav.main_menu{
     display: inline-block;
-	background: lightgrey;
-	vertical-align: top;
+	vertical-align: top;    
 }
 
 nav.main_menu ul li{
     display: inline-block;
     padding-right: 20px;
+    padding-top: 41px;
+    
 }
+
+nav.main_menu ul li a{
+    text-transform: uppercase;
+   /* border-bottom: 2px solid black;
+    padding-bottom: 3px;*/
+    font-weight: 500;
+}
+
 
 a.brand_logo img{
     margin: 10px;
