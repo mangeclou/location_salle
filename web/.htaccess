@@ -1,9 +1,54 @@
-#RewriteEngine On
-#RewriteCond %{REQUEST_FILENAME} !-F
-#RewriteRule ^(.*)$ lokisalle.php [QSA,L]
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /location_salle
+
+
+RewriteEngine On 
+RewriteRule    ^test$  /test.php
+RewriteRule    ^accueil$  /index.php?controller=VisiteurController&method=displayIndex
+RewriteRule    ^reservation$  /index.php?controller=VisiteurController&method=displayReservation
+RewriteRule    ^connexion$  /index.php?controller=VisiteurController&method=connexion
+RewriteRule    ^inscription$  /index.php?controller=VisiteurController&method=creerMembre
+RewriteRule    ^cgv$  /index.php?controller=VisiteurController&method=displayCgv
+RewriteRule    ^mention$  /index.php?controller=VisiteurController&method=displayMention
+RewriteRule    ^plan$  /index.php?controller=VisiteurController&method=displayPlan
+RewriteRule    ^recherche$  /index.php?controller=VisiteurController&method=displayRecherche
+
+RewriteRule    ^membre/contact$  /index.php?controller=MembreController&method=displayContact
+RewriteRule    ^membre/accueil$  /index.php?controller=MembreController&method=displayIndexMembre
+RewriteRule    ^membre/newsletter/inscription$  /index.php?controller=MembreController&method=displayNewsletterInscription
+RewriteRule    ^membre/profil$  /index.php?controller=MembreController&method=displayProfil
+RewriteRule    ^membre/reservation$  /index.php?controller=MembreController&method=displayReservationMembre
+RewriteRule    ^membre/deconnection$  /index.php?controller=MembreController&method=deconnectMembre
+
+
+RewriteRule    ^reservation/detail/([0-9]+)/?$    displayReservationDetail?id=$1    [NC,L]    
+</IfModule>
+
+
 
 #RewriteCond %{HTTP_REFERER} !^$
 
 #Remplacer l'adresse temporaire par celle du site final
 #RewriteCond %{HTTP_REFERER} !^http://www.votredomaine.net/.*$ [NC]
 #ReWriteRule .*\.(gif|png|jpe?g)$ - [F]
+
+ServerSignature Off
+
+# cache images and flash content for one month
+<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf)$">
+Header set Cache-Control "max-age=2592000"
+</FilesMatch>
+
+# cache text, css, and javascript files for one week
+<FilesMatch ".(js|css|pdf|txt)$">
+Header set Cache-Control "max-age=604800"
+</FilesMatch>
+
+# cache html and htm files for one day
+<FilesMatch ".(html|htm)$">
+Header set Cache-Control "max-age=43200"
+</FilesMatch>
+
+# protect against DOS attacks by limiting file upload size
+LimitRequestBody 10240000

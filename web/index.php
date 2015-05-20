@@ -10,24 +10,21 @@
 **
 */
 
-require_once(__DIR__ . '/../src/autoload.php');
+//require_once(__DIR__ . '/../src/Autoload.php');
 require_once(__DIR__ .'/../src/controller/controllerAndMethodManager.php');
 
+$controller = $_GET['controller'];
+$methodName = $_GET['method'];
 
- $controller = $_GET['controller'];
- $methodName = $_GET['method'];
+$path = __DIR__ . '/../src/controller/' . $controller . '.php';
+include $path;
 
- $path = __DIR__ . '\..\src\controller\\' . $controller . '.php';
- include $path;
- $controllerName = 'controller\\'. $controller;
- 
- 
- //on appelle deux méthodes de controllerAndMethodManager pour checker, instancier
- //et appeler la bonne méthode
- if (controller\controllerAndMethodManager::checkControllerAndMethod($controller,$methodName)== true) {
-     controller\controllerAndMethodManager::filterInstantiateAndCall($controllerName,$methodName);
- } else {
-     require_once '404.php';
+//on appelle deux méthodes de controllerAndMethodManager pour checker, instancier
+//et appeler la bonne méthode
+if (controller\controllerAndMethodManager::checkControllerAndMethod($controller, $methodName)=== true) {
+    controller\controllerAndMethodManager::filterInstantiateAndCall($controller, $methodName);
+} else {
+    require_once '404.php';
 }
          
  
