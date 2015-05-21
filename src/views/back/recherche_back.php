@@ -5,8 +5,7 @@
 	<div class="recherche_form">
             <h2>Nombre de résultats : <span>3</span></h2>
 		<fieldset> 
-            <legend>Rercherche</legend> 
-			<div class="recherche_champ"> 
+            <div class="recherche_champ"> 
                             <label for="date">Date
 				<input id="date" name="date" type="date" required autofocus> 
                             </label>
@@ -23,7 +22,7 @@
 			</div> 
 			<div class="recherche_champ"> 
 				<button id="recherche" name="recherche" type="button">
-                                    <img src="/web/img/search.png" class="btn_recherche">
+                   <i class="fa fa-search"></i>s
                                 </button>
 			</div> 
 			

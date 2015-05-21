@@ -4,7 +4,7 @@
                 <h2>Présentation 1</h2>
                 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula faucibus sodales.
                     Nulla posuere, est sed volutpat ullamcorper, est nunc dignissim eros, ut imperdiet augue risus et est.</p>
-                <img src="img/home_presentation.jpg" alt="" class="big_img"> 
+                <img src="img/salle.jpg" alt="" class="big_img"> 
             </div><!--END .slide -->
         </div><!--END .carousel -->
     </div><!--END .carousel_wrapper -->
@@ -16,7 +16,7 @@
         <?php foreach($this->indexParameters["meta"] as $key => $value): ?>
             <div class="col_30">
                 <div class="small-box">
-                <img src="/web/img/home_box.jpg" alt="" class="small_img"> 
+                <img src="img/home_box.jpg" alt="" class="small_img"> 
             <div class="date">
                 <p><i class="fa fa-calendar"></i>
 Du <?php echo($value["date_arrivee"]); ?></p>
