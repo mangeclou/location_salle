@@ -7,13 +7,20 @@
 *
 */
 header{
-	display: inline-block;
+	display: block;
+    margin-left: -15px;
+    margin-right: -15px;
+    background: white;
+    border-bottom: solid 4px #3DC3E2;
+    
+    
 }
 
 nav.main_menu{
     display: inline-block;
-	background: lightgrey;
 	vertical-align: top;
+    padding-top: 42px;
+    text-transform: uppercase;
 }
 
 nav.main_menu ul li{
@@ -31,6 +38,10 @@ a.brand_logo img{
 a.brand_logo{
     display: inline-block;
     height: 64px;
+}
+
+nav.main_menu ul li a:hover{
+    transition:  width 2s ease, height 3s linear;
 }
 
 /*========================*/

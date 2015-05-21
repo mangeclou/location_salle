@@ -31,12 +31,16 @@ ______________________________________________________________
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 50px;
+    min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -54px; 
 }
 
 .container-box{
     width: 90%;
     margin: auto;
     text-align: center;
+    min-height: 1000px;
 }
 
 .col_30{
@@ -61,7 +65,7 @@ ______________________________________________________________
 .col_50 p{
 	display: inline-block;
 	margin-left: 15px;
-	vertical-align: top;
+	/*vertical-align: top;*/
 }
 
 .col_60{
@@ -77,7 +81,8 @@ ______________________________________________________________
     width: 65%;
 	vertical-align: top;
 	margin-bottom: 30px;
-	padding: 10px;
+	padding-top: 0px;
+    margin-right: 20px;
 }
 
 .wide {
@@ -97,6 +102,11 @@ ______________________________________________________________
 
 .wide p {
     margin-left: 1em;
+}
+
+
+.col_70 .carousel_wrapper{
+	padding-top: 0px;
 }
 
 
@@ -159,10 +169,21 @@ iframe{
 
 /* ----CAROUSEL---*/
 .slide{
-	background: lightgray;
-	margin-top: 20px;
+	width: 100%;
 }
 
+.slide img{
+	margin: 0 auto;
+}
+
+.slide h2 {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.slide p{
+    padding-left: 20px;
+}
 
 /*Front */
 .small-box {
@@ -179,7 +200,7 @@ iframe{
 
 .medium-box {
     text-align: left;
-    background: rgb(95, 167, 191);
+    background: #3DC3E2;
      padding: 1em;
     margin-right: 1em;
   -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.12),
@@ -213,35 +234,105 @@ iframe{
 /* ----Links---*/
 a {
     text-decoration: none;
-    color: cornflowerblue;
+    color: #3DC3E2;
 }
+
+a:hover {
+    text-decoration: underline;
+    color: #006687;
+}
+
+
 
 /* ----FORMS---*/
 .btn form button{
 	margin-bottom: 10px;
+    background: none;
+    border: solid 1px #12303A;
+    font-family: open sans;
+}
+
+label{
+    text-align: left;
+    float: left;
+}
+
+input {
+    text-align: left;
 }
 
 fieldset.form-inscription{
     
 }
 
-fieldset.form-inscription label{
+/*fieldset.form-inscription label{
     display: block;
     margin-bottom: 6px;
-}
+}*/
 
-fieldset.form-inscription input{
+/*fieldset.form-inscription input{
     width: 100%;
     margin-bottom: 10px;
-}
+}*/
 
 fieldset.form-inscription input[type="radio"]{
     width: inherit;
+    margin-bottom: 20px;
 }
 
 fieldset.erreur, span.error{
     color: #cd0a0a;
 }
+
+
+.btn a button {
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
+label, input[name="submit"] {
+  position: relative;
+}
+label > span, input, textarea, button {
+  box-sizing: border-box;
+}
+label {
+  display: block;
+}
+label > span {
+  display: none;
+}
+input, textarea, button {
+  width: 100%;
+  padding: 0.5em;
+  border: none;
+  font: 300 100%/1.2 Ubuntu, sans-serif;
+}
+input[type="text"], input[type="email"], input[type="date"] ,input[type="password"], textarea {
+  margin: 0 0 1em;
+  border: 1px solid #ccc;
+  outline: none;
+}
+input.invalid, textarea.invalid {
+  border-color: #d5144d;
+}
+textarea {
+  height: 6em;
+}
+input[type="submit"], button {
+  background:none;
+  color: #12303A;
+    border: solid 2px #008CBA;
+}
+input[type="submit"]:hover, button:hover {
+  background: #006687;
+}
+
+
 
 /* ----IMG---*/
 img.big_img{
@@ -259,8 +350,14 @@ height: auto;
 	RECHERCHE
 ======================= */
 fieldset{
-	background: lightgrey;
+	border: solid 2px #008CBA;
 	margin-bottom: 30px;
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.12),
+                      0 1px 2px 0 rgba(0,0,0,.24);
+  -moz-box-shadow:    0 1px 3px 0 rgba(0,0,0,.12),
+                      0 1px 2px 0 rgba(0,0,0,.24);
+  box-shadow:         0 1px 3px 0 rgba(0,0,0,.12),
+                      0 1px 2px 0 rgba(0,0,0,.24);
 }
 
 .recherche_champ{
@@ -405,7 +502,6 @@ nav.footer-menu{
     display: inline-block;
 	width: 100%;
 	margin: auto;
-	background: lightgrey;
 	margin-top: 0px;
 }
 
@@ -416,4 +512,20 @@ nav.footer-menu ul{
 nav.footer-menu ul li{
     display: inline-block;
     padding-right: 20px;
+}
+
+footer {
+    display: block;
+    margin-left: -15px;
+    margin-right: -15px;
+    background: white;
+    border-bottom: solid 4px #3DC3E2;
+}
+
+.container:after {
+  content: "";
+  display: block;
+}
+footer, .container:after {
+  height: 42px; 
 }
